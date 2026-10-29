@@ -1,0 +1,185 @@
+name: Release build
+
+# One NebulaOS release, built completely on GitHub's free runners (Tim
+# 2026-10-29). Input: a commit of NebulaOS-KE/NebulaOS-firmware.
+#
+#   build A + build B   two independent release builds on separate runners
+#   compare             xImage and rootfs.squashfs must be byte-identical
+#   package             .img (on-printer / Creality updater) + .ingenic (USB
+#                       recovery) + checksums + manifests + the OTA release
+#                       record, a GitHub artifact attestation, a DRAFT release
+#
+# The draft is published by a human after the build has been tested on a
+# printer. The printer's update check only sees published releases.
+# The build logic lives in NebulaOS-firmware (scripts/release/, build.sh,
+# scripts/package/); this file only runs it.
+
+on:
+  workflow_dispatch:
+    inputs:
+      firmware_sha:
+        description: "NebulaOS-firmware commit (full 40-hex)"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ inputs.firmware_sha }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: build ${{ matrix.copy }}
+    strategy:
+      matrix:
+        copy: [a, b]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 355
+    steps:
+      - name: Check the input
+        env:
+          SHA: ${{ inputs.firmware_sha }}
+        run: |
+          echo "$SHA" | grep -Eqx '[0-9a-f]{40}' \
+            || { echo "firmware_sha must be a full 40-hex commit"; exit 1; }
+
+      - name: Free disk space (the build needs ~20 GB)
+        run: |
+          df -h /
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /usr/local/.ghcup \
+            /opt/hostedtoolcache/CodeQL /usr/share/swift /usr/local/share/boost
+          sudo docker image prune --all --force >/dev/null
+          df -h /
+
+      - uses: actions/checkout@v6
+        with:
+          repository: NebulaOS-KE/NebulaOS-firmware
+          ref: ${{ inputs.firmware_sha }}
+          fetch-depth: 0
+          path: firmware
+
+      - name: Release build
+        env:
+          SHA: ${{ inputs.firmware_sha }}
+        run: firmware/scripts/release/ci-build.sh "$SHA"
+
+      - name: Collect the canonical core
+        run: |
+          mkdir -p out
+          cp firmware/artifacts/buildroot-halley5-v30-image/{xImage,rootfs.squashfs,build-manifest.txt} \
+             firmware/.nebulaos-build-verified out/
+          sha256sum out/xImage out/rootfs.squashfs | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build-${{ matrix.copy }}
+          path: out/
+          include-hidden-files: true
+          retention-days: 7
+
+  compare:
+    needs: build
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          repository: NebulaOS-KE/NebulaOS-firmware
+          ref: ${{ inputs.firmware_sha }}
+          path: firmware
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-a
+          path: a
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-b
+          path: b
+      - name: Build A == build B
+        run: |
+          set -o pipefail
+          firmware/scripts/release/compare-builds.sh a b | tee -a "$GITHUB_STEP_SUMMARY"
+
+  package:
+    needs: compare
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          repository: NebulaOS-KE/NebulaOS-firmware
+          ref: ${{ inputs.firmware_sha }}
+          fetch-depth: 0
+          path: firmware
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-a
+          path: run/artifacts/buildroot-halley5-v30-image
+
+      - name: Packaging tools
+        run: sudo apt-get update -q && sudo apt-get install -y -q p7zip-full whois
+
+      - name: Package
+        id: pkg
+        env:
+          SHA: ${{ inputs.firmware_sha }}
+        run: |
+          set -euo pipefail
+          mv run/artifacts/buildroot-halley5-v30-image/.nebulaos-build-verified run/
+          version=$(sed -n 's/^NEBULAOS_VERSION=//p' firmware/manifests/dependencies.conf)
+          echo "$version" | grep -Eqx '[0-9]+\.[0-9]+\.[0-9]+'
+          tpl=$(firmware/scripts/release/fetch-ingenic-template.sh template | sed -n 's/^INGENIC_TEMPLATE=//p')
+          firmware/scripts/package/package-release.sh --build-run "$PWD/run" --template "$tpl" \
+            --ota-version "$version" --out "$PWD/release"
+          python3 firmware/tools/release/make-release-record.py \
+            --img "release/NebulaOS-Ender3V3KE-$version.img" --version "$version" \
+            --source-head "$SHA" --out release
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: |
+            release/NebulaOS-Ender3V3KE-*.img
+            release/NebulaOS-Ender3V3KE-*.ingenic
+            release/nebulaos-release.json
+
+      - name: Draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.pkg.outputs.version }}
+          SHA: ${{ inputs.firmware_sha }}
+        run: |
+          set -euo pipefail
+          tag="v$VERSION"
+          if gh release view "$tag" -R "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "A release $tag exists already - delete the draft or raise NEBULAOS_VERSION." >&2
+            exit 1
+          fi
+          {
+            echo "NebulaOS $VERSION for the Creality Ender-3 V3 KE."
+            echo
+            echo "Built on GitHub from NebulaOS-firmware [\`${SHA:0:7}\`](https://github.com/NebulaOS-KE/NebulaOS-firmware/commit/$SHA)"
+            echo "([run]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)); two independent builds were byte-identical."
+            echo
+            echo "- \`NebulaOS-Ender3V3KE-$VERSION.img\`: install from the touchscreen (Settings > Updates > System image) or with the stock updater."
+            echo "- \`NebulaOS-Ender3V3KE-$VERSION.ingenic\`: USB recovery."
+            echo "- \`xImage\`, \`rootfs.squashfs\`: the kernel and root filesystem inside both (developers)."
+            echo
+            echo "Verify: \`sha256sum -c SHA256SUMS\` or \`gh attestation verify <file> -R $GITHUB_REPOSITORY\`."
+            echo
+            echo '```'
+            cat release/release-manifest.txt
+            echo '```'
+          } > notes.md
+          gh release create "$tag" -R "$GITHUB_REPOSITORY" --draft --title "NebulaOS $VERSION" \
+            --notes-file notes.md \
+            "release/NebulaOS-Ender3V3KE-$VERSION.img" "release/NebulaOS-Ender3V3KE-$VERSION.img.sha256" \
+            "release/NebulaOS-Ender3V3KE-$VERSION.ingenic" "release/NebulaOS-Ender3V3KE-$VERSION.ingenic.sha256" \
+            release/nebulaos-release.json release/release-manifest.txt release/SHA256SUMS \
+            release/build-manifest.txt release/xImage release/rootfs.squashfs
+          echo "Draft release $tag created" >> "$GITHUB_STEP_SUMMARY"
