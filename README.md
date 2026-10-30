@@ -15,11 +15,16 @@ Each release carries:
 | File | Use it for |
 |---|---|
 | `NebulaOS-Ender3V3KE-<version>.img` | Installing or updating: on NebulaOS from the touchscreen (Settings > Updates > System image), on the stock firmware with Creality's own updater |
-| `NebulaOS-Ender3V3KE-<version>.ingenic` | USB recovery of a printer that does not start |
+| `NebulaOS-Ender3V3KE-<version>.ingenic` | USB recovery of a printer that does not start (rewrites the whole printer, erases its data) |
 | `SHA256SUMS`, `*.sha256` | Checking a download: `sha256sum -c SHA256SUMS` |
 | `release-manifest.txt`, `build-manifest.txt` | The exact source of every component in the release |
 | `nebulaos-release.json` | The record a NebulaOS printer reads to update itself over the internet |
 | `xImage`, `rootfs.squashfs` | The kernel and root filesystem inside both packages (developers) |
+
+**First install** (from stock Creality firmware or OpenKE): copy the `.img` to the printer **without
+renaming it** and run Creality's updater on it - over SSH from OpenKE, or from a USB stick on the
+stock touchscreen. Steps: [Installing NebulaOS from stock or OpenKE](https://github.com/NebulaOS-KE/NebulaOS-firmware/blob/main/docs/INSTALL_FROM_STOCK.md).
+Your old system stays in the other slot.
 
 A NebulaOS printer finds new releases itself (Settings > Updates > System image > Online). It
 downloads only over HTTPS from github.com and keeps the image only when its size and sha256 match
