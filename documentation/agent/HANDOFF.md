@@ -25,11 +25,14 @@ finished. Two discovery slices remain before Phase 2 writing begins in earnest.
 - Docs worktree created: `_worktrees/docs/NebulaOS`, branch `docs/agent`.
 - Tracking system built in `documentation/agent/`: mission, rules, status, queue, blockers,
   verification policy, screenshot inventory, decisions, handoff, and two scripts.
-- `coverage.jsonl` holds 355 items: 8 repository references, 10 manual sections, 49
+- `coverage.jsonl` holds 429 items: 8 repository references, 10 manual sections, 49
   NebulaScreen panels, 51 G-code commands, 172 configuration options, 30 extension modules,
-  35 boot services.
+  35 boot services, 56 Moonraker API endpoints plus 1 notification, 17 OS helper modules.
 - **Q-001 done** - the 8 G-code commands whose names are built from module constants are
   resolved and recorded with their constants in `tools/seed_inventory.py`.
+- **Q-003 done** - the public Moonraker API surface, inventoried from the server-side
+  registration table and cross-checked against UI call sites. Klipper status objects are the
+  remaining follow-up.
 - **Q-002 done** - configuration discovery, after fixing a first attempt that mistook 85
   Moonraker status-object pointers for settings. Read the note in `STATUS.md` before
   touching that code: the lesson is that a broad literal sweep over UI source looks
@@ -61,6 +64,18 @@ writing starts in earnest.
   the SHAs alone: a pin gap is a question, and the answer is in the diff.
 - **The UI surface is large and well-structured.** 49 panels in `src/*_panel.cpp`, which is
   both the screen reference and the screenshot plan.
+- **NebulaOS has a deliberate public API.** 56 Moonraker endpoints under
+  `machine.nebulaos.*`, served by `scripts/build/overlay/usr/lib/nebulaos/moonraker/
+  nebulaos.py` in Moonraker's own process - no second daemon. The full chain is
+  panel -> JSON-RPC -> that component -> the `nebulaos-osconfig` CLI (argv in, one JSON
+  object out, validated and atomic) -> 17 `nebulaos_osconfig` modules. The component is
+  symlinked into Moonraker by `S05nebulaos-activate` and configured by `[nebulaos]` in
+  `/etc/nebulaos/moonraker/nebulaos.conf`; without that file Moonraker runs without it,
+  which is precisely the difference between a printer that shows OS settings and one that
+  does not.
+- **Inventory the API from the server, not from the UI.** Two endpoints
+  (`ota.discard`, `system.notify_refused`) are served but never called by the shipped UI.
+  Discovering from call sites would have missed both.
 - **Boot and lifecycle are script-driven.** 35 ordered init scripts in the firmware overlay,
   covering revert safety, Wi-Fi, MCU guard, update supervision, image trial and
   confirm-good. These are the real source for the update, rollback and recovery pages.
@@ -104,12 +119,13 @@ repositories not yet cloned locally.
 
 1. `git fetch` every repository and compare tips against the table above. If a tip moved,
    mark the affected items for re-verification instead of assuming the pages still hold.
-2. Work **Q-003**: the Moonraker / JSON-RPC and WebSocket surface NebulaScreen uses, plus
-   NebulaOS-specific methods and the Klipper status objects. The 85 status-object pointers
-   rejected from configuration discovery are a ready-made starting list - find where they
-   are subscribed and requested, and inventory them as API items.
-3. Work **Q-004** and **Q-005**: developer commands and build targets across the five
-   cloned repositories, then the update, rollback, A/B slot and recovery mechanisms.
+2. Work **Q-004** and **Q-005**: developer commands and build targets across the five cloned
+   repositories, then the update, rollback, A/B slot and recovery mechanisms. The 35 boot
+   services and the `ota.*` / `image.*` / `updates.*` API groups are the way in.
+3. Finish the **Q-003 follow-up**: the Klipper status objects the UI subscribes to. Find the
+   `printer.objects.subscribe` call sites first; the ~85 pointers rejected from configuration
+   discovery are the candidate list, but they must be tied to a real subscription before any
+   of them goes into the inventory.
 4. Work **Q-006**: audit the 34 existing wiki pages and record a reuse decision for each -
    this decides how much of Phase 2 is writing versus adapting, so do it before writing.
 5. Then open Phase 2 with **Q-010** and **Q-011**, the manual skeleton and the installation
@@ -117,6 +133,17 @@ repositories not yet cloned locally.
 
 Each batch ends the same way: update `coverage.jsonl`, regenerate `COVERAGE.md`, update
 `STATUS.md` and `QUEUE.md`, commit, push, update this file.
+
+## A habit this work has earned
+
+Two of the first three discovery slices shipped a bug that mis-sized the inventory: a sweep
+that over-collected 85 non-existent configuration options, and a regex that silently dropped
+an API endpoint whose path contains a digit. Neither announced itself - a wrong inventory
+looks exactly like a right one.
+
+So every extractor gets a second, independent count before its output is trusted. Compare
+against a different signal: total path literals in the file, a hand count on one module, the
+other side of the same interface. It has caught something every time.
 
 ## Working rules that are easy to get wrong
 

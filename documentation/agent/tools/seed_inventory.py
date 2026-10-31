@@ -207,6 +207,55 @@ def discover(root):
                 ["src/config.cpp", "src/config.h"],
                 shas["NebulaOS-nebulascreen"], "main", priority=2))
 
+    # --- NebulaOS Moonraker API (the public OS-settings surface) -------------
+    # The authoritative list is the registration table in the Moonraker
+    # component, not the call sites in the UI: the UI is one client among
+    # several, and an endpoint nobody calls yet is still public API.
+    # Moonraker exposes each HTTP path /machine/nebulaos/x/y as the JSON-RPC
+    # method machine.nebulaos.x.y, which is how NebulaScreen addresses them.
+    comp = os.path.join(root, "NebulaOS-firmware", "scripts/build/overlay",
+                        "usr/lib/nebulaos/moonraker/nebulaos.py")
+    if os.path.exists(comp):
+        txt = open(comp).read()
+        # NOTE: the character class must include digits. Without 0-9 it
+        # silently drops /machine/nebulaos/network/ipv4 - a dropped endpoint
+        # looks exactly like an endpoint that does not exist.
+        tbl = re.compile(r'\(\s*"(/machine/nebulaos/[a-z0-9_/]+)"\s*,'
+                         r'\s*RequestType\.([A-Z|_ ]+?)\s*,\s*self\.(\w+)')
+        for path, rt, handler in tbl.findall(txt):
+            rpc = path.lstrip("/").replace("/", ".")
+            items.append(rec(
+                f"api:{rpc}", "NebulaOS-firmware", "nebulaos-moonraker-api",
+                f"Moonraker method {rpc} ({rt.strip()})", "api",
+                ["scripts/build/overlay/usr/lib/nebulaos/moonraker/"
+                 "nebulaos.py"],
+                shas["NebulaOS-firmware"], "main", priority=2,
+                evidence=[f"NebulaOS-firmware@{(shas['NebulaOS-firmware'] or '')[:7]}:"
+                          f"scripts/build/overlay/usr/lib/nebulaos/moonraker/"
+                          f"nebulaos.py#{handler}"]))
+        for note in re.findall(r'register_notification\(\s*"([^"]+)"', txt):
+            items.append(rec(
+                f"api:notification:{note}", "NebulaOS-firmware",
+                "nebulaos-moonraker-api",
+                f"Moonraker notification {note}", "api",
+                ["scripts/build/overlay/usr/lib/nebulaos/moonraker/"
+                 "nebulaos.py"],
+                shas["NebulaOS-firmware"], "main", priority=2))
+
+    # --- nebulaos_osconfig helper modules (what the API delegates to) --------
+    osc = os.path.join(root, "NebulaOS-firmware", "scripts/build/overlay",
+                       "usr/lib/nebulaos/python/nebulaos_osconfig")
+    if os.path.isdir(osc):
+        for f in sorted(os.listdir(osc)):
+            if not f.endswith(".py") or f == "__init__.py":
+                continue
+            items.append(rec(
+                f"osconfig:{f[:-3]}", "NebulaOS-firmware", "nebulaos-osconfig",
+                f"OS settings helper module: {f}", "os-helper",
+                [f"scripts/build/overlay/usr/lib/nebulaos/python/"
+                 f"nebulaos_osconfig/{f}"],
+                shas["NebulaOS-firmware"], "main", priority=2))
+
     # --- firmware init scripts / services -----------------------------------
     initd = os.path.join(root, "NebulaOS-firmware",
                          "scripts/build/overlay/etc/init.d")

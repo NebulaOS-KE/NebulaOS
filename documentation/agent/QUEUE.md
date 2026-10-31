@@ -17,8 +17,13 @@ the dashboard in the same batch as the page itself.
       badly - see the discovery mistake recorded in `STATUS.md`. Declared **defaults** are
       still to be extracted per key when each reference page is written, which is the right
       time to read them accurately.
-- [ ] **Q-003** Discover the Moonraker / JSON-RPC and WebSocket surface NebulaScreen uses,
-      plus NebulaOS-specific methods and Klipper status objects.
+- [x] **Q-003** Discover the Moonraker / JSON-RPC surface. Done: **56** `machine.nebulaos.*`
+      endpoints plus the `nebulaos:settings_changed` notification, inventoried from the
+      server-side registration table and cross-checked against the UI's call sites, plus 17
+      `nebulaos_osconfig` helper modules. Still open as a smaller follow-up: the **Klipper
+      status objects** the UI subscribes to via `printer.objects.subscribe` - the ~85
+      pointers rejected from configuration discovery belong here, and need their
+      subscription sites found before they can be inventoried honestly.
 - [ ] **Q-004** Discover developer-facing commands: make targets, build scripts, diagnostic
       and recovery scripts, CI workflows, across all five cloned repositories.
 - [ ] **Q-005** Inventory the update, rollback, A/B slot and recovery mechanisms in the
@@ -93,3 +98,5 @@ Requests arriving from the foreground development session are added here in prio
 - **Q-001** G-code command constants resolved (2026-10-31).
 - **Q-002** Configuration key discovery (2026-10-31), after correcting an over-collecting
   first attempt.
+- **Q-003** Moonraker API discovery (2026-10-31), after fixing an extractor that dropped an
+  endpoint whose path contains a digit. Klipper status objects remain as a follow-up.
