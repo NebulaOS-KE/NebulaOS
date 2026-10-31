@@ -41,15 +41,18 @@ the dashboard in the same batch as the page itself.
 
 ## P1 - Phase 2, the end-user manual (starts as soon as discovery is deep enough)
 
-- [ ] **Q-010** Manual skeleton and navigation: `wiki/` in the central repository, home page
-      and sidebar covering all ten sections.
-- [ ] **Q-011** Section 02, Installation - the highest-risk procedure a user will ever
-      follow. Download, choose the right file, prepare USB, install from stock, install from
-      OpenKE, first boot, and how to go back. Verified against the firmware's own install
-      and recovery scripts.
-- [ ] **Q-012** Section 10, Recovery, and the safety material in section 01. Written early
-      and deliberately: a user who follows the install guide needs the way out to already
-      exist.
+- [x] **Q-010** Manual skeleton and navigation. Done: `wiki/` with `Home.md` and
+      `_Sidebar.md` covering all ten sections, plus `tools/check_links.py` which gates
+      broken links, missing images and pages unreachable from the sidebar.
+- [x] **Q-011** Section 02, Installation. Done: `wiki/Installing-NebulaOS.md`, both routes,
+      with the untested stock-touchscreen caveat given its own section near the top rather
+      than buried.
+- [x] **Q-012** Section 10, Recovery, plus the safety material. Done:
+      `wiki/Recovery.md`, `wiki/Going-Back.md`, `wiki/Safety-First.md`. Trial timings
+      verified in source rather than copied from the old wiki.
+- [ ] **Q-017** Replace the 17 stub pages with real content, highest-traffic first:
+      `First-Time-Setup`, `Connecting-To-WiFi`, `Opening-Mainsail`, then `Resetting` and
+      `Updating-NebulaOS`, then `Screen-Reference`.
 - [ ] **Q-013** Section 03, First-time setup - startup, Wi-Fi, finding the IP, Mainsail,
       first calibration, first print.
 - [ ] **Q-014** Section 04, the complete NebulaScreen guide - 49 panels, task pages plus a
@@ -92,6 +95,15 @@ the dashboard in the same batch as the page itself.
       dashboard. Publishing itself waits for the project owner.
 - [ ] **Q-043** Phase 7 maintenance guide: how a contributor documents a new feature,
       refreshes screenshots and runs validation.
+
+## Verification debt (do not let this accumulate silently)
+
+- [ ] **Q-050** 59 inventory items require a screenshot; **0** exist. Q-020 decides whether
+      the simulator can supply them. Until then every procedure page is text-only, which the
+      mission explicitly calls insufficient for a beginner audience.
+- [ ] **Q-051** `verify_test` is `unknown` for all 544 items. The Klipper extensions ship 31
+      test files - running that suite and citing it is the cheapest real verification
+      available anywhere in this project.
 
 ## From the foreground session
 

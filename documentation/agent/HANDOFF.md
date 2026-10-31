@@ -15,14 +15,12 @@ workspace rules and the owner's decisions and wins wherever the two differ.
 
 ## Current phase
 
-**Phase 1 - substantially complete.** 510 items discovered across commands, configuration,
-screens, services, the public API, the build pipeline, tooling and runtime helpers.
+**Phase 2 - writing the end-user manual.** Phase 1 closed at 544 items. The manual exists:
+23 pages in `wiki/`, 6 real and 17 honest stubs. Inventory status: 4 documented, 2 draft,
+538 missing.
 
-**Phase 2 starts now.** The mission is explicit that the deliverable is documentation, not
-an audit, and there is more than enough evidence on hand to write against. Do not keep
-extending discovery - the two remaining follow-ups (Klipper status objects, and cloning
-`nebulaos-packages` and `lv_drivers`) are additive and belong with the sections that need
-them.
+Keep writing pages. Do not reopen discovery - the two remaining follow-ups are additive and
+belong with the sections that need them.
 
 ## Completed
 
@@ -51,7 +49,14 @@ them.
 
 ## Active work
 
-Nothing half-finished. The next batch starts clean.
+Nothing half-finished. 17 stub pages are placeholders by design, each saying so to the reader,
+and each still counted `missing` in the inventory.
+
+**The biggest open risk is screenshots.** 59 items require one and none exist. The manual is
+for people who need to see the screen they are looking at, so text-only procedure pages are a
+real gap, not a cosmetic one. Q-020 (can the SDL simulator be built and driven here?) decides
+whether this is solvable without a printer, and it should be answered soon rather than left
+until the end.
 
 ## Remaining work
 
@@ -140,14 +145,17 @@ repositories not yet cloned locally.
 
 1. `git fetch` every repository and compare tips against the table above. If a tip moved,
    mark the affected items for re-verification instead of assuming the pages still hold.
-2. **Q-010 and Q-011, the first writing batch.** Create `wiki/` in the central repository
-   with the home page and sidebar covering all ten sections, then the installation section,
-   then **Q-012** recovery in the same batch - a user following an install guide needs the
-   way out to already exist. Read `REUSE-AUDIT.md` first: 15 pages move largely as they
-   stand, so this is more relocation and reconciliation than authoring.
-3. Raise the first pull request on that batch. Do not wait for the whole manual.
-4. Then sections 01, 03 and 06, which have no existing equivalent and are genuine authoring,
-   and section 04's 49-panel reference built around the page that already exists.
+2. **Q-017:** replace stubs with real pages, highest-traffic first - `First-Time-Setup`,
+   `Connecting-To-WiFi`, `Opening-Mainsail`, then `Resetting` and `Updating-NebulaOS`. The
+   existing NebulaScreen wiki already covers the last two well; reconcile rather than rewrite.
+3. **Q-020:** try to build the NebulaScreen SDL simulator in a worktree of your own and drive
+   it to a known screen. Record the answer in `SCREENSHOTS.md` either way - a clear "not
+   possible here" is worth as much as a yes, because it converts 59 open items into a named
+   blocker instead of a silent gap.
+4. **Q-051:** run the Klipper extensions test suite and cite it. 31 test files, and
+   `verify_test` is currently `unknown` for all 544 items. This is the cheapest genuine
+   verification available in the whole project and it is being left on the table.
+5. Keep running `tools/check_links.py` before every commit that touches `wiki/`.
 5. Follow-ups, when their sections come up and not before: Klipper status objects (find the
    `printer.objects.subscribe` call sites; the ~85 rejected pointers are candidates, but tie
    each to a real subscription first), and cloning `nebulaos-packages` and `lv_drivers`.
@@ -176,6 +184,26 @@ the mission warns about.
 
 Run the updates, then render, then **verify the files say what the commit message claims**
 before committing. A commit message is a claim like any other.
+
+## How to write a page here
+
+Read `REUSE-AUDIT.md` first - 15 of the existing wiki pages move largely as they stand, so
+check whether the work is already done before authoring.
+
+Every procedure page follows the mission's shape: what the guide is for, what you need, what
+to check first, numbered steps, expected result, troubleshooting, and how to undo it.
+
+Three habits that the first batch proved out:
+
+- **Verify the numbers, do not copy them.** The old wiki's "about 5 minutes" and "three
+  times" were correct, but that was established by reading `TRIAL_SECONDS` and
+  `TRIAL_ATTEMPTS` in source. Two accurate documents agreeing with each other is not
+  evidence.
+- **Give caveats their own heading.** The untested install route got a *How much of this is
+  tested* section near the top of the page, not a footnote. A reader deciding whether to
+  flash their printer needs that before the steps, not after.
+- **Cite the commit.** Any claim about timing, defaults or behaviour names the file and the
+  commit it came from, so a later reader can re-check it instead of trusting it.
 
 ## Working rules that are easy to get wrong
 

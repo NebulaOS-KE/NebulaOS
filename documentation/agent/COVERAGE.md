@@ -11,18 +11,18 @@ Verification is reported in four separate columns because they prove different t
 | Measure | Items | Share |
 |---|---|---|
 | Discovered documentation items | 544 | 100% |
-| Documented (page exists and covers the item) | 0 | 0% |
-| Draft | 0 | 0% |
-| Missing | 544 | 100% |
-| Blocked | 2 | 0% |
+| Documented (page exists and covers the item) | 4 | 0% |
+| Draft | 2 | 0% |
+| Missing | 538 | 98% |
+| Blocked | 4 | 0% |
 
 ## Verification (counted separately, never combined)
 
 | Kind | Verified | Partial | Unknown | Blocked | N/A |
 |---|---|---|---|---|---|
-| Code verified | 0 | 0 | 544 | 0 | 0 |
+| Code verified | 5 | 1 | 538 | 0 | 0 |
 | Test verified | 0 | 0 | 544 | 0 | 0 |
-| Hardware verified | 0 | 0 | 0 | 0 | 544 |
+| Hardware verified | 0 | 0 | 0 | 2 | 542 |
 
 ## Screenshots
 
@@ -39,12 +39,12 @@ Verification is reported in four separate columns because they prove different t
 
 | Repository | Items | Documented | Draft | Missing | Code verified | Documented % |
 |---|---|---|---|---|---|---|
-| NebulaOS | 11 | 0 | 0 | 11 | 0 | 0% |
-| NebulaOS-firmware | 191 | 0 | 0 | 191 | 0 | 0% |
+| NebulaOS | 11 | 2 | 1 | 8 | 2 | 18% |
+| NebulaOS-firmware | 191 | 0 | 1 | 190 | 1 | 0% |
 | NebulaOS-kernel | 1 | 0 | 0 | 1 | 0 | 0% |
 | NebulaOS-klipper-extensions | 234 | 0 | 0 | 234 | 0 | 0% |
 | NebulaOS-klipper-mcu | 1 | 0 | 0 | 1 | 0 | 0% |
-| NebulaOS-nebulascreen | 104 | 0 | 0 | 104 | 0 | 0% |
+| NebulaOS-nebulascreen | 104 | 2 | 0 | 102 | 2 | 1% |
 | lv_drivers | 1 | 0 | 0 | 1 | 0 | 0% |
 | nebulaos-packages | 1 | 0 | 0 | 1 | 0 | 0% |
 
@@ -52,19 +52,19 @@ Verification is reported in four separate columns because they prove different t
 
 | Category | Items | Documented | Draft | Missing | Documented % |
 |---|---|---|---|---|---|
-| api | 57 | 0 | 0 | 57 | 0% |
+| api | 57 | 0 | 1 | 56 | 0% |
 | build-command | 14 | 0 | 0 | 14 | 0% |
 | command | 51 | 0 | 0 | 51 | 0% |
 | config-option | 172 | 0 | 0 | 172 | 0% |
 | developer-tool | 11 | 0 | 0 | 11 | 0% |
-| existing-page | 34 | 0 | 0 | 34 | 0% |
+| existing-page | 34 | 2 | 0 | 32 | 5% |
 | extension | 30 | 0 | 0 | 30 | 0% |
 | os-helper | 17 | 0 | 0 | 17 | 0% |
 | repo-overview | 8 | 0 | 0 | 8 | 0% |
 | runtime-helper | 56 | 0 | 0 | 56 | 0% |
 | screen | 49 | 0 | 0 | 49 | 0% |
 | service | 35 | 0 | 0 | 35 | 0% |
-| user-manual-section | 10 | 0 | 0 | 10 | 0% |
+| user-manual-section | 10 | 2 | 1 | 7 | 20% |
 
 ## Source revisions this inventory was discovered at
 
@@ -85,4 +85,6 @@ Verification is reported in four separate columns because they prove different t
 |---|---|---|
 | repo:nebulaos-packages | nebulaos-packages | not cloned locally; clone into _worktrees/docs |
 | repo:lv_drivers | lv_drivers | not cloned locally; clone into _worktrees/docs |
+| manual:01-start-here | NebulaOS | sections on supported hardware and terminology are still stubs |
+| manual:02-installation | NebulaOS | B-003: the stock-touchscreen install route is untested on hardware |
 

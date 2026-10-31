@@ -1,7 +1,7 @@
 # Status
 
 **Updated:** 2026-10-31
-**Phase:** 1 - repository discovery and coverage inventory (substantially complete)
+**Phase:** 2 - writing the end-user manual (first batch complete)
 **Branch:** `docs/agent` in the central `NebulaOS` repository
 **Mode:** autonomous, self-paced loop
 
@@ -188,15 +188,16 @@ five system-named shims that looked like noise and were not.
 
 ## Next
 
-Phase 1 has produced enough evidence to write against, and the mission is explicit that the
-deliverable is pages rather than an audit. So: **Q-006**, the reuse audit of the 34 existing
-wiki pages, and then straight into Phase 2 - the manual skeleton and the installation and
-recovery sections, which is the first pull request.
+Replace the highest-traffic stubs with real pages, in this order: **first-time setup** and
+**Wi-Fi** (every new user hits these immediately after installing), then **Resetting** and
+**Updating**, then the **49-panel screen reference**.
 
-Two discovery follow-ups stay open and are deliberately not blocking: the Klipper status
-objects the UI subscribes to, and the two repositories not yet cloned
-(`nebulaos-packages`, `lv_drivers`). Both are additive and will be folded in when their
-sections come up.
+Then the screenshot question, which is the largest open risk in the manual: find out whether
+the NebulaScreen SDL simulator can be built and driven here. 59 inventory items require a
+screenshot and **zero** exist.
+
+Two discovery follow-ups stay open and deliberately non-blocking: the Klipper status objects
+the UI subscribes to, and cloning `nebulaos-packages` and `lv_drivers`.
 
 ## Open blockers
 

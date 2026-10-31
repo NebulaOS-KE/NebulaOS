@@ -1,0 +1,51 @@
+docs(manual): start the central end-user manual - install, recovery, safety
+
+Phase 2 begins. The central NebulaOS repository now has a wiki/ with 23 pages:
+6 real ones and 17 honest stubs.
+
+Written:
+
+- Home.md, routing by task rather than by component.
+- _Sidebar.md, navigation across all ten mission sections.
+- Safety-First.md, led by the hazard that can permanently damage a printer: a
+  stock Creality power-on can write old firmware back into the mainboard.
+- Installing-NebulaOS.md, both routes, in the mission's procedure format.
+- Recovery.md, all four ways back, least drastic first, with the one option that
+  erases everything clearly marked.
+- Going-Back.md, returning to stock or OpenKE.
+
+Verified rather than copied. The existing wiki said the automatic trial fallback
+waits "about 5 minutes" and gives up after "three times". Both are correct -
+TRIAL_SECONDS = 300 and TRIAL_ATTEMPTS = 3 in nebulaos_osconfig/image.py at
+firmware 82e1320 - but that was established by reading the source. Two accurate
+documents agreeing with each other is not evidence. Also confirmed: both firmware
+docs the recovery page links to exist, swap_slot is a real API method, and
+usb-set-boot-slot.sh is where the page says it is.
+
+The untested stock-touchscreen install route gets its own "How much of this is
+tested" section near the top of the install page, with a table of which route is
+tested and which is not. A reader deciding whether to flash their printer needs
+that before the steps, not as a footnote after them.
+
+Two new tools:
+
+- check_links.py gates broken links, missing images and pages unreachable from
+  the sidebar. Its docstring states what it cannot prove - that a page says
+  anything true, or that a screenshot shows the screen it claims to - because a
+  green check otherwise invites the reader to assume more than it earned.
+- set_status.py changes inventory statuses one id at a time, so a status change
+  is deliberate and visible rather than a hand edit to JSONL where a typo is not.
+
+On the stubs (D-007): a full sidebar immediately produced 17 links to pages that
+do not exist. Broken links were not an option in a safety-critical manual, and
+trimming the sidebar would have hidden the manual's shape and made the gaps
+invisible. So each unwritten page exists and says so, and the 11 whose topics are
+already covered well in the NebulaScreen wiki link straight there. A stub is not
+documentation and is not counted as such: those items stay missing, and the
+dashboard reports 4 documented of 544, which is the truth.
+
+Recorded as the next real risk: 59 items require a screenshot and none exist.
+Whether the SDL simulator can supply them decides if that is solvable without a
+printer, and it should be answered soon rather than at the end.
+
+Co-Authored-By: Claude Opus 5.5 (1M context) <noreply@anthropic.com>
