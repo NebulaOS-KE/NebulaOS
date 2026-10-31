@@ -23,6 +23,21 @@ REPOS = {
     "lv_drivers":                  ("master", None),
 }
 
+# G-code commands whose registered name is assembled from a module constant, so
+# the literal-string scan below cannot see them. Each entry was resolved by
+# reading the module and is listed with the constant it comes from, so the
+# mapping can be re-checked rather than trusted.
+RESOLVED_COMMANDS = {
+    "_NEBULAOS_BED_TRAM":            ("nebulaos_bed_tram.py", "'_' + CMD"),
+    "_NEBULAOS_BED_TRAM_CANCEL":     ("nebulaos_bed_tram.py", "CANCEL"),
+    "NEBULAOS_BED_TRAM":             ("nebulaos_bed_tram.py", "CMD (wrapper macro name)"),
+    "_NEBULAOS_LOAD_CELL_CALIBRATE": ("nebulaos_load_cell_calibration.py", "'_' + CMD"),
+    "_NEBULAOS_LOAD_CELL_CANCEL":    ("nebulaos_load_cell_calibration.py", "CANCEL"),
+    "NEBULAOS_LOAD_CELL_MODE":       ("nebulaos_load_cell_calibration.py", "MODE_CMD"),
+    "NEBULAOS_LOAD_CELL_AUTO_CHECK": ("nebulaos_load_cell_calibration.py", "CHECK_CMD"),
+    "NEBULAOS_Z_ADJUST":             ("nebulaos_z_adjust.py", "CMD"),
+}
+
 BLANK = dict(
     doc_page=None, doc_status="missing", verify_code="unknown",
     verify_test="unknown", verify_hardware="n/a",
@@ -111,6 +126,8 @@ def discover(root):
                 if not re.fullmatch(r"[A-Z_][A-Z0-9_]*", n):
                     continue          # built from a constant - resolve by hand
                 found.setdefault(n, []).append(f"extras/{f}")
+        for n, (mod, const) in RESOLVED_COMMANDS.items():
+            found.setdefault(n, []).append(f"extras/{mod}")
         for n, paths in sorted(found.items()):
             items.append(rec(
                 f"gcode:{n}", "NebulaOS-klipper-extensions", "klipper-extensions",
@@ -125,6 +142,70 @@ def discover(root):
                 "klipper-extensions", f"Klipper extension module: {f}",
                 "extension", [f"extras/{f}"],
                 shas["NebulaOS-klipper-extensions"], "main", priority=2))
+
+    # --- Klipper extension configuration keys -------------------------------
+    if os.path.isdir(ext):
+        cfg = re.compile(
+            r"config\.get(float|int|boolean|lists?|choice|_name|)\("
+            r"\s*['\"]([a-z0-9_]+)['\"]")
+        for f in sorted(os.listdir(ext)):
+            if not f.endswith(".py") or f.startswith("test_"):
+                continue
+            section = f[:-3]
+            seen = set()
+            for m in cfg.finditer(open(os.path.join(ext, f)).read()):
+                key = m.group(2)
+                if key in seen:
+                    continue
+                seen.add(key)
+                kind = {"": "string", "float": "float", "int": "int",
+                        "boolean": "bool", "list": "list", "lists": "list",
+                        "choice": "choice", "_name": "name"}[m.group(1)]
+                items.append(rec(
+                    f"config:{section}:{key}", "NebulaOS-klipper-extensions",
+                    "klipper-extensions",
+                    f"Config option [{section}] {key} ({kind})",
+                    "config-option", [f"extras/{f}"],
+                    shas["NebulaOS-klipper-extensions"], "main", priority=2))
+
+    # --- NebulaScreen configuration keys ------------------------------------
+    # Only real settings, which means two places and no more: the keys the
+    # config schema itself touches (src/config.cpp / config.h, where the
+    # defaults are applied) and the keys any panel reads through the Config
+    # object. A blind sweep for `_json_pointer` across the whole UI is wrong -
+    # most of those pointers address Moonraker response and status objects, not
+    # settings, and counting them as configuration would inflate the inventory
+    # with items that do not exist. The API surface is discovered separately.
+    nsrc = os.path.join(root, "NebulaOS-nebulascreen", "src")
+    if os.path.isdir(nsrc):
+        schema = re.compile(r'"(/[a-z0-9_]+)"_json_pointer')
+        viaconf = re.compile(r'get(?:<[^>]*>)?\(\s*"(/[a-z0-9_]+)"')
+        keys = set()
+        for f in ("config.cpp", "config.h"):
+            fp = os.path.join(nsrc, f)
+            if os.path.exists(fp):
+                txt = open(fp, errors="replace").read()
+                keys.update(m.group(1) for m in schema.finditer(txt))
+                keys.update(m.group(1) for m in viaconf.finditer(txt))
+        # A setting is anything read or written through the Config object:
+        # get, get_json and set all name real keys. Writes matter as much as
+        # reads - a toggle the UI stores is a setting even if only one panel
+        # reads it back.
+        conf_call = re.compile(
+            r'(?:Config::get_instance\(\)|(?:conf|config|_conf|cfg)\w*)'
+            r'(?:->|\.)(?:get|get_json|set)[A-Za-z_]*(?:<[^>]*>)?'
+            r'\(\s*"(/[a-z0-9_]+)"')
+        for f in sorted(os.listdir(nsrc)):
+            if not f.endswith((".cpp", ".h")):
+                continue
+            keys.update(m.group(1) for m in conf_call.finditer(
+                open(os.path.join(nsrc, f), errors="replace").read()))
+        for k in sorted(keys):
+            items.append(rec(
+                f"nsconfig:{k}", "NebulaOS-nebulascreen", "nebulascreen-config",
+                f"NebulaScreen setting {k}", "config-option",
+                ["src/config.cpp", "src/config.h"],
+                shas["NebulaOS-nebulascreen"], "main", priority=2))
 
     # --- firmware init scripts / services -----------------------------------
     initd = os.path.join(root, "NebulaOS-firmware",

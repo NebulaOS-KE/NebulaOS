@@ -10,19 +10,19 @@ Verification is reported in four separate columns because they prove different t
 
 | Measure | Items | Share |
 |---|---|---|
-| Discovered documentation items | 175 | 100% |
+| Discovered documentation items | 355 | 100% |
 | Documented (page exists and covers the item) | 0 | 0% |
 | Draft | 0 | 0% |
-| Missing | 175 | 100% |
-| Blocked | 2 | 1% |
+| Missing | 355 | 100% |
+| Blocked | 2 | 0% |
 
 ## Verification (counted separately, never combined)
 
 | Kind | Verified | Partial | Unknown | Blocked | N/A |
 |---|---|---|---|---|---|
-| Code verified | 0 | 0 | 175 | 0 | 0 |
-| Test verified | 0 | 0 | 175 | 0 | 0 |
-| Hardware verified | 0 | 0 | 0 | 0 | 175 |
+| Code verified | 0 | 0 | 355 | 0 | 0 |
+| Test verified | 0 | 0 | 355 | 0 | 0 |
+| Hardware verified | 0 | 0 | 0 | 0 | 355 |
 
 ## Screenshots
 
@@ -42,9 +42,9 @@ Verification is reported in four separate columns because they prove different t
 | NebulaOS | 11 | 0 | 0 | 11 | 0 | 0% |
 | NebulaOS-firmware | 36 | 0 | 0 | 36 | 0 | 0% |
 | NebulaOS-kernel | 1 | 0 | 0 | 1 | 0 | 0% |
-| NebulaOS-klipper-extensions | 74 | 0 | 0 | 74 | 0 | 0% |
+| NebulaOS-klipper-extensions | 234 | 0 | 0 | 234 | 0 | 0% |
 | NebulaOS-klipper-mcu | 1 | 0 | 0 | 1 | 0 | 0% |
-| NebulaOS-nebulascreen | 50 | 0 | 0 | 50 | 0 | 0% |
+| NebulaOS-nebulascreen | 70 | 0 | 0 | 70 | 0 | 0% |
 | lv_drivers | 1 | 0 | 0 | 1 | 0 | 0% |
 | nebulaos-packages | 1 | 0 | 0 | 1 | 0 | 0% |
 
@@ -52,7 +52,8 @@ Verification is reported in four separate columns because they prove different t
 
 | Category | Items | Documented | Draft | Missing | Documented % |
 |---|---|---|---|---|---|
-| command | 43 | 0 | 0 | 43 | 0% |
+| command | 51 | 0 | 0 | 51 | 0% |
+| config-option | 172 | 0 | 0 | 172 | 0% |
 | extension | 30 | 0 | 0 | 30 | 0% |
 | repo-overview | 8 | 0 | 0 | 8 | 0% |
 | screen | 49 | 0 | 0 | 49 | 0% |
@@ -66,9 +67,9 @@ Verification is reported in four separate columns because they prove different t
 | NebulaOS | main | not cloned l | 11 |
 | NebulaOS-firmware | main | 82e132088fc7 | 36 |
 | NebulaOS-kernel | openke | d86790d2e231 | 1 |
-| NebulaOS-klipper-extensions | main | 8e3447ac0da4 | 74 |
+| NebulaOS-klipper-extensions | main | 8e3447ac0da4 | 234 |
 | NebulaOS-klipper-mcu | main | 33f5d16daccd | 1 |
-| NebulaOS-nebulascreen | main | 94869f756572 | 50 |
+| NebulaOS-nebulascreen | main | 94869f756572 | 70 |
 | lv_drivers | master | not cloned l | 1 |
 | nebulaos-packages | main | not cloned l | 1 |
 

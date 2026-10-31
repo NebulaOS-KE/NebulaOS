@@ -1,17 +1,17 @@
 # Status
 
 **Updated:** 2026-10-31
-**Phase:** 1 - repository discovery and coverage inventory (first pass complete)
+**Phase:** 1 - repository discovery and coverage inventory (commands and configuration done)
 **Branch:** `docs/agent` in the central `NebulaOS` repository
 **Mode:** autonomous, self-paced loop
 
 ## Where things stand
 
-The agent's own infrastructure is in place and the first mechanical discovery pass has run.
-There are **175 discovered documentation items** in `coverage.jsonl`, every one of them
-recorded against the exact commit it was found at, and every one of them currently
-`missing` - which is the honest starting position. No documentation pages have been written
-yet.
+The agent's own infrastructure is in place and discovery has run over commands,
+configuration, screens and services. There are **355 discovered documentation items** in
+`coverage.jsonl`, every one of them recorded against the exact commit it was found at, and
+every one of them currently `missing` - which is the honest starting position. No
+documentation pages have been written yet.
 
 The dashboard in `COVERAGE.md` is generated from the inventory by script, so it cannot drift
 from reality.
@@ -41,11 +41,15 @@ code with no reconciliation needed.
   This is the backbone of the complete screen reference and of the screenshot plan.
 - **35 firmware boot services** - `S00`-`S99` init scripts in the firmware overlay,
   covering boot, Wi-Fi, MCU guarding, update supervision, recovery and housekeeping.
-- **43 registered G-code commands** across the Klipper extensions, of which 41 have
-  literal names and 2 are assembled from module constants and still need resolving by hand.
-- **42 Klipper extension modules**, each with a matching test file in most cases - unusually
-  good test coverage for this kind of code, which will make `verify_test` genuinely
-  achievable.
+- **51 registered G-code commands** across the Klipper extensions. 43 are registered with
+  a literal name; the remaining 8 are assembled from module constants and were resolved by
+  reading each module, with the constant recorded next to the name so the mapping can be
+  re-checked rather than trusted.
+- **172 configuration options** - 152 Klipper extension settings with their declared type,
+  and 20 real NebulaScreen settings.
+- **30 Klipper extension modules** with **31 test files** beside them - roughly one test
+  module per extension, which is unusually good coverage for this kind of code and makes
+  `verify_test` genuinely achievable rather than aspirational.
 - **34 existing end-user wiki pages** in `NebulaOS-nebulascreen/wiki/`, plus roughly 70
   design and analysis documents in `NebulaOS-firmware/docs/`. Substantial material to reuse
   rather than replace.
@@ -62,12 +66,30 @@ From `NebulaOS-firmware/manifests/dependencies.conf` at `82e1320`:
   extension pages must label development-only behaviour
 - Host Klipper is pristine upstream `Klipper3d/klipper` at `58bd67d`, not a fork
 
+## A discovery mistake worth recording
+
+The first attempt at NebulaScreen configuration discovery swept the UI source for every
+`_json_pointer` literal and produced 104 "settings". Most were not settings at all - they
+were pointers into Moonraker response and printer status objects: `/sg_result`,
+`/layer_count`, `/commits_behind_count`, `/toff`. Counting those as configuration would have
+inflated the inventory with roughly 85 options that do not exist, and the dashboard would
+have looked busier while being less true.
+
+Discovery is now scoped to what is actually a setting: keys the config schema itself touches
+in `src/config.cpp` and `src/config.h` where defaults are applied, plus keys any panel reads
+or writes through the `Config` object. That yields **20** NebulaScreen settings. The
+Moonraker and status-object surface is real and still needs documenting, but it is an API
+inventory and will be discovered as one.
+
+A second correction: an earlier draft of this file claimed 42 extension modules. The real
+count is **30** modules and **31** test files. Both numbers now come from the inventory.
+
 ## Next
 
-Finish Phase 1 by deepening the inventory where it is still shallow - configuration keys,
-Moonraker and JSON-RPC interfaces, build and developer commands, update and recovery
-mechanisms - then start Phase 2, the end-user manual, beginning with the install and
-first-setup journey, reusing the existing NebulaScreen wiki pages.
+Finish Phase 1 with the two remaining discovery slices - the Moonraker / JSON-RPC and status
+object surface, and developer-facing commands and build targets - plus the audit of the 34
+existing wiki pages. Then start Phase 2, the end-user manual, beginning with the install and
+first-setup journey.
 
 ## Open blockers
 

@@ -9,12 +9,14 @@ the dashboard in the same batch as the page itself.
 
 ## P1 - Finish Phase 1 discovery
 
-- [ ] **Q-001** Resolve the 2 G-code command names assembled from module constants
-      (`nebulaos_bed_tram.py`, `nebulaos_load_cell_calibration.py`) and add them to the
-      inventory as literal command names.
-- [ ] **Q-002** Discover configuration keys: every `config.get*` call in the Klipper
-      extensions, plus the NebulaScreen configuration schema, with types and real defaults.
-      One inventory item per key.
+- [x] **Q-001** Resolve the G-code command names assembled from module constants. Done:
+      8 resolved, each recorded in `tools/seed_inventory.py` next to the constant it comes
+      from. Command total is 51, not the 43 the literal-string scan could see.
+- [x] **Q-002** Discover configuration keys. Done: 152 Klipper extension options with
+      declared types, and 20 real NebulaScreen settings. The first attempt over-collected
+      badly - see the discovery mistake recorded in `STATUS.md`. Declared **defaults** are
+      still to be extracted per key when each reference page is written, which is the right
+      time to read them accurately.
 - [ ] **Q-003** Discover the Moonraker / JSON-RPC and WebSocket surface NebulaScreen uses,
       plus NebulaOS-specific methods and Klipper status objects.
 - [ ] **Q-004** Discover developer-facing commands: make targets, build scripts, diagnostic
@@ -88,4 +90,6 @@ Requests arriving from the foreground development session are added here in prio
 
 ## Done
 
-*(nothing yet - the infrastructure above is Phase 0, recorded in `STATUS.md`)*
+- **Q-001** G-code command constants resolved (2026-10-31).
+- **Q-002** Configuration key discovery (2026-10-31), after correcting an over-collecting
+  first attempt.
