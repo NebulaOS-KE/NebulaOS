@@ -62,8 +62,12 @@ From `NebulaOS-firmware/manifests/dependencies.conf` at `82e1320`:
 - NebulaScreen pinned at `94869f7`, which **is** the current `main` tip
 - Kernel pinned at `d86790d` on `openke`, which **is** the current tip
 - Klipper extensions pinned to branch `production` at `31d6d65`, while `main` is at
-  `8e3447a` - **the one place where development is ahead of what ships**, and the reason
-  extension pages must label development-only behaviour
+  `8e3447a`. The gap is **CI and README only** - `.github/workflows/tests.yml`,
+  `scripts/ci-tests.sh` and a README edit, verified with
+  `git diff --name-status origin/production origin/main`. Nothing under `extras/` differs,
+  so the two branches are identical in runtime code and every documented extension
+  behaviour is shipped behaviour. Pages carry a footnote with the pin SHA, not a
+  development-only warning (see `DECISIONS.md` D-002)
 - Host Klipper is pristine upstream `Klipper3d/klipper` at `58bd67d`, not a fork
 
 ## A discovery mistake worth recording

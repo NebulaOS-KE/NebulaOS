@@ -53,9 +53,12 @@ writing starts in earnest.
   pinned at `58bd67d` and owned by the firmware build. Custom behaviour lives in
   `NebulaOS-klipper-extensions` as loadable `extras/` modules. Documentation must never
   present upstream Klipper behaviour as NebulaOS behaviour.
-- **One place where development is ahead of what ships.** The firmware manifest pins the
-  extensions to branch `production` at `31d6d65`; `main` is at `8e3447a`. Extension pages
-  document the newest code and must label anything not in the pin as development only.
+- **The extensions pin gap is cosmetic.** The firmware manifest pins the extensions to
+  branch `production` at `31d6d65`; `main` is at `8e3447a`. The diff is three files - a CI
+  workflow, a CI script and a README edit - with nothing under `extras/`. Runtime code is
+  identical, so every documented extension behaviour is shipped behaviour and pages get a
+  footnote with the pin SHA rather than a development-only label. Do not re-derive this from
+  the SHAs alone: a pin gap is a question, and the answer is in the diff.
 - **The UI surface is large and well-structured.** 49 panels in `src/*_panel.cpp`, which is
   both the screen reference and the screenshot plan.
 - **Boot and lifecycle are script-driven.** 35 ordered init scripts in the firmware overlay,

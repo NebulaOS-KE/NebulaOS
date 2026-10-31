@@ -19,12 +19,33 @@ No wiki history is deleted.
 ## D-002 - Document the newest code, and name the shipping pin
 
 **Date:** 2026-10-31
+**Revised:** 2026-10-31, after checking the diff instead of assuming
 
 Pages describe the tip of each repository's default branch, with the exact commit recorded.
-Where the firmware manifest pins an older commit of a component, the page says so. This
-matters most for `NebulaOS-klipper-extensions`, where the manifest pins branch `production`
-at `31d6d65` while `main` is at `8e3447a` - so some documented behaviour is development
-work, not shipped behaviour, and has to be labelled that way.
+Where the firmware manifest pins an older commit of a component, the page says so.
+
+The first version of this decision treated the `NebulaOS-klipper-extensions` gap - manifest
+pins branch `production` at `31d6d65`, `main` is at `8e3447a` - as a reason to label
+extension behaviour "development only". **That was wrong, and the mistake was reasoning from
+the existence of a gap rather than from its contents.**
+
+Checked directly:
+
+```
+git diff --name-status origin/production origin/main
+A  .github/workflows/tests.yml
+M  README.md
+A  scripts/ci-tests.sh
+```
+
+Three files, 96 insertions, nothing under `extras/`. The two branches are identical in
+runtime code, so **every documented extension behaviour is shipped behaviour** and none of
+it should carry a development-only label. A footnote naming the pin is the right amount of
+caution; a warning on every page would have been noise that quietly taught readers to
+distrust correct documentation.
+
+The general rule this leaves behind: a pin gap is a question, not an answer. Diff it before
+labelling anything, every time, because the label is a claim about what users have.
 
 ## D-003 - Coverage is generated, never hand-counted
 
