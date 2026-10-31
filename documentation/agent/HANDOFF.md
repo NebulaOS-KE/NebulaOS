@@ -30,10 +30,11 @@ them.
 - Docs worktree created: `_worktrees/docs/NebulaOS`, branch `docs/agent`.
 - Tracking system built in `documentation/agent/`: mission, rules, status, queue, blockers,
   verification policy, screenshot inventory, decisions, handoff, and two scripts.
-- `coverage.jsonl` holds 510 items: 8 repository references, 10 manual sections, 49
+- `coverage.jsonl` holds 544 items: 8 repository references, 10 manual sections, 49
   NebulaScreen panels, 51 G-code commands, 172 configuration options, 30 extension modules,
   35 boot services, 56 Moonraker API endpoints plus 1 notification, 17 OS helper modules, 14 build pipeline scripts, 11 tool sets, 56 overlay runtime
-  helpers.
+  helpers, 34 audited existing wiki pages.
+- **Q-006 done** - the reuse audit, written up in `REUSE-AUDIT.md`.
 - **Q-004 and Q-005 done** - the build pipeline, developer tooling, and the update /
   rollback / recovery surface. Counts verified independently and in agreement.
 - **Q-001 done** - the 8 G-code commands whose names are built from module constants are
@@ -64,6 +65,12 @@ writing starts in earnest.
   pinned at `58bd67d` and owned by the firmware build. Custom behaviour lives in
   `NebulaOS-klipper-extensions` as loadable `extras/` modules. Documentation must never
   present upstream Klipper behaviour as NebulaOS behaviour.
+- **One install path is documented but untested, and the caveat must survive.** The existing
+  install page says the Creality-touchscreen route (from stock firmware) has not been tested
+  - and that is the route most first-time users take. Carry that caveat into the manual with
+  full prominence. Deleting it while relocating the page would be the most harmful single
+  edit available in this migration: a promise of a tested procedure on the one operation that
+  can brick a mainboard. Recorded as `BLOCKERS.md` B-003.
 - **Five overlay executables have ordinary system names and are not what they look like.**
   `sudo` is an adapter that is not sudo, `supervisorctl` is a deliberate fake so Moonraker
   believes a supervisor exists, `passwd` redirects because the image `/etc/shadow` is
@@ -133,16 +140,14 @@ repositories not yet cloned locally.
 
 1. `git fetch` every repository and compare tips against the table above. If a tip moved,
    mark the affected items for re-verification instead of assuming the pages still hold.
-2. Work **Q-006**: audit the 34 existing wiki pages in `NebulaOS-nebulascreen/wiki/` and
-   record reuse / adapt-and-move / supersede for each. Do this before writing, because it
-   decides how much of Phase 2 is authoring versus adapting - several of those pages
-   (`Installing-NebulaOS.md`, `Recovery.md`, `Updating-NebulaOS.md`,
-   `Emergency-Factory-Reset.md`) cover exactly the sections that come first.
-3. Then **Q-010** and **Q-011**: the manual skeleton with navigation in the central
-   repository's `wiki/`, then the installation section, verified against the firmware's own
-   install and recovery scripts. Write **Q-012** (recovery) in the same batch - a user who
-   follows an install guide needs the way out to already exist.
-4. Raise the first pull request on that batch. Do not wait for the whole manual.
+2. **Q-010 and Q-011, the first writing batch.** Create `wiki/` in the central repository
+   with the home page and sidebar covering all ten sections, then the installation section,
+   then **Q-012** recovery in the same batch - a user following an install guide needs the
+   way out to already exist. Read `REUSE-AUDIT.md` first: 15 pages move largely as they
+   stand, so this is more relocation and reconciliation than authoring.
+3. Raise the first pull request on that batch. Do not wait for the whole manual.
+4. Then sections 01, 03 and 06, which have no existing equivalent and are genuine authoring,
+   and section 04's 49-panel reference built around the page that already exists.
 5. Follow-ups, when their sections come up and not before: Klipper status objects (find the
    `printer.objects.subscribe` call sites; the ~85 rejected pointers are candidates, but tie
    each to a real subscription first), and cloning `nebulaos-packages` and `lv_drivers`.
@@ -160,6 +165,17 @@ looks exactly like a right one.
 So every extractor gets a second, independent count before its output is trusted. Compare
 against a different signal: total path literals in the file, a hand count on one module, the
 other side of the same interface. It has caught something every time.
+
+## A process rule, learned the hard way
+
+Never chain `render_dashboard.py && <state updates>` in one shell command. A path mistake in
+the render short-circuited the `&&` on 2026-10-31, the state updates silently did not run,
+and the commit that followed described a blocker it had not actually written. The dashboard
+was left reporting 510 items while the inventory held 544 - the exact stale-dashboard failure
+the mission warns about.
+
+Run the updates, then render, then **verify the files say what the commit message claims**
+before committing. A commit message is a claim like any other.
 
 ## Working rules that are easy to get wrong
 

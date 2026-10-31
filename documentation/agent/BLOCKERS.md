@@ -27,6 +27,23 @@ inventories are empty. Not a real obstacle - they will be cloned into
 
 **Holds up:** the repo-level items `repo:nebulaos-packages` and `repo:lv_drivers`.
 
+### B-003 - The most common installation path is documented but untested
+
+`Installing-NebulaOS.md` says plainly: *"Tested from OpenKE on 2026-10-29. The path through
+Creality's touchscreen is not tested yet."* That untested path - installing from stock
+Creality firmware using the printer's own touchscreen - is the one most first-time users will
+take, because most arrive from stock firmware rather than from OpenKE.
+
+The caveat is preserved verbatim in the central manual, with the same prominence. It cannot
+be cleared here: verifying it needs a printer running stock firmware, and this agent has no
+hardware access.
+
+**Holds up:** `verify_hardware` for the installation section, and any claim that the stock
+touchscreen route works.
+
+**Who can clear it:** the project owner, by running that path once on a printer and reporting
+the result.
+
 ## Code problems found while documenting
 
 Discrepancies between code and documentation go here, never into a code change. This agent

@@ -10,19 +10,19 @@ Verification is reported in four separate columns because they prove different t
 
 | Measure | Items | Share |
 |---|---|---|
-| Discovered documentation items | 510 | 100% |
+| Discovered documentation items | 544 | 100% |
 | Documented (page exists and covers the item) | 0 | 0% |
 | Draft | 0 | 0% |
-| Missing | 510 | 100% |
+| Missing | 544 | 100% |
 | Blocked | 2 | 0% |
 
 ## Verification (counted separately, never combined)
 
 | Kind | Verified | Partial | Unknown | Blocked | N/A |
 |---|---|---|---|---|---|
-| Code verified | 0 | 0 | 510 | 0 | 0 |
-| Test verified | 0 | 0 | 510 | 0 | 0 |
-| Hardware verified | 0 | 0 | 0 | 0 | 510 |
+| Code verified | 0 | 0 | 544 | 0 | 0 |
+| Test verified | 0 | 0 | 544 | 0 | 0 |
+| Hardware verified | 0 | 0 | 0 | 0 | 544 |
 
 ## Screenshots
 
@@ -44,7 +44,7 @@ Verification is reported in four separate columns because they prove different t
 | NebulaOS-kernel | 1 | 0 | 0 | 1 | 0 | 0% |
 | NebulaOS-klipper-extensions | 234 | 0 | 0 | 234 | 0 | 0% |
 | NebulaOS-klipper-mcu | 1 | 0 | 0 | 1 | 0 | 0% |
-| NebulaOS-nebulascreen | 70 | 0 | 0 | 70 | 0 | 0% |
+| NebulaOS-nebulascreen | 104 | 0 | 0 | 104 | 0 | 0% |
 | lv_drivers | 1 | 0 | 0 | 1 | 0 | 0% |
 | nebulaos-packages | 1 | 0 | 0 | 1 | 0 | 0% |
 
@@ -57,6 +57,7 @@ Verification is reported in four separate columns because they prove different t
 | command | 51 | 0 | 0 | 51 | 0% |
 | config-option | 172 | 0 | 0 | 172 | 0% |
 | developer-tool | 11 | 0 | 0 | 11 | 0% |
+| existing-page | 34 | 0 | 0 | 34 | 0% |
 | extension | 30 | 0 | 0 | 30 | 0% |
 | os-helper | 17 | 0 | 0 | 17 | 0% |
 | repo-overview | 8 | 0 | 0 | 8 | 0% |
@@ -74,7 +75,7 @@ Verification is reported in four separate columns because they prove different t
 | NebulaOS-kernel | openke | d86790d2e231 | 1 |
 | NebulaOS-klipper-extensions | main | 8e3447ac0da4 | 234 |
 | NebulaOS-klipper-mcu | main | 33f5d16daccd | 1 |
-| NebulaOS-nebulascreen | main | 94869f756572 | 70 |
+| NebulaOS-nebulascreen | main | 94869f756572 | 104 |
 | lv_drivers | master | not cloned l | 1 |
 | nebulaos-packages | main | not cloned l | 1 |
 

@@ -32,8 +32,10 @@ the dashboard in the same batch as the page itself.
       items rather than as a file list: the update supervisor, slot swap, clean reset, OTA
       markers and image trial/confirm services, together with the `ota.*`, `image.*` and
       `updates.*` API groups.
-- [ ] **Q-006** Audit the 34 existing NebulaScreen wiki pages: for each, decide reuse,
-      adapt-and-move, or supersede, and record the decision in the inventory.
+- [x] **Q-006** Audit the 34 existing NebulaScreen wiki pages. Done: 15 move, 1 adapt,
+      16 keep, 2 historical, all recorded in `coverage.jsonl` and written up in
+      `REUSE-AUDIT.md`. Two problems found - a confusable page-name pair, and an install
+      path that is documented but untested (now `BLOCKERS.md` B-003).
 - [ ] **Q-007** Clone `nebulaos-packages` and `lv_drivers` into the docs worktree and run
       discovery on them.
 
@@ -104,6 +106,9 @@ Requests arriving from the foreground development session are added here in prio
   first attempt.
 - **Q-003** Moonraker API discovery (2026-10-31), after fixing an extractor that dropped an
   endpoint whose path contains a digit. Klipper status objects remain as a follow-up.
+- **Q-006** Reuse audit of the existing wiki (2026-10-31). The existing wiki is good and is
+  being reused rather than replaced; Phase 2 is more relocation than authoring, except for
+  sections 01, 03 and 06.
 - **Q-004, Q-005** Build pipeline, developer tooling and runtime helpers (2026-10-31).
   Counts verified independently. Five system-named overlay shims were nearly filtered out
   as vendor noise and turned out to be NebulaOS-authored - see `STATUS.md`.
