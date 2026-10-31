@@ -139,7 +139,10 @@ repositories not yet cloned locally.
 ## Branches and pull requests
 
 - `docs/agent` in `NebulaOS` - the agent's state and the user manual. Pushed.
-- No pull requests open yet.
+- **PR #3** - https://github.com/NebulaOS-KE/NebulaOS/pull/3 - the first batch: manual
+  skeleton, install, recovery, safety, and the coverage dashboard. Open, awaiting review.
+  Later batches continue on the same branch and update this PR; do not open a second PR for
+  the manual unless the owner asks for one.
 
 ## Next actions, in order
 
