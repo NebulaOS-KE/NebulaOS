@@ -269,6 +269,66 @@ def discover(root):
                 [f"scripts/build/overlay/etc/init.d/{f}"],
                 shas["NebulaOS-firmware"], "main", priority=2))
 
+    # --- existing NebulaScreen wiki pages, with a reuse disposition ---------
+    # Audited page by page on 2026-10-31 (Q-006). The wiki is good: real file
+    # paths, exact error strings, and safety notes written by someone who had
+    # actually done the procedure. It is reused, not replaced.
+    #
+    # "move" = end-user material that belongs in the central manual
+    # "adapt" = end-user material needing rework or merging before it moves
+    # "keep"  = developer material that stays in the component wiki
+    # "historical" = describes something NebulaOS does not have; keep as a
+    #                signpost, do not carry into the manual
+    WIKI = {
+        "Installing-NebulaOS.md":     ("move", "02-installation"),
+        "Updating-NebulaOS.md":       ("move", "08-updates"),
+        "Recovery.md":                ("move", "10-recovery"),
+        "Resetting.md":               ("move", "08-updates"),
+        "Troubleshooting.md":         ("move", "09-troubleshooting"),
+        "Using-NebulaScreen.md":      ("adapt", "04-nebulascreen"),
+        "Calibration-Guide.md":       ("move", "05-calibration"),
+        "Calibration-Explained.md":   ("move", "05-calibration"),
+        "Bed-Tramming.md":            ("move", "05-calibration"),
+        "Load-Cell-Calibration.md":   ("move", "05-calibration"),
+        "Axis-Twist-Compensation.md": ("move", "05-calibration"),
+        "Skew-Correction.md":         ("move", "05-calibration"),
+        "TMC-Autotune.md":            ("move", "07-advanced"),
+        "Adaptive-Print-Setup.md":    ("move", "07-advanced"),
+        "Camera-Image-Tuning.md":     ("move", "07-advanced"),
+        "Buzzer-and-Sounds.md":       ("move", "07-advanced"),
+        "Home.md":                    ("keep", "component navigation"),
+        "_Sidebar.md":                ("keep", "component navigation"),
+        "Installation.md":            ("keep", "component files and paths"),
+        "Architecture.md":            ("keep", "developer"),
+        "Building-from-Source.md":    ("keep", "developer"),
+        "Development-and-Simulator.md": ("keep", "developer"),
+        "Configuration.md":           ("keep", "developer"),
+        "Config-and-Theme.md":        ("keep", "developer"),
+        "Releases-and-Deployment.md": ("keep", "developer"),
+        "Testing.md":                 ("keep", "developer"),
+        "CI.md":                      ("keep", "developer"),
+        "Contributing.md":            ("keep", "developer"),
+        "Vendored-Dependencies.md":   ("keep", "developer"),
+        "Integration-with-NebulaOS.md": ("keep", "developer"),
+        "Wiki-Publishing.md":         ("keep", "developer"),
+        "History-and-Credits.md":     ("keep", "developer"),
+        "Upgrading.md":               ("historical", "redirect stub"),
+        "Emergency-Factory-Reset.md": ("historical", "documents an absence"),
+    }
+    wdir = os.path.join(root, "NebulaOS-nebulascreen", "wiki")
+    if os.path.isdir(wdir):
+        for f in sorted(os.listdir(wdir)):
+            if not f.endswith(".md"):
+                continue
+            disp, dest = WIKI.get(f, ("unaudited", "-"))
+            items.append(rec(
+                f"existing:{f}", "NebulaOS-nebulascreen", "existing-wiki",
+                f"Existing wiki page {f} -> {disp} ({dest})", "existing-page",
+                [f"wiki/{f}"], shas["NebulaOS-nebulascreen"], "main",
+                priority=1 if disp in ("move", "adapt") else 3,
+                blockers="" if disp != "unaudited"
+                        else "discovered after the Q-006 audit; needs a disposition"))
+
     # --- firmware build pipeline --------------------------------------------
     fw = os.path.join(root, "NebulaOS-firmware")
     bld = os.path.join(fw, "scripts/build")
