@@ -35,7 +35,36 @@ The mission also asks for these dispositions where they apply; they are recorded
 
 **Can prove:** that code exists, what it does, how it is registered, what its defaults
 are, which configuration keys it reads, which tests cover it, and which commit each claim
-comes from. The repositories' own test suites are available and can be run.
+comes from. The repositories' own test suites are available and can be run - and have been.
+
+### Test verification actually performed
+
+On 2026-10-31, in a dedicated worktree at `NebulaOS-klipper-extensions` `8e3447a`:
+
+```
+29 of 31 test suites run standalone, the way scripts/ci-tests.sh runs them
+899 individual tests, all passing
+```
+
+The two excluded suites (`test_nebulaos_compat`, `test_nebulaos_temperature_mcu`) import real
+Klipper modules and need the pinned Klipper checkout composed in, exactly as the repository's
+own CI script documents. They are not failures; they are a different run.
+
+That result promoted `verify_test` to `verified` on **21 extension modules**, each citing the
+specific test file and the run date. Nine modules have no test of their own and stay
+`unknown`: `autotune_tmc`, `bl24c16f`, `calibrate_shaper_config`, `gcode_shell_command`,
+`motor_constants`, `nebulaos_compat`, `nebulaos_temperature_mcu`, `prtouch_test_support`,
+`virtual_pins`.
+
+Two cautions, recorded because both nearly produced a wrong result:
+
+- **Do not detect pass/fail with `grep '^OK'`.** `unittest` colours that line when it has a
+  TTY, so the match fails and every suite looks broken. The first run here reported 29 of 29
+  failing, which was entirely an artifact. Strip ANSI first. The repository's CI script is
+  unaffected because CI has no TTY.
+- **Do not use `unittest discover` for this suite.** It reports 42 errors, which are
+  rootdir and import artifacts rather than real failures - `test_tmcstatus` passes perfectly
+  when run as `extras.test_tmcstatus`. Run per-module, the way the project's own CI does.
 
 **Cannot prove:** that any of it works on a real printer. This agent has no printer
 access by design - no SSH, no hardware launcher, no Moonraker calls to a machine. So

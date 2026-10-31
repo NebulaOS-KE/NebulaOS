@@ -90,14 +90,36 @@ def main():
     sc = tally(need, "screenshot_status")
     A("## Screenshots")
     A("")
-    A(table(["Measure", "Items"], [
-        ["Required", len(need)],
-        ["Captured", sc.get("captured", 0)],
+    rows = [
+        ["Captured and confirmed current", sc.get("captured", 0)],
         ["Verified against the running UI", sc.get("verified", 0)],
-        ["Missing", sc.get("missing", 0)],
+        ["Candidate image exists, version unconfirmed",
+         sc.get("candidate-unconfirmed", 0)],
+        ["Missing outright", sc.get("missing", 0)],
         ["Outdated", sc.get("outdated", 0)],
         ["Blocked (needs real hardware)", sc.get("blocked", 0)],
-    ]))
+    ]
+    A(table(["Measure", "Items"], [["Required", len(need)]] + rows))
+    A("")
+    # Self-check. An unrecognised screenshot_status used to vanish from this
+    # table, leaving the rows silently failing to add up to the required total -
+    # which is the one thing a coverage dashboard must never do. If this fires,
+    # add the new status to the rows above rather than ignoring it.
+    counted = sum(r[1] for r in rows)
+    if counted != len(need):
+        leaked = sorted(set(sc) - {"captured", "verified",
+                                   "candidate-unconfirmed", "missing",
+                                   "outdated", "blocked"})
+        A(f"> **Dashboard self-check failed.** {len(need)} items require a "
+          f"screenshot but only {counted} are accounted for above. "
+          f"Unreported status values: {', '.join(leaked) or 'none'}. "
+          "Fix `render_dashboard.py` rather than trusting this table.")
+        A("")
+        print(f"WARNING: screenshot rows sum to {counted}, required is "
+              f"{len(need)}; unreported: {leaked}")
+    A("A *candidate* is not coverage. It means a real image exists but has not "
+      "been confirmed against the commit this documentation describes, so it "
+      "cannot yet be trusted to show the reader what they will see.")
     A("")
 
     # ---- per repository ----------------------------------------------------

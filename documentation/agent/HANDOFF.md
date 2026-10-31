@@ -52,11 +52,17 @@ belong with the sections that need them.
 Nothing half-finished. 17 stub pages are placeholders by design, each saying so to the reader,
 and each still counted `missing` in the inventory.
 
-**The biggest open risk is screenshots.** 59 items require one and none exist. The manual is
-for people who need to see the screen they are looking at, so text-only procedure pages are a
-real gap, not a cosmetic one. Q-020 (can the SDL simulator be built and driven here?) decides
-whether this is solvable without a printer, and it should be answered soon rather than left
-until the end.
+**The biggest open risk is still screenshots**, but it is now a well-understood risk rather
+than an unknown. 59 items need one; 0 are confirmed; 22 have a *candidate* image from
+2026-07-01 that nobody has checked against `94869f7`; 13 more images in `screenshots/` are
+upstream GuppyScreen captures from 2025 and must not be used at all.
+
+The simulator route is viable in principle - SDL2 and the toolchain are present, and panels
+expose `sim_*` hooks built for driving the UI to a given state. It is blocked only on fetching
+the four declared-but-empty submodules (`lvgl`, `lv_drivers`, `libhv`, `spdlog`). That is the
+next experiment. Read `SCREENSHOTS.md` before attempting it: the app crashes at startup if
+`log_path`'s directory is missing, and the `machine.nebulaos.*` panels cannot be captured
+truthfully against anything but a real printer.
 
 ## Remaining work
 
@@ -105,9 +111,12 @@ writing starts in earnest.
 - **Boot and lifecycle are script-driven.** 35 ordered init scripts in the firmware overlay,
   covering revert safety, Wi-Fi, MCU guard, update supervision, image trial and
   confirm-good. These are the real source for the update, rollback and recovery pages.
-- **The extensions have a real test suite** - 30 modules, 31 test files. That makes
-  `verify_test` genuinely reachable for the Klipper command reference, which is rare and
-  worth exploiting early: run the suite, cite the test, promote the status honestly.
+- **The extensions test suite passes, and has been run.** 29 of 31 suites, 899 individual
+  tests, at `8e3447a`. 21 modules are now test-verified with per-file citations. Two traps
+  when re-running it: strip ANSI before matching `OK` (the coloured line defeats
+  `grep '^OK'` and makes every suite look broken), and run per-module rather than via
+  `unittest discover` (discovery reports 42 bogus errors). Both are written up in
+  `VERIFICATION.md`.
 - **Upstream commands are overridden, not just added.** `nebulaos_bed_soak.py` replaces
   upstream Klipper's `SET_PIN`, and `nebulaos_z_adjust.py` deregisters and replaces
   `Z_OFFSET_APPLY_PROBE`. Those two must be documented as modified upstream behaviour, not
@@ -138,6 +147,10 @@ repositories not yet cloned locally.
 
 ## Branches and pull requests
 
+- `docs/extensions` in `NebulaOS-klipper-extensions` - worktree at
+  `_worktrees/docs/NebulaOS-klipper-extensions`, used for running the test suite. No
+  commits, nothing to push. Note that `git worktree add` could not write the parent repo's
+  `.git/config` (sandbox), which is harmless - the worktree itself works.
 - `docs/agent` in `NebulaOS` - the agent's state and the user manual. Pushed.
 - **PR #3** - https://github.com/NebulaOS-KE/NebulaOS/pull/3 - the first batch: manual
   skeleton, install, recovery, safety, and the coverage dashboard. Open, awaiting review.
@@ -151,13 +164,11 @@ repositories not yet cloned locally.
 2. **Q-017:** replace stubs with real pages, highest-traffic first - `First-Time-Setup`,
    `Connecting-To-WiFi`, `Opening-Mainsail`, then `Resetting` and `Updating-NebulaOS`. The
    existing NebulaScreen wiki already covers the last two well; reconcile rather than rewrite.
-3. **Q-020:** try to build the NebulaScreen SDL simulator in a worktree of your own and drive
-   it to a known screen. Record the answer in `SCREENSHOTS.md` either way - a clear "not
-   possible here" is worth as much as a yes, because it converts 59 open items into a named
-   blocker instead of a silent gap.
-4. **Q-051:** run the Klipper extensions test suite and cite it. 31 test files, and
-   `verify_test` is currently `unknown` for all 544 items. This is the cheapest genuine
-   verification available in the whole project and it is being left on the table.
+3. **Q-020, continued:** fetch the four submodules into
+   `_worktrees/docs/NebulaOS-nebulascreen`, build with `GUPPY_SMALL_SCREEN=1`, and try to
+   drive one panel and capture one image. Record the answer in `SCREENSHOTS.md` either way.
+4. **Q-052:** run the two Klipper-dependent test suites the way `scripts/ci-tests.sh` does,
+   by composing `extras/` into a scratch copy of the pinned Klipper at `58bd67d`.
 5. Keep running `tools/check_links.py` before every commit that touches `wiki/`.
 5. Follow-ups, when their sections come up and not before: Klipper status objects (find the
    `printer.objects.subscribe` call sites; the ~85 rejected pointers are candidates, but tie

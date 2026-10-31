@@ -64,9 +64,15 @@ the dashboard in the same batch as the page itself.
 
 ## P2 - Screenshots
 
-- [ ] **Q-020** Determine whether the NebulaScreen SDL simulator builds in this workspace
-      and can be driven to a known screen reproducibly. Record the method in
-      `SCREENSHOTS.md` either way.
+- [~] **Q-020** Simulator feasibility - **partly answered, see `SCREENSHOTS.md`.** SDL2,
+      make, g++ and cmake are available; the repository builds as an SDL simulator; and
+      panels expose `sim_*` hooks for driving the UI to a given state, which is exactly what
+      reproducible capture needs. Remaining blocker: `lvgl`, `lv_drivers`, `libhv` and
+      `spdlog` are declared submodules but empty in the workspace. Next: fetch them into a
+      worktree and attempt a build.
+- [ ] **Q-023** Confirm or reject the 26 existing `wiki/images/` screenshots against
+      `94869f7`. They were captured 2026-07-01, four months earlier. Needs the UI running.
+      Until then they are candidates, not coverage.
 - [ ] **Q-021** Capture the install and first-setup screens first - the highest-impact
       images in the manual.
 - [ ] **Q-022** Capture the remaining panels, then annotate the ones used in procedures.
@@ -101,9 +107,13 @@ the dashboard in the same batch as the page itself.
 - [ ] **Q-050** 59 inventory items require a screenshot; **0** exist. Q-020 decides whether
       the simulator can supply them. Until then every procedure page is text-only, which the
       mission explicitly calls insufficient for a beginner audience.
-- [ ] **Q-051** `verify_test` is `unknown` for all 544 items. The Klipper extensions ship 31
-      test files - running that suite and citing it is the cheapest real verification
-      available anywhere in this project.
+- [x] **Q-051** Done 2026-10-31. 29 of 31 suites, **899 tests, all passing**, at `8e3447a`.
+      `verify_test` now `verified` on 21 extension modules with per-file citations. The two
+      remaining suites need the pinned Klipper composed in; 9 modules have no test at all and
+      honestly stay `unknown`.
+- [ ] **Q-052** Run the two Klipper-dependent suites the way `scripts/ci-tests.sh` does, by
+      composing `extras/` into a scratch copy of the pinned Klipper (`58bd67d`). That would
+      finish test verification for `nebulaos_compat` and `nebulaos_temperature_mcu`.
 
 ## From the foreground session
 
@@ -118,6 +128,9 @@ Requests arriving from the foreground development session are added here in prio
   first attempt.
 - **Q-003** Moonraker API discovery (2026-10-31), after fixing an extractor that dropped an
   endpoint whose path contains a digit. Klipper status objects remain as a follow-up.
+- **Q-051** Extensions test suite run and cited (2026-10-31): 899 tests passing, 21 modules
+  promoted to test-verified. Two detection bugs of my own caught on the way - see
+  `VERIFICATION.md`.
 - **Q-006** Reuse audit of the existing wiki (2026-10-31). The existing wiki is good and is
   being reused rather than replaced; Phase 2 is more relocation than authoring, except for
   sections 01, 03 and 06.

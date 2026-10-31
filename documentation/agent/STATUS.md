@@ -1,6 +1,6 @@
 # Status
 
-**Updated:** 2026-10-31
+**Updated:** 2026-11-01
 **Phase:** 2 - writing the end-user manual (first batch complete)
 **Branch:** `docs/agent` in the central `NebulaOS` repository
 **Mode:** autonomous, self-paced loop
@@ -186,15 +186,65 @@ Worth noting that the habit cut both ways this time. It caught over-collection i
 sweep, under-collection in the API regex, and here it prevented a wrong *exclusion* - the
 five system-named shims that looked like noise and were not.
 
+## Test verification is real now
+
+Ran the Klipper extensions suite in a dedicated worktree at `8e3447a`: **29 of 31 suites, 899
+individual tests, all passing.** The two excluded suites need the pinned Klipper composed in,
+as the project's own CI script documents. `verify_test` is now `verified` on 21 extension
+modules, each citing its test file.
+
+Two near-misses worth keeping, both of which would have produced a confidently wrong result:
+
+- The first run reported **29 of 29 suites failing**. That was entirely my own detection bug -
+  `unittest` colours its `OK` line when attached to a TTY, so `grep '^OK'` never matched.
+  Nothing was wrong with the code. Had I trusted that output, the honest-looking conclusion
+  would have been "the extensions test suite is broken", filed as a blocker against work that
+  is in fact healthy.
+- `unittest discover` reports 42 errors on this suite, which are rootdir artifacts.
+  `test_tmcstatus` fails under discovery and passes perfectly when run as a module.
+
+The lesson is the same one the discovery bugs taught: a tool's output is a claim too. Both of
+these would have been easy to report as findings.
+
+## Screenshots: better and worse than expected
+
+**Better:** 26 real screenshots already exist in `NebulaOS-nebulascreen/wiki/images/`, and the
+simulator has purpose-built `sim_*` hooks for driving panels to a given state - built for
+exactly this job. SDL2, make, g++ and cmake are all available here.
+
+**Worse:** none of it can be used yet.
+
+- The 26 images were captured **2026-07-01**, four months before the commit this manual
+  documents. Four months of UI development is long enough for labels and layouts to move, and
+  the mission's condition for reusing an image is confirming it matches the documented
+  version. That confirmation needs the UI running. So they are recorded as 22 *candidates*,
+  not as coverage.
+- A second set of 13 images in `screenshots/` dates to **2025-08-20** and predates the
+  NebulaScreen rename. Those are upstream GuppyScreen captures and using them would
+  misattribute upstream UI to NebulaOS. Not candidates.
+- The simulator build is blocked on submodules: `lvgl`, `lv_drivers`, `libhv` and `spdlog` are
+  declared but empty in the workspace.
+
+Full detail in `SCREENSHOTS.md`.
+
+### A dashboard bug this exposed
+
+Marking 22 panels as `candidate-unconfirmed` made them vanish from the screenshot table -
+neither captured nor missing. 59 required, 37 reported, 22 silently gone. For a dashboard
+whose entire purpose is preventing gaps from hiding, that is the worst possible bug.
+
+Fixed, and `render_dashboard.py` now carries a self-check: if the screenshot rows do not sum
+to the required total, it prints a warning *into the dashboard itself* naming the unreported
+status values. A dashboard that can quietly fail to add up is not worth having.
+
 ## Next
 
-Replace the highest-traffic stubs with real pages, in this order: **first-time setup** and
-**Wi-Fi** (every new user hits these immediately after installing), then **Resetting** and
-**Updating**, then the **49-panel screen reference**.
+Replace the highest-traffic stubs with real pages: **first-time setup** and **Wi-Fi**, then
+**Resetting** and **Updating**, then the **49-panel screen reference**.
 
-Then the screenshot question, which is the largest open risk in the manual: find out whether
-the NebulaScreen SDL simulator can be built and driven here. 59 inventory items require a
-screenshot and **zero** exist.
+In parallel, attempt the simulator: fetch submodules into a worktree, build with
+`GUPPY_SMALL_SCREEN=1`, drive one panel, capture one image. A clear "not possible here" is a
+useful answer too.
 
 Two discovery follow-ups stay open and deliberately non-blocking: the Klipper status objects
 the UI subscribes to, and cloning `nebulaos-packages` and `lv_drivers`.
