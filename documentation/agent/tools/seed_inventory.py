@@ -269,6 +269,68 @@ def discover(root):
                 [f"scripts/build/overlay/etc/init.d/{f}"],
                 shas["NebulaOS-firmware"], "main", priority=2))
 
+    # --- firmware build pipeline --------------------------------------------
+    fw = os.path.join(root, "NebulaOS-firmware")
+    bld = os.path.join(fw, "scripts/build")
+    if os.path.isdir(bld):
+        for f in sorted(os.listdir(bld)):
+            if not f.endswith(".sh"):
+                continue
+            items.append(rec(
+                f"buildscript:{f}", "NebulaOS-firmware", "firmware-build",
+                f"Build pipeline script: {f}", "build-command",
+                [f"scripts/build/{f}"], shas["NebulaOS-firmware"], "main",
+                priority=2))
+
+    # --- firmware developer and operator tooling ----------------------------
+    tools = os.path.join(fw, "tools")
+    if os.path.isdir(tools):
+        for d in sorted(os.listdir(tools)):
+            dp = os.path.join(tools, d)
+            if os.path.isdir(dp):
+                files = sorted(f for f in os.listdir(dp)
+                               if f.endswith((".sh", ".py")))
+                if not files:
+                    continue
+                items.append(rec(
+                    f"toolset:{d}", "NebulaOS-firmware", "firmware-tools",
+                    f"Tooling: tools/{d} ({len(files)} scripts)",
+                    "developer-tool", [f"tools/{d}/{f}" for f in files],
+                    shas["NebulaOS-firmware"], "main", priority=3))
+            elif d.endswith((".sh", ".py")):
+                items.append(rec(
+                    f"toolset:{d}", "NebulaOS-firmware", "firmware-tools",
+                    f"Tooling: tools/{d}", "developer-tool",
+                    [f"tools/{d}"], shas["NebulaOS-firmware"], "main",
+                    priority=3))
+
+    # --- runtime helpers shipped in the overlay ------------------------------
+    # Everything executable in the overlay outside init.d. Note that the
+    # ones with ordinary system names - passwd, sudo, supervisorctl,
+    # sftp-server, git - are NOT vendor binaries: each is a NebulaOS shell
+    # shim, and `sudo` is explicitly an adapter rather than sudo. They were
+    # nearly filtered out as third-party noise; they are in fact some of the
+    # most surprising things in the image and a developer who assumes
+    # otherwise will be badly misled. They stay in the inventory.
+    ov = os.path.join(fw, "scripts/build/overlay")
+    if os.path.isdir(ov):
+        skip_ext = (".conf", ".cfg", ".json", ".txt", ".png", ".service")
+        for dirpath, _dirnames, filenames in os.walk(ov):
+            if "init.d" in dirpath:
+                continue
+            for f in sorted(filenames):
+                full = os.path.join(dirpath, f)
+                if f.endswith(skip_ext):
+                    continue
+                if not (f.endswith(".sh") or os.access(full, os.X_OK)):
+                    continue
+                relov = os.path.relpath(full, ov)
+                items.append(rec(
+                    f"overlay:{relov}", "NebulaOS-firmware", "firmware-runtime",
+                    f"Runtime helper: /{relov}", "runtime-helper",
+                    [f"scripts/build/overlay/{relov}"],
+                    shas["NebulaOS-firmware"], "main", priority=2))
+
     return items
 
 

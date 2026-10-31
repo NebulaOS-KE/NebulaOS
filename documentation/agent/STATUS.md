@@ -1,15 +1,15 @@
 # Status
 
 **Updated:** 2026-10-31
-**Phase:** 1 - repository discovery and coverage inventory (commands, configuration and APIs done)
+**Phase:** 1 - repository discovery and coverage inventory (substantially complete)
 **Branch:** `docs/agent` in the central `NebulaOS` repository
 **Mode:** autonomous, self-paced loop
 
 ## Where things stand
 
 The agent's own infrastructure is in place and discovery has run over commands,
-configuration, screens, services and the public API. There are **429 discovered
-documentation items** in
+configuration, screens, services, the public API, the build pipeline, the developer tooling
+and the runtime helpers. There are **510 discovered documentation items** in
 `coverage.jsonl`, every one of them recorded against the exact commit it was found at, and
 every one of them currently `missing` - which is the honest starting position. No
 documentation pages have been written yet.
@@ -135,6 +135,40 @@ inventory and will be discovered as one.
 A second correction: an earlier draft of this file claimed 42 extension modules. The real
 count is **30** modules and **31** test files. Both numbers now come from the inventory.
 
+## Build, tooling and runtime (Q-004, Q-005)
+
+- **14 build pipeline scripts** in `scripts/build/`, a clean numbered sequence from
+  `00-fetch-vendor-sources.sh` through `06-verify.sh`, plus packaging, SBOM generation and
+  baseline gates. Pleasant to document because the order is the architecture.
+- **11 tool sets** in `tools/`: attestation, eMMC layout, hardware agent, hardware
+  capability probes, qualification, USB recovery, release records, SDK export, workspace
+  control.
+- **56 runtime helpers** shipped in the overlay outside `init.d` - the update supervisor,
+  slot swap, clean reset, OTA markers, network and Wi-Fi apply, camera seeding, display
+  sleep/wake, memory guard, health check and more. Together with the 35 boot services and
+  the `ota.*` / `image.*` / `updates.*` API groups, these are the real source material for
+  the update, rollback and recovery documentation.
+
+### A filter that would have been a mistake
+
+Five of those overlay executables have ordinary system names - `passwd`, `sudo`,
+`supervisorctl`, `sftp-server`, `git` - and the obvious move was to drop them as vendor
+noise. Reading them first was the right call, because every one is NebulaOS-authored:
+
+- `usr/bin/sudo` says of itself that it is a "NebulaOS sudo ADAPTER - not sudo".
+- `usr/bin/supervisorctl` is a deliberate fake, present only so Moonraker believes a
+  supervisor exists and can list services.
+- `usr/bin/passwd` redirects to `nebulaos-passwd` because the image's `/etc/shadow` is
+  read-only and the real one lives in persistent storage.
+- `usr/libexec/sftp-server` exists to open SFTP in `/opt/printer_data` rather than root's
+  empty read-only home.
+- `usr/libexec/nebulaos/bin/git` is a wrapper placed first on Moonraker's PATH so
+  `update_manager`'s git calls go through it.
+
+These are among the most surprising things in the image, and a developer who assumes
+standard behaviour will be misled by all five. They are in the inventory, and the
+reasoning is in the seeder so nobody "cleans them up" later.
+
 ## A second discovery bug, caught the same way
 
 The endpoint extractor first used the character class `[a-z_/]+` for API paths. That silently
@@ -145,13 +179,24 @@ the file and comparing against the table, which now agrees at 56.
 
 Two discovery bugs in two slices, both in the direction of under- or over-collecting
 silently. Every extractor from here on gets a second, independent count before its output is
-trusted.
+trusted. The build/tooling/runtime slice was checked that way and agreed exactly: 14 build
+scripts, 56 overlay executables, 11 tool sets by shell count and by inventory count alike.
+
+Worth noting that the habit cut both ways this time. It caught over-collection in the config
+sweep, under-collection in the API regex, and here it prevented a wrong *exclusion* - the
+five system-named shims that looked like noise and were not.
 
 ## Next
 
-Finish Phase 1 with developer-facing commands and build targets (Q-004), the update and
-recovery mechanisms (Q-005), and the audit of the 34 existing wiki pages (Q-006). Then start
-Phase 2, the end-user manual, beginning with the install and first-setup journey.
+Phase 1 has produced enough evidence to write against, and the mission is explicit that the
+deliverable is pages rather than an audit. So: **Q-006**, the reuse audit of the 34 existing
+wiki pages, and then straight into Phase 2 - the manual skeleton and the installation and
+recovery sections, which is the first pull request.
+
+Two discovery follow-ups stay open and are deliberately not blocking: the Klipper status
+objects the UI subscribes to, and the two repositories not yet cloned
+(`nebulaos-packages`, `lv_drivers`). Both are additive and will be folded in when their
+sections come up.
 
 ## Open blockers
 

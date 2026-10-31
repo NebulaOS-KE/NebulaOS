@@ -15,9 +15,14 @@ workspace rules and the owner's decisions and wins wherever the two differ.
 
 ## Current phase
 
-**Phase 1 - repository discovery and coverage inventory.** Commands, configuration,
-screens and services are discovered: **355 items** recorded. Phase 0 (infrastructure) is
-finished. Two discovery slices remain before Phase 2 writing begins in earnest.
+**Phase 1 - substantially complete.** 510 items discovered across commands, configuration,
+screens, services, the public API, the build pipeline, tooling and runtime helpers.
+
+**Phase 2 starts now.** The mission is explicit that the deliverable is documentation, not
+an audit, and there is more than enough evidence on hand to write against. Do not keep
+extending discovery - the two remaining follow-ups (Klipper status objects, and cloning
+`nebulaos-packages` and `lv_drivers`) are additive and belong with the sections that need
+them.
 
 ## Completed
 
@@ -25,9 +30,12 @@ finished. Two discovery slices remain before Phase 2 writing begins in earnest.
 - Docs worktree created: `_worktrees/docs/NebulaOS`, branch `docs/agent`.
 - Tracking system built in `documentation/agent/`: mission, rules, status, queue, blockers,
   verification policy, screenshot inventory, decisions, handoff, and two scripts.
-- `coverage.jsonl` holds 429 items: 8 repository references, 10 manual sections, 49
+- `coverage.jsonl` holds 510 items: 8 repository references, 10 manual sections, 49
   NebulaScreen panels, 51 G-code commands, 172 configuration options, 30 extension modules,
-  35 boot services, 56 Moonraker API endpoints plus 1 notification, 17 OS helper modules.
+  35 boot services, 56 Moonraker API endpoints plus 1 notification, 17 OS helper modules, 14 build pipeline scripts, 11 tool sets, 56 overlay runtime
+  helpers.
+- **Q-004 and Q-005 done** - the build pipeline, developer tooling, and the update /
+  rollback / recovery surface. Counts verified independently and in agreement.
 - **Q-001 done** - the 8 G-code commands whose names are built from module constants are
   resolved and recorded with their constants in `tools/seed_inventory.py`.
 - **Q-003 done** - the public Moonraker API surface, inventoried from the server-side
@@ -56,6 +64,12 @@ writing starts in earnest.
   pinned at `58bd67d` and owned by the firmware build. Custom behaviour lives in
   `NebulaOS-klipper-extensions` as loadable `extras/` modules. Documentation must never
   present upstream Klipper behaviour as NebulaOS behaviour.
+- **Five overlay executables have ordinary system names and are not what they look like.**
+  `sudo` is an adapter that is not sudo, `supervisorctl` is a deliberate fake so Moonraker
+  believes a supervisor exists, `passwd` redirects because the image `/etc/shadow` is
+  read-only, `sftp-server` relocates SFTP to `/opt/printer_data`, and `git` is a wrapper
+  first on Moonraker's PATH. Any of these would mislead a developer who assumed standard
+  behaviour. They were nearly filtered out of discovery as vendor noise.
 - **The extensions pin gap is cosmetic.** The firmware manifest pins the extensions to
   branch `production` at `31d6d65`; `main` is at `8e3447a`. The diff is three files - a CI
   workflow, a CI script and a README edit - with nothing under `extras/`. Runtime code is
@@ -119,17 +133,19 @@ repositories not yet cloned locally.
 
 1. `git fetch` every repository and compare tips against the table above. If a tip moved,
    mark the affected items for re-verification instead of assuming the pages still hold.
-2. Work **Q-004** and **Q-005**: developer commands and build targets across the five cloned
-   repositories, then the update, rollback, A/B slot and recovery mechanisms. The 35 boot
-   services and the `ota.*` / `image.*` / `updates.*` API groups are the way in.
-3. Finish the **Q-003 follow-up**: the Klipper status objects the UI subscribes to. Find the
-   `printer.objects.subscribe` call sites first; the ~85 pointers rejected from configuration
-   discovery are the candidate list, but they must be tied to a real subscription before any
-   of them goes into the inventory.
-4. Work **Q-006**: audit the 34 existing wiki pages and record a reuse decision for each -
-   this decides how much of Phase 2 is writing versus adapting, so do it before writing.
-5. Then open Phase 2 with **Q-010** and **Q-011**, the manual skeleton and the installation
-   section, and raise the first pull request.
+2. Work **Q-006**: audit the 34 existing wiki pages in `NebulaOS-nebulascreen/wiki/` and
+   record reuse / adapt-and-move / supersede for each. Do this before writing, because it
+   decides how much of Phase 2 is authoring versus adapting - several of those pages
+   (`Installing-NebulaOS.md`, `Recovery.md`, `Updating-NebulaOS.md`,
+   `Emergency-Factory-Reset.md`) cover exactly the sections that come first.
+3. Then **Q-010** and **Q-011**: the manual skeleton with navigation in the central
+   repository's `wiki/`, then the installation section, verified against the firmware's own
+   install and recovery scripts. Write **Q-012** (recovery) in the same batch - a user who
+   follows an install guide needs the way out to already exist.
+4. Raise the first pull request on that batch. Do not wait for the whole manual.
+5. Follow-ups, when their sections come up and not before: Klipper status objects (find the
+   `printer.objects.subscribe` call sites; the ~85 rejected pointers are candidates, but tie
+   each to a real subscription first), and cloning `nebulaos-packages` and `lv_drivers`.
 
 Each batch ends the same way: update `coverage.jsonl`, regenerate `COVERAGE.md`, update
 `STATUS.md` and `QUEUE.md`, commit, push, update this file.

@@ -10,19 +10,19 @@ Verification is reported in four separate columns because they prove different t
 
 | Measure | Items | Share |
 |---|---|---|
-| Discovered documentation items | 429 | 100% |
+| Discovered documentation items | 510 | 100% |
 | Documented (page exists and covers the item) | 0 | 0% |
 | Draft | 0 | 0% |
-| Missing | 429 | 100% |
+| Missing | 510 | 100% |
 | Blocked | 2 | 0% |
 
 ## Verification (counted separately, never combined)
 
 | Kind | Verified | Partial | Unknown | Blocked | N/A |
 |---|---|---|---|---|---|
-| Code verified | 0 | 0 | 429 | 0 | 0 |
-| Test verified | 0 | 0 | 429 | 0 | 0 |
-| Hardware verified | 0 | 0 | 0 | 0 | 429 |
+| Code verified | 0 | 0 | 510 | 0 | 0 |
+| Test verified | 0 | 0 | 510 | 0 | 0 |
+| Hardware verified | 0 | 0 | 0 | 0 | 510 |
 
 ## Screenshots
 
@@ -40,7 +40,7 @@ Verification is reported in four separate columns because they prove different t
 | Repository | Items | Documented | Draft | Missing | Code verified | Documented % |
 |---|---|---|---|---|---|---|
 | NebulaOS | 11 | 0 | 0 | 11 | 0 | 0% |
-| NebulaOS-firmware | 110 | 0 | 0 | 110 | 0 | 0% |
+| NebulaOS-firmware | 191 | 0 | 0 | 191 | 0 | 0% |
 | NebulaOS-kernel | 1 | 0 | 0 | 1 | 0 | 0% |
 | NebulaOS-klipper-extensions | 234 | 0 | 0 | 234 | 0 | 0% |
 | NebulaOS-klipper-mcu | 1 | 0 | 0 | 1 | 0 | 0% |
@@ -53,11 +53,14 @@ Verification is reported in four separate columns because they prove different t
 | Category | Items | Documented | Draft | Missing | Documented % |
 |---|---|---|---|---|---|
 | api | 57 | 0 | 0 | 57 | 0% |
+| build-command | 14 | 0 | 0 | 14 | 0% |
 | command | 51 | 0 | 0 | 51 | 0% |
 | config-option | 172 | 0 | 0 | 172 | 0% |
+| developer-tool | 11 | 0 | 0 | 11 | 0% |
 | extension | 30 | 0 | 0 | 30 | 0% |
 | os-helper | 17 | 0 | 0 | 17 | 0% |
 | repo-overview | 8 | 0 | 0 | 8 | 0% |
+| runtime-helper | 56 | 0 | 0 | 56 | 0% |
 | screen | 49 | 0 | 0 | 49 | 0% |
 | service | 35 | 0 | 0 | 35 | 0% |
 | user-manual-section | 10 | 0 | 0 | 10 | 0% |
@@ -67,7 +70,7 @@ Verification is reported in four separate columns because they prove different t
 | Repository | Branch | Commit | Items |
 |---|---|---|---|
 | NebulaOS | main | not cloned l | 11 |
-| NebulaOS-firmware | main | 82e132088fc7 | 110 |
+| NebulaOS-firmware | main | 82e132088fc7 | 191 |
 | NebulaOS-kernel | openke | d86790d2e231 | 1 |
 | NebulaOS-klipper-extensions | main | 8e3447ac0da4 | 234 |
 | NebulaOS-klipper-mcu | main | 33f5d16daccd | 1 |

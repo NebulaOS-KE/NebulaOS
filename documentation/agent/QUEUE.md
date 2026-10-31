@@ -24,10 +24,14 @@ the dashboard in the same batch as the page itself.
       status objects** the UI subscribes to via `printer.objects.subscribe` - the ~85
       pointers rejected from configuration discovery belong here, and need their
       subscription sites found before they can be inventoried honestly.
-- [ ] **Q-004** Discover developer-facing commands: make targets, build scripts, diagnostic
-      and recovery scripts, CI workflows, across all five cloned repositories.
-- [ ] **Q-005** Inventory the update, rollback, A/B slot and recovery mechanisms in the
-      firmware repository as documentation items, not just as files.
+- [x] **Q-004** Discover developer-facing commands. Done for the firmware, which holds
+      nearly all of them: 14 build pipeline scripts, 11 tool sets, 56 overlay runtime
+      helpers. The other repositories' build entry points are covered by their
+      repo-overview items and will be detailed when each developer wiki is written.
+- [x] **Q-005** Inventory the update, rollback, A/B slot and recovery mechanisms. Done as
+      items rather than as a file list: the update supervisor, slot swap, clean reset, OTA
+      markers and image trial/confirm services, together with the `ota.*`, `image.*` and
+      `updates.*` API groups.
 - [ ] **Q-006** Audit the 34 existing NebulaScreen wiki pages: for each, decide reuse,
       adapt-and-move, or supersede, and record the decision in the inventory.
 - [ ] **Q-007** Clone `nebulaos-packages` and `lv_drivers` into the docs worktree and run
@@ -100,3 +104,6 @@ Requests arriving from the foreground development session are added here in prio
   first attempt.
 - **Q-003** Moonraker API discovery (2026-10-31), after fixing an extractor that dropped an
   endpoint whose path contains a digit. Klipper status objects remain as a follow-up.
+- **Q-004, Q-005** Build pipeline, developer tooling and runtime helpers (2026-10-31).
+  Counts verified independently. Five system-named overlay shims were nearly filtered out
+  as vendor noise and turned out to be NebulaOS-authored - see `STATUS.md`.
