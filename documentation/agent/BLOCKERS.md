@@ -49,6 +49,27 @@ any more, and no page claims the route is tested either.
 **Still open as verification:** `verify_hardware` for the installation item remains unverified
 and only a printer run can change that. This is no longer blocking documentation work.
 
+### B-004 - `nozzle_clear` declares its own hardware gap
+
+`extras/nozzle_clear.py`, the native nozzle-wipe routine behind
+`_NEBULAOS_NOZZLE_CLEAN`, carries a note in its own header stating that the module **had not
+been exercised on real hardware** when that note was written, and that it was enabled for a
+Phase 1.8B integration candidate by source-level activation.
+
+The flag name inverts, which is worth stating plainly: `HARDWARE_BEHAVIOR_BLOCKED = False`
+means the routine is **not** blocked and does run. The guard raises only when it is `True`.
+
+It matters because this is a motion and contact routine - it heats, probes two randomised
+points on the wipe pad, and drags the nozzle between them under load. It is the only module in
+the extensions carrying such a note.
+
+**Why this is a question and not a finding:** the note says "as of this commit" about the
+commit it was written in, not about `a2e7634`. The module may well have been qualified since.
+This agent cannot tell, and will not guess either way.
+
+**Who can clear it:** the project owner, by confirming whether the wipe routine has been run
+on a printer, and updating or removing that header note.
+
 ## Code problems found while documenting
 
 Discrepancies between code and documentation go here, never into a code change. This agent

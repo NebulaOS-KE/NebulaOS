@@ -11,10 +11,10 @@ Verification is reported in four separate columns because they prove different t
 | Measure | Items | Share |
 |---|---|---|
 | Discovered documentation items | 547 | 100% |
-| Documented (page exists and covers the item) | 199 | 36% |
-| Draft | 168 | 30% |
+| Documented (page exists and covers the item) | 221 | 40% |
+| Draft | 146 | 26% |
 | Missing | 180 | 32% |
-| Blocked (cannot proceed without hardware, access or a decision) | 6 | 1% |
+| Blocked (cannot proceed without hardware, access or a decision) | 8 | 1% |
 | Has a recorded completeness gap (work not done, not stuck) | 311 | 56% |
 
 ## Verification (counted separately, never combined)
@@ -23,7 +23,7 @@ Verification is reported in four separate columns because they prove different t
 |---|---|---|---|---|---|
 | Code verified | 332 | 36 | 179 | 0 | 0 |
 | Test verified | 28 | 0 | 519 | 0 | 0 |
-| Hardware verified | 0 | 0 | 0 | 2 | 545 |
+| Hardware verified | 0 | 0 | 0 | 4 | 543 |
 
 ## Screenshots
 
@@ -46,7 +46,7 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | NebulaOS | 11 | 10 | 0 | 1 | 10 | 90% |
 | NebulaOS-firmware | 194 | 1 | 95 | 98 | 61 | 0% |
 | NebulaOS-kernel | 1 | 0 | 0 | 1 | 0 | 0% |
-| NebulaOS-klipper-extensions | 234 | 138 | 73 | 23 | 211 | 58% |
+| NebulaOS-klipper-extensions | 234 | 160 | 51 | 23 | 211 | 68% |
 | NebulaOS-klipper-mcu | 1 | 0 | 0 | 1 | 0 | 0% |
 | NebulaOS-nebulascreen | 104 | 50 | 0 | 54 | 50 | 48% |
 | lv_drivers | 1 | 0 | 0 | 1 | 0 | 0% |
@@ -59,7 +59,7 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | api | 59 | 0 | 59 | 0 | 0% |
 | build-command | 14 | 0 | 0 | 14 | 0% |
 | command | 51 | 49 | 0 | 2 | 96% |
-| config-option | 172 | 80 | 72 | 20 | 46% |
+| config-option | 172 | 102 | 50 | 20 | 59% |
 | developer-tool | 11 | 0 | 0 | 11 | 0% |
 | existing-page | 34 | 16 | 0 | 18 | 47% |
 | extension | 30 | 9 | 0 | 21 | 30% |
@@ -95,4 +95,6 @@ Only genuine blockers: something that cannot proceed without hardware, access or
 | screen:storage_panel | NebulaOS-nebulascreen | the new Free up space button (screen 3194104) is not in the screenshot tour; needs an extra tour step or a real printer |
 | screen:updates_panel | NebulaOS-nebulascreen | capture is timing-dependent without a live Moonraker: the busy/idle state varies between runs, so a published image would contradict the page. Needs a real printer. |
 | gcode:NEBULAOS_BED_TRAM | NebulaOS-klipper-extensions | defined as a gcode_macro in the firmware's calibration.cfg, not registered by the extensions; verify the macro file before documenting |
+| gcode:_NEBULAOS_NOZZLE_CLEAN | NebulaOS-klipper-extensions | the module's own header states it had not been exercised on real hardware when that note was written, and was enabled by source-level activation for a Phase 1.8B integration candidate; only the owner can say whether it has since been qualified |
+| extension:nozzle_clear | NebulaOS-klipper-extensions | the module's own header states it had not been exercised on real hardware when that note was written, and was enabled by source-level activation for a Phase 1.8B integration candidate; only the owner can say whether it has since been qualified |
 

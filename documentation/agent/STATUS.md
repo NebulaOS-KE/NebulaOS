@@ -6,14 +6,14 @@
 | | |
 |---|---|
 | Discovered items | **547** |
-| Documented | **199** (36%) |
-| Draft | 168 |
+| Documented | **221** (40%) |
+| Draft | 146 |
 | Missing | 180 |
 | Code verified | 332 |
 | Test verified | 28 |
 | Hardware verified | 0 |
 | Screenshots required / captured | 57 / 41 |
-| Blocked (cannot proceed) | 6 |
+| Blocked (cannot proceed) | 8 |
 | Completeness gaps (work not done) | 311 |
 
 Per-repository and per-category breakdowns are in `COVERAGE.md`.
@@ -42,13 +42,18 @@ ranges, errors raised, side effects and an example invocation, each naming what 
 unestablished.
 
 Configuration is in progress. `CONFIG.md` carries each section's module-header purpose, the
-checked fact that every option needs a Klipper restart, and now a **per-option Purpose column**
-for 80 of the 155 - 43 written by reading the module, 37 quoted from the author's own comment
-above the option and labelled as such.
+checked fact that every option needs a Klipper restart, and a **per-option Purpose column**
+for **102 of the 155** - 70 written by reading the module, the rest quoted from the author's
+own comment above the option and labelled as such.
 
-Only those 80 are promoted. **72 keep a dash** and stay draft, because a dash is the honest
-answer where neither a reading nor a comment exists; the alternative is a sentence invented
-from the option's name.
+Only those are promoted. **50 keep a dash** and stay draft, because a dash is the honest answer
+where neither a reading nor a comment exists; the alternative is a sentence invented from the
+option's name.
+
+`nozzle_clear`'s thirteen options are the clearest argument for reading modules rather than
+parsing them: `clr_noz_len_x`, `pa_clr_dis_mm_x`, `vs_start_z_pos` cannot be described honestly
+from their names, but the module header explains the wipe sequence and the options map onto it
+once that is known.
 
 An earlier attempt promoted all 152 on the strength of a section-level purpose, taking coverage
 from 21% to 49% in one step. It was reverted the same iteration - see `STATUS-LOG.md`, along
@@ -121,7 +126,12 @@ the workspace root - those belong to the foreground session and move without war
 
 ## Open blockers
 
-Six, all genuine, in `BLOCKERS.md`. The substantive one is **B-001: no printer access**, by
+Seven, all genuine, in `BLOCKERS.md`. The newest is **B-004**: `nozzle_clear`, the nozzle-wipe
+routine behind `_NEBULAOS_NOZZLE_CLEAN`, carries a header note saying it had not been exercised
+on real hardware when that note was written. It is a motion and contact routine, and the only
+module declaring such a gap. The note says "as of this commit" about its own commit, not about
+`a2e7634`, so whether it has since been qualified is a question for the owner rather than
+something this agent can settle. The substantive one is **B-001: no printer access**, by
 design - so `verify_hardware` is 0 across the whole inventory and will stay there. Everything
 documented is established from source and from the repositories' own tests.
 

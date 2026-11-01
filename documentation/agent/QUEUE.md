@@ -107,13 +107,13 @@ strongest: the suite already passes and 21 modules are already test-verified.
       happen at load time; none are re-read at runtime). But the **per-option** purpose,
       runtime behaviour, dependencies and example that 6.6 asks for are not written, and those
       *can* be written by reading each of the 18 modules.
-      **80 of 155 now carry a per-option purpose** - 43 written by reading the module, 37
-      quoted from the author's comment above the option - and only those 80 are promoted.
-      **72 remain draft** with a dash in the Purpose column, which is the honest answer rather
+      **102 of 155 now carry a per-option purpose** - 70 written by reading the module, the
+      rest quoted from the author's comment above the option - and only those are promoted.
+      **50 remain draft** with a dash in the Purpose column, which is the honest answer rather
       than a sentence invented from the option's name. Remaining modules to read:
-      `z_compensate` (16), `nebulaos_z_offset_probe` (14), `nozzle_clear` (13),
-      `nebulaos_calibration` (31), `autotune_tmc` (16), `calibrate_shaper_config` (5),
-      `motor_constants` (7), `bl24c16f`, `virtual_pins`.
+      `z_compensate` (16), `nebulaos_z_offset_probe` (14), `nebulaos_calibration` (31),
+      `autotune_tmc` (16, though most carry source comments already), `bl24c16f`,
+      `virtual_pins`.
 - [ ] **Q-031** `NebulaOS-nebulascreen` - LVGL architecture, the panel system, Moonraker
       integration, simulator, build and testing. Reuse the existing developer pages.
 - [~] **Q-032** `NebulaOS-firmware` - API and boot services referenced (PR #5 on that repo):
