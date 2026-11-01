@@ -27,7 +27,9 @@ Nothing, if NebulaOS still starts. Otherwise see [Recovery](Recovery).
 
 This is blocked while a print is running.
 
-*Screenshot needed: the Swap boot slot confirmation dialog. Not yet captured.*
+![The Swap boot slot confirmation, naming what is in the other slot](images/30-swap-confirm-nebulaos.png)
+
+*The confirmation names what is installed in the other slot. Read it before confirming.*
 
 ## Expected result
 

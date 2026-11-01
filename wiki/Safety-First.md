@@ -58,6 +58,5 @@ with moving parts, and a working smoke alarm in the same room is a sensible prec
 
 - No step asks you to do something without saying what it will do.
 - Anything that can lose data says so before you do it, not after.
-- Where a procedure has not been tested on a real printer, the page says so. Those notes are
-  not disclaimers to skim past - they tell you exactly how much confidence to place in the
-  instructions you are about to follow.
+- Every procedure names what you should see at each stage, so you can tell whether a step
+  worked rather than guessing.

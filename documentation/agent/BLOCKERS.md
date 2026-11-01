@@ -27,7 +27,7 @@ inventories are empty. Not a real obstacle - they will be cloned into
 
 **Holds up:** the repo-level items `repo:nebulaos-packages` and `repo:lv_drivers`.
 
-### B-003 - The most common installation path is documented but untested
+### B-003 - CLOSED as a documentation blocker (2026-11-01), still an open verification gap
 
 `Installing-NebulaOS.md` says plainly: *"Tested from OpenKE on 2026-10-29. The path through
 Creality's touchscreen is not tested yet."* That untested path - installing from stock
@@ -41,8 +41,13 @@ hardware access.
 **Holds up:** `verify_hardware` for the installation section, and any claim that the stock
 touchscreen route works.
 
-**Who can clear it:** the project owner, by running that path once on a printer and reporting
-the result.
+**Resolution as a documentation question:** Tim decided on 2026-11-01 that the wiki should
+assume the route works and document it as the normal route, with the record kept in
+`VERIFICATION.md` only. Applied - see decision D-009. No user-facing page carries the warning
+any more, and no page claims the route is tested either.
+
+**Still open as verification:** `verify_hardware` for the installation item remains unverified
+and only a printer run can change that. This is no longer blocking documentation work.
 
 ## Code problems found while documenting
 

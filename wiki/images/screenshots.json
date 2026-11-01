@@ -1,0 +1,396 @@
+{
+  "caveat": "real UI from the real application at this commit; not hardware. machine.nebulaos.* panels need a live printer and are not truthful here.",
+  "commit": "94869f75657270200a306c5a54d694eb6adf7b74",
+  "count": 129,
+  "images": [
+    {
+      "image": "01-settings.png"
+    },
+    {
+      "image": "02-connections.png"
+    },
+    {
+      "image": "03-wifi.png"
+    },
+    {
+      "image": "04-display.png"
+    },
+    {
+      "image": "05-printer.png"
+    },
+    {
+      "image": "06-system.png"
+    },
+    {
+      "image": "07-updates.png"
+    },
+    {
+      "image": "08-reset.png"
+    },
+    {
+      "image": "09-clean-reset-confirm.png"
+    },
+    {
+      "image": "10-swap-confirm.png"
+    },
+    {
+      "image": "11-reboot-confirm.png"
+    },
+    {
+      "image": "12-hostname.png"
+    },
+    {
+      "image": "13-hostname-invalid.png"
+    },
+    {
+      "image": "14-hostname-confirm.png"
+    },
+    {
+      "image": "15-printer.png"
+    },
+    {
+      "image": "16-mcu.png"
+    },
+    {
+      "image": "17-mcu-confirm.png"
+    },
+    {
+      "image": "18-mcu-busy.png"
+    },
+    {
+      "image": "19-mcu-done.png"
+    },
+    {
+      "image": "20-mcu-failed.png"
+    },
+    {
+      "image": "21-updates.png"
+    },
+    {
+      "image": "22-image.png"
+    },
+    {
+      "image": "23-image-confirm-nebulaos.png"
+    },
+    {
+      "image": "24-image-confirm-creality.png"
+    },
+    {
+      "image": "25-image-refused.png"
+    },
+    {
+      "image": "26-image-writing.png"
+    },
+    {
+      "image": "27-image-restarting.png"
+    },
+    {
+      "image": "28-image-failed.png"
+    },
+    {
+      "image": "29-image-rolled-back.png"
+    },
+    {
+      "image": "30-swap-confirm-nebulaos.png"
+    },
+    {
+      "image": "31-refusal-active.png"
+    },
+    {
+      "image": "32-refusal-updating.png"
+    },
+    {
+      "image": "33-image-stopped-print.png"
+    },
+    {
+      "image": "34-image-next-power-on.png"
+    },
+    {
+      "image": "35-restart-klipper-refused.png"
+    },
+    {
+      "image": "36-spoolman.png"
+    },
+    {
+      "image": "37-spoolman-typing.png"
+    },
+    {
+      "image": "38-spoolman-none.png"
+    },
+    {
+      "image": "39-display-no-nebula-camera.png"
+    },
+    {
+      "image": "40-display-nebula-camera.png"
+    },
+    {
+      "image": "41-camera.png"
+    },
+    {
+      "image": "42-camera-unsaved.png"
+    },
+    {
+      "image": "43-camera-back-unsaved.png"
+    },
+    {
+      "image": "m01-home.png"
+    },
+    {
+      "image": "m02-macros.png"
+    },
+    {
+      "image": "m03-console.png"
+    },
+    {
+      "image": "m04-tune.png"
+    },
+    {
+      "image": "m05-move.png"
+    },
+    {
+      "image": "m06-extruder.png"
+    },
+    {
+      "image": "m07-fans.png"
+    },
+    {
+      "image": "m08-leds.png"
+    },
+    {
+      "image": "m09-files.png"
+    },
+    {
+      "image": "m10-bedmesh.png"
+    },
+    {
+      "image": "m10b-bedmesh-saved.png"
+    },
+    {
+      "image": "m11-finetune.png"
+    },
+    {
+      "image": "m12-limits.png"
+    },
+    {
+      "image": "m13-tmc-metrics.png"
+    },
+    {
+      "image": "m14-power.png"
+    },
+    {
+      "image": "m15-retraction.png"
+    },
+    {
+      "image": "m16-zoffset-saved.png"
+    },
+    {
+      "image": "m17-zoffset-save-error.png"
+    },
+    {
+      "image": "m18-zoffset-older-extensions.png"
+    },
+    {
+      "image": "m19-calibration.png"
+    },
+    {
+      "image": "m19b-calibration-status.png"
+    },
+    {
+      "image": "m19c-calibration-status-middle.png"
+    },
+    {
+      "image": "m19d-calibration-status-other.png"
+    },
+    {
+      "image": "m20-axis-twist.png"
+    },
+    {
+      "image": "m21-skew.png"
+    },
+    {
+      "image": "m22a-pid.png"
+    },
+    {
+      "image": "m22b-pid-running.png"
+    },
+    {
+      "image": "m22c-pid-done.png"
+    },
+    {
+      "image": "m29a-loadcell-auto-never.png"
+    },
+    {
+      "image": "m29b-loadcell-auto-checking.png"
+    },
+    {
+      "image": "m29c-loadcell-auto-ok.png"
+    },
+    {
+      "image": "m29d-loadcell-auto-failed.png"
+    },
+    {
+      "image": "m29e-loadcell-manual.png"
+    },
+    {
+      "image": "m29f-loadcell-manual-step.png"
+    },
+    {
+      "image": "m30-loadcell-idle.png"
+    },
+    {
+      "image": "m31-loadcell-empty.png"
+    },
+    {
+      "image": "m32-loadcell-weight.png"
+    },
+    {
+      "image": "m33-loadcell-weight-keypad.png"
+    },
+    {
+      "image": "m33b-loadcell-weight-typed.png"
+    },
+    {
+      "image": "m33c-loadcell-weight-ok.png"
+    },
+    {
+      "image": "m33d-loadcell-weigh-problem.png"
+    },
+    {
+      "image": "m34-loadcell-weight-problem.png"
+    },
+    {
+      "image": "m35-loadcell-replace.png"
+    },
+    {
+      "image": "m36-loadcell-remove.png"
+    },
+    {
+      "image": "m37-loadcell-finger.png"
+    },
+    {
+      "image": "m38-loadcell-confirm.png"
+    },
+    {
+      "image": "m39-loadcell-complete.png"
+    },
+    {
+      "image": "m40-tram-idle.png"
+    },
+    {
+      "image": "m41-tram-mount.png"
+    },
+    {
+      "image": "m42-tram-adjust-rigid.png"
+    },
+    {
+      "image": "m43-tram-adjust-adjustable.png"
+    },
+    {
+      "image": "m44-tram-adjust-older-extensions.png"
+    },
+    {
+      "image": "m45-tram-complete.png"
+    },
+    {
+      "image": "m46-tram-stopped.png"
+    },
+    {
+      "image": "m50-auto-calibrate.png"
+    },
+    {
+      "image": "m51-auto-calibrate-running.png"
+    },
+    {
+      "image": "m51a-auto-step1-load-cell.png"
+    },
+    {
+      "image": "m51b-auto-step4-heating.png"
+    },
+    {
+      "image": "m51c-auto-step7-touch.png"
+    },
+    {
+      "image": "m51d-auto-step8-mesh.png"
+    },
+    {
+      "image": "m51e-auto-step9-restart.png"
+    },
+    {
+      "image": "m51f-auto-reconnecting.png"
+    },
+    {
+      "image": "m51g-auto-done.png"
+    },
+    {
+      "image": "m51h-auto-failed.png"
+    },
+    {
+      "image": "m51i-auto-idle-older-extensions.png"
+    },
+    {
+      "image": "m52-esteps.png"
+    },
+    {
+      "image": "m52a-esteps-step1-heating.png"
+    },
+    {
+      "image": "m52b-esteps-start-extrusion.png"
+    },
+    {
+      "image": "m52c-esteps-confirm.png"
+    },
+    {
+      "image": "m53-esteps-measure-keypad.png"
+    },
+    {
+      "image": "m54-input-shaper.png"
+    },
+    {
+      "image": "m54a-input-shaper-step2.png"
+    },
+    {
+      "image": "m54b-input-shaper-measuring-x.png"
+    },
+    {
+      "image": "m54c-input-shaper-calculating-x.png"
+    },
+    {
+      "image": "m54d-input-shaper-x-result-graph.png"
+    },
+    {
+      "image": "m54e-input-shaper-done-graphs.png"
+    },
+    {
+      "image": "m54f-input-shaper-graph-full-screen.png"
+    },
+    {
+      "image": "m54g-input-shaper-graphs-off.png"
+    },
+    {
+      "image": "m54h-input-shaper-measuring-y.png"
+    },
+    {
+      "image": "m60-print-status.png"
+    },
+    {
+      "image": "m61-finetune-printing.png"
+    },
+    {
+      "image": "m62-home-printing.png"
+    },
+    {
+      "image": "m63-print-start-heating.png"
+    },
+    {
+      "image": "m64-print-start-soak.png"
+    },
+    {
+      "image": "m65-print-start-pause.png"
+    },
+    {
+      "image": "m66-print-start-done.png"
+    }
+  ],
+  "resolution": "480x272 (GUPPY_SMALL_SCREEN=1, the KE's real panel)",
+  "source": "NebulaScreen SDL simulator, GUPPY_SIM_SHOTS tour, captured 2026-11-01"
+}

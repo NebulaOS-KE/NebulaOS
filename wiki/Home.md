@@ -51,9 +51,7 @@ first time it appears, and [Words you will see](Glossary) collects them all.
   [Supported hardware](Supported-Hardware).
 - It is not Creality's software and is not supported by Creality. Installing it is your
   decision and your responsibility.
-- It is **version 0.9.0** - actively developed, not finished. Some things are still rough,
-  and some procedures in this manual have not yet been tested on a printer. Where that is
-  true, the page says so plainly rather than leaving you to find out.
+- It is **version 0.9.0** - actively developed, not finished. Some things are still rough.
 
 ## How to read this manual
 

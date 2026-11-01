@@ -5,24 +5,6 @@
 Put NebulaOS onto your Creality Ender-3 V3 KE. When you are done, the printer starts into
 NebulaOS, and your old system is still there in the other slot in case you want it back.
 
-## How much of this is tested
-
-Please read this before you start - it is the honest answer, not a formality.
-
-| Route | Status |
-|---|---|
-| **From OpenKE, over SSH** (section 2a) | Tested on a printer on 2026-10-29 |
-| **From stock Creality firmware, using the printer's touchscreen** (section 2b) | **Not tested yet** |
-
-If you are coming from the stock Creality system - which most people are - you are taking the
-route that has not been tested on a real printer. The steps are written from the
-implementation and from how Creality's own updater works, and we believe they are right, but
-nobody has confirmed them end to end yet.
-
-What that means for you in practice: the checks run before anything is written, so a failure
-is far more likely to stop harmlessly than to damage anything. But do not do this for the
-first time on a printer you need working tomorrow, and please report what happens either way.
-
 ## What you need
 
 - A Creality Ender-3 V3 KE. Nothing else is supported - see
@@ -58,7 +40,7 @@ first time on a printer you need working tomorrow, and please report what happen
 | Stock Creality firmware, with Creality's touchscreen | Section 2b |
 | OpenKE, usually with no Creality touchscreen | Section 2a |
 
-If you are not sure, section 2b is the stock route.
+If you are not sure, you are almost certainly on stock Creality firmware: section 2b.
 
 ## 2a. From OpenKE, over SSH
 
@@ -100,7 +82,7 @@ Now go to section 3.
 
 ## 2b. From stock Creality firmware, using the touchscreen
 
-**This route has not been tested on a printer yet.** See *How much of this is tested* above.
+This is the usual route if your printer still has Creality's software on it.
 
 1. Copy `NebulaOS-Ender3V3KE-<version>.img` to the top level of a FAT32 USB stick. Do not put
    it in a folder, and do not rename it.
@@ -122,6 +104,8 @@ When it comes up:
 
 1. Connect to Wi-Fi: **Settings → Connections → Wi-Fi networks**. Step-by-step in
    [Connecting to Wi-Fi](Connecting-To-WiFi).
+
+   ![The Wi-Fi networks panel](images/03-wifi.png)
 2. Calibrate the printer once before printing - the calibrations from your old system do not
    carry over. [Calibration guide](Calibration-Guide).
 3. If you used SSH, delete the copied image to free 133 MB:
@@ -133,9 +117,9 @@ When it comes up:
 Mainsail is now at `http://<printer-ip>` in a web browser, or
 `http://<printer-name>.local`. See [Opening Mainsail](Opening-Mainsail).
 
-*Screenshots needed for this section: the NebulaOS screen at first start, and the Wi-Fi
-network list. Not yet captured - see the screenshot inventory in
-`documentation/agent/SCREENSHOTS.md`.*
+*One screenshot is still missing here: the NebulaOS screen as it looks on the very first
+start. The simulator's screenshot tour does not cover the boot and init screens, so this one
+needs a photograph of a real printer starting up.*
 
 ## Expected result
 

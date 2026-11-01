@@ -41,6 +41,10 @@ happened when it comes up.
 A screen shed by the memory guard counts as a successful start, and a power cut during the
 trial makes the trial run again on the next start.
 
+![The screen reporting that an image was rolled back](images/29-image-rolled-back.png)
+
+*What the screen shows after an automatic rollback.*
+
 **This does not cover:** an install done through Creality's updater, which has no trial at all,
 or a kernel that does not start.
 
@@ -51,6 +55,8 @@ printer by the author of this page.*
 ## 2. Swap the boot slot from the screen
 
 **The easy one.** Use this whenever NebulaOS still starts.
+
+![The Swap boot slot confirmation dialog](images/30-swap-confirm-nebulaos.png)
 
 1. On the printer, go to **Settings → Reset → Swap boot slot**.
 2. The confirmation tells you what is installed in the other slot. Read it - this is how you

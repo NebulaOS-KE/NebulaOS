@@ -87,6 +87,19 @@ NebulaOS-klipper-extensions@8e3447a:extras/nebulaos_beeper.py#cmd_NEBULAOS_BEEP
 Pages cite the same references, pinned to the exact commit, so a reader can check any
 sentence against the source it came from.
 
+## Hardware verification still outstanding
+
+Kept here on Tim's instruction (2026-11-01), because the user-facing pages no longer carry it.
+
+**Installing from stock Creality firmware using the printer's touchscreen has not been
+observed on a printer by this agent.** The existing wiki recorded on 2026-10-29 that only the
+OpenKE/SSH route had been tested. User pages now present the touchscreen route as the normal
+route (decision D-009); the route's `verify_hardware` stays unverified in `coverage.jsonl`.
+
+What *is* established from source: the checks run before anything is written, so a failure
+stops without changing the running system. What is not established: that the route completes
+successfully on real hardware.
+
 ## Source revisions
 
 Documentation describes the **newest** code: the tip of each repository's default branch.

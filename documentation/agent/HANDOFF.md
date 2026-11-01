@@ -37,6 +37,7 @@ belong with the sections that need them.
   rollback / recovery surface. Counts verified independently and in agreement.
 - **Q-001 done** - the 8 G-code commands whose names are built from module constants are
   resolved and recorded with their constants in `tools/seed_inventory.py`.
+- **Q-020 done** - screenshot capture solved; 129 images from the documented commit.
 - **Q-003 done** - the public Moonraker API surface, inventoried from the server-side
   registration table and cross-checked against UI call sites. Klipper status objects are the
   remaining follow-up.
@@ -52,17 +53,17 @@ belong with the sections that need them.
 Nothing half-finished. 17 stub pages are placeholders by design, each saying so to the reader,
 and each still counted `missing` in the inventory.
 
-**The biggest open risk is still screenshots**, but it is now a well-understood risk rather
-than an unknown. 59 items need one; 0 are confirmed; 22 have a *candidate* image from
-2026-07-01 that nobody has checked against `94869f7`; 13 more images in `screenshots/` are
-upstream GuppyScreen captures from 2025 and must not be used at all.
+**Screenshots are solved.** 129 real captures at 480x272 from commit `94869f7`, in
+`wiki/images/`, reproducible with `tools/capture_screenshots.sh`. The app has a built-in
+headless tour (`GUPPY_SIM_SHOTS=<dir>`). 36 of 49 panels covered. Read `SCREENSHOTS.md` before
+re-running it - three non-obvious build blockers are written up there.
 
-The simulator route is viable in principle - SDL2 and the toolchain are present, and panels
-expose `sim_*` hooks built for driving the UI to a given state. It is blocked only on fetching
-the four declared-but-empty submodules (`lvgl`, `lv_drivers`, `libhv`, `spdlog`). That is the
-next experiment. Read `SCREENSHOTS.md` before attempting it: the app crashes at startup if
-`log_path`'s directory is missing, and the `machine.nebulaos.*` panels cannot be captured
-truthfully against anything but a real printer.
+**The remaining screenshot work is embedding, not capturing.** 7 of 129 are used in pages. Do
+it page by page as you write, not as a sweep at the end.
+
+**Pending re-verification: code is changing tonight.** See `QUEUE.md` Q-060. Final SHAs land in
+`CONTINUE.md` in the morning. The captures are from `94869f7`, so a screen-tip move invalidates
+them - re-run the capture script and compare rather than assuming they still hold.
 
 ## Remaining work
 
@@ -145,6 +146,24 @@ affected inventory items for re-verification rather than assuming the pages stil
 `BLOCKERS.md`: B-001 no printer access (by design; simulator is the mitigation), B-002 two
 repositories not yet cloned locally.
 
+## Worktrees and build areas
+
+- `_worktrees/docs/NebulaOS` - the manual and agent state, branch `docs/agent`.
+- `_worktrees/docs/NebulaOS-firmware` - pinned at `82e1320`, branch `docs/firmware`. **Read
+  evidence from here, not from the workspace-root checkout** - the foreground session moves
+  that one under you (it was already one commit ahead when checked).
+- `_worktrees/docs/NebulaOS-klipper-extensions` - `8e3447a`, branch `docs/extensions`, used
+  for the test suite.
+- `_worktrees/docs/NebulaOS-nebulascreen` - `94869f7`, branch `docs/screen`.
+- `_worktrees/docs/screen-sim` - a **separate clone** with submodules, for building the
+  simulator. Not a worktree, deliberately: submodule init needs to write the parent repo's
+  `.git/config`, which lives in the foreground checkout and is write-protected.
+
+One mistake to avoid: `git worktree add` resolves a *relative* path against the `-C`
+directory, not the shell's cwd. That briefly created a worktree **inside** the foreground
+checkout on 2026-11-01. It was removed and the checkout verified clean, but use absolute
+paths.
+
 ## Branches and pull requests
 
 - `docs/extensions` in `NebulaOS-klipper-extensions` - worktree at
@@ -187,6 +206,18 @@ looks exactly like a right one.
 So every extractor gets a second, independent count before its output is trusted. Compare
 against a different signal: total path literals in the file, a hand count on one module, the
 other side of the same interface. It has caught something every time.
+
+## Tim's decisions you must not re-litigate
+
+- **D-009:** the Creality-touchscreen install route is documented as the normal route, with no
+  "untested" warning on user pages. The verification record lives in `VERIFICATION.md` and the
+  inventory only. This reversed an earlier position of this agent's; it is Tim's call. Do not
+  reinstate the warning.
+- **D-010:** free rein to rename, merge and restructure the wiki, via PRs.
+
+Note what D-009 did *not* license: no page claims the route is tested, and `verify_hardware`
+stays unverified in the inventory. Removing a warning is not the same as asserting a
+verification.
 
 ## A process rule, learned the hard way
 

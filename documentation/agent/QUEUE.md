@@ -64,15 +64,15 @@ the dashboard in the same batch as the page itself.
 
 ## P2 - Screenshots
 
-- [~] **Q-020** Simulator feasibility - **partly answered, see `SCREENSHOTS.md`.** SDL2,
-      make, g++ and cmake are available; the repository builds as an SDL simulator; and
-      panels expose `sim_*` hooks for driving the UI to a given state, which is exactly what
-      reproducible capture needs. Remaining blocker: `lvgl`, `lv_drivers`, `libhv` and
-      `spdlog` are declared submodules but empty in the workspace. Next: fetch them into a
-      worktree and attempt a build.
-- [ ] **Q-023** Confirm or reject the 26 existing `wiki/images/` screenshots against
-      `94869f7`. They were captured 2026-07-01, four months earlier. Needs the UI running.
-      Until then they are candidates, not coverage.
+- [x] **Q-020** **Solved.** Simulator builds, and the app has a built-in screenshot tour
+      (`GUPPY_SIM_SHOTS`). 129 real screenshots at 480x272 from commit `94869f7`, captured
+      headless. Reproducible via `tools/capture_screenshots.sh`.
+- [x] **Q-023** Moot. The 2026-07-01 images are superseded by captures from the documented
+      commit, so they are not used rather than confirmed.
+- [ ] **Q-024** Embed the captures. Only **7 of 129** are in pages. Do this as each page is
+      written rather than as a sweep at the end.
+- [ ] **Q-025** Capture the 13 panels the tour misses. `boot_logo_panel` and `init_panel` need
+      real hardware; the rest are reachable with existing `sim_*` hooks.
 - [ ] **Q-021** Capture the install and first-setup screens first - the highest-impact
       images in the manual.
 - [ ] **Q-022** Capture the remaining panels, then annotate the ones used in procedures.
@@ -117,9 +117,22 @@ the dashboard in the same batch as the page itself.
 
 ## From the foreground session
 
-Requests arriving from the foreground development session are added here in priority order.
-
-*(none yet)*
+- [x] **Q-059** Tim's two decisions of 2026-11-01 - install-route framing, and free rein to
+      restructure. Applied; see `DECISIONS.md` D-009 and D-010.
+- [ ] **Q-060** **Re-verify against tonight's code changes.** Final SHAs land in
+      `CONTINUE.md` in the morning. Affected:
+      - Power-loss resume fix (extensions `a2e7634`) - `Power-Loss-Recovery` page,
+        `nebulaos_power_loss_recovery` module, the `NEBULAOS_PLR_*` commands.
+      - Screen: print view only for a running print, shorter resume popup (screen `4883008`) -
+        `print_status_panel`, `plr_status`, and **every screenshot** (they are from `94869f7`).
+      - Storage **Free up space** button, NebulaOS leftovers only. **Clean up Creality files**
+        stays separate - do not merge the two in the docs; they do different things.
+      - Default root password `NebulaOS` (was `openke`), unique default hostname
+        `nebulaos-<last 4 MAC hex>`, clearer SSH prompt - affects any page mentioning SSH or
+        the printer's name, and `Opening-Mainsail` in particular.
+      Re-run `tools/capture_screenshots.sh` once the screen tip moves.
+- [ ] **Q-061** Restructure under D-010: retitle the component `Installation.md` to say what
+      it is, and reconcile the screen wiki's navigation with the central manual.
 
 ## Done
 
@@ -128,6 +141,8 @@ Requests arriving from the foreground development session are added here in prio
   first attempt.
 - **Q-003** Moonraker API discovery (2026-10-31), after fixing an extractor that dropped an
   endpoint whose path contains a digit. Klipper status objects remain as a follow-up.
+- **Q-020** Screenshot capture solved (2026-11-01): 129 images from the documented commit,
+  via the app's own headless tour.
 - **Q-051** Extensions test suite run and cited (2026-10-31): 899 tests passing, 21 modules
   promoted to test-verified. Two detection bugs of my own caught on the way - see
   `VERIFICATION.md`.

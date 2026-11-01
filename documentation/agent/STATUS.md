@@ -1,6 +1,6 @@
 # Status
 
-**Updated:** 2026-11-01
+**Updated:** 2026-11-01 (late)
 **Phase:** 2 - writing the end-user manual (first batch complete)
 **Branch:** `docs/agent` in the central `NebulaOS` repository
 **Mode:** autonomous, self-paced loop
@@ -206,45 +206,71 @@ Two near-misses worth keeping, both of which would have produced a confidently w
 The lesson is the same one the discovery bugs taught: a tool's output is a claim too. Both of
 these would have been easy to report as findings.
 
-## Screenshots: better and worse than expected
+## Screenshots: solved
 
-**Better:** 26 real screenshots already exist in `NebulaOS-nebulascreen/wiki/images/`, and the
-simulator has purpose-built `sim_*` hooks for driving panels to a given state - built for
-exactly this job. SDL2, make, g++ and cmake are all available here.
+**129 real screenshots**, captured headless from commit `94869f7` - the exact commit this
+manual documents - and committed to `wiki/images/`.
 
-**Worse:** none of it can be used yet.
+The application turned out to have a built-in screenshot tour: `GUPPY_SIM_SHOTS=<dir>` walks
+every page and state, saves each as a PPM from the LVGL framebuffer, and exits. No display
+server needed. It captures *states*, not just screens - confirmations, refusals, in-progress,
+failed, rolled-back, and step-by-step calibration sequences - which is the per-workflow
+coverage the mission asks for rather than one image per page.
 
-- The 26 images were captured **2026-07-01**, four months before the commit this manual
-  documents. Four months of UI development is long enough for labels and layouts to move, and
-  the mission's condition for reusing an image is confirming it matches the documented
-  version. That confirmation needs the UI running. So they are recorded as 22 *candidates*,
-  not as coverage.
-- A second set of 13 images in `screenshots/` dates to **2025-08-20** and predates the
-  NebulaScreen rename. Those are upstream GuppyScreen captures and using them would
-  misattribute upstream UI to NebulaOS. Not candidates.
-- The simulator build is blocked on submodules: `lvgl`, `lv_drivers`, `libhv` and `spdlog` are
-  declared but empty in the workspace.
+36 of 49 panels now have at least one capture. Reproducible via
+`tools/capture_screenshots.sh`, which records the commit alongside the images.
 
-Full detail in `SCREENSHOTS.md`.
+Three things blocked the build, all written up in `SCREENSHOTS.md`: the default `LDFLAGS`
+contain `-static` and there is no static SDL2 here (and `/usr/lib`'s is 32-bit i386, while a
+usable 64-bit one sits in `/lib64`); submodules cannot be fetched into a git worktree because
+that needs to write the foreground checkout's `.git/config`, so a separate clone was required;
+and two submodule patches must be applied first.
 
-### A dashboard bug this exposed
+**What this is not:** hardware. The `machine.nebulaos.*` panels need a live printer, so
+OS-settings captures must not be presented as a working machine, and the boot/init screens are
+outside the tour entirely.
 
-Marking 22 panels as `candidate-unconfirmed` made them vanish from the screenshot table -
-neither captured nor missing. 59 required, 37 reported, 22 silently gone. For a dashboard
-whose entire purpose is preventing gaps from hiding, that is the worst possible bug.
+The older images are now superseded and unused: 26 from 2026-07-01 in the screen repository
+(four months stale), and 13 from 2025-08-20 that predate the NebulaScreen rename and show the
+upstream GuppyScreen app.
 
-Fixed, and `render_dashboard.py` now carries a self-check: if the screenshot rows do not sum
-to the required total, it prints a warning *into the dashboard itself* naming the unreported
-status values. A dashboard that can quietly fail to add up is not worth having.
+**The honest caveat:** only **7** of the 129 are embedded in pages so far. Having images is
+not the same as a manual that uses them, and that gap is the real measure of remaining visual
+work.
+
+## Tim's decisions, 2026-11-01
+
+1. **The Creality-touchscreen install route is documented as the normal route.** The "not
+   tested" warning is gone from user pages; the record stays in `VERIFICATION.md` and the
+   inventory. This reverses the position taken in PR #3 and it is Tim's call. Applied, with
+   the trade-off recorded in decision D-009 - including that no page now *claims* the route is
+   tested, and that two promises the manual made about caveats were removed too, since a
+   manual that promises caveats and then shows none teaches the reader that silence means
+   tested.
+2. **Free rein to restructure the wiki.** Rename, merge and restructure as it should be, via
+   PRs. This unblocks the `Installation.md` / `Installing-NebulaOS.md` name collision, which
+   now gets fixed rather than flagged.
+
+## Code is changing tonight
+
+The foreground session is landing changes that affect documented behaviour. Final SHAs arrive
+in `CONTINUE.md` in the morning. Known so far:
+
+- Power-loss resume fix (extensions `a2e7634`).
+- Screen: print view only for a running print; shorter resume popup (screen `4883008`).
+- Coming: a Storage **Free up space** button (NebulaOS leftovers only - **Clean up Creality
+  files** stays separate); default root password becomes `NebulaOS` (was `openke`); unique
+  default hostname `nebulaos-<last 4 MAC hex>`; a clearer SSH prompt.
+
+Queued as **Q-060** with the affected items flagged for re-verification. The screenshots just
+captured are from `94869f7` and will need re-running once the screen tip moves - which is
+precisely why the capture is now a script.
 
 ## Next
 
-Replace the highest-traffic stubs with real pages: **first-time setup** and **Wi-Fi**, then
-**Resetting** and **Updating**, then the **49-panel screen reference**.
-
-In parallel, attempt the simulator: fetch submodules into a worktree, build with
-`GUPPY_SMALL_SCREEN=1`, drive one panel, capture one image. A clear "not possible here" is a
-useful answer too.
+Write the remaining high-traffic pages (**Resetting**, **Updating**, **Printing**,
+**Filament**) and embed captures as each is drafted. Then the 49-panel screen reference, which
+now has images for 36 of them.
 
 Two discovery follow-ups stay open and deliberately non-blocking: the Klipper status objects
 the UI subscribes to, and cloning `nebulaos-packages` and `lv_drivers`.

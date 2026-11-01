@@ -14,7 +14,7 @@ Verification is reported in four separate columns because they prove different t
 | Documented (page exists and covers the item) | 4 | 0% |
 | Draft | 2 | 0% |
 | Missing | 538 | 98% |
-| Blocked | 26 | 4% |
+| Blocked | 8 | 1% |
 
 ## Verification (counted separately, never combined)
 
@@ -29,10 +29,10 @@ Verification is reported in four separate columns because they prove different t
 | Measure | Items |
 |---|---|
 | Required | 59 |
-| Captured and confirmed current | 0 |
+| Captured and confirmed current | 36 |
 | Verified against the running UI | 0 |
-| Candidate image exists, version unconfirmed | 22 |
-| Missing outright | 37 |
+| Candidate image exists, version unconfirmed | 0 |
+| Missing outright | 23 |
 | Outdated | 0 |
 | Blocked (needs real hardware) | 0 |
 
@@ -89,27 +89,9 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | repo:nebulaos-packages | nebulaos-packages | not cloned locally; clone into _worktrees/docs |
 | repo:lv_drivers | lv_drivers | not cloned locally; clone into _worktrees/docs |
 | manual:01-start-here | NebulaOS | sections on supported hardware and terminology are still stubs |
-| manual:02-installation | NebulaOS | B-003: the stock-touchscreen install route is untested on hardware |
-| screen:axis_twist_panel | NebulaOS-nebulascreen | a 2026-07-01 image exists in NebulaOS-nebulascreen/wiki/images but has not been confirmed against 94869f7 |
-| screen:bedmesh_panel | NebulaOS-nebulascreen | a 2026-07-01 image exists in NebulaOS-nebulascreen/wiki/images but has not been confirmed against 94869f7 |
-| screen:console_panel | NebulaOS-nebulascreen | a 2026-07-01 image exists in NebulaOS-nebulascreen/wiki/images but has not been confirmed against 94869f7 |
-| screen:exclude_object_panel | NebulaOS-nebulascreen | a 2026-07-01 image exists in NebulaOS-nebulascreen/wiki/images but has not been confirmed against 94869f7 |
-| screen:extruder_panel | NebulaOS-nebulascreen | a 2026-07-01 image exists in NebulaOS-nebulascreen/wiki/images but has not been confirmed against 94869f7 |
-| screen:fan_panel | NebulaOS-nebulascreen | a 2026-07-01 image exists in NebulaOS-nebulascreen/wiki/images but has not been confirmed against 94869f7 |
-| screen:file_panel | NebulaOS-nebulascreen | a 2026-07-01 image exists in NebulaOS-nebulascreen/wiki/images but has not been confirmed against 94869f7 |
-| screen:finetune_panel | NebulaOS-nebulascreen | a 2026-07-01 image exists in NebulaOS-nebulascreen/wiki/images but has not been confirmed against 94869f7 |
-| screen:firmware_retraction_panel | NebulaOS-nebulascreen | a 2026-07-01 image exists in NebulaOS-nebulascreen/wiki/images but has not been confirmed against 94869f7 |
-| screen:homing_panel | NebulaOS-nebulascreen | a 2026-07-01 image exists in NebulaOS-nebulascreen/wiki/images but has not been confirmed against 94869f7 |
-| screen:led_panel | NebulaOS-nebulascreen | a 2026-07-01 image exists in NebulaOS-nebulascreen/wiki/images but has not been confirmed against 94869f7 |
-| screen:limits_panel | NebulaOS-nebulascreen | a 2026-07-01 image exists in NebulaOS-nebulascreen/wiki/images but has not been confirmed against 94869f7 |
-| screen:macros_panel | NebulaOS-nebulascreen | a 2026-07-01 image exists in NebulaOS-nebulascreen/wiki/images but has not been confirmed against 94869f7 |
-| screen:main_panel | NebulaOS-nebulascreen | a 2026-07-01 image exists in NebulaOS-nebulascreen/wiki/images but has not been confirmed against 94869f7 |
-| screen:print_status_panel | NebulaOS-nebulascreen | a 2026-07-01 image exists in NebulaOS-nebulascreen/wiki/images but has not been confirmed against 94869f7 |
-| screen:printer_select_panel | NebulaOS-nebulascreen | a 2026-07-01 image exists in NebulaOS-nebulascreen/wiki/images but has not been confirmed against 94869f7 |
-| screen:printertune_panel | NebulaOS-nebulascreen | a 2026-07-01 image exists in NebulaOS-nebulascreen/wiki/images but has not been confirmed against 94869f7 |
-| screen:skew_correction_panel | NebulaOS-nebulascreen | a 2026-07-01 image exists in NebulaOS-nebulascreen/wiki/images but has not been confirmed against 94869f7 |
-| screen:spoolman_panel | NebulaOS-nebulascreen | a 2026-07-01 image exists in NebulaOS-nebulascreen/wiki/images but has not been confirmed against 94869f7 |
-| screen:tmc_status_panel | NebulaOS-nebulascreen | a 2026-07-01 image exists in NebulaOS-nebulascreen/wiki/images but has not been confirmed against 94869f7 |
-| screen:tmc_tune_panel | NebulaOS-nebulascreen | a 2026-07-01 image exists in NebulaOS-nebulascreen/wiki/images but has not been confirmed against 94869f7 |
-| screen:zoffset_panel | NebulaOS-nebulascreen | a 2026-07-01 image exists in NebulaOS-nebulascreen/wiki/images but has not been confirmed against 94869f7 |
+| manual:02-installation | NebulaOS | verify_hardware outstanding: the stock-touchscreen route has not been observed on a printer (D-009: user pages document it as the normal route; record kept in VERIFICATION.md) |
+| screen:exclude_object_panel | NebulaOS-nebulascreen | not covered by the simulator screenshot tour; needs an extra tour step or a manual capture |
+| screen:printer_select_panel | NebulaOS-nebulascreen | not covered by the simulator screenshot tour; needs an extra tour step or a manual capture |
+| screen:spoolman_panel | NebulaOS-nebulascreen | not covered by the simulator screenshot tour; needs an extra tour step or a manual capture |
+| screen:tmc_tune_panel | NebulaOS-nebulascreen | not covered by the simulator screenshot tour; needs an extra tour step or a manual capture |
 

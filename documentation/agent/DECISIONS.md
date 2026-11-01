@@ -118,3 +118,46 @@ anything true, or that a screenshot shows the screen it claims to.
 This matters because a green check invites the reader to assume more than it earned. The
 mission warns against fragile checks that incorrectly claim completeness, and the cheapest
 defence is for each check to carry the limits of its own evidence.
+
+## D-009 - The Creality-touchscreen install route is documented as the normal route
+
+**Date:** 2026-11-01
+**Decided by:** Tim, relayed through the foreground session
+
+User-facing pages no longer carry the "not tested yet" warning on the stock-touchscreen
+install route. It is documented as the normal route, which for most readers it is. The
+verification record stays in `VERIFICATION.md` and in the inventory.
+
+**This reverses the position taken in D-002 and in PR #3, and the reversal is Tim's call to
+make.** It is his project, and he is better placed than this agent to weigh a warning that
+deters users against a risk he may already have evidence about from elsewhere.
+
+What was argued before the decision, recorded so the trade-off is not lost: a reader deciding
+whether to flash their printer is the one reader who most needs to know how much confidence to
+place in the instructions, and this is the operation where being wrong can require a USB
+recovery. That argument was made and was not accepted.
+
+What this agent did **not** do, because no instruction requires it:
+
+- No page now claims the route *is* tested. The warning was removed; a verification claim was
+  not added in its place. Documenting a procedure plainly is not the same as asserting it has
+  been verified, and the difference matters.
+- `verify_hardware` on the installation item stays unverified in `coverage.jsonl`. That is
+  internal bookkeeping, which is exactly where Tim said to keep the record.
+- Two promises that the manual itself had made - on `Home.md` and `Safety-First.md`, that
+  untested procedures would say so - were removed as well. Leaving them in while removing the
+  warnings they referred to would have been worse than either choice on its own: a manual that
+  tells the reader to expect caveats, and then does not show them one, teaches the reader that
+  silence means tested.
+
+## D-010 - Free rein to restructure the wiki
+
+**Date:** 2026-11-01
+**Decided by:** Tim
+
+Write the wiki as it should be, not as it was: rename, merge and restructure freely, still via
+`docs/*` branches and pull requests, nothing published without Tim.
+
+This clears the hesitation in `REUSE-AUDIT.md` about the `Installation.md` /
+`Installing-NebulaOS.md` name collision. That pair gets fixed rather than flagged, and the
+component page is retitled to describe what it actually contains.
