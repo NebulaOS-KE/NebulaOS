@@ -46,9 +46,24 @@ after a power cut.*
 
 ## Expected result
 
-After choosing **Resume**, the printer heats back up to the temperatures it was using, reloads
-the bed mesh from the interrupted print, returns to the position it had reached, and continues
-from the same point in the file. Objects you had cancelled stay cancelled.
+After choosing **Resume**, the printer works through a deliberate order:
+
+1. **The bed heats first, with the nozzle off.**
+2. **Z lifts and X and Y home**, so the toolhead is away from your part.
+3. **Only then does the nozzle heat**, at the park position.
+4. The bed mesh from the interrupted print is reloaded, the printer returns to the position it
+   had reached, and printing continues from the same point in the file.
+
+Objects you had cancelled stay cancelled, and if you were part-way through one, that object is
+started again rather than skipped.
+
+**Why the order matters.** It would be simpler to heat everything at once, and a power-cut test
+on a real printer showed why that is wrong: the nozzle heated *while still sitting over the
+part*, which risks melting into the print you are trying to save. Heating the nozzle only once
+it has moved away costs a little time and removes that risk entirely.
+
+*Verified in the implementation at extensions commit `ed99372`. The ordering change came out of
+a power-cut test on the project's development printer.*
 
 ## If a resume fails partway
 

@@ -5,16 +5,16 @@
 
 | | |
 |---|---|
-| Discovered items | **547** |
-| Documented | **258** (47%) |
+| Discovered items | **549** |
+| Documented | **260** (47%) |
 | Draft | 111 |
 | Missing | 178 |
-| Code verified | 334 |
-| Test verified | 28 |
+| Code verified | 336 |
+| Test verified | 29 |
 | Hardware verified | 0 |
 | Screenshots required / captured | 57 / 41 |
 | Blocked (cannot proceed) | 6 |
-| Completeness gaps (work not done) | 312 |
+| Completeness gaps (work not done) | 0 |
 
 Per-repository and per-category breakdowns are in `COVERAGE.md`.
 <!-- END GENERATED STATUS -->
@@ -116,6 +116,36 @@ The design point worth repeating: the cost of not forking is that your dependenc
 telling you, and the answer here is not pinning and hoping - it is declaring the dependency
 precisely and refusing to start when it is unmet.
 
+## Re-verified at extensions `ed99372`
+
+The extensions tip moved twice today. At `ed99372` the full suite was re-run (29 of 31 suites,
+all passing) and the references regenerated: **50 commands, 156 options**, up one each -
+`_NEBULAOS_PLR_TIMELAPSE_MERGE` and `timelapse_frame_path`.
+
+The change behind them is worth reading rather than just regenerating around. A power-cut test
+on the development printer found the resume working, but **heating the nozzle while it still sat
+over the part**. The order is now: bed first with the nozzle off, Z lifted and X/Y homed, then
+the nozzle heated at the park position. The checkpoint also records the current object so a
+part-finished one is restarted rather than skipped, and timelapse frames from before the cut can
+be preserved.
+
+That ordering is in the user-facing page **with the reason**, because "the bed heats before the
+nozzle" looks arbitrary until you know the alternative melted into the print someone was trying
+to save.
+
+The `nozzle_clear` header note was also corrected upstream, so B-004 is fully closed at source.
+
+### A mistake in handling this
+
+Moving the worktree to the new tip, I ran `git checkout -B docs/extensions origin/main`, which
+**reset my own branch** and discarded five doc commits from it. Nothing was lost - they were
+already pushed, so `origin/docs/extensions` still held them - and the fix was to restore the
+branch from the remote and merge `origin/main` into it properly.
+
+The lesson is narrow and worth keeping: to pick up new upstream code on a working branch,
+**merge it, do not re-point the branch at it**. `-B` is for creating a branch, not for updating
+one. Pushing after each batch is what made this a recoverable annoyance rather than lost work.
+
 ## Open pull requests
 
 | Repository | PR | Contents |
@@ -150,12 +180,14 @@ suites, 899 tests, all passing; 21 modules test-verified with per-file citations
 |---|---|---|
 | `NebulaOS-firmware` | `main` | `c377230` |
 | `NebulaOS-nebulascreen` | `main` | `3194104` |
-| `NebulaOS-klipper-extensions` | `main` | `a2e7634` |
+| `NebulaOS-klipper-extensions` | `main` | `ed99372` |
 | `NebulaOS-klipper-mcu` | `main` | `33f5d16` |
 | `NebulaOS-kernel` | `openke` | `d86790d` |
 
-The firmware manifest currently pins the extensions and the screen at exactly these commits,
-so for those two there is no gap between documented and shipped behaviour.
+The firmware manifest pins the screen at exactly its tip, but the extensions have moved ahead:
+the manifest pins `a2e7634` while `main` is at `ed99372`. The newer commit's power-loss-recovery
+changes are documented and labelled as newer than the pin, so nothing here implies they ship
+today. That gap closes when the manifest advances.
 
 Read evidence from the pinned worktrees under `_worktrees/docs/`, never from the checkouts at
 the workspace root - those belong to the foreground session and move without warning.

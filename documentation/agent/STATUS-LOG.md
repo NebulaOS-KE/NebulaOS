@@ -143,3 +143,26 @@ Corrected in `STATUS.md`, and the foreground was told.
 
 The one real bug in the same area was genuine: three wiki pages pointed at the retired
 `coreflake1/NebulaOS-guppyscreen` repository. Fixed.
+
+## Resetting my own branch while picking up new code
+
+**2026-11-01.** To regenerate the references against a new extensions tip I ran:
+
+```
+git checkout -B docs/extensions origin/main
+```
+
+`-B` **resets** the named branch to the given commit. It moved `docs/extensions` off my five
+doc commits and onto `origin/main`, and the working tree lost `docs/reference/` entirely - the
+next command failed with "No such file or directory", which is how I noticed.
+
+Nothing was lost, because every batch had been pushed: `origin/docs/extensions` still pointed at
+`06c84e4`. The recovery was to restore the branch from the remote and merge `origin/main` into
+it, which is what should have happened in the first place.
+
+Two things to keep:
+
+- **To pick up new upstream code on a working branch, merge it.** Do not re-point the branch at
+  it. `-B` is for creating a branch, not updating one.
+- **Pushing after every batch turned a destructive mistake into an annoyance.** That habit was
+  adopted for durability across sessions; it paid off for a reason I had not anticipated.

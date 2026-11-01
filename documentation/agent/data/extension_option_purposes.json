@@ -79,6 +79,7 @@
   "nebulaos_power_loss_recovery:poll_interval": "Seconds between checks of print state while deciding whether to checkpoint.",
   "nebulaos_power_loss_recovery:resume_z_lift": "How far to lift Z before moving back to the interrupted position, so the nozzle does not drag across the part.",
   "nebulaos_power_loss_recovery:sidecar_dir": "Directory for the larger JSON checkpoint files, written and fsynced before the EEPROM record so a power cut cannot leave the two disagreeing.",
+  "nebulaos_power_loss_recovery:timelapse_frame_path": "Directory moonraker-timelapse keeps its frames in. Set it to preserve a timelapse across a power cut: on resume the frames from before the cut are set aside, and _NEBULAOS_PLR_TIMELAPSE_MERGE puts them back in front, renumbered without a gap, before Moonraker renders. Empty disables the handling, and the timelapse is lost on resume.",
   "nebulaos_version:generation_file": "File tracking the app generation, used to tell an image's own apps from separately updated ones.",
   "nebulaos_version:version_file": "File reporting the installed NebulaOS version.",
   "nebulaos_z_adjust:filename": "File storing the saved Z adjustment, so it survives restarts.",
