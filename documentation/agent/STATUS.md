@@ -1,6 +1,6 @@
 # Status
 
-**Updated:** 2026-11-01 (overnight, third pass)
+**Updated:** 2026-11-01 (overnight, fourth pass)
 **Phase:** 2 - writing the end-user manual (first batch complete)
 **Branch:** `docs/agent` in the central `NebulaOS` repository
 **Mode:** autonomous, self-paced loop
@@ -357,10 +357,44 @@ Cancel can easily hit it.
 Stop button, and every other button is disabled while loading. Without that, a user watching
 filament feed and wanting it to stop has no idea what to press.
 
+## The screen reference exists
+
+`wiki/Screen-Reference.md` - 824 lines, adapted from the NebulaScreen wiki's
+`Using-NebulaScreen.md` under decision D-010 rather than rewritten, because that page is good
+and re-authoring it would have lost detail for no gain.
+
+What was actually done to it:
+
+- **A generated index of all 49 panels** at the top, built from `coverage.jsonl`, with where
+  each one is documented and whether it has a screenshot. Generated rather than typed, so a
+  panel cannot quietly go missing from the list.
+- **18 image references remapped** to the new captures from `3194104`.
+- **8 image references removed**, because no current capture corresponds to them with
+  confidence: the bed-mesh 3D view, three console sub-states, exclude object, the printers
+  panel, the Spoolman spool list and TMC autotune. Each now says plainly that there is no
+  current screenshot of that screen.
+
+That last decision is the one worth defending. There *were* plausible-looking candidates for
+several - `m10b-bedmesh-saved` for the 3D view, `36-spoolman` for the spool list,
+`m13-tmc-metrics` for autotune - and using them would have made the page look complete. But
+`m10b` is the mesh after saving, `36-spoolman` is the Spoolman *server settings*, and
+`m13-tmc-metrics` is TMC *status*, not autotune. A caption naming a screen the reader is not
+looking at is worse than no picture, because the reader trusts it and then cannot find the
+control.
+
+- **7 links remapped**: calibration sub-pages now point at `Calibration-Explained`,
+  `Camera-Image-Tuning` at `Camera`, and `Configuration` becomes an explicit external link to
+  the component wiki, since the audit's disposition for it was "keep".
+
+Honest state of the reference: **28 of 49 panels are described in detail**; the other 21 are
+indexed with a pointer to where they are covered, and are still counted `missing` in the
+inventory rather than credited to a pointer.
+
 ## Next
 
-The **49-panel screen reference** (images exist for 36), then the calibration pages, then
-`Troubleshooting`, `What-NebulaOS-Is`, `Supported-Hardware` and `Glossary`.
+The calibration pages (`Calibration-Guide`, `Calibration-Explained`) are the largest remaining
+user-facing gap - and the existing wiki has strong material for both. Then `Troubleshooting`,
+`Camera`, `Beeps-And-Songs`, and the three introductory pages.
 
 Also worth doing: tour steps for the panels the capture misses, starting with `storage_panel`,
 which now has a new user-facing button and no picture of it.

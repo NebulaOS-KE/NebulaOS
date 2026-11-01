@@ -52,10 +52,11 @@ the dashboard in the same batch as the page itself.
       verified in source rather than copied from the old wiki.
 - [~] **Q-017** Replace the stub pages with real content. Done so far:
       `First-Time-Setup`, `Connecting-To-WiFi`, `Opening-Mainsail`, `Power-Loss-Recovery`,
-      `Resetting`, `Updating-NebulaOS`, `Printing`, `Filament` - 8 of 17. Remaining 9:
-      `Camera`, `Beeps-And-Songs`, `Screen-Reference`, `Calibration-Guide`,
-      `Calibration-Explained`, `Troubleshooting`, `What-NebulaOS-Is`, `Supported-Hardware`,
-      `Glossary`.
+      `Resetting`, `Updating-NebulaOS`, `Printing`, `Filament`, `Screen-Reference` - 9 of
+      17. Remaining 8: `Calibration-Guide`, `Calibration-Explained`, `Troubleshooting`,
+      `Camera`, `Beeps-And-Songs`, `What-NebulaOS-Is`, `Supported-Hardware`, `Glossary`.
+- [ ] **Q-018** Describe the 21 panels that `Screen-Reference.md` only indexes with a pointer.
+      They are counted `missing`, not credited to the pointer.
 - [ ] **Q-013** Section 03, First-time setup - startup, Wi-Fi, finding the IP, Mainsail,
       first calibration, first print.
 - [ ] **Q-014** Section 04, the complete NebulaScreen guide - 49 panels, task pages plus a

@@ -241,6 +241,19 @@ the mission warns about.
 Run the updates, then render, then **verify the files say what the commit message claims**
 before committing. A commit message is a claim like any other.
 
+## The screen reference, and a rule it established
+
+`wiki/Screen-Reference.md` was adapted from the component wiki, not rewritten, and carries a
+generated 49-panel index so no panel can drop off the list.
+
+**The rule: never point a caption at a screenshot of a different screen.** Eight image
+references were removed rather than remapped to plausible-looking candidates -
+`m10b-bedmesh-saved` is the mesh *after saving* and not the 3D view, `36-spoolman` is the
+Spoolman *server settings* and not the spool list, `m13-tmc-metrics` is TMC *status* and not
+autotune. Using them would have made the page look finished. A caption naming a screen the
+reader is not looking at is worse than no picture at all: the reader trusts it, then cannot
+find the control, and stops trusting the rest.
+
 ## How to write a page here
 
 Read `REUSE-AUDIT.md` first - 15 of the existing wiki pages move largely as they stand, so
