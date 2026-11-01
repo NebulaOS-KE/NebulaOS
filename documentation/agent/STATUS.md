@@ -6,8 +6,8 @@
 | | |
 |---|---|
 | Discovered items | **547** |
-| Documented | **78** (14%) |
-| Draft | 289 |
+| Documented | **119** (21%) |
+| Draft | 248 |
 | Missing | 180 |
 | Code verified | 332 |
 | Test verified | 28 |
@@ -34,8 +34,13 @@ side effects and safety warnings. For a configuration option (6.6): purpose, run
 whether a restart is needed, validation rules and an example.
 
 The generated references give name, module, kind, description, type, default and constraints -
-real, verified, genuinely useful, and short of that bar. Those 289 items are **draft**, each
-carrying the specific gap in its `gaps` field.
+real, verified, genuinely useful, and short of that bar. Draft items each carry the specific
+gap in their `gaps` field.
+
+The commands have since been raised to that bar and are now documented: parameters with valid
+ranges, errors raised, side effects and an example invocation, each naming what remains
+unestablished. Configuration is the next and harder half, because purpose and runtime
+behaviour are not derivable from a `config.getX` call at all.
 
 Marking them documented once took the headline from 14% to 49% in a single step. That was
 flattering and false, and reverting it is recorded in `STATUS-LOG.md`.
@@ -85,13 +90,20 @@ the workspace root - those belong to the foreground session and move without war
 
 ## Next
 
-1. **Q-036 / Q-037** - raise both generated references to the mission's per-item bar. This is
-   where most of the 289 draft items sit, so it is the largest single move available.
-2. `NebulaOS-nebulascreen` developer pages - LVGL architecture, the panel system, Moonraker
-   integration, the simulator, build and testing.
-3. `NebulaOS-klipper-mcu` and `NebulaOS-kernel`.
-4. `nebulaos-packages` and `lv_drivers` - still not cloned locally.
-5. The firmware's build pipeline, runtime helpers, and A/B / OTA / recovery as an architecture
+1. **Q-036 configuration half** - the 155 extension options still need purpose, runtime
+   behaviour, restart requirement and an example. Unlike the commands, these are *not*
+   mechanically derivable: a `config.getfloat('duty', 0.5)` call gives the name, type, default
+   and range but says nothing about what the setting is for. This needs reading each module,
+   not a better parser.
+2. **Q-037** - response examples for the firmware API, from `nebulaos_osconfig/` and the
+   fixtures in `tests/nebulaos-osconfig-tests.py`.
+3. `NebulaOS-nebulascreen` developer pages - LVGL architecture, the panel system, Moonraker
+   integration, the simulator, build and testing. **Two real doc bugs to fix while there:** its
+   `Building-from-Source` page still says to clone `coreflake1/NebulaOS-guppyscreen`, and its
+   documented `LDFLAGS` contain `-static`, which cannot link here.
+4. `NebulaOS-klipper-mcu` and `NebulaOS-kernel`.
+5. `nebulaos-packages` and `lv_drivers` - still not cloned locally.
+6. The firmware's build pipeline, runtime helpers, and A/B / OTA / recovery as an architecture
    rather than a file list.
 
 ## Open blockers

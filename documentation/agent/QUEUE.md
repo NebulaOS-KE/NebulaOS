@@ -96,10 +96,15 @@ strongest: the suite already passes and 21 modules are already test-verified.
 - [~] **Q-030** `NebulaOS-klipper-extensions` - generated reference done (PR #3 on that
       repo): 49 commands, 155 options, README. All 193 items are **draft**, not documented:
       the tables lack the per-item detail mission 6.5 and 6.6 require.
-- [ ] **Q-036** Raise the extensions reference to the mission's bar: per-command
-      preconditions, example invocation, expected output, errors, side effects and safety
-      warnings; per-option purpose, runtime behaviour, restart requirement, validation and an
-      example. This is the difference between a generated table and a documented item.
+- [~] **Q-036** Raise the extensions reference to the mission's bar.
+      **Commands done:** `COMMANDS-DETAIL.md` gives handler, help text, parameters with types
+      / defaults / valid ranges, errors raised, side effects and an example invocation for all
+      49. The 41 user-facing ones are now `documented`, each naming the residual gap -
+      expected output, preconditions beyond the handler's guards, and safety warnings, none of
+      which the source contains.
+      **Configuration still draft:** 155 options need purpose, runtime behaviour, restart
+      requirement and an example. Purpose and behaviour are not mechanically derivable from a
+      `config.getX` call, so this one needs reading each module, not a better parser.
 - [ ] **Q-031** `NebulaOS-nebulascreen` - LVGL architecture, the panel system, Moonraker
       integration, simulator, build and testing. Reuse the existing developer pages.
 - [~] **Q-032** `NebulaOS-firmware` - API and boot services referenced (PR #5 on that repo):
