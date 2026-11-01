@@ -1,7 +1,11 @@
 {
   "caveat": "real UI from the real application at this commit; not hardware. machine.nebulaos.* panels need a live printer and are not truthful here.",
-  "commit": "94869f75657270200a306c5a54d694eb6adf7b74",
-  "count": 129,
+  "commit": "3194104b_see_note",
+  "commit_note": "captured from NebulaOS-nebulascreen main at 3194104 on 2026-11-01",
+  "count": 128,
+  "excluded": {
+    "07-updates.png": "timing-dependent: the Updates page waits on a Moonraker reply that never arrives without a printer, so the buttons are captured enabled or disabled depending on timing. Would show a reader greyed-out buttons that are not greyed out on a real printer."
+  },
   "images": [
     {
       "image": "01-settings.png"
@@ -20,9 +24,6 @@
     },
     {
       "image": "06-system.png"
-    },
-    {
-      "image": "07-updates.png"
     },
     {
       "image": "08-reset.png"
@@ -391,6 +392,7 @@
       "image": "m66-print-start-done.png"
     }
   ],
+  "reproducibility": "128 of 129 captures are byte-identical across runs of the same build",
   "resolution": "480x272 (GUPPY_SMALL_SCREEN=1, the KE's real panel)",
-  "source": "NebulaScreen SDL simulator, GUPPY_SIM_SHOTS tour, captured 2026-11-01"
+  "source": "NebulaScreen SDL simulator, GUPPY_SIM_SHOTS tour"
 }

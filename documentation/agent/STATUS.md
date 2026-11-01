@@ -1,6 +1,6 @@
 # Status
 
-**Updated:** 2026-11-01 (overnight)
+**Updated:** 2026-11-01 (overnight, second pass)
 **Phase:** 2 - writing the end-user manual (first batch complete)
 **Branch:** `docs/agent` in the central `NebulaOS` repository
 **Mode:** autonomous, self-paced loop
@@ -268,8 +268,32 @@ deliberately** - nozzle heater off, file unloaded, **bed left on** so the part s
 down, and the checkpoint kept so Resume is offered again. Without that explanation a user
 would reasonably read a half-finished resume as a malfunction.
 
-The screen change (`4883008`) is **not pushed yet** - `origin/main` is still `94869f7`, which
-is what the 129 screenshots were captured from. When it lands, re-run the capture script.
+### The screen changes landed too, and the re-capture found something
+
+`origin/main` for the screen moved to **`3194104`**, bringing both `4883008` (print status only
+for a running print, shorter power-loss popup) and `3194104` (Storage **Free up space**).
+
+Rebuilt and re-captured. **128 of 129 images were byte-identical**, and exactly one differed:
+`07-updates.png`. That looked like a real UI change from the new commits.
+
+It was not. Running the tour twice against *the same* build produced the same difference. The
+Updates panel disables its buttons while waiting for a reply from Moonraker's update manager,
+and with no Moonraker there is no reply - so the capture lands in the busy or the idle state
+depending on timing. The differing region is exactly where **Check now** and **Update all**
+sit.
+
+So `07-updates.png` is **excluded and not published**. It would have shown a reader greyed-out
+buttons that are not greyed out on a real printer - a picture contradicting the page it
+illustrates. The text describes the greying-out instead.
+
+Two things worth keeping from this:
+
+- **Measure reproducibility before trusting a comparison.** 128/129 byte-identical is what
+  makes commit-to-commit screenshot comparison a real stale-detection method. Without that
+  check, a flaky image is indistinguishable from a genuine UI change, and I would have
+  "found" a change that never happened.
+- **The new Storage button has no screenshot**, because `storage_panel` is one of the panels
+  the tour does not visit. Recorded as such rather than quietly left out.
 
 ### A drift fix in the tooling
 
@@ -279,6 +303,13 @@ inventory had recorded. It now prefers this agent's own pinned worktrees under
 `_worktrees/docs/`, falling back to the root checkout only if no worktree exists. Reading
 evidence from a tree that can change underneath you means the recorded commit silently stops
 matching the content it describes.
+
+## Code changes: all of tonight's screen and extension work is now in
+
+Remaining from the foreground's list, not yet seen in a pushed commit: the default root
+password change to `NebulaOS`, the unique default hostname `nebulaos-<last 4 MAC hex>`, and the
+clearer SSH prompt. Those are firmware-side; `origin/main` for the firmware is still
+`82e1320`.
 
 ## Code changes still expected
 
@@ -297,9 +328,11 @@ precisely why the capture is now a script.
 
 ## Next
 
-Write the remaining high-traffic pages (**Resetting**, **Updating**, **Printing**,
-**Filament**) and embed captures as each is drafted. Then the 49-panel screen reference, which
-now has images for 36 of them.
+**Printing** and **Filament** are the last two high-traffic stubs. Then the 49-panel screen
+reference, which has images for 36 of them.
+
+Also worth doing soon: add tour steps for the panels it misses, starting with `storage_panel`
+now that it has a new user-facing button and no picture of it.
 
 Two discovery follow-ups stay open and deliberately non-blocking: the Klipper status objects
 the UI subscribes to, and cloning `nebulaos-packages` and `lv_drivers`.

@@ -27,9 +27,39 @@ window, so no display server is needed - `SDL_VIDEODRIVER=offscreen` is enough. 
 suppresses the simulator's demo data, prompts and notifications, so output is clean and
 repeatable.
 
-That produced **129 screenshots at 480x272** - the KE's real panel resolution - from commit
-`94869f7`, the exact commit this manual documents. They are in `wiki/images/`, with
-`wiki/images/screenshots.json` recording the commit, the source and the caveat.
+That produced **128 screenshots at 480x272** - the KE's real panel resolution - currently from
+commit **`3194104`**, re-captured on 2026-11-01 when the screen tip moved.
+`wiki/images/screenshots.json` records the commit, the source, the caveat and the one
+exclusion.
+
+### The captures are reproducible, and that was measured
+
+Running the tour twice against the same build gives **128 of 129 byte-identical** images. That
+matters: it is what makes comparing two commits' captures a usable way to find stale
+screenshots. Without reproducibility the comparison is noise.
+
+### The one exclusion: `07-updates.png`
+
+The Updates page is **timing-dependent and is not published**.
+
+It came to light the right way round. When the screen tip moved from `94869f7` to `3194104`,
+re-capturing and comparing showed exactly one image changed - `07-updates.png` - which looked
+like a real UI change from the two new commits. Running the tour twice against *the same*
+build showed the same image differing again. So it was never a code change; it was
+non-determinism.
+
+The cause: the Updates panel disables its buttons while it waits for a reply from Moonraker's
+update manager. With no Moonraker there is no reply, so whether the capture lands in the busy
+state or the idle state depends on timing. The differing region is exactly where the **Check
+now** and **Update all** buttons sit.
+
+Publishing it would have shown a reader greyed-out buttons that are **not** greyed out on a
+real printer - a picture that contradicts the page it illustrates. The `Updating-NebulaOS`
+page describes that greying-out in words instead.
+
+This is the general caveat below made concrete: panels that depend on a live printer cannot be
+captured truthfully here, and a plausible-looking screenshot is the most convincing way to
+publish something false.
 
 Coverage is better than a panel count suggests, because the tour captures *states*, not just
 screens: confirmation dialogs, refusals, in-progress, failed, rolled-back, and step-by-step
@@ -87,10 +117,11 @@ Generated figures are in `COVERAGE.md`. In summary, as of 2026-11-01:
 
 | Measure | Count |
 |---|---|
-| Screenshots captured from commit `94869f7` | **129** |
+| Screenshots captured from commit `3194104` | **128** |
 | Panels with at least one capture | 36 of 49 |
 | Panels with no capture yet | 13 |
-| Images embedded in manual pages so far | 7 |
+| Excluded as timing-dependent | 1 (`07-updates.png`) |
+| Images embedded in manual pages so far | 11 |
 
 Having 129 images available is not the same as a manual that uses them. Only 7 are embedded so
 far, and the gap between those two numbers is the honest measure of how much of the visual
@@ -132,8 +163,10 @@ Two further things to know before attempting it:
 
 1. Embed captures into pages as each is drafted. 7 of 129 are in use.
 2. Cover the 13 panels the tour misses. Most need only an extra tour step.
-3. Re-run the capture whenever the screen repository's tip moves, and compare. A stale
-   screenshot is exactly the failure this inventory exists to catch, and now that captures are
-   cheap there is no excuse for one.
+3. Re-run the capture whenever the screen repository's tip moves, and compare. **Done once
+   already**, for `94869f7` -> `3194104`: 128 identical, 1 difference that turned out to be
+   non-determinism rather than a code change. When comparing, run the tour twice against the
+   same build first - otherwise a flaky image is indistinguishable from a real UI change, and
+   you will "discover" changes that did not happen.
 
 Building the simulator in this agent's own worktree is permitted. Firmware builds are not.

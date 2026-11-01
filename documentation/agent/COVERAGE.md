@@ -11,16 +11,16 @@ Verification is reported in four separate columns because they prove different t
 | Measure | Items | Share |
 |---|---|---|
 | Discovered documentation items | 544 | 100% |
-| Documented (page exists and covers the item) | 12 | 2% |
+| Documented (page exists and covers the item) | 15 | 2% |
 | Draft | 3 | 0% |
-| Missing | 529 | 97% |
-| Blocked | 9 | 1% |
+| Missing | 526 | 96% |
+| Blocked | 11 | 2% |
 
 ## Verification (counted separately, never combined)
 
 | Kind | Verified | Partial | Unknown | Blocked | N/A |
 |---|---|---|---|---|---|
-| Code verified | 13 | 2 | 529 | 0 | 0 |
+| Code verified | 16 | 2 | 526 | 0 | 0 |
 | Test verified | 24 | 0 | 520 | 0 | 0 |
 | Hardware verified | 0 | 0 | 0 | 2 | 542 |
 
@@ -32,9 +32,9 @@ Verification is reported in four separate columns because they prove different t
 | Captured and confirmed current | 37 |
 | Verified against the running UI | 0 |
 | Candidate image exists, version unconfirmed | 0 |
-| Missing outright | 22 |
+| Missing outright | 21 |
 | Outdated | 0 |
-| Blocked (needs real hardware) | 0 |
+| Blocked (needs real hardware) | 1 |
 
 A *candidate* is not coverage. It means a real image exists but has not been confirmed against the commit this documentation describes, so it cannot yet be trusted to show the reader what they will see.
 
@@ -42,12 +42,12 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 
 | Repository | Items | Documented | Draft | Missing | Code verified | Documented % |
 |---|---|---|---|---|---|---|
-| NebulaOS | 11 | 3 | 2 | 6 | 3 | 27% |
+| NebulaOS | 11 | 4 | 2 | 5 | 4 | 36% |
 | NebulaOS-firmware | 191 | 0 | 1 | 190 | 1 | 0% |
 | NebulaOS-kernel | 1 | 0 | 0 | 1 | 0 | 0% |
 | NebulaOS-klipper-extensions | 234 | 7 | 0 | 227 | 7 | 2% |
 | NebulaOS-klipper-mcu | 1 | 0 | 0 | 1 | 0 | 0% |
-| NebulaOS-nebulascreen | 104 | 2 | 0 | 102 | 2 | 1% |
+| NebulaOS-nebulascreen | 104 | 4 | 0 | 100 | 4 | 3% |
 | lv_drivers | 1 | 0 | 0 | 1 | 0 | 0% |
 | nebulaos-packages | 1 | 0 | 0 | 1 | 0 | 0% |
 
@@ -60,14 +60,14 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | command | 51 | 5 | 0 | 46 | 9% |
 | config-option | 172 | 0 | 0 | 172 | 0% |
 | developer-tool | 11 | 0 | 0 | 11 | 0% |
-| existing-page | 34 | 2 | 0 | 32 | 5% |
+| existing-page | 34 | 4 | 0 | 30 | 11% |
 | extension | 30 | 2 | 0 | 28 | 6% |
 | os-helper | 17 | 0 | 0 | 17 | 0% |
 | repo-overview | 8 | 0 | 0 | 8 | 0% |
 | runtime-helper | 56 | 0 | 0 | 56 | 0% |
 | screen | 49 | 0 | 0 | 49 | 0% |
 | service | 35 | 0 | 0 | 35 | 0% |
-| user-manual-section | 10 | 3 | 2 | 5 | 30% |
+| user-manual-section | 10 | 4 | 2 | 4 | 40% |
 
 ## Source revisions this inventory was discovered at
 
@@ -94,5 +94,7 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | screen:exclude_object_panel | NebulaOS-nebulascreen | not covered by the simulator screenshot tour; needs an extra tour step or a manual capture |
 | screen:printer_select_panel | NebulaOS-nebulascreen | not covered by the simulator screenshot tour; needs an extra tour step or a manual capture |
 | screen:spoolman_panel | NebulaOS-nebulascreen | not covered by the simulator screenshot tour; needs an extra tour step or a manual capture |
+| screen:storage_panel | NebulaOS-nebulascreen | the new Free up space button (screen 3194104) is not in the screenshot tour; needs an extra tour step or a real printer |
 | screen:tmc_tune_panel | NebulaOS-nebulascreen | not covered by the simulator screenshot tour; needs an extra tour step or a manual capture |
+| screen:updates_panel | NebulaOS-nebulascreen | capture is timing-dependent without a live Moonraker: the busy/idle state varies between runs, so a published image would contradict the page. Needs a real printer. |
 

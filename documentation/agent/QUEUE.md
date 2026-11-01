@@ -50,9 +50,12 @@ the dashboard in the same batch as the page itself.
 - [x] **Q-012** Section 10, Recovery, plus the safety material. Done:
       `wiki/Recovery.md`, `wiki/Going-Back.md`, `wiki/Safety-First.md`. Trial timings
       verified in source rather than copied from the old wiki.
-- [ ] **Q-017** Replace the 17 stub pages with real content, highest-traffic first:
-      `First-Time-Setup`, `Connecting-To-WiFi`, `Opening-Mainsail`, then `Resetting` and
-      `Updating-NebulaOS`, then `Screen-Reference`.
+- [~] **Q-017** Replace the stub pages with real content. Done so far:
+      `First-Time-Setup`, `Connecting-To-WiFi`, `Opening-Mainsail`, `Power-Loss-Recovery`,
+      `Resetting`, `Updating-NebulaOS`. Remaining: `Printing`, `Filament`, `Camera`,
+      `Beeps-And-Songs`, `Screen-Reference`, `Calibration-Guide`,
+      `Calibration-Explained`, `Troubleshooting`, `What-NebulaOS-Is`,
+      `Supported-Hardware`, `Glossary`.
 - [ ] **Q-013** Section 03, First-time setup - startup, Wi-Fi, finding the IP, Mainsail,
       first calibration, first print.
 - [ ] **Q-014** Section 04, the complete NebulaScreen guide - 49 panels, task pages plus a
@@ -71,8 +74,13 @@ the dashboard in the same batch as the page itself.
       commit, so they are not used rather than confirmed.
 - [ ] **Q-024** Embed the captures. Only **7 of 129** are in pages. Do this as each page is
       written rather than as a sweep at the end.
-- [ ] **Q-025** Capture the 13 panels the tour misses. `boot_logo_panel` and `init_panel` need
-      real hardware; the rest are reachable with existing `sim_*` hooks.
+- [ ] **Q-025** Capture the panels the tour misses. `boot_logo_panel` and `init_panel` need
+      real hardware; the rest are reachable with existing `sim_*` hooks. **Priority:
+      `storage_panel`** - it has a brand-new user-facing button (**Free up space**) and no
+      picture of it.
+- [ ] **Q-026** `screen:updates_panel` is now `blocked` for screenshots: the capture is
+      timing-dependent without a live Moonraker. Only a real printer can supply a trustworthy
+      image of that page.
 - [ ] **Q-021** Capture the install and first-setup screens first - the highest-impact
       images in the manual.
 - [ ] **Q-022** Capture the remaining panels, then annotate the ones used in procedures.
@@ -125,10 +133,16 @@ the dashboard in the same batch as the page itself.
         moved to it, full suite re-run (29/29 suites pass; the PLR suite is now 169 tests),
         all 21 test-verified modules re-pointed from `8e3447a` to `a2e7634`, and
         `wiki/Power-Loss-Recovery.md` written from the new behaviour.
-      - [ ] Screen: print view only for a running print, shorter resume popup (screen
-        `4883008`) - **not pushed yet**; origin/main is still `94869f7`. Affects
-        `print_status_panel`, `plr_status`, and **every screenshot**. Re-run
-        `tools/capture_screenshots.sh` when it lands.
+      - [x] Screen `4883008` + `3194104` - **pushed and verified.** Rebuilt and re-captured
+        at `3194104`; 128/129 images byte-identical, the one difference proved to be
+        non-determinism rather than a code change (see `SCREENSHOTS.md`). All screenshot
+        citations re-pointed to `3194104`.
+      - [x] Storage **Free up space** documented in `wiki/Resetting.md` and
+        `wiki/Updating-NebulaOS.md`, kept **separate** from **Clean up Creality files** as
+        instructed - they do different jobs and the separation is what keeps going back to
+        stock working.
+      - [ ] Still unpushed (firmware side, origin/main still `82e1320`): default root password
+        `NebulaOS`, default hostname `nebulaos-<last 4 MAC hex>`, clearer SSH prompt.
       - Storage **Free up space** button, NebulaOS leftovers only. **Clean up Creality files**
         stays separate - do not merge the two in the docs; they do different things.
       - Default root password `NebulaOS` (was `openke`), unique default hostname
