@@ -70,9 +70,30 @@ def checkout_path(root, checkout):
 
 
 def sha(root, checkout):
+    """The *code* commit an item was discovered at.
+
+    Not the worktree's HEAD. These worktrees sit on this agent's own `docs/*`
+    branches, which carry documentation commits and merges on top of the code.
+    Recording HEAD meant the inventory cited a documentation commit as the
+    source of a code fact - so anyone checking the SHA would find prose, not
+    the implementation it described.
+
+    So: the tip of the branch the documentation describes (`origin/<default>`),
+    falling back to HEAD only where no such ref exists.
+    """
     p = checkout_path(root, checkout)
     if not p:
         return None
+    branch = None
+    for repo, (b, c) in REPOS.items():
+        if c == checkout:
+            branch = b
+            break
+    if branch:
+        out = subprocess.run(["git", "-C", p, "rev-parse", f"origin/{branch}"],
+                             capture_output=True, text=True).stdout.strip()
+        if out:
+            return out
     return subprocess.run(["git", "-C", p, "rev-parse", "HEAD"],
                           capture_output=True, text=True).stdout.strip() or None
 

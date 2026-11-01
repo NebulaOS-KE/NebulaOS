@@ -15,7 +15,7 @@ Verification is reported in four separate columns because they prove different t
 | Draft | 111 | 20% |
 | Missing | 169 | 30% |
 | Blocked (cannot proceed without hardware, access or a decision) | 6 | 1% |
-| Has a recorded completeness gap (work not done, not stuck) | 16 | 2% |
+| Has a recorded completeness gap (work not done, not stuck) | 0 | 0% |
 
 ## Verification (counted separately, never combined)
 
@@ -74,12 +74,12 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 
 | Repository | Branch | Commit | Items |
 |---|---|---|---|
-| NebulaOS | main | bec4c6571243 | 11 |
-| NebulaOS-firmware | main | 7b63c998b9e4 | 194 |
+| NebulaOS | main | bef8693fb1f4 | 11 |
+| NebulaOS-firmware | main | 832314df6042 | 194 |
 | NebulaOS-kernel | openke | d86790d2e231 | 1 |
-| NebulaOS-klipper-extensions | main | 93224bf418d1 | 236 |
+| NebulaOS-klipper-extensions | main | ed993726b892 | 236 |
 | NebulaOS-klipper-mcu | main | 33f5d16daccd | 1 |
-| NebulaOS-nebulascreen | main | 59728abcc2ad | 104 |
+| NebulaOS-nebulascreen | main | dee0f6f22a89 | 104 |
 | lv_drivers | master | not cloned l | 1 |
 | nebulaos-packages | main | not cloned l | 1 |
 

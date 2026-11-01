@@ -14,7 +14,7 @@
 | Hardware verified | 0 |
 | Screenshots required / captured | 57 / 41 |
 | Blocked (cannot proceed) | 6 |
-| Completeness gaps (work not done) | 16 |
+| Completeness gaps (work not done) | 0 |
 
 Per-repository and per-category breakdowns are in `COVERAGE.md`.
 <!-- END GENERATED STATUS -->
@@ -116,7 +116,33 @@ The design point worth repeating: the cost of not forking is that your dependenc
 telling you, and the answer here is not pinning and hoping - it is declaring the dependency
 precisely and refusing to start when it is unmet.
 
-## Re-verified at extensions `ed99372`
+## Everything re-verified at today's tips
+
+All three repositories moved again. Current: firmware `832314d`, extensions `ed99372`, screen
+`dee0f6f`. References regenerated, suite re-run, screenshots re-captured.
+
+**The screenshot diff did exactly what it was built for.** Re-capturing at `dee0f6f` changed
+**5 of 129** images, and all five were print-status or print-start screens - matching that
+commit's own subject, *"Print start: steps centred, the preview back after the start"*. The
+other 123 were byte-identical. A capture run is a cheap way to see what a UI change actually
+touched, and that is now written into the screen wiki as evidence rather than theory.
+
+### An evidence bug in my own tooling
+
+The seeder recorded each worktree's `HEAD` as the source commit. Those worktrees now sit on this
+agent's own `docs/*` branches, which carry documentation commits and merges on top of the code -
+so the inventory began citing **documentation** commits as the source of **code** facts.
+`ddb14e6` is a page of prose; anyone checking it for the API surface would find nothing.
+
+Fixed: the seeder now records `origin/<default-branch>` - the tip of the code the documentation
+describes - and falls back to HEAD only where no such ref exists. The dashboard again shows
+`832314d`, `ed99372`, `dee0f6f`.
+
+This one is worth noticing because nothing failed. The SHAs looked perfectly plausible, and
+every item carried one. An evidence trail that points at the wrong artefact is indistinguishable
+from a correct one until someone follows it.
+
+## Previously: re-verified at extensions `ed99372`
 
 The extensions tip moved twice today. At `ed99372` the full suite was re-run (29 of 31 suites,
 all passing) and the references regenerated: **50 commands, 156 options**, up one each -
@@ -206,16 +232,17 @@ suites, 899 tests, all passing; 21 modules test-verified with per-file citations
 
 | Repository | Branch | Commit |
 |---|---|---|
-| `NebulaOS-firmware` | `main` | `c377230` |
-| `NebulaOS-nebulascreen` | `main` | `3194104` |
+| `NebulaOS-firmware` | `main` | `832314d` |
+| `NebulaOS-nebulascreen` | `main` | `dee0f6f` |
 | `NebulaOS-klipper-extensions` | `main` | `ed99372` |
 | `NebulaOS-klipper-mcu` | `main` | `33f5d16` |
 | `NebulaOS-kernel` | `openke` | `d86790d` |
 
-The firmware manifest pins the screen at exactly its tip, but the extensions have moved ahead:
-the manifest pins `a2e7634` while `main` is at `ed99372`. The newer commit's power-loss-recovery
-changes are documented and labelled as newer than the pin, so nothing here implies they ship
-today. That gap closes when the manifest advances.
+The firmware manifest advanced in `832314d` to extensions `ed99372` and screen `dee0f6f`, so
+**the pins match those tips exactly** and there is currently no gap between documented and
+shipped behaviour. The caveat recorded earlier today - that the power-loss-recovery changes were
+newer than the pin - was correct for about two hours and has been removed rather than left to
+mislead in the other direction.
 
 Read evidence from the pinned worktrees under `_worktrees/docs/`, never from the checkouts at
 the workspace root - those belong to the foreground session and move without warning.

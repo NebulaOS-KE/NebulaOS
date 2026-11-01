@@ -1,11 +1,12 @@
 {
   "caveat": "real UI from the real application at this commit; not hardware. machine.nebulaos.* panels need a live printer and are not truthful here.",
-  "commit": "3194104b_see_note",
-  "commit_note": "captured from NebulaOS-nebulascreen main at 3194104 on 2026-11-01",
+  "commit": "dee0f6f",
+  "commit_note": "captured from NebulaOS-nebulascreen main at dee0f6f on 2026-11-01",
   "count": 128,
   "excluded": {
     "07-updates.png": "timing-dependent: the Updates page waits on a Moonraker reply that never arrives without a printer, so the buttons are captured enabled or disabled depending on timing. Would show a reader greyed-out buttons that are not greyed out on a real printer."
   },
+  "history": "re-captured when the screen tip moved 94869f7 -> 3194104 -> dee0f6f. At dee0f6f exactly 5 images changed, all of them print-status or print-start screens, matching that commit's subject (Print start: steps centred, the preview back after the start).",
   "images": [
     {
       "image": "01-settings.png"

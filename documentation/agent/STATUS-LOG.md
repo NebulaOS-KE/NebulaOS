@@ -166,3 +166,23 @@ Two things to keep:
   it. `-B` is for creating a branch, not updating one.
 - **Pushing after every batch turned a destructive mistake into an annoyance.** That habit was
   adopted for durability across sessions; it paid off for a reason I had not anticipated.
+
+## The inventory cited my own documentation as the source of code facts
+
+**2026-11-01.** `seed_inventory.py` recorded each worktree's `HEAD` as an item's
+`source_commit`. That was right while the worktrees sat on plain upstream checkouts. Once they
+moved onto this agent's own `docs/*` branches - with documentation commits and merges on top -
+every item started citing a *documentation* commit as the source of a *code* fact.
+
+The dashboard showed `ddb14e669d78` as the commit 194 firmware items were discovered at.
+`ddb14e6` is a page of prose. Anyone following that SHA to check the API surface would find
+documentation, not implementation.
+
+Fixed by recording `origin/<default-branch>` - the tip of the code the documentation describes -
+falling back to HEAD only where no such ref exists.
+
+Why this one is worth recording: **nothing failed.** No script errored, no count moved, every
+item carried a plausible 40-character SHA. The whole value of an evidence trail is that a reader
+can follow it, and a trail pointing at the wrong artefact is indistinguishable from a correct one
+until somebody does. It was caught by reading the dashboard's own table and recognising the
+SHAs as mine.
