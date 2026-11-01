@@ -81,3 +81,33 @@ one was not:
 "Documented" means the work is done, not that the remaining work is hard. The warning sign was
 the shape of the jump: a large promotion that followed a small amount of new writing. The same
 shape as the 14%-to-49% error two iterations earlier, and I nearly made it twice.
+
+## A hand-written data file that contributed nothing, twice over
+
+**2026-11-01.** Wrote 45 per-option purposes into
+`documentation/agent/data/extension_option_purposes.json`, wired the generator to merge them,
+regenerated, and got **41 options with a purpose** - the same number as before the file
+existed.
+
+Two separate faults, each silent:
+
+1. **The file landed in the wrong repository.** The shell's working directory had drifted into
+   the extensions worktree, so `mkdir -p documentation/agent/data` created that path *inside
+   the extensions repo*. The generator resolves the file relative to its own location, found
+   nothing, and returned an empty dict without complaining. All 41 purposes were coming from
+   source comments alone.
+2. **Two keys used Python attribute names instead of config keys.**
+   `max_tune_printing_seconds` for `max_tune_seconds_printing`, and `stable_drift` for
+   `stable_drift_counts_per_s`. Those two purposes would never have displayed.
+
+Both were caught only because the output count was compared against what had been written -
+45 in, 41 shown. Without that arithmetic the file would have sat in the wrong repo indefinitely
+while the reference looked like it had purposes.
+
+Fixes: the file moved, the keys corrected, the stray directory removed from the extensions
+worktree, and the generator now **prints a warning naming any purpose written for an option
+that does not exist**. A data file that silently contributes nothing is worse than no data
+file, because it looks like the work is done.
+
+Two habits confirmed: check the output count against the input count, and check `pwd` before
+creating a directory.

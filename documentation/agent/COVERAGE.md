@@ -11,8 +11,8 @@ Verification is reported in four separate columns because they prove different t
 | Measure | Items | Share |
 |---|---|---|
 | Discovered documentation items | 547 | 100% |
-| Documented (page exists and covers the item) | 119 | 21% |
-| Draft | 248 | 45% |
+| Documented (page exists and covers the item) | 199 | 36% |
+| Draft | 168 | 30% |
 | Missing | 180 | 32% |
 | Blocked (cannot proceed without hardware, access or a decision) | 6 | 1% |
 | Has a recorded completeness gap (work not done, not stuck) | 311 | 56% |
@@ -46,7 +46,7 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | NebulaOS | 11 | 10 | 0 | 1 | 10 | 90% |
 | NebulaOS-firmware | 194 | 1 | 95 | 98 | 61 | 0% |
 | NebulaOS-kernel | 1 | 0 | 0 | 1 | 0 | 0% |
-| NebulaOS-klipper-extensions | 234 | 58 | 153 | 23 | 211 | 24% |
+| NebulaOS-klipper-extensions | 234 | 138 | 73 | 23 | 211 | 58% |
 | NebulaOS-klipper-mcu | 1 | 0 | 0 | 1 | 0 | 0% |
 | NebulaOS-nebulascreen | 104 | 50 | 0 | 54 | 50 | 48% |
 | lv_drivers | 1 | 0 | 0 | 1 | 0 | 0% |
@@ -59,7 +59,7 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | api | 59 | 0 | 59 | 0 | 0% |
 | build-command | 14 | 0 | 0 | 14 | 0% |
 | command | 51 | 49 | 0 | 2 | 96% |
-| config-option | 172 | 0 | 152 | 20 | 0% |
+| config-option | 172 | 80 | 72 | 20 | 46% |
 | developer-tool | 11 | 0 | 0 | 11 | 0% |
 | existing-page | 34 | 16 | 0 | 18 | 47% |
 | extension | 30 | 9 | 0 | 21 | 30% |

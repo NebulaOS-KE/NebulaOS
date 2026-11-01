@@ -6,8 +6,8 @@
 | | |
 |---|---|
 | Discovered items | **547** |
-| Documented | **119** (21%) |
-| Draft | 248 |
+| Documented | **199** (36%) |
+| Draft | 168 |
 | Missing | 180 |
 | Code verified | 332 |
 | Test verified | 28 |
@@ -41,12 +41,19 @@ The commands have since been raised to that bar and are now documented: paramete
 ranges, errors raised, side effects and an example invocation, each naming what remains
 unestablished.
 
-Configuration is the next and harder half. `CONFIG.md` has gained each section's module-header
-purpose and the checked fact that every option needs a Klipper restart - but the **per-option**
-purpose and behaviour 6.6 asks for are still unwritten, so all 152 stay draft. Promoting them
-on the strength of a section-level purpose took coverage from 21% to 49% in one step; it was
-reverted the same iteration. `STATUS-LOG.md` records why, because the warning sign is worth
-recognising: a large promotion following a small amount of new writing.
+Configuration is in progress. `CONFIG.md` carries each section's module-header purpose, the
+checked fact that every option needs a Klipper restart, and now a **per-option Purpose column**
+for 80 of the 155 - 43 written by reading the module, 37 quoted from the author's own comment
+above the option and labelled as such.
+
+Only those 80 are promoted. **72 keep a dash** and stay draft, because a dash is the honest
+answer where neither a reading nor a comment exists; the alternative is a sentence invented
+from the option's name.
+
+An earlier attempt promoted all 152 on the strength of a section-level purpose, taking coverage
+from 21% to 49% in one step. It was reverted the same iteration - see `STATUS-LOG.md`, along
+with the separate episode where the purposes file itself sat in the wrong repository and
+contributed nothing.
 
 Marking them documented once took the headline from 14% to 49% in a single step. That was
 flattering and false, and reverting it is recorded in `STATUS-LOG.md`.

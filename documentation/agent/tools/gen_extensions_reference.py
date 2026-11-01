@@ -14,7 +14,7 @@ computed rather than literal are reported as "computed", never guessed.
 
 Usage:  gen_extensions_reference.py <extensions-checkout> <out-dir>
 """
-import ast, os, re, subprocess, sys, datetime
+import ast, json, os, re, subprocess, sys, datetime
 
 GETTERS = {
     "get": "string", "getint": "int", "getfloat": "float",
@@ -52,6 +52,40 @@ def fmt(v):
     if isinstance(v, bool):
         return "`true`" if v else "`false`"
     return f"`{v}`"
+
+
+HEADING = re.compile(r"^[A-Z][A-Za-z0-9 /()-]{2,40}$")
+
+
+def option_comment(lines, lineno):
+    """The comment block immediately above a config line, if it is about that
+    option rather than a heading for the group below it.
+
+    A comment like "Coolstep Tunables" heads several options; attaching it to
+    whichever one happens to come first would quietly mislabel that option. So
+    short title-like lines with no verb and no full stop are rejected.
+    """
+    i = lineno - 2
+    block = []
+    while i >= 0 and lines[i].strip().startswith("#"):
+        block.insert(0, lines[i].strip().lstrip("#").strip())
+        i -= 1
+    text = " ".join(x for x in block if x)
+    text = " ".join(text.split())
+    if not text or HEADING.match(text):
+        return ""
+    if len(text) > 300:
+        text = text[:297].rsplit(" ", 1)[0] + "..."
+    return text
+
+
+def load_purposes():
+    here = os.path.dirname(os.path.abspath(__file__))
+    path = os.path.join(here, "..", "data", "extension_option_purposes.json")
+    if not os.path.exists(path):
+        return {}
+    return {k: v for k, v in json.load(open(path)).items()
+            if not k.startswith("_")}
 
 
 def module_purpose(path):
@@ -144,7 +178,9 @@ def scan(path, consts):
     So: `config` receivers are configuration, `gcmd` receivers are command
     parameters, and everything else is ignored.
     """
-    tree = ast.parse(open(path).read())
+    src_text = open(path).read()
+    src_lines = src_text.split("\n")
+    tree = ast.parse(src_text)
     consts = module_consts(tree)
     options, params, commands = [], [], []
     for node in ast.walk(tree):
@@ -196,7 +232,8 @@ def scan(path, consts):
                 if kw.arg in CONSTRAINTS and is_literal(kw.value):
                     cons.append(f"{kw.arg} {ast.literal_eval(kw.value)}")
             rec_ = dict(name=name, kind=kind, default=default,
-                        required=required, constraints=", ".join(cons) or "-")
+                        required=required, constraints=", ".join(cons) or "-",
+                        comment=option_comment(src_lines, node.lineno))
             (params if recv == "gcmd" else options).append(rec_)
 
         elif attr in ("register_command", "register_mux_command") and node.args:
@@ -348,8 +385,27 @@ def main():
          "per-option purpose cannot be extracted - and inferring one from an option's name",
          "would be invention dressed as documentation. The module is the honest unit of",
          "explanation: the header says what the thing is for, the table says what you can",
-         "set.\n"]
+         "set.\n",
+         "Where an option has its own **Purpose**, it was written by reading the module.",
+         "Where the cell says *From the source comment*, it is the comment the author left",
+         "above that line, quoted. A dash means neither exists - and a dash is the honest",
+         "answer, because the alternative is a sentence invented from the option's name.\n"]
+    purposes = load_purposes()
+    # An orphan key is a purpose that was written and will never be shown.
+    # Both of the first two here used the Python attribute name instead of the
+    # config key (max_tune_printing_seconds for max_tune_seconds_printing), and
+    # the file contributed nothing without saying so. Fail loudly instead.
+    real = set()
+    for f, (opts, _p, _c) in data.items():
+        for o in opts:
+            real.add(f"{f[:-3]}:{o['name']}")
+    orphans = sorted(set(purposes) - real)
+    if orphans:
+        print("WARNING: purposes written for options that do not exist:")
+        for o in orphans:
+            print(f"  {o}")
     total = 0
+    documented_purpose = 0
     for f in sorted(data):
         opts, _p, _c = data[f]
         if not opts:
@@ -358,6 +414,9 @@ def main():
         for o in opts:
             seen.setdefault(o["name"], o)
         total += len(seen)
+        documented_purpose += sum(
+            1 for n in seen
+            if purposes.get(f"{f[:-3]}:{n}") or seen[n].get("comment"))
         L.append(f"## `[{f[:-3]}]`\n")
         purpose = module_purpose(os.path.join(ext, f))
         if purpose:
@@ -365,17 +424,21 @@ def main():
         t = f"test_{f[:-3]}.py"
         if t in tests:
             L.append(f"Tested by `extras/{t}`.\n")
-        L.append("| Option | Type | Default | Constraints |")
-        L.append("|---|---|---|---|")
+        L.append("| Option | Purpose | Type | Default | Constraints |")
+        L.append("|---|---|---|---|---|")
         for n in sorted(seen):
             o = seen[n]
             d = "**required**" if o["required"] else o["default"]
-            L.append(f"| `{n}` | {o['kind']} | {d} | {o['constraints']} |")
+            why = purposes.get(f"{f[:-3]}:{n}", "")
+            if not why and o.get("comment"):
+                why = f"*From the source comment:* {o['comment']}"
+            L.append(f"| `{n}` | {why or '-'} | {o['kind']} | {d} | "
+                     f"{o['constraints']} |")
         L.append("")
     L.insert(5, f"{total} options across {sum(1 for f in data if data[f][0])} modules.\n")
     open(os.path.join(out, "CONFIG.md"), "w").write("\n".join(L) + "\n")
     print(f"COMMANDS.md: {len(by_name)} commands")
-    print(f"CONFIG.md:   {total} options")
+    print(f"CONFIG.md:   {total} options, {documented_purpose} with a purpose")
 
 
 if __name__ == "__main__":
