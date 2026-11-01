@@ -51,7 +51,7 @@ first time it appears, and [Words you will see](Glossary) collects them all.
   [Supported hardware](Supported-Hardware).
 - It is not Creality's software and is not supported by Creality. Installing it is your
   decision and your responsibility.
-- It is **version 0.9.0** - actively developed, not finished. Some things are still rough.
+- This manual describes **NebulaOS 1.0.0**, the first full release.
 
 ## How to read this manual
 

@@ -113,8 +113,9 @@ Tested on Linux on 2026-10-14.
 **This erases your settings, your print files and your calibration.** Only the printer's
 factory serial number and network address are kept.
 
-Each release includes an `.ingenic` file for the Ingenic USB Cloner. It rewrites the printer
-from scratch: NebulaOS in slot 2, Creality's stock system in slot 1.
+Each release includes an `.ingenic` file for the Ingenic USB Cloner - for 1.0.0 that is
+`NebulaOS-Ender3V3KE-1.0.0.ingenic`, alongside its `.sha256`. It rewrites the printer from
+scratch: NebulaOS in slot 2, Creality's stock system in slot 1.
 
 **This has not been tested on a printer by the NebulaOS project.** Use it only when nothing
 else has worked, and expect to set the printer up from nothing afterwards.

@@ -10,7 +10,8 @@ USB stick and no computer needed once the printer is on your network.
 - A printer on your Wi-Fi network - [Connecting to Wi-Fi](Connecting-To-WiFi).
 - A printer that is not printing. Updates are refused while it is busy printing, heating or
   calibrating, and the screen says which.
-- For a whole-system update: about 140 MB of download and a few minutes.
+- For a whole-system update: a download of well over 100 MB, and a few minutes. The screen
+  shows the exact size before you start.
 
 ## Before you begin
 
@@ -37,9 +38,10 @@ less frightening than it sounds.
 ### Online, the easy way
 
 1. **Settings → Updates → System image → Online.** The printer asks GitHub for the latest
-   NebulaOS release.
-2. If a newer version exists, it shows the version and the download size. Tap **Download** -
-   about 140 MB.
+   NebulaOS release - it reads `nebulaos-release.json` from the releases page, which is how it
+   knows what is available without you choosing a file.
+2. If a newer version exists, it shows the version and the exact download size. Tap
+   **Download**.
 3. When it finishes, the download appears in the list as **Downloaded**. Tap **Install** next
    to it.
 4. NebulaOS checks the file again, asks you to confirm, installs it over a few minutes, and

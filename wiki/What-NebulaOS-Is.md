@@ -47,7 +47,8 @@ Being straight about this matters more than selling it:
   decision.
 - **You have to calibrate.** Your existing calibration does not carry over, and skipping it
   means chasing first-layer problems that an hour of calibration would have fixed.
-- **It is version 0.9.0** - actively developed, not finished. Some things are rough.
+- **This is version 1.0.0**, the first full release. It is actively developed, so expect it to
+  keep changing.
 - **Only the Ender-3 V3 KE.** See [Supported hardware](Supported-Hardware).
 - **Some things need a computer.** Not many, and not for ordinary printing.
 

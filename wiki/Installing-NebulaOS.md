@@ -9,9 +9,18 @@ NebulaOS, and your old system is still there in the other slot in case you want 
 
 - A Creality Ender-3 V3 KE. Nothing else is supported - see
   [Supported hardware](Supported-Hardware).
-- The NebulaOS image file and its checksum file, from
-  [NebulaOS releases](https://github.com/NebulaOS-KE/NebulaOS/releases):
-  `NebulaOS-Ender3V3KE-<version>.img` and `NebulaOS-Ender3V3KE-<version>.sha256`.
+- The NebulaOS image file and its checksum, from
+  [NebulaOS releases](https://github.com/NebulaOS-KE/NebulaOS/releases). For 1.0.0 those are:
+
+  | File | What it is |
+  |---|---|
+  | `NebulaOS-Ender3V3KE-1.0.0.img` | **The one you need.** The image Creality's updater installs |
+  | `NebulaOS-Ender3V3KE-1.0.0.img.sha256` | Its checksum, for the optional download check below |
+  | `NebulaOS-Ender3V3KE-1.0.0.ingenic` | Only for USB recovery on a printer that will not start - see [Recovery](Recovery). **Not** for a normal install |
+  | `NebulaOS-Ender3V3KE-1.0.0.ingenic.sha256` | Its checksum |
+  | `nebulaos-release.json` | Machine-readable release details; the printer uses it for online updates |
+
+  Download the `.img` and, if you want to check it, the `.img.sha256`.
 - **If you are coming from stock Creality firmware:** a USB stick formatted as FAT32.
 - **If you are coming from OpenKE:** a computer that can use SSH, and your printer's root
   password.
@@ -28,7 +37,7 @@ NebulaOS, and your old system is still there in the other slot in case you want 
 - Check your download if you can. On Linux or macOS, in the folder with both files:
 
   ```
-  sha256sum -c NebulaOS-Ender3V3KE-<version>.img.sha256
+  sha256sum -c NebulaOS-Ender3V3KE-1.0.0.img.sha256
   ```
 
   You want to see `OK`. If it says `FAILED`, download the file again - do not install it.
@@ -44,22 +53,23 @@ If you are not sure, you are almost certainly on stock Creality firmware: sectio
 
 ## 2a. From OpenKE, over SSH
 
-Replace `<printer-ip>` with your printer's address and `<version>` with the version you
-downloaded.
+Replace `<printer-ip>` with your printer's address. The examples use `1.0.0`; if you
+downloaded a different version, use its number instead.
 
 1. Copy the image to the printer:
 
    ```
-   scp NebulaOS-Ender3V3KE-<version>.img root@<printer-ip>:/usr/data/
+   scp NebulaOS-Ender3V3KE-1.0.0.img root@<printer-ip>:/usr/data/
    ```
 
    It will ask for your printer's root password - the password of the system running on it
-   **now** (OpenKE), not NebulaOS's. The file is about 133 MB, so this takes a minute or two.
+   **now** (OpenKE), not NebulaOS's. The file is well over 100 MB, so this takes a minute or
+   two.
 
 2. Start the installation:
 
    ```
-   ssh root@<printer-ip> /etc/ota_bin/local_ota_update.sh /usr/data/NebulaOS-Ender3V3KE-<version>.img
+   ssh root@<printer-ip> /etc/ota_bin/local_ota_update.sh /usr/data/NebulaOS-Ender3V3KE-1.0.0.img
    ```
 
    The updater unpacks the file, checks every part, then writes the kernel, the system and the
@@ -83,7 +93,7 @@ Now go to section 3.
 
 This is the usual route if your printer still has Creality's software on it.
 
-1. Copy `NebulaOS-Ender3V3KE-<version>.img` to the top level of a FAT32 USB stick. Do not put
+1. Copy `NebulaOS-Ender3V3KE-1.0.0.img` to the top level of a FAT32 USB stick. Do not put
    it in a folder, and do not rename it.
 2. Plug the USB stick into the printer.
 3. Start the update from Creality's own screen, the same way you would install a Creality
@@ -107,10 +117,10 @@ When it comes up:
    ![The Wi-Fi networks panel](images/03-wifi.png)
 2. Calibrate the printer once before printing - the calibrations from your old system do not
    carry over. [Calibration guide](Calibration-Guide).
-3. If you used SSH, delete the copied image to free 133 MB:
+3. If you used SSH, delete the copied image to free the space it used:
 
    ```
-   ssh root@<printer-ip> rm /usr/data/NebulaOS-Ender3V3KE-<version>.img
+   ssh root@<printer-ip> rm /usr/data/NebulaOS-Ender3V3KE-1.0.0.img
    ```
 
 Mainsail is now at `http://<printer-ip>` in a web browser, or
@@ -120,10 +130,17 @@ Your printer has given itself a name like `nebulaos-4f2a` - four characters deri
 own hardware, so that two printers on one network do not collide. You can change it on
 **Settings → Connections → Name → Change**.
 
-**If you ever need SSH**, the root password on a newly installed NebulaOS is `NebulaOS`. You do
-not need SSH for normal use, and you should change that password if your printer is reachable
-from beyond your own network. A printer that already ran an earlier NebulaOS keeps whatever
-password it had.
+**If you ever need SSH**, the root password on a **newly installed** NebulaOS is `NebulaOS`.
+You do not need SSH for normal use, and you should change that password if your printer is
+reachable from beyond your own network.
+
+**Upgrading from an earlier NebulaOS?** Your existing password is kept. The printer stores it
+separately from the system image, so it survives updates - including this one. If you never
+changed it, it is still the old default (`openke`), not `NebulaOS`.
+
+Once you are in, the prompt shows the printer's name and the directory, like
+`root@nebulaos-4f2a:~#`. Worth a glance if you have more than one printer - it is the quickest
+way to be sure which one you are typing into.
 
 *One screenshot is still missing here: the NebulaOS screen as it looks on the very first
 start. The simulator's screenshot tour does not cover the boot and init screens, so this one
