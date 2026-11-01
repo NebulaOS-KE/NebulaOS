@@ -46,11 +46,29 @@ BLANK = dict(
 )
 
 
-def sha(root, checkout):
+def checkout_path(root, checkout):
+    """Where to read a repository's source from.
+
+    Prefer this agent's own pinned worktree under _worktrees/docs/ over the
+    checkout at the workspace root. The root checkouts belong to the foreground
+    development session and move without warning - on 2026-11-01 the firmware
+    one was already a commit ahead of the SHA this inventory had recorded.
+    Reading evidence from a tree that can change under you means the recorded
+    commit stops matching the content it describes, silently.
+    """
     if not checkout:
         return None
+    own = os.path.join(root, "_worktrees", "docs", checkout)
+    if os.path.isdir(os.path.join(own, ".git")) or os.path.exists(
+            os.path.join(own, ".git")):
+        return own
     p = os.path.join(root, checkout)
-    if not os.path.isdir(p):
+    return p if os.path.isdir(p) else None
+
+
+def sha(root, checkout):
+    p = checkout_path(root, checkout)
+    if not p:
         return None
     return subprocess.run(["git", "-C", p, "rev-parse", "HEAD"],
                           capture_output=True, text=True).stdout.strip() or None
@@ -68,6 +86,7 @@ def rec(id_, repo, component, topic, category, paths, commit, branch, **kw):
 def discover(root):
     items = []
     shas = {r: sha(root, c) for r, (b, c) in REPOS.items()}
+    fw = checkout_path(root, "NebulaOS-firmware") or ""
 
     # --- repository-level technical references -------------------------------
     for repo, (branch, checkout) in REPOS.items():
@@ -100,7 +119,7 @@ def discover(root):
                          screenshot_status="missing"))
 
     # --- NebulaScreen panels (one user-facing screen reference each) ---------
-    src = os.path.join(root, "NebulaOS-nebulascreen", "src")
+    src = os.path.join(checkout_path(root, "NebulaOS-nebulascreen") or "", "src")
     if os.path.isdir(src):
         for f in sorted(os.listdir(src)):
             if not f.endswith("_panel.cpp"):
@@ -114,7 +133,7 @@ def discover(root):
                 screenshot_required=True, screenshot_status="missing"))
 
     # --- Klipper extension G-code commands ----------------------------------
-    ext = os.path.join(root, "NebulaOS-klipper-extensions", "extras")
+    ext = os.path.join(checkout_path(root, "NebulaOS-klipper-extensions") or "", "extras")
     if os.path.isdir(ext):
         pat = re.compile(r"register_(?:mux_)?command\(\s*(?:'([^']+)'|\"([^\"]+)\")")
         found = {}
@@ -176,7 +195,7 @@ def discover(root):
     # most of those pointers address Moonraker response and status objects, not
     # settings, and counting them as configuration would inflate the inventory
     # with items that do not exist. The API surface is discovered separately.
-    nsrc = os.path.join(root, "NebulaOS-nebulascreen", "src")
+    nsrc = os.path.join(checkout_path(root, "NebulaOS-nebulascreen") or "", "src")
     if os.path.isdir(nsrc):
         schema = re.compile(r'"(/[a-z0-9_]+)"_json_pointer')
         viaconf = re.compile(r'get(?:<[^>]*>)?\(\s*"(/[a-z0-9_]+)"')
@@ -213,7 +232,7 @@ def discover(root):
     # several, and an endpoint nobody calls yet is still public API.
     # Moonraker exposes each HTTP path /machine/nebulaos/x/y as the JSON-RPC
     # method machine.nebulaos.x.y, which is how NebulaScreen addresses them.
-    comp = os.path.join(root, "NebulaOS-firmware", "scripts/build/overlay",
+    comp = os.path.join(fw, "scripts/build/overlay",
                         "usr/lib/nebulaos/moonraker/nebulaos.py")
     if os.path.exists(comp):
         txt = open(comp).read()
@@ -243,7 +262,7 @@ def discover(root):
                 shas["NebulaOS-firmware"], "main", priority=2))
 
     # --- nebulaos_osconfig helper modules (what the API delegates to) --------
-    osc = os.path.join(root, "NebulaOS-firmware", "scripts/build/overlay",
+    osc = os.path.join(fw, "scripts/build/overlay",
                        "usr/lib/nebulaos/python/nebulaos_osconfig")
     if os.path.isdir(osc):
         for f in sorted(os.listdir(osc)):
@@ -257,8 +276,7 @@ def discover(root):
                 shas["NebulaOS-firmware"], "main", priority=2))
 
     # --- firmware init scripts / services -----------------------------------
-    initd = os.path.join(root, "NebulaOS-firmware",
-                         "scripts/build/overlay/etc/init.d")
+    initd = os.path.join(fw, "scripts/build/overlay/etc/init.d")
     if os.path.isdir(initd):
         for f in sorted(os.listdir(initd)):
             if not re.match(r"S\d\d", f):
@@ -315,7 +333,7 @@ def discover(root):
         "Upgrading.md":               ("historical", "redirect stub"),
         "Emergency-Factory-Reset.md": ("historical", "documents an absence"),
     }
-    wdir = os.path.join(root, "NebulaOS-nebulascreen", "wiki")
+    wdir = os.path.join(checkout_path(root, "NebulaOS-nebulascreen") or "", "wiki")
     if os.path.isdir(wdir):
         for f in sorted(os.listdir(wdir)):
             if not f.endswith(".md"):
@@ -330,7 +348,6 @@ def discover(root):
                         else "discovered after the Q-006 audit; needs a disposition"))
 
     # --- firmware build pipeline --------------------------------------------
-    fw = os.path.join(root, "NebulaOS-firmware")
     bld = os.path.join(fw, "scripts/build")
     if os.path.isdir(bld):
         for f in sorted(os.listdir(bld)):

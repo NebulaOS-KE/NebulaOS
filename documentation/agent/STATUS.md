@@ -1,6 +1,6 @@
 # Status
 
-**Updated:** 2026-11-01 (late)
+**Updated:** 2026-11-01 (overnight)
 **Phase:** 2 - writing the end-user manual (first batch complete)
 **Branch:** `docs/agent` in the central `NebulaOS` repository
 **Mode:** autonomous, self-paced loop
@@ -251,7 +251,36 @@ work.
    PRs. This unblocks the `Installation.md` / `Installing-NebulaOS.md` name collision, which
    now gets fixed rather than flagged.
 
-## Code is changing tonight
+## Q-060 progress: the extensions change is in and verified
+
+`origin/main` for the extensions moved to **`a2e7634`** - the power-loss resume fix - so that
+part of Q-060 is done rather than pending:
+
+- Pinned worktree moved to `a2e7634`; **full suite re-run, 29/29 suites pass.** The PLR suite
+  itself is now 169 tests.
+- All 21 test-verified modules had their evidence re-pointed from `8e3447a` to `a2e7634`. An
+  evidence citation that names a commit the tree no longer sits at is worse than no citation,
+  because it looks checked.
+- `wiki/Power-Loss-Recovery.md` written from the new behaviour, replacing a stub.
+
+The behaviour worth documenting, and now documented: a resume that stops partway **cleans up
+deliberately** - nozzle heater off, file unloaded, **bed left on** so the part stays stuck
+down, and the checkpoint kept so Resume is offered again. Without that explanation a user
+would reasonably read a half-finished resume as a malfunction.
+
+The screen change (`4883008`) is **not pushed yet** - `origin/main` is still `94869f7`, which
+is what the 129 screenshots were captured from. When it lands, re-run the capture script.
+
+### A drift fix in the tooling
+
+The seeder read source from the workspace-root checkouts, which belong to the foreground
+session and move without warning - the firmware one was already a commit ahead of the SHA the
+inventory had recorded. It now prefers this agent's own pinned worktrees under
+`_worktrees/docs/`, falling back to the root checkout only if no worktree exists. Reading
+evidence from a tree that can change underneath you means the recorded commit silently stops
+matching the content it describes.
+
+## Code changes still expected
 
 The foreground session is landing changes that affect documented behaviour. Final SHAs arrive
 in `CONTINUE.md` in the morning. Known so far:

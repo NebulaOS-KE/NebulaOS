@@ -61,9 +61,15 @@ re-running it - three non-obvious build blockers are written up there.
 **The remaining screenshot work is embedding, not capturing.** 7 of 129 are used in pages. Do
 it page by page as you write, not as a sweep at the end.
 
-**Pending re-verification: code is changing tonight.** See `QUEUE.md` Q-060. Final SHAs land in
-`CONTINUE.md` in the morning. The captures are from `94869f7`, so a screen-tip move invalidates
-them - re-run the capture script and compare rather than assuming they still hold.
+**Q-060 is half done.** The extensions change (`a2e7634`, power-loss resume fix) is pushed,
+verified and documented. The screen change (`4883008`) is **not pushed** - origin/main is still
+`94869f7`, which is what all 129 screenshots came from. When it lands, re-run
+`tools/capture_screenshots.sh` and compare; do not assume the captures still hold.
+
+**The seeder now reads from the pinned worktrees, not the root checkouts.** The root ones are
+the foreground session's and move without warning. Keep it that way: an evidence citation
+naming a commit the tree no longer sits at is worse than no citation, because it looks
+checked.
 
 ## Remaining work
 
@@ -152,8 +158,8 @@ repositories not yet cloned locally.
 - `_worktrees/docs/NebulaOS-firmware` - pinned at `82e1320`, branch `docs/firmware`. **Read
   evidence from here, not from the workspace-root checkout** - the foreground session moves
   that one under you (it was already one commit ahead when checked).
-- `_worktrees/docs/NebulaOS-klipper-extensions` - `8e3447a`, branch `docs/extensions`, used
-  for the test suite.
+- `_worktrees/docs/NebulaOS-klipper-extensions` - **`a2e7634`**, branch `docs/extensions`,
+  used for the test suite.
 - `_worktrees/docs/NebulaOS-nebulascreen` - `94869f7`, branch `docs/screen`.
 - `_worktrees/docs/screen-sim` - a **separate clone** with submodules, for building the
   simulator. Not a worktree, deliberately: submodule init needs to write the parent repo's

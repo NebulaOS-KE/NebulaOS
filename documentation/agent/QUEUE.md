@@ -119,12 +119,16 @@ the dashboard in the same batch as the page itself.
 
 - [x] **Q-059** Tim's two decisions of 2026-11-01 - install-route framing, and free rein to
       restructure. Applied; see `DECISIONS.md` D-009 and D-010.
-- [ ] **Q-060** **Re-verify against tonight's code changes.** Final SHAs land in
-      `CONTINUE.md` in the morning. Affected:
-      - Power-loss resume fix (extensions `a2e7634`) - `Power-Loss-Recovery` page,
-        `nebulaos_power_loss_recovery` module, the `NEBULAOS_PLR_*` commands.
-      - Screen: print view only for a running print, shorter resume popup (screen `4883008`) -
-        `print_status_panel`, `plr_status`, and **every screenshot** (they are from `94869f7`).
+- [~] **Q-060** **Re-verify against tonight's code changes.** Extensions part **done**;
+      the rest waits for pushed SHAs.
+      - [x] Power-loss resume fix, extensions `a2e7634` - **pushed and verified.** Worktree
+        moved to it, full suite re-run (29/29 suites pass; the PLR suite is now 169 tests),
+        all 21 test-verified modules re-pointed from `8e3447a` to `a2e7634`, and
+        `wiki/Power-Loss-Recovery.md` written from the new behaviour.
+      - [ ] Screen: print view only for a running print, shorter resume popup (screen
+        `4883008`) - **not pushed yet**; origin/main is still `94869f7`. Affects
+        `print_status_panel`, `plr_status`, and **every screenshot**. Re-run
+        `tools/capture_screenshots.sh` when it lands.
       - Storage **Free up space** button, NebulaOS leftovers only. **Clean up Creality files**
         stays separate - do not merge the two in the docs; they do different things.
       - Default root password `NebulaOS` (was `openke`), unique default hostname

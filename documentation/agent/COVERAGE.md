@@ -11,17 +11,17 @@ Verification is reported in four separate columns because they prove different t
 | Measure | Items | Share |
 |---|---|---|
 | Discovered documentation items | 544 | 100% |
-| Documented (page exists and covers the item) | 4 | 0% |
-| Draft | 2 | 0% |
-| Missing | 538 | 98% |
-| Blocked | 8 | 1% |
+| Documented (page exists and covers the item) | 12 | 2% |
+| Draft | 3 | 0% |
+| Missing | 529 | 97% |
+| Blocked | 9 | 1% |
 
 ## Verification (counted separately, never combined)
 
 | Kind | Verified | Partial | Unknown | Blocked | N/A |
 |---|---|---|---|---|---|
-| Code verified | 5 | 1 | 538 | 0 | 0 |
-| Test verified | 21 | 0 | 523 | 0 | 0 |
+| Code verified | 13 | 2 | 529 | 0 | 0 |
+| Test verified | 24 | 0 | 520 | 0 | 0 |
 | Hardware verified | 0 | 0 | 0 | 2 | 542 |
 
 ## Screenshots
@@ -29,10 +29,10 @@ Verification is reported in four separate columns because they prove different t
 | Measure | Items |
 |---|---|
 | Required | 59 |
-| Captured and confirmed current | 36 |
+| Captured and confirmed current | 37 |
 | Verified against the running UI | 0 |
 | Candidate image exists, version unconfirmed | 0 |
-| Missing outright | 23 |
+| Missing outright | 22 |
 | Outdated | 0 |
 | Blocked (needs real hardware) | 0 |
 
@@ -42,10 +42,10 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 
 | Repository | Items | Documented | Draft | Missing | Code verified | Documented % |
 |---|---|---|---|---|---|---|
-| NebulaOS | 11 | 2 | 1 | 8 | 2 | 18% |
+| NebulaOS | 11 | 3 | 2 | 6 | 3 | 27% |
 | NebulaOS-firmware | 191 | 0 | 1 | 190 | 1 | 0% |
 | NebulaOS-kernel | 1 | 0 | 0 | 1 | 0 | 0% |
-| NebulaOS-klipper-extensions | 234 | 0 | 0 | 234 | 0 | 0% |
+| NebulaOS-klipper-extensions | 234 | 7 | 0 | 227 | 7 | 2% |
 | NebulaOS-klipper-mcu | 1 | 0 | 0 | 1 | 0 | 0% |
 | NebulaOS-nebulascreen | 104 | 2 | 0 | 102 | 2 | 1% |
 | lv_drivers | 1 | 0 | 0 | 1 | 0 | 0% |
@@ -57,17 +57,17 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 |---|---|---|---|---|---|
 | api | 57 | 0 | 1 | 56 | 0% |
 | build-command | 14 | 0 | 0 | 14 | 0% |
-| command | 51 | 0 | 0 | 51 | 0% |
+| command | 51 | 5 | 0 | 46 | 9% |
 | config-option | 172 | 0 | 0 | 172 | 0% |
 | developer-tool | 11 | 0 | 0 | 11 | 0% |
 | existing-page | 34 | 2 | 0 | 32 | 5% |
-| extension | 30 | 0 | 0 | 30 | 0% |
+| extension | 30 | 2 | 0 | 28 | 6% |
 | os-helper | 17 | 0 | 0 | 17 | 0% |
 | repo-overview | 8 | 0 | 0 | 8 | 0% |
 | runtime-helper | 56 | 0 | 0 | 56 | 0% |
 | screen | 49 | 0 | 0 | 49 | 0% |
 | service | 35 | 0 | 0 | 35 | 0% |
-| user-manual-section | 10 | 2 | 1 | 7 | 20% |
+| user-manual-section | 10 | 3 | 2 | 5 | 30% |
 
 ## Source revisions this inventory was discovered at
 
@@ -76,7 +76,7 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | NebulaOS | main | not cloned l | 11 |
 | NebulaOS-firmware | main | 82e132088fc7 | 191 |
 | NebulaOS-kernel | openke | d86790d2e231 | 1 |
-| NebulaOS-klipper-extensions | main | 8e3447ac0da4 | 234 |
+| NebulaOS-klipper-extensions | main | a2e763460bb0 | 234 |
 | NebulaOS-klipper-mcu | main | 33f5d16daccd | 1 |
 | NebulaOS-nebulascreen | main | 94869f756572 | 104 |
 | lv_drivers | master | not cloned l | 1 |
@@ -90,6 +90,7 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | repo:lv_drivers | lv_drivers | not cloned locally; clone into _worktrees/docs |
 | manual:01-start-here | NebulaOS | sections on supported hardware and terminology are still stubs |
 | manual:02-installation | NebulaOS | verify_hardware outstanding: the stock-touchscreen route has not been observed on a printer (D-009: user pages document it as the normal route; record kept in VERIFICATION.md) |
+| manual:07-advanced | NebulaOS | camera, Spoolman, adaptive meshing, macros and console sections still stubs |
 | screen:exclude_object_panel | NebulaOS-nebulascreen | not covered by the simulator screenshot tour; needs an extra tour step or a manual capture |
 | screen:printer_select_panel | NebulaOS-nebulascreen | not covered by the simulator screenshot tour; needs an extra tour step or a manual capture |
 | screen:spoolman_panel | NebulaOS-nebulascreen | not covered by the simulator screenshot tour; needs an extra tour step or a manual capture |
