@@ -238,6 +238,15 @@ and this file.
    evidence SHAs to need updating.
 4. Re-check the manifest pins: a release is exactly when documented-versus-shipped can diverge.
 
+   **Specifically, check the extensions `production` branch.** The manifest pins
+   `KLIPPER_EXTENSIONS_BRANCH=production` with `KLIPPER_EXTENSIONS_PIN`, and the 1.0.0 release
+   identity gate reported `production != pin` as its one remaining failure, which Tim is
+   fixing. The extensions reference on `docs/extensions` currently claims *"Shipped by
+   firmware: yes - the manifest advanced to `ed99372`"*, and that claim is only true if
+   `production`, the pin and `main` all agree once the release lands. Verify all three before
+   leaving that sentence in place; it was already wrong once today in the other direction, when
+   the pin lagged `main` by two hours.
+
 ### What was mid-flight
 
 Nothing. The last batch (kernel documentation) finished and pushed before the pause. The next
