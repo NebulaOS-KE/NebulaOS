@@ -182,6 +182,55 @@ affected inventory items for re-verification rather than assuming the pages stil
 `BLOCKERS.md`: B-001 no printer access (by design; simulator is the mitigation), B-002 two
 repositories not yet cloned locally.
 
+## PAUSED FOR RELEASE 1.0.0 (2026-11-01)
+
+**Do not start work in the component worktrees, and do not recreate them, until the foreground
+session says the release freeze is over.**
+
+Tim started RELEASE 1.0.0. The release identity gate requires every source repository to have
+only its main checkout, so the five component worktrees under `_worktrees/docs/` are being
+removed by the foreground session for the freeze - release builds A and B, packaging, hardware
+qualification. A few hours.
+
+State at the pause, all clean and pushed:
+
+| Branch | Repository | Commit |
+|---|---|---|
+| `docs/agent` | `NebulaOS` | `85a850a` |
+| `docs/firmware` | `NebulaOS-firmware` | `7c8f108` |
+| `docs/extensions` | `NebulaOS-klipper-extensions` | `f8c24ea` |
+| `docs/mcu` | `NebulaOS-klipper-mcu` | `f5f489d` |
+| `docs/kernel` | `NebulaOS-kernel` | `aa0a0d4f6` |
+| `docs/screen` | `NebulaOS-nebulascreen` | `96d6e10` |
+
+**The branches survive; only the worktrees go.** Nothing is lost - every batch was pushed, which
+is the habit that made this a non-event rather than a scramble.
+
+**The central `NebulaOS` worktree is not affected** and still holds the inventory, the dashboard
+and this file.
+
+### Resuming afterwards
+
+1. Recreate each worktree from its **existing remote branch**, not from `origin/main`:
+   ```sh
+   git -C <checkout> worktree add /home/tim/workspace/NebulaOS/_worktrees/docs/<repo> docs/<topic>
+   ```
+   Use an absolute path - a relative one resolves against `-C`, which once created a worktree
+   inside a foreground checkout.
+2. Merge `origin/<default>` into each branch to pick up release work. **Merge; do not
+   `checkout -B`** - that resets the branch and discards the doc commits.
+3. Re-run `tools/seed_inventory.py`, the extensions test suite, and
+   `tools/capture_screenshots.sh`. A release will have moved tips, so expect screenshots and
+   evidence SHAs to need updating.
+4. Re-check the manifest pins: a release is exactly when documented-versus-shipped can diverge.
+
+### What was mid-flight
+
+Nothing. The last batch (kernel documentation) finished and pushed before the pause. The next
+queued item is cloning `nebulaos-packages` and `lv_drivers` - the only two repositories with no
+documentation - which needs no component worktree and could proceed if the freeze allowed new
+work. It does not, so it waits.
+
 ## Worktrees and build areas
 
 - `_worktrees/docs/NebulaOS` - the manual and agent state, branch `docs/agent`.

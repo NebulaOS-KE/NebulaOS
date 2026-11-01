@@ -19,6 +19,10 @@
 Per-repository and per-category breakdowns are in `COVERAGE.md`.
 <!-- END GENERATED STATUS -->
 
+**PAUSED: RELEASE 1.0.0 freeze (2026-11-01).** The component worktrees are removed for the
+release identity gate; all six `docs/*` branches are pushed and intact. No new work until the
+foreground session lifts the freeze. See `HANDOFF.md` for the resume procedure.
+
 **Phase:** 3 - developer wikis. Phase 1 (discovery) and Phase 2 (end-user manual) are complete.
 
 **Branch:** `docs/agent` in the central `NebulaOS` repository.
