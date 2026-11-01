@@ -1,6 +1,6 @@
 # Status
 
-**Updated:** 2026-11-01 (overnight, fourth pass)
+**Updated:** 2026-11-01 (overnight, fifth pass)
 **Phase:** 2 - writing the end-user manual (first batch complete)
 **Branch:** `docs/agent` in the central `NebulaOS` repository
 **Mode:** autonomous, self-paced loop
@@ -390,11 +390,39 @@ Honest state of the reference: **28 of 49 panels are described in detail**; the 
 indexed with a pointer to where they are covered, and are still counted `missing` in the
 inventory rather than credited to a pointer.
 
+## Calibration is in: eight pages
+
+`Calibration-Guide`, `Calibration-Explained`, `Bed-Tramming`, `Load-Cell-Calibration`,
+`Axis-Twist-Compensation`, `Skew-Correction`, `TMC-Autotune` and `Adaptive-Print-Setup` - all
+adapted from the component wiki under D-010, with links and images remapped and real
+screenshots added from the capture tour.
+
+The manual is now **29 pages**.
+
+Two things worth noting about how this went:
+
+**All six sub-pages came across, not just the two I set out to write.** The two calibration
+pages link to the sub-pages for each individual calibration, and the reuse audit had already
+marked all six as "move". Writing only the top two would have left six dangling links or six
+more collapsed redirects.
+
+**It let me undo an earlier compromise.** When `Screen-Reference` was built, those sub-pages
+did not exist centrally, so eight links to them were collapsed onto `Calibration-Explained` -
+correct but lossy, since a reader wanting bed tramming landed on a long walkthrough. Now that
+the real pages exist, those links point where they should: `Calibration-Explained` references
+dropped from 8 to 1. A workaround taken for a real reason is still worth revisiting once the
+reason goes away.
+
+One image reference dropped: TMC Autotune's, because `tmc_tune_panel` has no capture and the
+nearest candidate (`m13-tmc-metrics`) is TMC *status*, a different screen.
+
 ## Next
 
-The calibration pages (`Calibration-Guide`, `Calibration-Explained`) are the largest remaining
-user-facing gap - and the existing wiki has strong material for both. Then `Troubleshooting`,
-`Camera`, `Beeps-And-Songs`, and the three introductory pages.
+`Troubleshooting` is the biggest remaining user-facing gap, then `Camera`, `Beeps-And-Songs`,
+and the three introductory pages (`What-NebulaOS-Is`, `Supported-Hardware`, `Glossary`).
+
+Then the developer wikis, which have not been started - Phase 3 is entirely untouched and is
+the larger half of the mission.
 
 Also worth doing: tour steps for the panels the capture misses, starting with `storage_panel`,
 which now has a new user-facing button and no picture of it.

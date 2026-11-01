@@ -11,16 +11,16 @@ Verification is reported in four separate columns because they prove different t
 | Measure | Items | Share |
 |---|---|---|
 | Discovered documentation items | 547 | 100% |
-| Documented (page exists and covers the item) | 47 | 8% |
+| Documented (page exists and covers the item) | 65 | 11% |
 | Draft | 3 | 0% |
-| Missing | 497 | 90% |
+| Missing | 479 | 87% |
 | Blocked | 30 | 5% |
 
 ## Verification (counted separately, never combined)
 
 | Kind | Verified | Partial | Unknown | Blocked | N/A |
 |---|---|---|---|---|---|
-| Code verified | 48 | 2 | 497 | 0 | 0 |
+| Code verified | 66 | 2 | 479 | 0 | 0 |
 | Test verified | 24 | 0 | 523 | 0 | 0 |
 | Hardware verified | 0 | 0 | 0 | 2 | 545 |
 
@@ -29,10 +29,10 @@ Verification is reported in four separate columns because they prove different t
 | Measure | Items |
 |---|---|
 | Required | 59 |
-| Captured and confirmed current | 39 |
+| Captured and confirmed current | 40 |
 | Verified against the running UI | 0 |
 | Candidate image exists, version unconfirmed | 0 |
-| Missing outright | 19 |
+| Missing outright | 18 |
 | Outdated | 0 |
 | Blocked (needs real hardware) | 1 |
 
@@ -42,12 +42,12 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 
 | Repository | Items | Documented | Draft | Missing | Code verified | Documented % |
 |---|---|---|---|---|---|---|
-| NebulaOS | 11 | 6 | 2 | 3 | 6 | 54% |
+| NebulaOS | 11 | 7 | 2 | 2 | 7 | 63% |
 | NebulaOS-firmware | 194 | 1 | 1 | 192 | 2 | 0% |
 | NebulaOS-kernel | 1 | 0 | 0 | 1 | 0 | 0% |
-| NebulaOS-klipper-extensions | 234 | 7 | 0 | 227 | 7 | 2% |
+| NebulaOS-klipper-extensions | 234 | 13 | 0 | 221 | 13 | 5% |
 | NebulaOS-klipper-mcu | 1 | 0 | 0 | 1 | 0 | 0% |
-| NebulaOS-nebulascreen | 104 | 33 | 0 | 71 | 33 | 31% |
+| NebulaOS-nebulascreen | 104 | 44 | 0 | 60 | 44 | 42% |
 | lv_drivers | 1 | 0 | 0 | 1 | 0 | 0% |
 | nebulaos-packages | 1 | 0 | 0 | 1 | 0 | 0% |
 
@@ -60,14 +60,14 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | command | 51 | 5 | 0 | 46 | 9% |
 | config-option | 172 | 0 | 0 | 172 | 0% |
 | developer-tool | 11 | 0 | 0 | 11 | 0% |
-| existing-page | 34 | 5 | 0 | 29 | 14% |
-| extension | 30 | 2 | 0 | 28 | 6% |
+| existing-page | 34 | 13 | 0 | 21 | 38% |
+| extension | 30 | 8 | 0 | 22 | 26% |
 | os-helper | 17 | 0 | 0 | 17 | 0% |
 | repo-overview | 8 | 0 | 0 | 8 | 0% |
 | runtime-helper | 57 | 1 | 0 | 56 | 1% |
-| screen | 49 | 28 | 0 | 21 | 57% |
+| screen | 49 | 31 | 0 | 18 | 63% |
 | service | 35 | 0 | 0 | 35 | 0% |
-| user-manual-section | 10 | 6 | 2 | 2 | 60% |
+| user-manual-section | 10 | 7 | 2 | 1 | 70% |
 
 ## Source revisions this inventory was discovered at
 
@@ -91,7 +91,7 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | manual:01-start-here | NebulaOS | sections on supported hardware and terminology are still stubs |
 | manual:02-installation | NebulaOS | verify_hardware outstanding: the stock-touchscreen route has not been observed on a printer (D-009: user pages document it as the normal route; record kept in VERIFICATION.md) |
 | manual:04-nebulascreen | NebulaOS | 8 screens in the reference have no current capture; 21 panels are indexed but not individually described |
-| manual:07-advanced | NebulaOS | camera, Spoolman, adaptive meshing, macros and console sections still stubs |
+| manual:07-advanced | NebulaOS | camera, Spoolman, macros and console sections still stubs |
 | screen:boot_logo_panel | NebulaOS-nebulascreen | indexed in wiki/Screen-Reference.md with a pointer, but no description of its own yet |
 | screen:calibration_menu_panel | NebulaOS-nebulascreen | indexed in wiki/Screen-Reference.md with a pointer, but no description of its own yet |
 | screen:camera_panel | NebulaOS-nebulascreen | indexed in wiki/Screen-Reference.md with a pointer, but no description of its own yet |

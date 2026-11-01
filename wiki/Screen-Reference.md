@@ -19,7 +19,7 @@ the task pages linked, or are internal screens you do not navigate to directly.
 
 | Panel | Where it is documented | Screenshot |
 |---|---|---|
-| `axis_twist_panel` | [Calibration](Calibration-Explained) - detail below | yes |
+| `axis_twist_panel` | [Axis twist](Axis-Twist-Compensation) - detail below | yes |
 | `bedmesh_panel` | detail below | yes |
 | `boot_logo_panel` | [Resetting](Resetting) | not yet |
 | `calibration_menu_panel` | [Calibration guide](Calibration-Guide) | yes |
@@ -57,14 +57,14 @@ the task pages linked, or are internal screens you do not navigate to directly.
 | `report_panel` | detail below | not yet |
 | `reset_panel` | [Resetting](Resetting) | yes |
 | `setting_panel` | Settings - detail below | yes |
-| `skew_correction_panel` | [Calibration](Calibration-Explained) - detail below | yes |
+| `skew_correction_panel` | [Skew correction](Skew-Correction) - detail below | yes |
 | `spoolman_panel` | [Filament](Filament) | not yet |
 | `spoolman_server_panel` | [Filament](Filament) | yes |
 | `static_ip_panel` | [Connecting to Wi-Fi](Connecting-To-WiFi) | not yet |
 | `storage_panel` | [Resetting](Resetting) | not yet |
 | `system_panel` | detail below | yes |
 | `tmc_status_panel` | detail below | yes |
-| `tmc_tune_panel` | detail below | not yet |
+| `tmc_tune_panel` | [TMC Autotune](TMC-Autotune) - detail below | not yet |
 | `updates_panel` | [Updating NebulaOS](Updating-NebulaOS) | needs a real printer |
 | `wifi_panel` | [Connecting to Wi-Fi](Connecting-To-WiFi) | yes |
 | `zoffset_panel` | [Printing](Printing) - detail below | yes |
@@ -586,14 +586,14 @@ page.
 
 | # | Row | Opens |
 |---|---|---|
-| 1 | **Bed Tramming** | Guided four-corner tramming ([Bed tramming](Calibration-Explained)) |
+| 1 | **Bed Tramming** | Guided four-corner tramming ([Bed tramming](Bed-Tramming)) |
 | 2 | **Heaters (PID)** | PID tuning: **Bed 65 C** and **Hotend 230 C**, each saved with one Klipper restart |
 | 3 | **Axis Twist** | Axis Twist Compensation wizard; its Save also removes the saved bed mesh |
 | 4 | **Auto Calibration** | Load cell check, nozzle clean, Z offset, bed mesh - about 7 min, no tools needed |
 | 5 | **Input Shaper** | Guided resonance measurement |
 | 6 | **E-Steps** | Guided mark-extrude-measure calibration |
 | 7 | **Skew Correction** | Skew Correction (needs a printed test part) |
-| — | **Load Cell Calibration** *(Other)* | Automatic re-check or manual with a bottle ([Load cell calibration](Calibration-Explained)) |
+| — | **Load Cell Calibration** *(Other)* | Automatic re-check or manual with a bottle ([Load cell calibration](Load-Cell-Calibration)) |
 | — | **TMC Autotune** *(Other, optional)* | TMC Autotune - quieter motors |
 | — | **Bed Mesh** *(Other)* | The same Bed Mesh panel as the Tune-tab tile — view or measure |
 
@@ -639,7 +639,7 @@ screen reconnects by itself), and at the end either **Done <date>** with the new
 
 A 5-point paper test across X (`AXIS_TWIST_COMPENSATION_CALIBRATE SAMPLE_COUNT=5`). Fixes first
 layers that are uneven left to right despite re-meshing. Full guide:
-[Axis Twist Compensation](Calibration-Explained).
+[Axis Twist Compensation](Axis-Twist-Compensation).
 
 #### Skew Correction
 
@@ -650,7 +650,7 @@ Corrects parts that come out as slight parallelograms instead of squares.
 - Enter three caliper measurements from a printed test square: **AC diagonal**, **BD diagonal**, **AD side**.
 - Tap **Apply & Save** — this sends the correction *and* runs `SAVE_CONFIG` (Klipper restarts).
 
-Full guide: [Skew Correction](Calibration-Explained).
+Full guide: [Skew Correction](Skew-Correction).
 
 #### TMC Autotune
 
@@ -658,7 +658,7 @@ Full guide: [Skew Correction](Calibration-Explained).
 
 Quieter, cooler steppers. For each stepper pick a **Motor** and a **Tuning Goal** (`auto`, `silent`,
 `performance`, `autoswitch`), then tap **Save/Restart**. Steppers without a saved choice are
-pre-selected with the KE's stock motors. Full guide: [TMC Autotune](Calibration-Explained).
+pre-selected with the KE's stock motors. Full guide: [TMC Autotune](TMC-Autotune).
 
 ---
 

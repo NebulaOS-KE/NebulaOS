@@ -78,6 +78,11 @@ checked.
 
 ## Remaining work
 
+**Phase 3, the developer wikis, has not been started at all.** That is the larger half of the
+mission: six component repositories, 234 extension items, 194 firmware items, the API
+reference, the command reference, the configuration reference. The end-user manual is well
+advanced; do not mistake that for the project being well advanced.
+
 All of it, in `QUEUE.md`, in priority order. Phase 1 needs four more discovery slices
 (configuration keys, APIs, developer commands, update/recovery mechanisms) before Phase 2
 writing starts in earnest.

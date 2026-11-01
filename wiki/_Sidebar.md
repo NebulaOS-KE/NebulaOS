@@ -22,12 +22,18 @@
 **Get good prints**
 - [Calibration guide](Calibration-Guide)
 - [Calibration walkthrough](Calibration-Explained)
+- [Bed tramming](Bed-Tramming)
+- [Load cell calibration](Load-Cell-Calibration)
+- [Axis twist](Axis-Twist-Compensation)
+- [Square parts (skew)](Skew-Correction)
 
 **Everyday printing**
 - [Printing](Printing)
 - [Filament](Filament)
 
 **Advanced**
+- [Adaptive meshing and purge](Adaptive-Print-Setup)
+- [Quieter motors (TMC Autotune)](TMC-Autotune)
 - [Camera](Camera)
 - [Beeps and songs](Beeps-And-Songs)
 - [Power-loss recovery](Power-Loss-Recovery)
