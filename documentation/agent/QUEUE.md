@@ -130,9 +130,11 @@ strongest: the suite already passes and 21 modules are already test-verified.
       building, the Creality header, the patch queue, reproducibility and the toolchain and
       were left alone. Still to write: the patch series file by file, flash layout detail,
       validation tooling.
-- [ ] **Q-034** `NebulaOS-kernel` - Ingenic X2000, PREEMPT_RT, device tree, display and
-      touch drivers, Wi-Fi and Bluetooth, kernel configuration. Separate what the kernel
-      repository maintains from what the firmware build applies.
+- [~] **Q-034** `NebulaOS-kernel` - written (PR #2 on that repo): branch layout with `main` as
+      the pristine vendor baseline, the three layers on `openke`, the five vendor board-file
+      fixes, the eight NebulaOS changes with their subsystems, how three of them serve
+      components above the kernel, and the build-applies-nothing answer. Still to write:
+      device-tree detail, PREEMPT_RT behaviour, the vendor SDK, U-Boot.
 - [ ] **Q-035** `nebulaos-packages` and `lv_drivers`.
 
 ## P3 - Audit, publishing, maintenance

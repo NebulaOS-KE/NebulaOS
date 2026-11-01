@@ -6,15 +6,15 @@
 | | |
 |---|---|
 | Discovered items | **549** |
-| Documented | **274** (49%) |
+| Documented | **275** (50%) |
 | Draft | 110 |
-| Missing | 165 |
-| Code verified | 349 |
+| Missing | 164 |
+| Code verified | 350 |
 | Test verified | 46 |
 | Hardware verified | 0 |
 | Screenshots required / captured | 57 / 41 |
 | Blocked (cannot proceed) | 6 |
-| Completeness gaps (work not done) | 5 |
+| Completeness gaps (work not done) | 6 |
 
 Per-repository and per-category breakdowns are in `COVERAGE.md`.
 <!-- END GENERATED STATUS -->
@@ -276,6 +276,34 @@ what it talks to must declare what it expects and refuse to start when that is u
 components, three independent update paths, one consistent answer - worth naming as a pattern
 rather than describing three times.
 
+## Every component repository now has documentation
+
+Six open pull requests, one per repository. The kernel was the last with nothing written.
+
+The kernel page answers the question the mission asks and that a developer arrives with: **which
+parts are NebulaOS?** `main` is the pristine vendor baseline (`a98c2e1f2`, forked from
+`Llixuma/ingenic-linux-kernel6.6-x2000-v1.0-20250221`) and `openke` carries 122 commits, so the
+diff between them is the complete change set.
+
+The page **warns about that diff rather than quoting it**: it reports ~13,000 files changed,
+almost all vendor tree reorganisation from the OpenKE import. Presenting that as NebulaOS's
+footprint would overstate it by about a thousandfold. The real surface is one inherited OpenKE
+commit, five fixes to genuine errors in the vendor board description, and eight NebulaOS changes.
+
+Two things worth carrying forward:
+
+- **The five board-file fixes are one group with a story.** Two of them are the same problem -
+  `uart1`, the link to the mainboard MCU, was never wired up, and `as_dmic` was holding the pins
+  it needed. A vendor SDK being wrong about its own hardware is normal; that list is where.
+- **Three kernel changes only make sense from above.** The buzzer is a PWM channel so Klipper's
+  `nebulaos_beeper` can drive it; the watchdog arms with a timeout so `S02nebulaos-watchdog` can
+  feed it; the power-on picture survives the display takeover so the logo does not flash to black
+  before NebulaScreen appears. Documenting the kernel alone would have missed all three.
+
+And the mission's question about build-applied versus repository-maintained changes has a clean
+answer: **all maintained here, none applied.** `01-apply-kernel-patches.sh` now verifies rather
+than applies, and keeps its number so older documents still navigate.
+
 ## Open pull requests
 
 | Repository | PR | Contents |
@@ -283,6 +311,7 @@ rather than describing three times.
 | `NebulaOS` | [#3](https://github.com/NebulaOS-KE/NebulaOS/pull/3) | The complete end-user manual: 29 pages, 128 screenshots, plus this agent's dashboard and tooling |
 | `NebulaOS-klipper-extensions` | [#3](https://github.com/NebulaOS-KE/NebulaOS-klipper-extensions/pull/3) | Architecture guide, 49 commands with per-command detail and side effects, 155 configuration options, developer README |
 | `NebulaOS-firmware` | [#5](https://github.com/NebulaOS-KE/NebulaOS-firmware/pull/5) | Architecture guide (boot, slots, updates, recovery), 58 Moonraker API endpoints, 35 boot services, developer README |
+| `NebulaOS-kernel` | [#2](https://github.com/NebulaOS-KE/NebulaOS-kernel/pull/2) | Which parts of the kernel are NebulaOS: the three layers on `openke`, the five vendor board-file fixes, the eight NebulaOS changes |
 | `NebulaOS-klipper-mcu` | [#1](https://github.com/NebulaOS-KE/NebulaOS-klipper-mcu/pull/1) | MCU firmware lifecycle on a printer: identity, automatic restore, the never-auto-flashed branch, user install |
 | `NebulaOS-nebulascreen` | [#6](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/pull/6) | Contributor guide (testable split, simulator, UI API contract); retired repository URLs fixed; the `GUPPY_SIM_SHOTS` screenshot tour documented |
 
