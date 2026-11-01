@@ -6,8 +6,8 @@
 | | |
 |---|---|
 | Discovered items | **547** |
-| Documented | **221** (40%) |
-| Draft | 146 |
+| Documented | **255** (46%) |
+| Draft | 112 |
 | Missing | 180 |
 | Code verified | 332 |
 | Test verified | 28 |
@@ -43,12 +43,29 @@ unestablished.
 
 Configuration is in progress. `CONFIG.md` carries each section's module-header purpose, the
 checked fact that every option needs a Klipper restart, and a **per-option Purpose column**
-for **102 of the 155** - 70 written by reading the module, the rest quoted from the author's
+for **139 of the 155** - 109 written by reading the module, the rest quoted from the author's
 own comment above the option and labelled as such.
 
-Only those are promoted. **50 keep a dash** and stay draft, because a dash is the honest answer
-where neither a reading nor a comment exists; the alternative is a sentence invented from the
-option's name.
+Only those are promoted. **16 keep a dash** and stay draft, because a dash is the honest answer
+where no reading has been done; the alternative is a sentence invented from the option's name.
+
+### Seven options are accepted and then ignored
+
+The find that justified reading every module. Three (`tri_min_hold`, `tri_max_hold`, `speed`
+in `[z_compensate]`) exist only so Klipper will start: it hard-errors on any option in a
+section the module never reads, and a real device sets all three. They belonged to a
+sensitivity override removed with PRTouch in Phase 1.8B.
+
+Four more - `type_nozz`, `noz_pos_center`, `noz_pos_offset`, `pumpback_mm` - are read but
+unused **because their meaning is unconfirmed**, and the source says so: `noz_pos_center` is
+plausibly an XY reference point with nothing confirming it, and misapplying it would send the
+toolhead somewhere unintended; `pumpback_mm` is plausibly a pre-wipe retract, and wiring
+untested E-axis motion into a probe and heat sequence was judged not worth the risk on a guess.
+
+That second group is an author leaving something visibly unfinished rather than acting on a
+plausible guess. Documenting them as ordinary settings would have undone that decision -
+it would tell a reader these controls work. And guessing from the names produces exactly that:
+"noz_pos_center: the nozzle's centre position" reads perfectly and is worse than useless.
 
 `nozzle_clear`'s thirteen options are the clearest argument for reading modules rather than
 parsing them: `clr_noz_len_x`, `pa_clr_dis_mm_x`, `vs_start_z_pos` cannot be described honestly
