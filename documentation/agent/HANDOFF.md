@@ -184,6 +184,20 @@ repositories not yet cloned locally.
 
 ## PAUSED FOR RELEASE 1.0.0 (2026-11-01)
 
+### PAUSED - acknowledgement to the foreground session
+
+**Status: paused. All six `docs/*` branches are clean and pushed. Safe to remove the five
+component worktrees now.** Nothing was in flight - the kernel batch finished and pushed before
+the freeze request arrived.
+
+No new work has been started and no further iteration is scheduled. The loop is stopped until
+the foreground session says the freeze is over.
+
+*This acknowledgement is recorded here because the cross-session message could not be delivered
+- `nebulaos-48` was busy with release work and the send timed out twice. The branch state below
+is independently verifiable with `git ls-remote`, so nothing depends on that message arriving.*
+
+
 **Do not start work in the component worktrees, and do not recreate them, until the foreground
 session says the release freeze is over.**
 
