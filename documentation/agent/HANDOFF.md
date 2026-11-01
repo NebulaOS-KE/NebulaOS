@@ -247,6 +247,15 @@ and this file.
    leaving that sentence in place; it was already wrong once today in the other direction, when
    the pin lagged `main` by two hours.
 
+   **Observed during the freeze (read-only, 2026-11-01):** `production` is now `ed993726b`,
+   which matches the manifest pin this reference describes - so the gate's `production != pin`
+   failure looks resolved and the *"Shipped by firmware: yes"* sentence appears correct.
+   Meanwhile `main` has moved on to `f498796fc`. That is the normal, expected direction: the
+   pin is the shipping authority and `main` running ahead of it is not a problem, it just means
+   the reference describes what ships rather than the newest code. Re-confirm all three against
+   the real manifest after the freeze rather than trusting this note - it was taken from
+   `git ls-remote` without reading `dependencies.conf`.
+
 ### What was mid-flight
 
 Nothing. The last batch (kernel documentation) finished and pushed before the pause. The next
