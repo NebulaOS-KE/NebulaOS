@@ -6,15 +6,15 @@
 | | |
 |---|---|
 | Discovered items | **549** |
-| Documented | **271** (49%) |
+| Documented | **274** (49%) |
 | Draft | 110 |
-| Missing | 168 |
-| Code verified | 346 |
+| Missing | 165 |
+| Code verified | 349 |
 | Test verified | 46 |
 | Hardware verified | 0 |
 | Screenshots required / captured | 57 / 41 |
 | Blocked (cannot proceed) | 6 |
-| Completeness gaps (work not done) | 4 |
+| Completeness gaps (work not done) | 5 |
 
 Per-repository and per-category breakdowns are in `COVERAGE.md`.
 <!-- END GENERATED STATUS -->
@@ -283,6 +283,7 @@ rather than describing three times.
 | `NebulaOS` | [#3](https://github.com/NebulaOS-KE/NebulaOS/pull/3) | The complete end-user manual: 29 pages, 128 screenshots, plus this agent's dashboard and tooling |
 | `NebulaOS-klipper-extensions` | [#3](https://github.com/NebulaOS-KE/NebulaOS-klipper-extensions/pull/3) | Architecture guide, 49 commands with per-command detail and side effects, 155 configuration options, developer README |
 | `NebulaOS-firmware` | [#5](https://github.com/NebulaOS-KE/NebulaOS-firmware/pull/5) | Architecture guide (boot, slots, updates, recovery), 58 Moonraker API endpoints, 35 boot services, developer README |
+| `NebulaOS-klipper-mcu` | [#1](https://github.com/NebulaOS-KE/NebulaOS-klipper-mcu/pull/1) | MCU firmware lifecycle on a printer: identity, automatic restore, the never-auto-flashed branch, user install |
 | `NebulaOS-nebulascreen` | [#6](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/pull/6) | Contributor guide (testable split, simulator, UI API contract); retired repository URLs fixed; the `GUPPY_SIM_SHOTS` screenshot tour documented |
 
 Nothing is published. No wiki workflow has been run, nothing is merged.

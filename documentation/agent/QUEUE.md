@@ -123,8 +123,13 @@ strongest: the suite already passes and 21 modules are already test-verified.
 - [ ] **Q-037** Raise the firmware API reference to mission 6.7: response examples, verified
       against `nebulaos_osconfig/` and the fixtures in `tests/nebulaos-osconfig-tests.py`.
       Do not take them from the component source - it does not contain them.
-- [ ] **Q-033** `NebulaOS-klipper-mcu` - GD32F303 target, patch series, build, flash layout,
-      safety.
+- [~] **Q-033** `NebulaOS-klipper-mcu` - the on-printer lifecycle written (PR #1 on that repo):
+      identity classification, automatic restore with its bounds, the `UNKNOWN_APPLICATION`
+      branch, user install from the screen, board parameters, and the repository's own
+      qualification status quoted rather than paraphrased. Its existing docs already covered
+      building, the Creality header, the patch queue, reproducibility and the toolchain and
+      were left alone. Still to write: the patch series file by file, flash layout detail,
+      validation tooling.
 - [ ] **Q-034** `NebulaOS-kernel` - Ingenic X2000, PREEMPT_RT, device tree, display and
       touch drivers, Wi-Fi and Bluetooth, kernel configuration. Separate what the kernel
       repository maintains from what the firmware build applies.
