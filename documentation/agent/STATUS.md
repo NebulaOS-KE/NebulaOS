@@ -39,8 +39,14 @@ gap in their `gaps` field.
 
 The commands have since been raised to that bar and are now documented: parameters with valid
 ranges, errors raised, side effects and an example invocation, each naming what remains
-unestablished. Configuration is the next and harder half, because purpose and runtime
-behaviour are not derivable from a `config.getX` call at all.
+unestablished.
+
+Configuration is the next and harder half. `CONFIG.md` has gained each section's module-header
+purpose and the checked fact that every option needs a Klipper restart - but the **per-option**
+purpose and behaviour 6.6 asks for are still unwritten, so all 152 stay draft. Promoting them
+on the strength of a section-level purpose took coverage from 21% to 49% in one step; it was
+reverted the same iteration. `STATUS-LOG.md` records why, because the warning sign is worth
+recognising: a large promotion following a small amount of new writing.
 
 Marking them documented once took the headline from 14% to 49% in a single step. That was
 flattering and false, and reverting it is recorded in `STATUS-LOG.md`.

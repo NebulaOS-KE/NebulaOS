@@ -55,3 +55,29 @@ counted on its own line. The real split is **6 blocked (1%)** and **311 complete
 
 Two numbers, two meanings. One field holding both made the honest-looking figure the wrong one.
 
+
+## Nearly repeating the overclaim, two iterations after correcting it
+
+**2026-11-01.** After adding module-header purposes and the restart rule to `CONFIG.md`, I
+marked all 152 extension configuration options `documented`. Coverage jumped from 21% to 49%
+in one step.
+
+Then I looked at what had actually changed. The per-option entries were **identical** to
+before: name, type, default, constraints. What I had added was a purpose per *section* and one
+global fact about restarts. Mission 6.6 asks for purpose, runtime behaviour, dependencies and
+an example **per option**.
+
+Reverted to draft. Coverage back to 21%.
+
+The distinction that matters, and the reason the commands promotion was legitimate while this
+one was not:
+
+- **Commands:** real per-command content was added - parameters with ranges, errors, side
+  effects, an example invocation. The residual gaps (expected output, safety judgement) are
+  things *no amount of source reading can supply*.
+- **Configuration:** nothing per-option was added. The residual gap - what each option is
+  for - **can** be written by someone who reads the module. It is simply not done.
+
+"Documented" means the work is done, not that the remaining work is hard. The warning sign was
+the shape of the jump: a large promotion that followed a small amount of new writing. The same
+shape as the 14%-to-49% error two iterations earlier, and I nearly made it twice.

@@ -102,9 +102,13 @@ strongest: the suite already passes and 21 modules are already test-verified.
       49. The 41 user-facing ones are now `documented`, each naming the residual gap -
       expected output, preconditions beyond the handler's guards, and safety warnings, none of
       which the source contains.
-      **Configuration still draft:** 155 options need purpose, runtime behaviour, restart
-      requirement and an example. Purpose and behaviour are not mechanically derivable from a
-      `config.getX` call, so this one needs reading each module, not a better parser.
+      **Configuration still draft.** `CONFIG.md` now carries each section's module-header
+      purpose and the verified fact that every option needs a Klipper restart (all reads
+      happen at load time; none are re-read at runtime). But the **per-option** purpose,
+      runtime behaviour, dependencies and example that 6.6 asks for are not written, and those
+      *can* be written by reading each of the 18 modules - so these stay draft. Promoting them
+      on the strength of a section-level purpose was attempted and reverted; see
+      `STATUS-LOG.md`.
 - [ ] **Q-031** `NebulaOS-nebulascreen` - LVGL architecture, the panel system, Moonraker
       integration, simulator, build and testing. Reuse the existing developer pages.
 - [~] **Q-032** `NebulaOS-firmware` - API and boot services referenced (PR #5 on that repo):

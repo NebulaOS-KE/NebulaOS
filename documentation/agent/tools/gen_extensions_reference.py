@@ -14,7 +14,7 @@ computed rather than literal are reported as "computed", never guessed.
 
 Usage:  gen_extensions_reference.py <extensions-checkout> <out-dir>
 """
-import ast, os, subprocess, sys, datetime
+import ast, os, re, subprocess, sys, datetime
 
 GETTERS = {
     "get": "string", "getint": "int", "getfloat": "float",
@@ -52,6 +52,48 @@ def fmt(v):
     if isinstance(v, bool):
         return "`true`" if v else "`false`"
     return f"`{v}`"
+
+
+def module_purpose(path):
+    """The module's own header comment, as its purpose.
+
+    The authors' words, not an inference from the module name. Config options
+    themselves carry no inline comments in this repository, so a per-option
+    purpose cannot be extracted - and guessing one from an option's name is
+    exactly the kind of plausible invention this project refuses. The module
+    header is the honest unit of explanation: it says what the thing is for,
+    and the option table says what you can set.
+    """
+    out = []
+    for ln in open(path, errors="replace").read().split("\n"):
+        s = ln.strip()
+        if not s.startswith("#"):
+            break
+        body = s.lstrip("#").strip()
+        if not body:
+            if out:
+                break
+            continue
+        if body.startswith(("!", "SPDX", "Copyright")):
+            continue
+        out.append(body)
+        if len(out) >= 6:
+            break
+    text = " ".join(out)
+    base = os.path.basename(path)
+    stem = base[:-3] if base.endswith(".py") else base
+    # Headers open with either "name.py - ..." or "name - ...".
+    text = re.sub(r"^(" + re.escape(base) + "|" + re.escape(stem) + r")\s*[-:]\s*",
+                  "", text)
+    text = " ".join(text.split())
+    if text:
+        text = text[0].upper() + text[1:]
+    m = re.search(r"^(.{60,400}?[.!])(\s|$)", text)
+    if m:
+        text = m.group(1)
+    elif len(text) > 400:
+        text = text[:397].rsplit(" ", 1)[0] + "..."
+    return text
 
 
 def module_consts(tree):
@@ -289,7 +331,24 @@ def main():
          "honest answer there. An option with no default is **required**: Klipper raises an",
          "error if the section omits it.\n",
          "Section names are the module names, which is how Klipper's `[section]` headers map",
-         "to these files.\n"]
+         "to these files.\n",
+         "## Every one of these needs a Klipper restart\n",
+         "**Checked, not assumed.** Every configuration read in this repository happens in a",
+         "module's `__init__` or `load_config`, at load time - a scan of all call sites found",
+         "no option re-read at runtime. So changing any option below takes effect only after",
+         "Klipper restarts, and nothing here can be adjusted live.",
+         "",
+         "On the printer that is **Settings -> Printer -> Restart Klipper**, or",
+         "`FIRMWARE_RESTART` from the console. The live adjustments a user can make during a",
+         "print - speed, flow, Z offset, pressure advance - are not configuration options and",
+         "are not in this file.\n",
+         "## What each section is for\n",
+         "The purpose text below each heading is the module's own header comment, written by",
+         "its author. Individual options carry no inline comments in this repository, so a",
+         "per-option purpose cannot be extracted - and inferring one from an option's name",
+         "would be invention dressed as documentation. The module is the honest unit of",
+         "explanation: the header says what the thing is for, the table says what you can",
+         "set.\n"]
     total = 0
     for f in sorted(data):
         opts, _p, _c = data[f]
@@ -300,6 +359,9 @@ def main():
             seen.setdefault(o["name"], o)
         total += len(seen)
         L.append(f"## `[{f[:-3]}]`\n")
+        purpose = module_purpose(os.path.join(ext, f))
+        if purpose:
+            L.append(f"{purpose}\n")
         t = f"test_{f[:-3]}.py"
         if t in tests:
             L.append(f"Tested by `extras/{t}`.\n")
