@@ -52,10 +52,8 @@ the dashboard in the same batch as the page itself.
       verified in source rather than copied from the old wiki.
 - [~] **Q-017** Replace the stub pages with real content. Done so far:
       `First-Time-Setup`, `Connecting-To-WiFi`, `Opening-Mainsail`, `Power-Loss-Recovery`,
-      `Resetting`, `Updating-NebulaOS`, `Printing`, `Filament`, `Screen-Reference`,
-      `Calibration-Guide`, `Calibration-Explained` - 11 of 17, plus 6 calibration sub-pages
-      brought across that were not stubs at all. Remaining 6: `Troubleshooting`, `Camera`,
-      `Beeps-And-Songs`, `What-NebulaOS-Is`, `Supported-Hardware`, `Glossary`.
+      **all 17 done**, plus 6 calibration sub-pages brought across that were never stubs.
+      The manual is 29 pages with no stubs remaining.
 - [ ] **Q-018** Describe the 21 panels that `Screen-Reference.md` only indexes with a pointer.
       They are counted `missing`, not credited to the pointer.
 - [ ] **Q-013** Section 03, First-time setup - startup, Wi-Fi, finding the IP, Mainsail,
@@ -86,6 +84,12 @@ the dashboard in the same batch as the page itself.
 - [ ] **Q-021** Capture the install and first-setup screens first - the highest-impact
       images in the manual.
 - [ ] **Q-022** Capture the remaining panels, then annotate the ones used in procedures.
+
+## P1 - Phase 3 is now the priority
+
+The end-user manual is complete; the developer wikis are untouched and hold most of the
+inventory. Start with the extensions, because that is where verification is cheapest and
+strongest: the suite already passes and 21 modules are already test-verified.
 
 ## P2 - Phase 3, developer wikis, one repository at a time
 

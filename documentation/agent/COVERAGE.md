@@ -11,28 +11,28 @@ Verification is reported in four separate columns because they prove different t
 | Measure | Items | Share |
 |---|---|---|
 | Discovered documentation items | 547 | 100% |
-| Documented (page exists and covers the item) | 65 | 11% |
-| Draft | 3 | 0% |
-| Missing | 479 | 87% |
-| Blocked | 30 | 5% |
+| Documented (page exists and covers the item) | 78 | 14% |
+| Draft | 1 | 0% |
+| Missing | 468 | 85% |
+| Blocked | 28 | 5% |
 
 ## Verification (counted separately, never combined)
 
 | Kind | Verified | Partial | Unknown | Blocked | N/A |
 |---|---|---|---|---|---|
-| Code verified | 66 | 2 | 479 | 0 | 0 |
-| Test verified | 24 | 0 | 523 | 0 | 0 |
+| Code verified | 79 | 0 | 468 | 0 | 0 |
+| Test verified | 27 | 0 | 520 | 0 | 0 |
 | Hardware verified | 0 | 0 | 0 | 2 | 545 |
 
 ## Screenshots
 
 | Measure | Items |
 |---|---|
-| Required | 59 |
-| Captured and confirmed current | 40 |
+| Required | 57 |
+| Captured and confirmed current | 41 |
 | Verified against the running UI | 0 |
 | Candidate image exists, version unconfirmed | 0 |
-| Missing outright | 18 |
+| Missing outright | 15 |
 | Outdated | 0 |
 | Blocked (needs real hardware) | 1 |
 
@@ -42,12 +42,12 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 
 | Repository | Items | Documented | Draft | Missing | Code verified | Documented % |
 |---|---|---|---|---|---|---|
-| NebulaOS | 11 | 7 | 2 | 2 | 7 | 63% |
+| NebulaOS | 11 | 10 | 0 | 1 | 10 | 90% |
 | NebulaOS-firmware | 194 | 1 | 1 | 192 | 2 | 0% |
 | NebulaOS-kernel | 1 | 0 | 0 | 1 | 0 | 0% |
-| NebulaOS-klipper-extensions | 234 | 13 | 0 | 221 | 13 | 5% |
+| NebulaOS-klipper-extensions | 234 | 17 | 0 | 217 | 17 | 7% |
 | NebulaOS-klipper-mcu | 1 | 0 | 0 | 1 | 0 | 0% |
-| NebulaOS-nebulascreen | 104 | 44 | 0 | 60 | 44 | 42% |
+| NebulaOS-nebulascreen | 104 | 50 | 0 | 54 | 50 | 48% |
 | lv_drivers | 1 | 0 | 0 | 1 | 0 | 0% |
 | nebulaos-packages | 1 | 0 | 0 | 1 | 0 | 0% |
 
@@ -57,17 +57,17 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 |---|---|---|---|---|---|
 | api | 59 | 0 | 1 | 58 | 0% |
 | build-command | 14 | 0 | 0 | 14 | 0% |
-| command | 51 | 5 | 0 | 46 | 9% |
+| command | 51 | 8 | 0 | 43 | 15% |
 | config-option | 172 | 0 | 0 | 172 | 0% |
 | developer-tool | 11 | 0 | 0 | 11 | 0% |
-| existing-page | 34 | 13 | 0 | 21 | 38% |
-| extension | 30 | 8 | 0 | 22 | 26% |
+| existing-page | 34 | 16 | 0 | 18 | 47% |
+| extension | 30 | 9 | 0 | 21 | 30% |
 | os-helper | 17 | 0 | 0 | 17 | 0% |
 | repo-overview | 8 | 0 | 0 | 8 | 0% |
 | runtime-helper | 57 | 1 | 0 | 56 | 1% |
-| screen | 49 | 31 | 0 | 18 | 63% |
+| screen | 49 | 34 | 0 | 15 | 69% |
 | service | 35 | 0 | 0 | 35 | 0% |
-| user-manual-section | 10 | 7 | 2 | 1 | 70% |
+| user-manual-section | 10 | 10 | 0 | 0 | 100% |
 
 ## Source revisions this inventory was discovered at
 
@@ -88,10 +88,8 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 |---|---|---|
 | repo:nebulaos-packages | nebulaos-packages | not cloned locally; clone into _worktrees/docs |
 | repo:lv_drivers | lv_drivers | not cloned locally; clone into _worktrees/docs |
-| manual:01-start-here | NebulaOS | sections on supported hardware and terminology are still stubs |
 | manual:02-installation | NebulaOS | verify_hardware outstanding: the stock-touchscreen route has not been observed on a printer (D-009: user pages document it as the normal route; record kept in VERIFICATION.md) |
 | manual:04-nebulascreen | NebulaOS | 8 screens in the reference have no current capture; 21 panels are indexed but not individually described |
-| manual:07-advanced | NebulaOS | camera, Spoolman, macros and console sections still stubs |
 | screen:boot_logo_panel | NebulaOS-nebulascreen | indexed in wiki/Screen-Reference.md with a pointer, but no description of its own yet |
 | screen:calibration_menu_panel | NebulaOS-nebulascreen | indexed in wiki/Screen-Reference.md with a pointer, but no description of its own yet |
 | screen:camera_panel | NebulaOS-nebulascreen | indexed in wiki/Screen-Reference.md with a pointer, but no description of its own yet |

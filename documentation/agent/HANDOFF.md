@@ -15,12 +15,16 @@ workspace rules and the owner's decisions and wins wherever the two differ.
 
 ## Current phase
 
-**Phase 2 - writing the end-user manual.** Phase 1 closed at 544 items. The manual exists:
-23 pages in `wiki/`, 6 real and 17 honest stubs. Inventory status: 4 documented, 2 draft,
-538 missing.
+**Phase 2 is complete. Phase 3 has not started.**
 
-Keep writing pages. Do not reopen discovery - the two remaining follow-ups are additive and
-belong with the sections that need them.
+The end-user manual is 29 pages with **no stubs**, covering all ten mission sections (10/10 on
+`user-manual-section`). 128 screenshots, 41 of 57 required items captured.
+
+**Start Phase 3 with `NebulaOS-klipper-extensions`.** Not arbitrary: its suite already passes
+(899 tests), 21 modules are already test-verified, and it holds 234 inventory items including
+51 commands and 152 configuration options. Every claim there can carry real evidence, which
+makes it both the largest and the easiest win. Then firmware, then NebulaScreen developer
+pages, then MCU and kernel.
 
 ## Completed
 

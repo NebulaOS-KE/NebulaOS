@@ -1,23 +1,100 @@
 # Troubleshooting
 
-> **This page of the manual is not written yet.**
+Common problems with the screen and with print quality. For anything else, use
+**Settings → System → Report a problem** on the printer: it sets the log level, saves the logs to a
+USB stick and shows where to report the issue
+([github.com/NebulaOS-KE/NebulaOS/issues](https://github.com/NebulaOS-KE/NebulaOS/issues)).
 
-Organised by what you actually see: a black screen, no Wi-Fi, Mainsail unreachable, a print that will not start, a poor first layer.
+## Start here: the printer is not working at all
 
-## Until it is written
+| What you see | Where to go |
+|---|---|
+| Nothing happens when you switch it on | No lights or fans at all is a power problem, not a NebulaOS one - check the switch, the cable and the fuse. If it has lights but a dead screen, see the next row. |
+| The printer powers on but the screen stays black | Wait two full minutes first - a first start takes about a minute. Then [Recovery](Recovery): if the printer answers on the network the screen alone has failed, and if it does not, use the boot-slot or USB routes. |
+| The screen works but nothing responds to touch | See **Screen and touch** below - most often the touch calibration. |
+| The screen is fine but Mainsail will not open | See **Network** below, and [Opening Mainsail](Opening-Mainsail). |
+| It worked before an update and not after | Wait five minutes: a system image that does not come up properly is undone automatically. See [Recovery](Recovery#1-automatic-the-trial-start). |
+| You just installed NebulaOS and nothing works | [Installing NebulaOS](Installing-NebulaOS), then [Recovery](Recovery). Your old system is still in the other slot. |
 
-There is good material on this topic already, in the NebulaScreen wiki:
+---
 
-- [Troubleshooting (NebulaScreen wiki)](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/wiki/Troubleshooting)
+## Screen and touch
 
-That page is being moved into this manual rather than rewritten. It was audited on
-2026-10-31 and its content is sound - it is simply in the wrong place for a reader
-who does not know that NebulaScreen is the name of the touchscreen app.
+| Symptom | Fix |
+|---|---|
+| Screen upside down or rotated | Set `display_rotate` to `2` in `nebulascreen.json` (the KE default). See [Configuration](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/wiki/Configuration). |
+| Taps land in the wrong place, e.g. after changing `display_rotate` | Calibration is rotation-specific. Redo it: **Settings → Reset → Reset touch calibration**. |
+| Touch calibration came out wrong and you cannot reach the button | Edit `config/nebulascreen/nebulascreen.json` in Mainsail: set `"touch_calibrated": true` and remove `touch_calibration_coeff`, then restart the screen. The wizard runs again. See [Configuration](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/wiki/Configuration). |
+| Sensors shown with raw names like `Heater Bed` | None of the `id`s in `monitored_sensors` matches a Klipper object, so the screen shows every heater and sensor under its Klipper name. Fix the `id`s (an empty or missing list is replaced by Extruder, Bed and MCU Temp at start). See [Configuration](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/wiki/Configuration). |
+| Screen seems stuck | **Settings → System → Restart GUI**, or over SSH `/etc/init.d/S58nebulascreen restart`. |
+| Settings do not stick after a reboot | Check that `config/nebulascreen/nebulascreen.json` exists and is valid JSON. A file that cannot be parsed is ignored and the built-in defaults are used. |
 
-## Where this is tracked
+---
 
-Progress on this manual is tracked in `documentation/agent/COVERAGE.md`, which is
-generated from an inventory of the real source code rather than written by hand. If this
-page matters to you, it is already on the list.
+## Printing and first layer
 
-Back to [Home](Home).
+| Symptom | Fix |
+|---|---|
+| A print will not start at all | Check the printer is idle and the file sliced correctly. See [Printing](Printing). |
+| The print stopped partway | Check for filament runout - see [Filament](Filament). After a power cut, see [Power-loss recovery](Power-Loss-Recovery). |
+| You pressed **Stop** and now nothing works | **Stop** is an emergency stop. Power-cycle the printer, or run `FIRMWARE_RESTART` from the console. See [Printing](Printing). |
+| First layer uneven left to right, bed mesh does not help | [Axis Twist Compensation](Axis-Twist-Compensation). |
+| One corner of the bed high or low | [Bed tramming](Bed-Tramming). |
+| First layer uneven everywhere | Re-run the bed mesh: **Tune → Bed Mesh → Calibrate**. Clean the bed (IPA) and check nothing is loose. |
+| First layer too high or too low everywhere | Baby-step Z offset: **Tune → Z Offset**, or tap the Z readout on the print status screen. |
+| Parts not square | [Skew Correction](Skew-Correction). |
+| Ghosting / echoes after sharp corners | [Input shaper](Calibration-Explained#step-5--input-shaper-kill-ringingghosting): **Tune → Calibration → Input Shaper**. |
+| Adaptive mesh not used, full bed meshed instead | The print covers more than 75 % of the bed, the file has no object labels, or the start G-code passes `BED_MESH_ADAPTIVE=0` or `BED_MESH_PROFILE=`. See [Adaptive meshing and purge](Adaptive-Print-Setup). |
+| Corner bulges, blobs or gaps | Pressure advance and flow: [Calibration walkthrough](Calibration-Explained#step-7--pressure-advance-flow--temperature-slicer-side). |
+| A panel says "locked during print" | Expected: calibration, homing, extruding and similar actions are blocked while printing. See [Screen reference](Screen-Reference). |
+
+---
+
+## Installing and updating
+
+| Symptom | Fix |
+|---|---|
+| Creality's updater stops with `failed to get .../ota_config.in` | The `.img` was renamed. Download it again or give it back its release name `NebulaOS-Ender3V3KE-<version>.img`. Nothing was installed. |
+| Creality's updater ends with `ota update ok`, but the printer still runs the old system | It does not restart by itself: soft reboot (`ssh root@<printer-ip> reboot`), never power off and on. See [Installing NebulaOS](Installing-NebulaOS). |
+| **Online** says the clock is not set | The printer sets its clock from the internet after Wi-Fi connects. Wait a minute and try again. |
+| **Online** says it could not reach the release channel | No internet, or GitHub was not reachable. Check Wi-Fi; try again later. |
+| A download fails with "does not match the release record" | The file arrived damaged. It was deleted; start the download again. |
+| An update says "not possible while a print is active" | Expected: updates wait until the printer is idle (no print, heaters off). |
+| The new system went back to the old one by itself | The new system did not start properly (trial start). The screen showed why; the old system runs as before. See [Recovery](Recovery#1-automatic-the-trial-start). |
+
+---
+
+## Network
+
+| Symptom | Fix |
+|---|---|
+| Not connected to Wi-Fi | **Settings → Connections → Wi-Fi networks**. After a clean NebulaOS reset, Wi-Fi has to be set up again here. See [Connecting to Wi-Fi](Connecting-To-WiFi). |
+| Mainsail will not open in a browser | Check that your computer or phone is on the **same** network - not a guest network and not mobile data. Read the address again from **Settings → Connections**; your router may have given the printer a different one. See [Opening Mainsail](Opening-Mainsail). |
+| `printername.local` does not work but the numbers do | Some routers and some Android versions do not support `.local` names. Use the numeric address. |
+| Two printers clash on the network | Each printer names itself `nebulaos-` plus four characters from its own hardware, so this should not happen. If you renamed both the same, rename one: **Settings → Connections → Name → Change**. |
+| A static IP setting does not work | NebulaOS checks a new static address (gateway reachable) and switches back automatically when it does not work; this can take a couple of minutes. The setting applies to all Wi-Fi networks. |
+| Wi-Fi events | **Settings → System → Logs** shows the Wi-Fi lines of `system.log`. |
+
+---
+
+## Logs
+
+- Screen log: `/opt/printer_data/logs/nebulascreen.log` (rotates at 10 MB, keeps 3 old files). It is in
+  Mainsail's log list too.
+- Raise the detail: **Settings → System → Report a problem → Log level → Debug**. Debug switches back
+  to Info by itself after 24 hours.
+- **Settings → System → Logs** shows logs on the screen; **Save logs to USB** (in Report a problem)
+  writes them to a USB stick.
+
+---
+
+---
+
+## Still stuck?
+
+Use **Settings → System → Report a problem** on the printer. It raises the log level, saves the
+logs to a USB stick and shows where to report the issue. Including those logs makes a report
+far more likely to be solvable.
+
+Developer and simulator troubleshooting lives in the component wiki:
+[NebulaScreen troubleshooting](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/wiki/Troubleshooting).

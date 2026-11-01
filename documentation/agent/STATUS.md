@@ -1,7 +1,7 @@
 # Status
 
-**Updated:** 2026-11-01 (overnight, fifth pass)
-**Phase:** 2 - writing the end-user manual (first batch complete)
+**Updated:** 2026-11-01 (overnight, sixth pass)
+**Phase:** 2 complete (end-user manual), Phase 3 (developer wikis) not started
 **Branch:** `docs/agent` in the central `NebulaOS` repository
 **Mode:** autonomous, self-paced loop
 
@@ -416,13 +416,50 @@ reason goes away.
 One image reference dropped: TMC Autotune's, because `tmc_tune_panel` has no capture and the
 nearest candidate (`m13-tmc-metrics`) is TMC *status*, a different screen.
 
-## Next
+## The end-user manual is complete: 29 pages, no stubs
 
-`Troubleshooting` is the biggest remaining user-facing gap, then `Camera`, `Beeps-And-Songs`,
-and the three introductory pages (`What-NebulaOS-Is`, `Supported-Hardware`, `Glossary`).
+Every one of the mission's ten sections is documented, and **all 17 original stub pages are
+now real content**. `user-manual-section` coverage is 10/10.
 
-Then the developer wikis, which have not been started - Phase 3 is entirely untouched and is
-the larger half of the mission.
+The last batch: `Troubleshooting`, `Camera` and `Beeps-And-Songs` adapted from the component
+wiki, and three pages authored from nothing - `What-NebulaOS-Is`, `Supported-Hardware` and
+`Glossary`.
+
+Two editorial decisions in that batch worth recording:
+
+**The imported troubleshooting page was reorganised, not just relinked.** It arrived organised
+by component, ended with a "Simulator and development" section, and had no entry for the
+things a stuck user actually experiences. It now opens with *the printer is not working at
+all* - black screen, no touch, Mainsail unreachable, worked-before-the-update - because
+someone reaching that page is not thinking in components. The developer and simulator section
+was removed and linked to in the component wiki where it belongs.
+
+**The glossary defines the words the manual actually uses**, checked against the pages rather
+than guessed: the Klipper/Moonraker/Mainsail/NebulaScreen distinction, boot slots, trial start,
+baby-stepping, load cell, E-steps, pressure advance, DHCP. A beginner's manual that uses
+"MCU" and "pressure advance" without defining them is not a beginner's manual.
+
+### A self-check caught a miscount
+
+Marking two sections as needing no screenshot by setting `screenshot_status: n/a` - while
+leaving `screenshot_required: true` - made them vanish from the screenshot table, 57 counted
+against 59 required. `render_dashboard.py`'s sum check fired and named the unreported status.
+
+The fix was to the data, not the renderer: the honest way to say an item needs no screenshot
+is to clear the requirement, not to invent a status the renderer does not count. Without that
+check the dashboard would have quietly under-reported by two, which is precisely the failure
+the check was added for after the same thing happened with screenshot candidates.
+
+## Next: Phase 3, the developer wikis
+
+**None of it is started.** Six component repositories, and the bulk of the inventory sits
+there: 234 extension items, 194 firmware items, 57 API endpoints, 172 configuration options.
+
+Sensible order, cheapest-verification-first: **`NebulaOS-klipper-extensions`** has 30 modules,
+51 commands, a 899-test suite already passing and 21 modules already test-verified - so its
+command and configuration reference can be written with real evidence behind every claim.
+Then `NebulaOS-firmware` (the API, boot services, build pipeline), then NebulaScreen's
+developer pages, then the MCU and kernel.
 
 Also worth doing: tour steps for the panels the capture misses, starting with `storage_panel`,
 which now has a new user-facing button and no picture of it.
