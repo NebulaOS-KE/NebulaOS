@@ -111,3 +111,35 @@ file, because it looks like the work is done.
 
 Two habits confirmed: check the output count against the input count, and check `pwd` before
 creating a directory.
+
+## I reported a documentation bug that did not exist
+
+**2026-11-01.** While building the simulator I hit a link failure on `-lSDL2`, traced it to the
+Makefile's default `LDFLAGS ?= -static ...`, and reported that NebulaScreen's
+`Building-from-Source` page documents `LDFLAGS` that cannot link. I put it in `STATUS.md` and
+told the foreground session.
+
+It was false. That page documents **exactly** the override I ended up using, and the line
+immediately below the code block says: *"The `LDFLAGS` override drops the Makefile's default
+`-static`, which a desktop SDL2 build cannot use."* It also warns about
+`-Wno-incompatible-pointer-types` on GCC 14+. The page is correct and more complete than my
+report of it.
+
+What went wrong: I read the **Makefile's** default and attributed it to the **documentation**,
+without opening the page's build section. I had read that page earlier for the submodule steps
+and assumed I knew what else it said.
+
+Two things worth keeping:
+
+- **A tool's failure is not evidence about the docs.** The build failed, so I reasoned the
+  instructions must be wrong - when in fact I had not followed them. The instructions were
+  sitting four lines below the command I had copied.
+- **Reporting a doc bug is a claim like any other.** This project's whole stance is that
+  nothing goes in without checking the source; I applied that to the code and not to my own
+  bug report. Worse, a false bug report costs someone else time, and I had already sent it to
+  the foreground session.
+
+Corrected in `STATUS.md`, and the foreground was told.
+
+The one real bug in the same area was genuine: three wiki pages pointed at the retired
+`coreflake1/NebulaOS-guppyscreen` repository. Fixed.

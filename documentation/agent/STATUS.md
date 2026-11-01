@@ -6,15 +6,15 @@
 | | |
 |---|---|
 | Discovered items | **547** |
-| Documented | **255** (46%) |
-| Draft | 112 |
-| Missing | 180 |
-| Code verified | 332 |
+| Documented | **258** (47%) |
+| Draft | 111 |
+| Missing | 178 |
+| Code verified | 334 |
 | Test verified | 28 |
 | Hardware verified | 0 |
 | Screenshots required / captured | 57 / 41 |
-| Blocked (cannot proceed) | 8 |
-| Completeness gaps (work not done) | 311 |
+| Blocked (cannot proceed) | 6 |
+| Completeness gaps (work not done) | 312 |
 
 Per-repository and per-category breakdowns are in `COVERAGE.md`.
 <!-- END GENERATED STATUS -->
@@ -49,6 +49,25 @@ own comment above the option and labelled as such.
 Only those are promoted. **16 keep a dash** and stay draft, because a dash is the honest answer
 where no reading has been done; the alternative is a sentence invented from the option's name.
 
+### Command side effects were misclassified, and are now read rather than detected
+
+Caught in review, not by my tooling. `COMMANDS-DETAIL.md` printed *Runs G-code: yes / no -
+reports only*, derived from whether the handler called `run_script`. That labelled
+`NEBULAOS_BEEP` (drives the buzzer's PWM), `SAVE_INPUT_SHAPER` (rewrites `printer.cfg`),
+`EEPROM_WRITE_INT` (writes the EEPROM) and `Z_OFFSET_APPLY_PROBE` (persists an offset) all as
+*reports only* - telling a reader each was safe to try.
+
+Making detection transitive did not fix it: effects are reached through collaborator objects
+(`self.pwm.off()`), and resolving those graphs soundly is real static analysis. So the automatic
+claim was removed and all 49 commands were **read**, in five classes: runs G-code, writes
+hardware, writes files, changes saved configuration, changes state surviving a restart.
+
+The result shows how misleading the old label was: **11 commands touch persistent state, 6
+write hardware while running no G-code at all, and only 6 are genuinely reports-only.**
+
+*Running no G-code* and *having no effect* are completely different claims, and the first
+version conflated them.
+
 ### Seven options are accepted and then ignored
 
 The find that justified reading every module. Three (`tri_min_hold`, `tri_max_hold`, `speed`
@@ -80,13 +99,31 @@ contributed nothing.
 Marking them documented once took the headline from 14% to 49% in a single step. That was
 flattering and false, and reverting it is recorded in `STATUS-LOG.md`.
 
+## The extensions wiki now has a readable guide, not just references
+
+`docs/reference/ARCHITECTURE.md` on `docs/extensions` - hand-written, because explanation
+cannot be extracted. Every factual claim names its source file so any sentence can be
+re-checked.
+
+It answers the question the generated references cannot: why the repository is shaped this way.
+Not forking Klipper leads, because everything follows from it. Then composition (symlinks into
+`klippy/extras/`, excluded from Klipper's git so the update manager sees a clean tree), the
+compatibility contract (26 required symbols checked at every Klipper start, plus an empty
+forbidden list so retired APIs cannot return), how a calibration actually runs through its four
+layers, and why power-loss recovery writes the sidecar before the EEPROM record.
+
+The design point worth repeating: the cost of not forking is that your dependency moves without
+telling you, and the answer here is not pinning and hoping - it is declaring the dependency
+precisely and refusing to start when it is unmet.
+
 ## Open pull requests
 
 | Repository | PR | Contents |
 |---|---|---|
 | `NebulaOS` | [#3](https://github.com/NebulaOS-KE/NebulaOS/pull/3) | The complete end-user manual: 29 pages, 128 screenshots, plus this agent's dashboard and tooling |
-| `NebulaOS-klipper-extensions` | [#3](https://github.com/NebulaOS-KE/NebulaOS-klipper-extensions/pull/3) | 49 commands, 155 configuration options, developer README |
+| `NebulaOS-klipper-extensions` | [#3](https://github.com/NebulaOS-KE/NebulaOS-klipper-extensions/pull/3) | Architecture guide, 49 commands with per-command detail and side effects, 155 configuration options, developer README |
 | `NebulaOS-firmware` | [#5](https://github.com/NebulaOS-KE/NebulaOS-firmware/pull/5) | 58 Moonraker API endpoints, 35 boot services, developer README |
+| `NebulaOS-nebulascreen` | [#6](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/pull/6) | Retired repository URLs fixed; the `GUPPY_SIM_SHOTS` screenshot tour documented |
 
 Nothing is published. No wiki workflow has been run, nothing is merged.
 
@@ -133,9 +170,10 @@ the workspace root - those belong to the foreground session and move without war
 2. **Q-037** - response examples for the firmware API, from `nebulaos_osconfig/` and the
    fixtures in `tests/nebulaos-osconfig-tests.py`.
 3. `NebulaOS-nebulascreen` developer pages - LVGL architecture, the panel system, Moonraker
-   integration, the simulator, build and testing. **Two real doc bugs to fix while there:** its
-   `Building-from-Source` page still says to clone `coreflake1/NebulaOS-guppyscreen`, and its
-   documented `LDFLAGS` contain `-static`, which cannot link here.
+   integration, the simulator, build and testing. One real doc bug found and fixed: three wiki
+   pages pointed at the old `coreflake1/NebulaOS-guppyscreen` repository.
+   **A second "bug" I reported was my own misreading** - see `STATUS-LOG.md`. The page's
+   documented `LDFLAGS` are correct and already explain dropping `-static`.
 4. `NebulaOS-klipper-mcu` and `NebulaOS-kernel`.
 5. `nebulaos-packages` and `lv_drivers` - still not cloned locally.
 6. The firmware's build pipeline, runtime helpers, and A/B / OTA / recovery as an architecture

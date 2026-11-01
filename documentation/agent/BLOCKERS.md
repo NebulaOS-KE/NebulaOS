@@ -49,7 +49,7 @@ any more, and no page claims the route is tested either.
 **Still open as verification:** `verify_hardware` for the installation item remains unverified
 and only a printer run can change that. This is no longer blocking documentation work.
 
-### B-004 - `nozzle_clear` declares its own hardware gap
+### B-004 - CLOSED (2026-11-01): the note was stale, not a gap
 
 `extras/nozzle_clear.py`, the native nozzle-wipe routine behind
 `_NEBULAOS_NOZZLE_CLEAN`, carries a note in its own header stating that the module **had not
@@ -63,12 +63,20 @@ It matters because this is a motion and contact routine - it heats, probes two r
 points on the wipe pad, and drags the nozzle between them under load. It is the only module in
 the extensions carrying such a note.
 
-**Why this is a question and not a finding:** the note says "as of this commit" about the
-commit it was written in, not about `a2e7634`. The module may well have been qualified since.
-This agent cannot tell, and will not guess either way.
+**Resolution.** The owner reports that `_NEBULAOS_NOZZLE_CLEAN` has run on the development
+printer more than once, and the code corroborates that it would: auto calibration invokes it
+at `nebulaos_calibration.py:1762`, so anyone running auto calibration exercises this routine.
+The header comment is stale and is to be corrected in the extensions repository.
 
-**Who can clear it:** the project owner, by confirming whether the wipe routine has been run
-on a printer, and updating or removing that header note.
+Recording this one carefully was worthwhile, and so is recording how it closed. The inventory
+now says `verify_hardware: reported-by-owner` rather than `verified` - because the call site is
+something this agent checked, while the hardware runs are the owner's report. Those are
+different kinds of evidence and collapsing them into "verified" would overstate what this
+documentation knows.
+
+Raising it as a question rather than a finding turned out to be the right call: the answer was
+that the source comment was wrong, which is not something this agent could have established
+alone.
 
 ## Code problems found while documenting
 

@@ -26,12 +26,53 @@ a reader to assume the silence means "nothing to worry about".
 
 Usage:  gen_extensions_commands_detail.py <extensions-checkout> <out-file>
 """
-import ast, os, subprocess, sys, datetime
+import ast, json, os, subprocess, sys, datetime
 
+EFFECTS = {}
 PARAM_GETTERS = {"get": "string", "get_int": "int", "get_float": "float",
                  "get_boolean": "bool"}
 CONSTRAINTS = ("minval", "maxval", "above", "below")
 RUNNERS = ("run_script", "run_script_from_command")
+
+# Side-effect detection, by class.
+#
+# The first version of this reference printed a single line, "Runs G-code:
+# yes / no - reports only", derived purely from whether the handler called
+# run_script. That was actively misleading and was caught in review:
+# NEBULAOS_BEEP drives the buzzer's PWM, SAVE_INPUT_SHAPER rewrites
+# printer.cfg, EEPROM_WRITE_INT writes the EEPROM, Z_OFFSET_APPLY_PROBE
+# persists an offset - and every one of them was labelled "reports only",
+# which tells a reader the command is safe to try.
+#
+# "Runs no G-code" and "has no effect" are completely different claims.
+WRITE_CALLS = ("write", "writelines", "replace", "rename", "unlink", "remove",
+               "rmtree", "fsync", "dump", "truncate", "mkdir", "makedirs")
+PERSIST_CALLS = ("set", "remove_section", "save_config")
+MOVE_CALLS = ("set_gcode_offset", "set_position", "manual_move", "move",
+              "set_digital", "set_pwm", "setup_pin", "set_temp",
+              "set_speed", "home")
+
+
+CLASS_TEXT = {
+    "gcode": "**Runs G-code** - can move the machine or change temperatures",
+    "hardware": "**Writes hardware directly** (sysfs, PWM, I2C or EEPROM)",
+    "files": "**Writes or deletes files** on the printer",
+    "config": "**Changes the saved Klipper configuration**",
+    "persistent": "**Changes state that survives a restart**",
+    "readonly": "Reports only - no effect found when the handler and the objects "
+                "it calls were read",
+}
+
+
+def load_effects():
+    here = os.path.dirname(os.path.abspath(__file__))
+    path = os.path.join(here, "..", "data", "extension_command_effects.json")
+    if not os.path.exists(path):
+        return {}
+    # Filter the exact metadata key only. Filtering anything starting with
+    # "_" would silently drop every internal command - 15 of them here all
+    # begin with an underscore by convention.
+    return {k: v for k, v in json.load(open(path)).items() if k != "_comment"}
 
 
 def is_lit(n):
@@ -89,8 +130,21 @@ def class_help(tree):
     return out
 
 
-def analyse(fn, consts):
+def analyse(fn, consts, funcs=None, _depth=0, _seen=None):
+    """Parameters, errors and side effects of a command handler.
+
+    Follows `self._helper(...)` calls into methods of the same module, to a
+    bounded depth. Without that almost every effect is invisible, because
+    handlers delegate: NEBULAOS_BEEP's PWM write lives in `_schedule`, and a
+    scan of the handler body alone reports "none detected" for it.
+
+    Parameters are collected at depth 0 only - a helper's own arguments are not
+    command parameters.
+    """
+    funcs = funcs or {}
+    _seen = _seen if _seen is not None else set()
     params, errors, runs, responds = {}, [], [], False
+    effects = set()
     for node in ast.walk(fn):
         if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute):
             a = node.func.attr
@@ -147,6 +201,13 @@ def analyse(fn, consts):
                     errors.append(" ".join(str(ast.literal_eval(node.args[0])).split()))
                 else:
                     errors.append("(message built at runtime)")
+            if a in WRITE_CALLS:
+                effects.add("writes files or deletes them")
+            if a in MOVE_CALLS:
+                effects.add("changes machine or printer state directly")
+            if a in PERSIST_CALLS and isinstance(node.func.value, ast.Attribute) \
+                    and node.func.value.attr in ("configfile", "config"):
+                effects.add("writes the saved configuration")
             if a in RUNNERS:
                 if node.args and is_lit(node.args[0]):
                     runs.append(" ".join(str(ast.literal_eval(node.args[0])).split())[:120])
@@ -154,16 +215,42 @@ def analyse(fn, consts):
                     runs.append("(script built at runtime)")
             if a in ("respond_info", "respond_raw"):
                 responds = True
+        # open(path, "w"/"a"/"x") - a file write the call-name scan misses.
+        if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) \
+                and node.func.id == "open" and len(node.args) > 1 \
+                and is_lit(node.args[1]):
+            mode = str(ast.literal_eval(node.args[1]))
+            if any(m in mode for m in ("w", "a", "x", "+")):
+                effects.add("writes files or deletes them")
         if isinstance(node, ast.Raise):
             exc = node.exc
             if isinstance(exc, ast.Call) and isinstance(exc.func, ast.Attribute):
                 if exc.args and is_lit(exc.args[0]):
                     errors.append(" ".join(str(ast.literal_eval(exc.args[0])).split()))
-    return params, errors, runs, responds
+    if _depth < 3:
+        for node in ast.walk(fn):
+            if not (isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute)):
+                continue
+            if getattr(node.func.value, "id", None) != "self":
+                continue
+            target = node.func.attr
+            if target in _seen or target not in funcs:
+                continue
+            _seen.add(target)
+            _p, _e, _r, _resp, _eff = analyse(funcs[target], consts, funcs,
+                                              _depth + 1, _seen)
+            errors.extend(_e)
+            runs.extend(_r)
+            effects.update(_eff)
+    if runs:
+        effects.add("runs G-code, so it can move the machine or change temperatures")
+    return params, errors, runs, responds, sorted(effects)
 
 
 def main():
+    global EFFECTS
     root, out = sys.argv[1], sys.argv[2]
+    EFFECTS = load_effects()
     sha = subprocess.run(["git", "-C", root, "rev-parse", "HEAD"],
                          capture_output=True, text=True).stdout.strip()
     ext = os.path.join(root, "extras")
@@ -204,11 +291,11 @@ def main():
                                          kw.value.attr.startswith("cmd_") else "")
             if desc is None:
                 desc = helps.get(name) or helps.get(name.lstrip("_"))
-            p, e, r, resp = ({}, [], [], False)
+            p, e, r, resp, eff = ({}, [], [], False, [])
             if handler and handler in funcs:
-                p, e, r, resp = analyse(funcs[handler], consts)
+                p, e, r, resp, eff = analyse(funcs[handler], consts, funcs)
             found.append(dict(name=name, module=f, handler=handler, desc=desc,
-                              params=p, errors=e, runs=r, responds=resp,
+                              params=p, errors=e, runs=r, responds=resp, effects=eff,
                               dereg=dereg, mux=node.func.attr.endswith("mux_command"),
                               tested=f"test_{f[:-3]}.py" in tests))
     seen, cmds = set(), []
@@ -241,9 +328,29 @@ def main():
          "- **Preconditions** beyond the guards visible in the handler. A command may also",
          "  depend on calibration state or configuration that the handler does not check.",
          "- **Safety warnings.** Whether a command is dangerous is a judgement about physical",
-         "  consequence, not a fact in the file. Commands that run G-code are flagged as such,",
-         "  which is the closest honest proxy.",
+         "  consequence, not a fact in the file.",
          "- **Hardware behaviour.** Nothing here was run on a printer.", "",
+         "## How to read the side effects", "",
+         "Each command's effects were established by **reading** its handler and the objects",
+         "that handler calls. They are not detected automatically, and the reason is worth",
+         "stating, because the first version of this page did detect them and was wrong.",
+         "",
+         "That version printed *Runs G-code: yes / no - reports only*, derived from whether",
+         "the handler called `run_script`. It labelled `NEBULAOS_BEEP` *reports only* - a",
+         "command that drives the buzzer's PWM. Also `SAVE_INPUT_SHAPER`, which rewrites",
+         "`printer.cfg`; `EEPROM_WRITE_INT`, which writes the EEPROM; and",
+         "`Z_OFFSET_APPLY_PROBE`, which persists an offset. All four told the reader the",
+         "command was safe to try. This was caught in review, not by the tool.",
+         "",
+         "Following the calls automatically does not fix it either. Effects are reached",
+         "through collaborator objects held on the module - `self.pwm.off()`,",
+         "`self.gcode.run_script()`, `self.journal.write()` - and resolving those object",
+         "graphs soundly is real static analysis. A scan that walks only the handler, or only",
+         "`self._method` calls, still reports nothing for the buzzer.",
+         "",
+         "So the automatic claim was removed. A command with no entry reads **not",
+         "determined**, which is honest, and a reader is told not to treat it as harmless.",
+         "**Running no G-code and having no effect are completely different claims.**", "",
          "A leading underscore means internal: a step of another command, or a macro's",
          "implementation detail. Not meant to be typed.", ""]
 
@@ -259,7 +366,12 @@ def main():
         if c["dereg"]:
             rows.append("| Upstream | **replaces an upstream Klipper command of this name** |")
         rows.append(f"| Test | {'`extras/test_'+c['module'][:-3]+'.py`' if c['tested'] else 'none'} |")
-        rows.append(f"| Runs G-code | {'yes' if c['runs'] else 'no - reports only'} |")
+        cls = EFFECTS.get(c["name"])
+        if cls:
+            label = "reports only" if cls == ["readonly"] else ", ".join(cls)
+        else:
+            label = "**not determined**"
+        rows.append(f"| Side effects | {label} |")
         L.append("| | |")
         L.append("|---|---|")
         L += rows
@@ -298,10 +410,18 @@ def main():
             for e in sorted(set(c["errors"])):
                 L.append(f"- {e}")
             L.append("")
-        if c["runs"]:
+        if cls:
             L.append("**Side effects**")
             L.append("")
-            L.append("Runs G-code, so it can move the machine or change temperatures:")
+            for k in cls:
+                L.append(f"- {CLASS_TEXT.get(k, k)}")
+            L.append("")
+        else:
+            L.append("**Side effects: not determined.** This command's handler has not been")
+            L.append("read for effects yet. Do not read this as harmless.")
+            L.append("")
+        if c["runs"]:
+            L.append("G-code this handler runs, where the source states it literally:")
             L.append("")
             for r in sorted(set(c["runs"]))[:6]:
                 L.append(f"- `{r}`")
