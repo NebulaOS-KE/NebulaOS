@@ -6,15 +6,15 @@
 | | |
 |---|---|
 | Discovered items | **549** |
-| Documented | **269** (48%) |
+| Documented | **270** (49%) |
 | Draft | 111 |
-| Missing | 169 |
-| Code verified | 344 |
-| Test verified | 29 |
+| Missing | 168 |
+| Code verified | 345 |
+| Test verified | 46 |
 | Hardware verified | 0 |
 | Screenshots required / captured | 57 / 41 |
 | Blocked (cannot proceed) | 6 |
-| Completeness gaps (work not done) | 0 |
+| Completeness gaps (work not done) | 1 |
 
 Per-repository and per-category breakdowns are in `COVERAGE.md`.
 <!-- END GENERATED STATUS -->
@@ -200,6 +200,34 @@ Three more things documented with their reasoning:
   checks `klippy_state`. A health check answering "did it start" while claiming "does it work"
   is worse than none.
 
+## NebulaScreen: a contributor guide, and its tests run
+
+`wiki/Working-on-NebulaScreen.md` on `docs/screen`. It complements the existing `Architecture`
+page rather than competing with it - that page says what is where, and the audit was right to
+keep it. This one says how to work on the code.
+
+The organising idea is the split that makes the codebase testable: **logic that does not need
+LVGL lives in files that do not include it** - twelve of them, each with a matching host test -
+while the `*_panel.cpp` files draw and dispatch. `plr_status.cpp` carries 21 tests precisely
+because the offer logic was kept out of the panel.
+
+**`make test` at `dee0f6f`: 18 suites, 262 tests, 0 failures, 2 skips.** The skips are the suite
+detecting that `AF_UNIX` is not permitted here and saying so - correct behaviour, not a gap. That
+promoted `verify_test` on **16 panels**, each citing the specific suite that covers it, so test
+verification across the project is now 46 items rather than 28.
+
+One trap documented because I hit it: do not pass a custom `LDFLAGS` to `make test`. It
+propagates into libhv's sub-make where the relative paths do not resolve, and the failure looks
+exactly like a broken suite. That is the second time this project has produced a
+*my-invocation-not-their-code* failure, after the ANSI/`grep OK` trap in the extensions - both
+now written down where the next person will look.
+
+The UI API contract gets its own section, because it is the same shape as the extensions'
+`required_klipper_symbols` check and for the same reason: a component updatable independently of
+what it talks to must declare what it expects and refuse to start when that is unmet. Three
+components, three independent update paths, one consistent answer - worth naming as a pattern
+rather than describing three times.
+
 ## Open pull requests
 
 | Repository | PR | Contents |
@@ -207,7 +235,7 @@ Three more things documented with their reasoning:
 | `NebulaOS` | [#3](https://github.com/NebulaOS-KE/NebulaOS/pull/3) | The complete end-user manual: 29 pages, 128 screenshots, plus this agent's dashboard and tooling |
 | `NebulaOS-klipper-extensions` | [#3](https://github.com/NebulaOS-KE/NebulaOS-klipper-extensions/pull/3) | Architecture guide, 49 commands with per-command detail and side effects, 155 configuration options, developer README |
 | `NebulaOS-firmware` | [#5](https://github.com/NebulaOS-KE/NebulaOS-firmware/pull/5) | Architecture guide (boot, slots, updates, recovery), 58 Moonraker API endpoints, 35 boot services, developer README |
-| `NebulaOS-nebulascreen` | [#6](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/pull/6) | Retired repository URLs fixed; the `GUPPY_SIM_SHOTS` screenshot tour documented |
+| `NebulaOS-nebulascreen` | [#6](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/pull/6) | Contributor guide (testable split, simulator, UI API contract); retired repository URLs fixed; the `GUPPY_SIM_SHOTS` screenshot tour documented |
 
 Nothing is published. No wiki workflow has been run, nothing is merged.
 

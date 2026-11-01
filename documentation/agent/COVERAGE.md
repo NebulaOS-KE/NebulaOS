@@ -11,18 +11,18 @@ Verification is reported in four separate columns because they prove different t
 | Measure | Items | Share |
 |---|---|---|
 | Discovered documentation items | 549 | 100% |
-| Documented (page exists and covers the item) | 269 | 48% |
+| Documented (page exists and covers the item) | 270 | 49% |
 | Draft | 111 | 20% |
-| Missing | 169 | 30% |
+| Missing | 168 | 30% |
 | Blocked (cannot proceed without hardware, access or a decision) | 6 | 1% |
-| Has a recorded completeness gap (work not done, not stuck) | 0 | 0% |
+| Has a recorded completeness gap (work not done, not stuck) | 1 | 0% |
 
 ## Verification (counted separately, never combined)
 
 | Kind | Verified | Partial | Unknown | Blocked | N/A |
 |---|---|---|---|---|---|
-| Code verified | 344 | 37 | 168 | 0 | 0 |
-| Test verified | 29 | 0 | 520 | 0 | 0 |
+| Code verified | 345 | 37 | 167 | 0 | 0 |
+| Test verified | 46 | 0 | 503 | 0 | 0 |
 | Hardware verified | 0 | 0 | 0 | 2 | 545 |
 
 ## Screenshots
@@ -48,7 +48,7 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | NebulaOS-kernel | 1 | 0 | 0 | 1 | 0 | 0% |
 | NebulaOS-klipper-extensions | 236 | 199 | 16 | 21 | 215 | 84% |
 | NebulaOS-klipper-mcu | 1 | 0 | 0 | 1 | 0 | 0% |
-| NebulaOS-nebulascreen | 104 | 50 | 0 | 54 | 50 | 48% |
+| NebulaOS-nebulascreen | 104 | 51 | 0 | 53 | 51 | 49% |
 | lv_drivers | 1 | 0 | 0 | 1 | 0 | 0% |
 | nebulaos-packages | 1 | 0 | 0 | 1 | 0 | 0% |
 
@@ -64,7 +64,7 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | existing-page | 34 | 16 | 0 | 18 | 47% |
 | extension | 30 | 11 | 0 | 19 | 36% |
 | os-helper | 17 | 0 | 0 | 17 | 0% |
-| repo-overview | 8 | 2 | 0 | 6 | 25% |
+| repo-overview | 8 | 3 | 0 | 5 | 37% |
 | runtime-helper | 57 | 3 | 0 | 54 | 5% |
 | screen | 49 | 34 | 0 | 15 | 69% |
 | service | 35 | 6 | 29 | 0 | 17% |
