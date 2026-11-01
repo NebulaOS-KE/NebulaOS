@@ -30,9 +30,17 @@ warnings, and per-option purpose, runtime behaviour and restart requirements. Ma
 documented took the headline from 14% to 49% in one step, which was flattering and false. Do
 not re-upgrade them without writing that detail.
 
-**Next:** either finish the extensions detail (Q-036) or start `NebulaOS-firmware`, the larger
-target - 194 items, the 57-endpoint API, 35 boot services, the build pipeline. Then NebulaScreen
-developer pages, then MCU and kernel.
+**The firmware reference is PR #5 on that repository** - 58 API endpoints and 35 boot services,
+branch `docs/firmware`, generated from `c377230`.
+
+**Two fields, two meanings, do not merge them again.** `blockers` means something that cannot
+proceed without hardware, access or a decision. `gaps` means work not yet done. Both were in
+`blockers` at one point and the dashboard reported 57% "blocked", which reads as a stuck
+project; the real split is 6 blocked and 311 gaps.
+
+**Next:** Q-036 and Q-037 raise both references to the mission's per-item bar, which is where
+most of the 289 draft items sit. Then NebulaScreen developer pages, the MCU, the kernel, and
+`nebulaos-packages` / `lv_drivers` (still not cloned).
 
 ## Completed
 

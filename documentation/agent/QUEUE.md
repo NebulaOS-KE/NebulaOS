@@ -102,8 +102,13 @@ strongest: the suite already passes and 21 modules are already test-verified.
       example. This is the difference between a generated table and a documented item.
 - [ ] **Q-031** `NebulaOS-nebulascreen` - LVGL architecture, the panel system, Moonraker
       integration, simulator, build and testing. Reuse the existing developer pages.
-- [ ] **Q-032** `NebulaOS-firmware` - architecture, Buildroot, boot, A/B slots, persistent
-      storage, the 35 services, OTA, rollback, integrity.
+- [~] **Q-032** `NebulaOS-firmware` - API and boot services referenced (PR #5 on that repo):
+      58 endpoints, 35 services. Still to write: the 14-script build pipeline, the 56 runtime
+      helpers, A/B slots / OTA / recovery as an architecture, Buildroot integration,
+      filesystem layout.
+- [ ] **Q-037** Raise the firmware API reference to mission 6.7: response examples, verified
+      against `nebulaos_osconfig/` and the fixtures in `tests/nebulaos-osconfig-tests.py`.
+      Do not take them from the component source - it does not contain them.
 - [ ] **Q-033** `NebulaOS-klipper-mcu` - GD32F303 target, patch series, build, flash layout,
       safety.
 - [ ] **Q-034** `NebulaOS-kernel` - Ingenic X2000, PREEMPT_RT, device tree, display and

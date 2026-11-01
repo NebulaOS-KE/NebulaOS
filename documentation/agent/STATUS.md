@@ -494,11 +494,47 @@ All 193 items are now **draft**, each carrying the specific gap. Coverage is bac
 documented, 35% draft**. A generated table is a genuine deliverable; it is not the same as a
 documented item, and a dashboard that cannot tell those apart is worthless.
 
+## The firmware reference: API and boot services
+
+`NebulaOS-firmware` now has a generated reference in `docs/reference/`, on branch
+`docs/firmware`, as **PR #5** on that repository.
+
+- `MOONRAKER-API.md` - **58** endpoints with HTTP method, JSON-RPC name, handler, and the
+  request parameters each handler actually reads, with literal defaults. For example
+  `machine.nebulaos.wifi.connect` takes `ssid` (required), `password` (default `""`) and
+  `hidden` (default `false`) - read out of `_wifi_connect`, not inferred from the name.
+- `BOOT-SERVICES.md` - **35** services in boot order, each with its own script's stated
+  purpose.
+
+58, not the 56 recorded earlier: `47e07af` added the two `machine.nebulaos.cleanup.nebulaos*`
+endpoints behind the Storage **Free up space** button. The generated list and the inventory
+agreed exactly at 58 on an independent diff.
+
+**Response shapes are deliberately absent.** They come from the `nebulaos-osconfig` helper at
+runtime, so taking them from the component source would mean inventing them. The README says
+so, and names the helper modules and test fixtures where the real shapes live.
+
+## A misleading number I introduced, and removed
+
+Recording "what still needs writing" in the inventory's `blockers` field made the dashboard
+report **57% blocked**. That reads as a stuck project. It was nothing of the kind: almost all
+of those were completeness gaps - work not yet done - rather than anything unable to proceed.
+
+Now separated. `blockers` means only what it says: something that cannot proceed without
+hardware, access, or a decision this agent cannot make. Everything else is a `gaps` entry,
+counted on its own line. The real split is **6 blocked (1%)** and **311 completeness gaps
+(56%)**.
+
+Two numbers, two meanings. One field holding both made the honest-looking figure the wrong one.
+
 ## Next
 
-Finish the extensions reference to the mission's bar - per-command and per-option detail - or
-move on to the next repository first and come back. `NebulaOS-firmware` is the larger target:
-194 items, the 57-endpoint API, 35 boot services, the build pipeline.
+- **Q-036 / Q-037:** raise both references to the mission's per-item bar. That is the gap
+  between a generated table and a documented item, and it is where most of the 289 draft items
+  sit.
+- `NebulaOS-nebulascreen` developer pages, then the MCU and kernel, then `nebulaos-packages`
+  and `lv_drivers` (still not cloned).
+- The firmware's build pipeline, runtime helpers, and A/B/OTA/recovery as an architecture.
 
 **None of it is started.** Six component repositories, and the bulk of the inventory sits
 there: 234 extension items, 194 firmware items, 57 API endpoints, 172 configuration options.

@@ -66,8 +66,12 @@ def main():
          f"{100*sum(1 for i in items if i['doc_status'] in DOC_DONE)//max(n,1)}%"],
         ["Draft", ds.get("draft", 0), f"{100*ds.get('draft',0)//max(n,1)}%"],
         ["Missing", ds.get("missing", 0), f"{100*ds.get('missing',0)//max(n,1)}%"],
-        ["Blocked", sum(1 for i in items if i.get("blockers")),
+        ["Blocked (cannot proceed without hardware, access or a decision)",
+         sum(1 for i in items if i.get("blockers")),
          f"{100*sum(1 for i in items if i.get('blockers'))//max(n,1)}%"],
+        ["Has a recorded completeness gap (work not done, not stuck)",
+         sum(1 for i in items if i.get("gaps")),
+         f"{100*sum(1 for i in items if i.get('gaps'))//max(n,1)}%"],
     ]))
     A("")
 
@@ -169,6 +173,12 @@ def main():
     # ---- blockers ----------------------------------------------------------
     bl = [i for i in items if i.get("blockers")]
     A("## Blocked items")
+    A("")
+    A("Only genuine blockers: something that cannot proceed without hardware, "
+      "access or a decision this agent cannot make. Work that is simply not "
+      "finished is a *completeness gap*, counted separately above - conflating "
+      "the two made this dashboard report 57% \"blocked\", which reads as a "
+      "stuck project rather than one in progress.")
     A("")
     if not bl:
         A("None recorded.")
