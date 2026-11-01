@@ -255,6 +255,21 @@ Note what D-009 did *not* license: no page claims the route is tested, and `veri
 stays unverified in the inventory. Removing a warning is not the same as asserting a
 verification.
 
+## Do not append to STATUS.md
+
+`STATUS.md` answers *where does this stand now*, in about a page. It is not a changelog.
+
+It became one: edited by appending a section per batch until it was 557 lines, with a summary
+at the top still reading "510 items, all missing, no pages written" while the dashboard said
+otherwise. An append-only status file turns its oldest and most wrong paragraph into the first
+thing a reader sees. The foreground session spotted it, which means it had been misleading for
+hours.
+
+Now: the factual block between the `GENERATED STATUS` markers is written by
+`render_dashboard.py` from the inventory, so it cannot drift. Edit the prose below it, keep it
+short, and let the numbers come from the script. Mistakes worth remembering go in
+`STATUS-LOG.md`; the narrative is the commit history.
+
 ## A process rule, learned the hard way
 
 Never chain `render_dashboard.py && <state updates>` in one shell command. A path mistake in

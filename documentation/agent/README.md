@@ -11,7 +11,8 @@ rediscovering anything.
 |---|---|
 | `MISSION.md` | The full assignment, stored verbatim so it survives any context loss |
 | `RULES.md` | Workspace rules and the project owner's decisions; these win over `MISSION.md` |
-| `STATUS.md` | Where the work stands right now |
+| `STATUS.md` | Where the work stands right now. Its figures block is generated - do not hand-edit it, and do not append batch notes to this file |
+| `STATUS-LOG.md` | Mistakes worth remembering, kept out of `STATUS.md` so it stays a status file |
 | `COVERAGE.md` | The coverage dashboard, generated from `coverage.jsonl` |
 | `coverage.jsonl` | Machine-readable inventory, one record per documentation item |
 | `QUEUE.md` | Pending work in priority order |

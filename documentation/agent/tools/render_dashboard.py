@@ -7,7 +7,7 @@ purpose - they must never be blended into one flattering percentage.
 
 Usage:  render_dashboard.py <coverage.jsonl> <COVERAGE.md>
 """
-import json, sys, collections, datetime
+import collections, datetime, json, os, sys
 
 DOC_DONE = ("documented", "verified")
 
@@ -188,6 +188,46 @@ def main():
     A("")
     open(out, "w").write("\n".join(L) + "\n")
     print(f"dashboard: {n} items -> {out}")
+
+    # Keep STATUS.md's factual block in step with the inventory.
+    #
+    # It drifted badly once: STATUS.md was edited by appending a section per
+    # batch until it was 557 lines long, with a summary at the top still saying
+    # "510 items, all missing, no pages written" while the dashboard said
+    # otherwise. An append-only status file becomes a changelog, and its oldest
+    # paragraph is the one a reader sees first. So the numbers now come from
+    # here, between markers, and nothing hand-written sits above them.
+    status = os.path.join(os.path.dirname(out), "STATUS.md")
+    if os.path.exists(status):
+        txt = open(status).read()
+        start, end = "<!-- BEGIN GENERATED STATUS -->", "<!-- END GENERATED STATUS -->"
+        if start in txt and end in txt:
+            doc = sum(1 for i in items if i["doc_status"] in DOC_DONE)
+            blk = [start,
+                   f"*Figures generated {datetime.date.today().isoformat()} from "
+                   f"`coverage.jsonl` by `tools/render_dashboard.py`. Do not edit "
+                   f"this block by hand.*",
+                   "",
+                   "| | |", "|---|---|",
+                   f"| Discovered items | **{n}** |",
+                   f"| Documented | **{doc}** ({100*doc//max(n,1)}%) |",
+                   f"| Draft | {sum(1 for i in items if i['doc_status']=='draft')} |",
+                   f"| Missing | {sum(1 for i in items if i['doc_status']=='missing')} |",
+                   f"| Code verified | {sum(1 for i in items if i.get('verify_code')=='verified')} |",
+                   f"| Test verified | {sum(1 for i in items if i.get('verify_test')=='verified')} |",
+                   f"| Hardware verified | {sum(1 for i in items if i.get('verify_hardware')=='verified')} |",
+                   f"| Screenshots required / captured | "
+                   f"{sum(1 for i in items if i.get('screenshot_required'))} / "
+                   f"{sum(1 for i in items if i.get('screenshot_status')=='captured')} |",
+                   f"| Blocked (cannot proceed) | {sum(1 for i in items if i.get('blockers'))} |",
+                   f"| Completeness gaps (work not done) | {sum(1 for i in items if i.get('gaps'))} |",
+                   "",
+                   "Per-repository and per-category breakdowns are in `COVERAGE.md`.",
+                   end]
+            pre, _, rest = txt.partition(start)
+            _, _, post = rest.partition(end)
+            open(status, "w").write(pre + "\n".join(blk) + post)
+            print(f"status block refreshed in {status}")
 
 
 if __name__ == "__main__":
