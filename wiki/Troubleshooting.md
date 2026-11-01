@@ -55,7 +55,7 @@ USB stick and shows where to report the issue
 | Symptom | Fix |
 |---|---|
 | Creality's updater stops with `failed to get .../ota_config.in` | The `.img` was renamed. Download it again or give it back its release name `NebulaOS-Ender3V3KE-<version>.img`. Nothing was installed. |
-| Creality's updater ends with `ota update ok`, but the printer still runs the old system | It does not restart by itself: soft reboot (`ssh root@<printer-ip> reboot`), never power off and on. See [Installing NebulaOS](Installing-NebulaOS). |
+| Creality's updater ends with `ota update ok`, but the printer still runs the old system | It does not restart by itself. Reboot it: `ssh root@<printer-ip> reboot`. See [Installing NebulaOS](Installing-NebulaOS). |
 | **Online** says the clock is not set | The printer sets its clock from the internet after Wi-Fi connects. Wait a minute and try again. |
 | **Online** says it could not reach the release channel | No internet, or GitHub was not reachable. Check Wi-Fi; try again later. |
 | A download fails with "does not match the release record" | The file arrived damaged. It was deleted; start the download again. |

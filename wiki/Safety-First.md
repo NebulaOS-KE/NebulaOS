@@ -5,23 +5,35 @@
 Understand the few things that can actually hurt you or permanently damage your printer, so
 that nothing in this manual takes you by surprise. Please read it before you install NebulaOS.
 
-## The one that can break your printer for good
+## Switching systems is safe, including with the power switch
 
-**Never switch the printer off and on again while it is running Creality's original
-software.** Use a soft restart instead - the printer restarting itself from a command or a
-menu, not the power switch.
+**You cannot permanently break the printer by switching between NebulaOS and Creality's
+system.** An earlier version of this page said otherwise. It was wrong, and this section
+replaces it.
 
-Here is why this matters. Creality's system checks the printer's mainboard when it starts up
-from a cold power-on, and it can write old mainboard firmware back onto it. If that happens
-after you have installed NebulaOS, the mainboard and the system stop matching, and getting
-the printer working again needs a USB recovery procedure from a computer.
+Here is what actually happens. The printer's mainboard has its own small piece of firmware,
+separate from the system NebulaOS replaces. Creality's system installs its own version of that
+firmware when it starts from cold. **NebulaOS does the same in the other direction:** at every
+boot it checks what the mainboard is running, and if it finds a known Creality version it
+reinstalls its own automatically.
 
-In practice this affects you in two situations:
+So each system puts back the mainboard firmware it needs, by itself, and switching back and
+forth - power switch included - is recoverable without your intervention.
 
-- While you are installing NebulaOS from the stock Creality system.
-- Any time you switch back to a Creality or OpenKE slot later.
+A detail worth knowing if you ever install mainboard firmware yourself: NebulaOS will **not**
+overwrite firmware it does not recognise. It reinstalls only when it finds a known Creality
+version. Anything you installed deliberately is left alone.
 
-Once NebulaOS is the system that starts, ordinary power switching is fine.
+### The one real caution
+
+**Do not switch the printer off while mainboard firmware is being installed.** That is the
+only moment in normal use when cutting power can leave the board in a state needing a computer
+to fix.
+
+You will know when it is happening, because the screen says so - it tells you not to switch
+off, and that Klipper is stopped. It takes a short time. Wait for it.
+
+[Mainboard firmware](Mainboard-Firmware) explains this in full, including how to reinstall it.
 
 ## Hot and moving parts
 

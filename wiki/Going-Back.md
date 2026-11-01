@@ -38,10 +38,13 @@ installed NebulaOS.
 
 ## Important, once you are back
 
-**Do not switch the printer off and on while it is running the stock Creality system.** A
-stock power-on can write old firmware into the mainboard, which then no longer matches, and
-fixing it needs a USB recovery from a computer. Use a soft restart instead. See
-[Safety first](Safety-First).
+Creality's system installs its own mainboard firmware when it starts from cold, and NebulaOS
+reinstalls its own when you come back - automatically, at boot, whenever it finds a known
+Creality version there. So moving between the two is recoverable in both directions without
+you doing anything, and the power switch is fine.
+
+The one thing to avoid is switching the printer off *while* mainboard firmware is being
+installed. The screen tells you when that is happening. See [Safety first](Safety-First).
 
 ## Troubleshooting
 

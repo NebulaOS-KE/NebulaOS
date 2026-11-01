@@ -49,8 +49,8 @@ way. If it runs Creality's system or OpenKE, those have **no NebulaOS swap butto
 back needs SSH, reinstalling with Creality's updater, or USB recovery. See
 [Going back](Going-Back) and [Recovery](Recovery).
 
-**And do not power-cycle a printer running the stock Creality system** - a stock power-on can
-write old firmware into the mainboard. Use a soft restart. See [Safety first](Safety-First).
+Switching into a stock slot is safe, power switch included: each system reinstalls the
+mainboard firmware it needs at boot. See [Safety first](Safety-First).
 
 ## Freeing up space
 

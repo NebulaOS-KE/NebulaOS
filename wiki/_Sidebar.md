@@ -40,6 +40,7 @@
 
 **Keep it running**
 - [Updating NebulaOS](Updating-NebulaOS)
+- [Mainboard firmware](Mainboard-Firmware)
 - [Resetting](Resetting)
 
 **When something is wrong**

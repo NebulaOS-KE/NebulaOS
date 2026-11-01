@@ -68,8 +68,8 @@ This button is blocked while a print is running.
 **One-way warning.** If the other slot holds a stock Creality or OpenKE system, those have no
 NebulaOS swap button, so coming back needs option 3 or 4. Know that before you press it.
 
-**Do not power-cycle a printer running the stock system.** A stock power-on can write old
-firmware into the mainboard. Use a soft restart. See [Safety first](Safety-First).
+Switching into a stock or OpenKE slot is safe, including with the power switch: each system
+reinstalls the mainboard firmware it needs at boot. See [Safety first](Safety-First).
 
 ## 3. Over SSH
 

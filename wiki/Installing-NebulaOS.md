@@ -19,9 +19,9 @@ NebulaOS, and your old system is still there in the other slot in case you want 
 
 ## Before you begin
 
-- Read [Safety first](Safety-First). One point from it applies directly here: **do not switch
-  the printer off and on while it is running the stock Creality system.** A stock power-on can
-  write old firmware back into the mainboard.
+- Read [Safety first](Safety-First). The point that applies here: switching between systems is
+  safe, but **do not switch the printer off while mainboard firmware is being installed** - the
+  screen tells you when that is happening.
 - Make sure no print is running.
 - **Do not rename the image file.** Creality's updater finds the parts inside the file by its
   name. A renamed file stops with `failed to get .../ota_config.in` and installs nothing.
@@ -74,9 +74,8 @@ downloaded.
    ssh root@<printer-ip> reboot
    ```
 
-   The updater does not restart the printer by itself, so this step is required.
-
-   **Do not switch the printer off and on instead.** See [Safety first](Safety-First).
+   The updater does not restart the printer by itself, so this step is required. A soft reboot
+   is the tidy way to do it: it lets the system shut down cleanly rather than being cut off.
 
 Now go to section 3.
 

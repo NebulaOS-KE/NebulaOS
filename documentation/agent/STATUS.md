@@ -6,15 +6,15 @@
 | | |
 |---|---|
 | Discovered items | **549** |
-| Documented | **270** (49%) |
-| Draft | 111 |
+| Documented | **271** (49%) |
+| Draft | 110 |
 | Missing | 168 |
-| Code verified | 345 |
+| Code verified | 346 |
 | Test verified | 46 |
 | Hardware verified | 0 |
 | Screenshots required / captured | 57 / 41 |
 | Blocked (cannot proceed) | 6 |
-| Completeness gaps (work not done) | 1 |
+| Completeness gaps (work not done) | 4 |
 
 Per-repository and per-category breakdowns are in `COVERAGE.md`.
 <!-- END GENERATED STATUS -->
@@ -172,6 +172,54 @@ The lesson is narrow and worth keeping: to pick up new upstream code on a workin
 **merge it, do not re-point the branch at it**. `-B` is for creating a branch, not for updating
 one. Pushing after each batch is what made this a recoverable annoyance rather than lost work.
 
+## Correction: the MCU-brick warning was wrong
+
+**The most prominent safety warning in the end-user manual was false, and it is now fixed.**
+
+Six user pages said never to power-cycle a printer running Creality's system, because a stock
+cold boot reflashes the MCU and would leave it mismatched until a USB recovery. `Safety-First`
+led with it under the heading *"The one that can break your printer for good"*.
+
+Current source says otherwise, and it was checkable all along. `S50nebulaos-mcu-guard` delegates
+to `mcu_lifecycle.py`, which classifies the running MCU application:
+
+| Classification | What happens |
+|---|---|
+| `NATIVE_CANDIDATE_001` | Klipper starts; nothing reflashed |
+| `KNOWN_STOCK` | `mcu_restore.py` reinstalls the native firmware automatically |
+| `UNKNOWN_APPLICATION` | **Never auto-flashed** - a user's own firmware is kept |
+
+`mcu_restore.py` is bounded: one attempt, SHA256 against a pinned value, hardware allow-list
+checked before any write and again after bootloader entry.
+
+So **stock reinstalls its MCU firmware at a cold boot and NebulaOS reinstalls its own at boot**.
+Switching is self-correcting in both directions, power switch included. Nothing is a hard brick.
+The real caution is the ordinary one - do not cut power *while a flash is running* - and the
+screen says so while it performs one.
+
+### How I got it wrong
+
+I derived it from `S00revert-safety`'s header comment, which explains that automatic rollback
+was removed because a stock boot reflashes the MCU "destroying the qualified native GD32F303 MCU
+build". That sentence is true about the reflash. I turned it into *therefore permanent damage*,
+and never checked whether anything restored it.
+
+The rule I had written for myself three times over - **derive behaviour from code, not from
+prose** - and I took a code *comment* as behaviour. Worse, the comment was correct for its own
+subject; I extrapolated a consequence it did not claim. And this was the one claim in the manual
+most likely to be read and acted on, because it was the scariest.
+
+The firmware's own `DEVELOPER_RECOVERY.md`, `HOW_TO_SWITCH_STOCK_AND_CUSTOM.md` and
+`HARDWARE_AGENT.md` carried the same stale framing - they predate `mcu_restore.py`. All three now
+carry corrections, with the historical reasoning preserved because it cites live hardware runs.
+
+### What was written instead
+
+`wiki/Mainboard-Firmware.md` is new: what the mainboard firmware is, why it changes by itself
+when you switch systems, that firmware you installed yourself is left alone, the one real
+caution, and how to reinstall or replace it from **Settings → Printer → MCU firmware**. That
+screen existed and had no documentation at all.
+
 ## The firmware has a readable architecture guide too
 
 `docs/reference/ARCHITECTURE.md` on `docs/firmware` - boot, slots, updates and recovery, with
@@ -183,9 +231,9 @@ the health check landed the next reboot on stock. It was removed in Phase 1.8B a
 now an explicit no-op, because **booting the stock Creality slot auto-flashes the MCU with old
 Creality firmware**, destroying the qualified native GD32F303 build.
 
-The automatic safety net was itself the larger hazard - it would have turned a software failure
-into a hardware one. That is also the root of the user-facing warning never to power-cycle a
-printer running stock: one hardware behaviour, two consequences, and the guide connects them.
+The automatic safety net would have turned a software failure into an MCU firmware change nobody
+asked for, which is a good reason to remove it. It is **not** a reason to call stock a one-way
+door - see the correction above.
 
 Three more things documented with their reasoning:
 

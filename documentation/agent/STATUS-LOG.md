@@ -186,3 +186,38 @@ item carried a plausible 40-character SHA. The whole value of an evidence trail 
 can follow it, and a trail pointing at the wrong artefact is indistinguishable from a correct one
 until somebody does. It was caught by reading the dashboard's own table and recognising the
 SHAs as mine.
+
+## I published a false safety warning, derived from a true code comment
+
+**2026-11-01.** The end-user manual's most prominent warning - `Safety-First` led with *"The one
+that can break your printer for good"* - told readers never to power-cycle a printer running
+Creality's system, because a stock cold boot reflashes the MCU and would leave it mismatched
+until a USB recovery from a computer. It appeared on six pages.
+
+It was wrong. `S50nebulaos-mcu-guard` → `mcu_lifecycle.py` classifies the running MCU
+application, and `KNOWN_STOCK` authorises `mcu_restore.py` to reinstall the native firmware
+automatically. Each system restores its own MCU firmware at boot; switching is self-correcting
+in both directions.
+
+**Where it came from.** `S00revert-safety`'s header explains that automatic rollback was removed
+because a stock boot reflashes the MCU, "destroying the qualified native GD32F303 MCU build".
+That sentence is accurate about the reflash. I turned it into *therefore permanent damage needing
+USB recovery*, and never looked for code that restores it.
+
+Three things worth keeping:
+
+- **A code comment is prose.** The rule in this project is to derive behaviour from code, and I
+  had already written it down three times. A comment is the most trustworthy-looking prose in a
+  repository, which makes it the easiest to mistake for the thing itself.
+- **I extrapolated a consequence the comment did not claim.** It said a reflash happens and that
+  this was reason enough to remove an automatic path into stock. It did not say the reflash was
+  unrecoverable. The inference felt so natural that I never identified it as an inference.
+- **The scariest claim deserves the most checking, and got the least.** It was the one sentence
+  in the manual most likely to change a reader's behaviour. "Never do X or you will destroy your
+  printer" should have triggered a search for the recovery path before it was ever written.
+
+Corrected across six user pages, the firmware architecture guide, and three of the firmware's own
+documents which carried the same stale framing because they predate `mcu_restore.py`. A new page,
+`wiki/Mainboard-Firmware.md`, documents what the screen's MCU page actually does - it had none.
+
+Caught by the project owner, not by me.
