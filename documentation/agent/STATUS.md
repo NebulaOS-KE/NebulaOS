@@ -1,7 +1,7 @@
 # Status
 
-**Updated:** 2026-11-01 (overnight, sixth pass)
-**Phase:** 2 complete (end-user manual), Phase 3 (developer wikis) not started
+**Updated:** 2026-11-01 (morning)
+**Phase:** 3 - developer wikis (extensions reference done; five repositories to go)
 **Branch:** `docs/agent` in the central `NebulaOS` repository
 **Mode:** autonomous, self-paced loop
 
@@ -450,7 +450,55 @@ is to clear the requirement, not to invent a status the renderer does not count.
 check the dashboard would have quietly under-reported by two, which is precisely the failure
 the check was added for after the same thing happened with screenshot candidates.
 
-## Next: Phase 3, the developer wikis
+## Phase 3 started: the extensions reference
+
+`NebulaOS-klipper-extensions` now has a generated developer reference in `docs/reference/`,
+on branch `docs/extensions`, as **PR #3** on that repository. Its GitHub wiki is disabled, so
+the reference lives in the repository - which the mission prefers anyway.
+
+- `COMMANDS.md` - 49 registered commands with module, kind, test coverage and description,
+  plus the G-code parameters each module reads.
+- `CONFIG.md` - 155 configuration options with literal defaults and constraints.
+- `README.md` - what the repository is, command attribution, verification state, how to run
+  the tests.
+
+### Parsing instead of pattern-matching caught three more bugs
+
+Written with Python's `ast` deliberately, after the two regex extraction bugs earlier in this
+project. It found three more immediately:
+
+- **About 140 invented settings.** A naive walk over every `.getX()` call finds **299** "config
+  options"; only **155** are called on a config object. The rest are dictionary and JSON
+  lookups and G-code parameter reads on `gcmd`.
+- **`getfloatlist` missing** from the getter list, dropping 3 real options in `z_compensate`.
+- **Fifteen options wrongly marked required.** Defaults passed as `default=CONSTANT` keyword
+  arguments were not seen. That is worse than a wrong default - it tells a reader to set
+  fifteen TMC registers they never needed to touch.
+
+Also corrected in the inventory: `gcode:_` was an artifact of the very first regex pass and
+does not exist, and `NEBULAOS_BED_TRAM` was misattributed - the source says plainly that this
+repository registers `_NEBULAOS_BED_TRAM` and the public name is a `gcode_macro` in the
+firmware's `calibration.cfg`. It is now recorded against the firmware.
+
+### I over-credited the inventory, then corrected it
+
+Marking the command and configuration items `documented` took coverage from 14% to **49%** in
+one step. That was wrong, and worth recording rather than quietly fixing.
+
+Mission 6.5 requires per command: preconditions, example invocation, expected output, errors,
+side effects and safety warnings. 6.6 requires per option: purpose, runtime behaviour, whether
+a restart is needed, validation rules and an example. The generated tables give name, module,
+kind, description, type, default and constraints - real and verified, but not that.
+
+All 193 items are now **draft**, each carrying the specific gap. Coverage is back to **14%
+documented, 35% draft**. A generated table is a genuine deliverable; it is not the same as a
+documented item, and a dashboard that cannot tell those apart is worthless.
+
+## Next
+
+Finish the extensions reference to the mission's bar - per-command and per-option detail - or
+move on to the next repository first and come back. `NebulaOS-firmware` is the larger target:
+194 items, the 57-endpoint API, 35 boot services, the build pipeline.
 
 **None of it is started.** Six component repositories, and the bulk of the inventory sits
 there: 234 extension items, 194 firmware items, 57 API endpoints, 172 configuration options.

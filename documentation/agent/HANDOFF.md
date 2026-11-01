@@ -15,16 +15,24 @@ workspace rules and the owner's decisions and wins wherever the two differ.
 
 ## Current phase
 
-**Phase 2 is complete. Phase 3 has not started.**
+**Phase 2 is complete. Phase 3 is underway.**
 
 The end-user manual is 29 pages with **no stubs**, covering all ten mission sections (10/10 on
 `user-manual-section`). 128 screenshots, 41 of 57 required items captured.
 
-**Start Phase 3 with `NebulaOS-klipper-extensions`.** Not arbitrary: its suite already passes
-(899 tests), 21 modules are already test-verified, and it holds 234 inventory items including
-51 commands and 152 configuration options. Every claim there can carry real evidence, which
-makes it both the largest and the easiest win. Then firmware, then NebulaScreen developer
-pages, then MCU and kernel.
+**The extensions reference is done and is PR #3 on that repository** - 49 commands, 155
+options, generated with `ast` from `a2e7634`. Branch `docs/extensions`.
+
+**Those 193 items are `draft`, not `documented`, and that is deliberate.** The generated tables
+give name, module, kind, description, type, default and constraints. Mission 6.5 and 6.6 also
+require per-command preconditions, examples, expected output, errors, side effects and safety
+warnings, and per-option purpose, runtime behaviour and restart requirements. Marking them
+documented took the headline from 14% to 49% in one step, which was flattering and false. Do
+not re-upgrade them without writing that detail.
+
+**Next:** either finish the extensions detail (Q-036) or start `NebulaOS-firmware`, the larger
+target - 194 items, the 57-endpoint API, 35 boot services, the build pipeline. Then NebulaScreen
+developer pages, then MCU and kernel.
 
 ## Completed
 
