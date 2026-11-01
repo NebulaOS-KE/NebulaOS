@@ -1,6 +1,6 @@
 # Status
 
-**Updated:** 2026-11-01 (overnight, second pass)
+**Updated:** 2026-11-01 (overnight, third pass)
 **Phase:** 2 - writing the end-user manual (first batch complete)
 **Branch:** `docs/agent` in the central `NebulaOS` repository
 **Mode:** autonomous, self-paced loop
@@ -304,12 +304,29 @@ inventory had recorded. It now prefers this agent's own pinned worktrees under
 evidence from a tree that can change underneath you means the recorded commit silently stops
 matching the content it describes.
 
-## Code changes: all of tonight's screen and extension work is now in
+## All of tonight's code is in, and Q-060 is closed
 
-Remaining from the foreground's list, not yet seen in a pushed commit: the default root
-password change to `NebulaOS`, the unique default hostname `nebulaos-<last 4 MAC hex>`, and the
-clearer SSH prompt. Those are firmware-side; `origin/main` for the firmware is still
-`82e1320`.
+Firmware `origin/main` moved to **`c377230`**, bringing the last of the announced changes:
+
+- **`936c3d6`** - the default root password is now **`NebulaOS`** (was `openke`). A printer
+  that already ran NebulaOS keeps the password it seeded, so there is no migration to document.
+- **`ed24767`** - a **unique default hostname per printer**: `nebulaos-<last 4 hex of the
+  stable Wi-Fi MAC>`, derived once at boot. The reason is worth repeating in the manual, and
+  now is: every printer being called `nebulaos` meant two on one network collided in the
+  router, in Mainsail and at `nebulaos.local`. A name the user sets always wins; with no
+  identifier available it falls back to plain `nebulaos`.
+- **`47e07af`** - the **Free up space** endpoints behind the new Storage button.
+- **`c377230`** - pins advanced to extensions `a2e7634` and screen `3194104`.
+
+**The pins now match the tips exactly.** Extensions `a2e7634` and screen `3194104` are both
+what the firmware ships and what `main` holds, so there is currently no gap at all between
+documented and shipped behaviour for those two. Worth noting because D-002 was written when
+there was one.
+
+Pages updated for the new facts: `Opening-Mainsail` explains the per-printer naming,
+`Installing-NebulaOS` gives the new root password with the advice to change it if the printer
+is reachable beyond your own network, and clarifies that the password the SSH install route
+asks for is the *current* system's, not NebulaOS's.
 
 ## Code changes still expected
 
@@ -326,13 +343,27 @@ Queued as **Q-060** with the affected items flagged for re-verification. The scr
 captured are from `94869f7` and will need re-running once the screen tip moves - which is
 precisely why the capture is now a script.
 
+## Pages written
+
+**Printing** and **Filament** are done, which clears the high-traffic stub list. 8 of the
+original 17 stubs are now real pages; 9 remain.
+
+The `Printing` page leads with the **Cancel vs Stop** distinction, because the two sit next to
+each other, **Stop** is labelled only "Stop" rather than "Emergency Stop", and pressing it
+requires a power-cycle or `FIRMWARE_RESTART` to recover from. A beginner reaching for a gentler
+Cancel can easily hit it.
+
+`Filament` records that **Cooldown is the stop control during a Load** - there is no separate
+Stop button, and every other button is disabled while loading. Without that, a user watching
+filament feed and wanting it to stop has no idea what to press.
+
 ## Next
 
-**Printing** and **Filament** are the last two high-traffic stubs. Then the 49-panel screen
-reference, which has images for 36 of them.
+The **49-panel screen reference** (images exist for 36), then the calibration pages, then
+`Troubleshooting`, `What-NebulaOS-Is`, `Supported-Hardware` and `Glossary`.
 
-Also worth doing soon: add tour steps for the panels it misses, starting with `storage_panel`
-now that it has a new user-facing button and no picture of it.
+Also worth doing: tour steps for the panels the capture misses, starting with `storage_panel`,
+which now has a new user-facing button and no picture of it.
 
 Two discovery follow-ups stay open and deliberately non-blocking: the Klipper status objects
 the UI subscribes to, and cloning `nebulaos-packages` and `lv_drivers`.

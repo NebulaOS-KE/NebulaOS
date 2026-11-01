@@ -53,8 +53,8 @@ downloaded.
    scp NebulaOS-Ender3V3KE-<version>.img root@<printer-ip>:/usr/data/
    ```
 
-   It will ask for your printer's root password. The file is about 133 MB, so this takes a
-   minute or two.
+   It will ask for your printer's root password - the password of the system running on it
+   **now** (OpenKE), not NebulaOS's. The file is about 133 MB, so this takes a minute or two.
 
 2. Start the installation:
 
@@ -116,6 +116,15 @@ When it comes up:
 
 Mainsail is now at `http://<printer-ip>` in a web browser, or
 `http://<printer-name>.local`. See [Opening Mainsail](Opening-Mainsail).
+
+Your printer has given itself a name like `nebulaos-4f2a` - four characters derived from its
+own hardware, so that two printers on one network do not collide. You can change it on
+**Settings → Connections → Name → Change**.
+
+**If you ever need SSH**, the root password on a newly installed NebulaOS is `NebulaOS`. You do
+not need SSH for normal use, and you should change that password if your printer is reachable
+from beyond your own network. A printer that already ran an earlier NebulaOS keeps whatever
+password it had.
 
 *One screenshot is still missing here: the NebulaOS screen as it looks on the very first
 start. The simulator's screenshot tour does not cover the boot and init screens, so this one

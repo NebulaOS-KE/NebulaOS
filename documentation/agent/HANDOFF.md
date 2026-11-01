@@ -61,10 +61,15 @@ re-running it - three non-obvious build blockers are written up there.
 **The remaining screenshot work is embedding, not capturing.** 7 of 129 are used in pages. Do
 it page by page as you write, not as a sweep at the end.
 
-**Q-060 is half done.** The extensions change (`a2e7634`, power-loss resume fix) is pushed,
-verified and documented. The screen change (`4883008`) is **not pushed** - origin/main is still
-`94869f7`, which is what all 129 screenshots came from. When it lands, re-run
-`tools/capture_screenshots.sh` and compare; do not assume the captures still hold.
+**Q-060 is closed.** All of it landed and was verified: extensions `a2e7634`, screen
+`3194104`, firmware `c377230`. Screenshots re-captured and compared. **The firmware pins now
+match the repository tips exactly** for the extensions and the screen, so there is currently no
+gap between documented and shipped behaviour there.
+
+**When a tip moves again:** move the matching worktree, re-run the extensions test suite and
+`tools/capture_screenshots.sh`, and compare. Run the capture tour twice against the same build
+before concluding anything changed - one image (`07-updates.png`) is timing-dependent and will
+otherwise look like a code change every time.
 
 **The seeder now reads from the pinned worktrees, not the root checkouts.** The root ones are
 the foreground session's and move without warning. Keep it that way: an evidence citation
@@ -155,12 +160,12 @@ repositories not yet cloned locally.
 ## Worktrees and build areas
 
 - `_worktrees/docs/NebulaOS` - the manual and agent state, branch `docs/agent`.
-- `_worktrees/docs/NebulaOS-firmware` - pinned at `82e1320`, branch `docs/firmware`. **Read
+- `_worktrees/docs/NebulaOS-firmware` - pinned at `c377230`, branch `docs/firmware`. **Read
   evidence from here, not from the workspace-root checkout** - the foreground session moves
   that one under you (it was already one commit ahead when checked).
 - `_worktrees/docs/NebulaOS-klipper-extensions` - **`a2e7634`**, branch `docs/extensions`,
   used for the test suite.
-- `_worktrees/docs/NebulaOS-nebulascreen` - `94869f7`, branch `docs/screen`.
+- `_worktrees/docs/NebulaOS-nebulascreen` - `3194104`, branch `docs/screen`.
 - `_worktrees/docs/screen-sim` - a **separate clone** with submodules, for building the
   simulator. Not a worktree, deliberately: submodule init needs to write the parent repo's
   `.git/config`, which lives in the foreground checkout and is write-protected.

@@ -13,7 +13,10 @@ import json, os, re, subprocess, sys, datetime
 TODAY = datetime.date.today().isoformat()
 
 REPOS = {
-    "NebulaOS":                    ("main",   None),
+    # The central repo is cloned at _worktrees/docs/NebulaOS - this agent's
+    # own branch lives there. Naming it here means its items carry a real
+    # commit instead of "not cloned locally".
+    "NebulaOS":                    ("main",   "NebulaOS"),
     "NebulaOS-firmware":           ("main",   "NebulaOS-firmware"),
     "NebulaOS-nebulascreen":       ("main",   "NebulaOS-nebulascreen"),
     "NebulaOS-klipper-extensions": ("main",   "NebulaOS-klipper-extensions"),

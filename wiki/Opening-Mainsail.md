@@ -45,8 +45,14 @@ The printer also answers to its own name, so you do not have to remember numbers
 http://<printer-name>.local
 ```
 
-The name is on **Settings → Connections**, next to **Name**, and you can change it there with
-**Change**. After changing it, the printer is reachable at the new `.local` address.
+The name is on **Settings → Connections**, next to **Name**, and **Change** renames it. After
+a rename, the printer is reachable at the new `.local` address.
+
+**Each printer gets its own name by default.** NebulaOS names a new printer
+`nebulaos-` followed by four characters derived from its own hardware, for example
+`nebulaos-4f2a`. That is deliberate: if every printer were simply called `nebulaos`, two of
+them on one network would collide in your router, in Mainsail and at `nebulaos.local`. A name
+you choose yourself always wins over the default.
 
 This naming trick works on most home networks, but not all - some routers and some Android
 versions do not support it. If `.local` does not work for you, use the numeric address.

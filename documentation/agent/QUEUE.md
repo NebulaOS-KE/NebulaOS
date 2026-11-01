@@ -52,10 +52,10 @@ the dashboard in the same batch as the page itself.
       verified in source rather than copied from the old wiki.
 - [~] **Q-017** Replace the stub pages with real content. Done so far:
       `First-Time-Setup`, `Connecting-To-WiFi`, `Opening-Mainsail`, `Power-Loss-Recovery`,
-      `Resetting`, `Updating-NebulaOS`. Remaining: `Printing`, `Filament`, `Camera`,
-      `Beeps-And-Songs`, `Screen-Reference`, `Calibration-Guide`,
-      `Calibration-Explained`, `Troubleshooting`, `What-NebulaOS-Is`,
-      `Supported-Hardware`, `Glossary`.
+      `Resetting`, `Updating-NebulaOS`, `Printing`, `Filament` - 8 of 17. Remaining 9:
+      `Camera`, `Beeps-And-Songs`, `Screen-Reference`, `Calibration-Guide`,
+      `Calibration-Explained`, `Troubleshooting`, `What-NebulaOS-Is`, `Supported-Hardware`,
+      `Glossary`.
 - [ ] **Q-013** Section 03, First-time setup - startup, Wi-Fi, finding the IP, Mainsail,
       first calibration, first print.
 - [ ] **Q-014** Section 04, the complete NebulaScreen guide - 49 panels, task pages plus a
@@ -141,8 +141,12 @@ the dashboard in the same batch as the page itself.
         `wiki/Updating-NebulaOS.md`, kept **separate** from **Clean up Creality files** as
         instructed - they do different jobs and the separation is what keeps going back to
         stock working.
-      - [ ] Still unpushed (firmware side, origin/main still `82e1320`): default root password
-        `NebulaOS`, default hostname `nebulaos-<last 4 MAC hex>`, clearer SSH prompt.
+      - [x] Firmware `c377230` - **pushed and documented.** Root password now `NebulaOS`
+        (`936c3d6`), unique per-printer hostname `nebulaos-<last 4 hex of stable Wi-Fi MAC>`
+        (`ed24767`), Free up space endpoints (`47e07af`), pins advanced to extensions
+        `a2e7634` + screen `3194104`. `Opening-Mainsail` and `Installing-NebulaOS` updated.
+      **Q-060 is closed.** The pins now match the tips exactly - no gap between documented and
+      shipped behaviour for the extensions or the screen.
       - Storage **Free up space** button, NebulaOS leftovers only. **Clean up Creality files**
         stays separate - do not merge the two in the docs; they do different things.
       - Default root password `NebulaOS` (was `openke`), unique default hostname
