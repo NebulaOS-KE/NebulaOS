@@ -6,15 +6,15 @@
 | | |
 |---|---|
 | Discovered items | **549** |
-| Documented | **260** (47%) |
+| Documented | **269** (48%) |
 | Draft | 111 |
-| Missing | 178 |
-| Code verified | 336 |
+| Missing | 169 |
+| Code verified | 344 |
 | Test verified | 29 |
 | Hardware verified | 0 |
 | Screenshots required / captured | 57 / 41 |
 | Blocked (cannot proceed) | 6 |
-| Completeness gaps (work not done) | 0 |
+| Completeness gaps (work not done) | 16 |
 
 Per-repository and per-category breakdowns are in `COVERAGE.md`.
 <!-- END GENERATED STATUS -->
@@ -146,13 +146,41 @@ The lesson is narrow and worth keeping: to pick up new upstream code on a workin
 **merge it, do not re-point the branch at it**. `-B` is for creating a branch, not for updating
 one. Pushing after each batch is what made this a recoverable annoyance rather than lost work.
 
+## The firmware has a readable architecture guide too
+
+`docs/reference/ARCHITECTURE.md` on `docs/firmware` - boot, slots, updates and recovery, with
+the reasoning rather than just the values.
+
+The find worth repeating: **there is deliberately no automatic rollback to the stock system.**
+`S00revert-safety` used to write the stock slot's marker on every boot, so any failure before
+the health check landed the next reboot on stock. It was removed in Phase 1.8B and the script is
+now an explicit no-op, because **booting the stock Creality slot auto-flashes the MCU with old
+Creality firmware**, destroying the qualified native GD32F303 build.
+
+The automatic safety net was itself the larger hazard - it would have turned a software failure
+into a hardware one. That is also the root of the user-facing warning never to power-cycle a
+printer running stock: one hardware behaviour, two consequences, and the guide connects them.
+
+Three more things documented with their reasoning:
+
+- The **OTA marker is a three-way wire format**, not a string in a partition. The exact bytes
+  are what Creality's `ota_utils.sh` and `ingenic-usbboot` both write, and usbboot's check is
+  `strncmp(ota, "ota:kernel\n", 11)` - so a bare `echo -n` silently fails to match.
+- The **image trial is bounded two ways** (`TRIAL_SECONDS 300`, `TRIAL_ATTEMPTS 3`) because
+  there are two failure shapes: a hang needs a timeout, a system that crashes and reboots
+  cleanly would reset a timeout forever and needs an attempt count.
+- **`S99confirm-good` originally accepted any result from `/server/info`** - true the instant
+  Moonraker's listener is up, regardless of whether Klipper reached the MCU. Found live, now
+  checks `klippy_state`. A health check answering "did it start" while claiming "does it work"
+  is worse than none.
+
 ## Open pull requests
 
 | Repository | PR | Contents |
 |---|---|---|
 | `NebulaOS` | [#3](https://github.com/NebulaOS-KE/NebulaOS/pull/3) | The complete end-user manual: 29 pages, 128 screenshots, plus this agent's dashboard and tooling |
 | `NebulaOS-klipper-extensions` | [#3](https://github.com/NebulaOS-KE/NebulaOS-klipper-extensions/pull/3) | Architecture guide, 49 commands with per-command detail and side effects, 155 configuration options, developer README |
-| `NebulaOS-firmware` | [#5](https://github.com/NebulaOS-KE/NebulaOS-firmware/pull/5) | 58 Moonraker API endpoints, 35 boot services, developer README |
+| `NebulaOS-firmware` | [#5](https://github.com/NebulaOS-KE/NebulaOS-firmware/pull/5) | Architecture guide (boot, slots, updates, recovery), 58 Moonraker API endpoints, 35 boot services, developer README |
 | `NebulaOS-nebulascreen` | [#6](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/pull/6) | Retired repository URLs fixed; the `GUPPY_SIM_SHOTS` screenshot tour documented |
 
 Nothing is published. No wiki workflow has been run, nothing is merged.
@@ -200,7 +228,9 @@ the workspace root - those belong to the foreground session and move without war
    and range but says nothing about what the setting is for. This needs reading each module,
    not a better parser.
 2. **Q-037** - response examples for the firmware API, from `nebulaos_osconfig/` and the
-   fixtures in `tests/nebulaos-osconfig-tests.py`.
+   fixtures in `tests/nebulaos-osconfig-tests.py`. The firmware is at 5% documented and holds
+   the largest remaining block: 95 draft and 89 missing items, mostly the 56 runtime helpers
+   and per-service detail.
 3. `NebulaOS-nebulascreen` developer pages - LVGL architecture, the panel system, Moonraker
    integration, the simulator, build and testing. One real doc bug found and fixed: three wiki
    pages pointed at the old `coreflake1/NebulaOS-guppyscreen` repository.

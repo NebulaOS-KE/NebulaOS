@@ -115,10 +115,11 @@ strongest: the suite already passes and 21 modules are already test-verified.
       Seven options are now marked **accepted but not acted on**; see `CONFIG.md`.
 - [ ] **Q-031** `NebulaOS-nebulascreen` - LVGL architecture, the panel system, Moonraker
       integration, simulator, build and testing. Reuse the existing developer pages.
-- [~] **Q-032** `NebulaOS-firmware` - API and boot services referenced (PR #5 on that repo):
-      58 endpoints, 35 services. Still to write: the 14-script build pipeline, the 56 runtime
-      helpers, A/B slots / OTA / recovery as an architecture, Buildroot integration,
-      filesystem layout.
+- [~] **Q-032** `NebulaOS-firmware` - API, boot services and now an **architecture guide**
+      (PR #5): slots and the marker, boot order, why there is no automatic rollback to stock,
+      the two-way bounded image trial, recovery by severity, the build pipeline in order.
+      Still to write: the 56 runtime helpers individually, per-service failure behaviour,
+      Buildroot internals, the filesystem layout, and what each build script does inside.
 - [ ] **Q-037** Raise the firmware API reference to mission 6.7: response examples, verified
       against `nebulaos_osconfig/` and the fixtures in `tests/nebulaos-osconfig-tests.py`.
       Do not take them from the component source - it does not contain them.

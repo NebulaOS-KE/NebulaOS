@@ -11,17 +11,17 @@ Verification is reported in four separate columns because they prove different t
 | Measure | Items | Share |
 |---|---|---|
 | Discovered documentation items | 549 | 100% |
-| Documented (page exists and covers the item) | 260 | 47% |
+| Documented (page exists and covers the item) | 269 | 48% |
 | Draft | 111 | 20% |
-| Missing | 178 | 32% |
+| Missing | 169 | 30% |
 | Blocked (cannot proceed without hardware, access or a decision) | 6 | 1% |
-| Has a recorded completeness gap (work not done, not stuck) | 0 | 0% |
+| Has a recorded completeness gap (work not done, not stuck) | 16 | 2% |
 
 ## Verification (counted separately, never combined)
 
 | Kind | Verified | Partial | Unknown | Blocked | N/A |
 |---|---|---|---|---|---|
-| Code verified | 336 | 36 | 177 | 0 | 0 |
+| Code verified | 344 | 37 | 168 | 0 | 0 |
 | Test verified | 29 | 0 | 520 | 0 | 0 |
 | Hardware verified | 0 | 0 | 0 | 2 | 545 |
 
@@ -44,7 +44,7 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | Repository | Items | Documented | Draft | Missing | Code verified | Documented % |
 |---|---|---|---|---|---|---|
 | NebulaOS | 11 | 10 | 0 | 1 | 10 | 90% |
-| NebulaOS-firmware | 194 | 1 | 95 | 98 | 61 | 0% |
+| NebulaOS-firmware | 194 | 10 | 95 | 89 | 69 | 5% |
 | NebulaOS-kernel | 1 | 0 | 0 | 1 | 0 | 0% |
 | NebulaOS-klipper-extensions | 236 | 199 | 16 | 21 | 215 | 84% |
 | NebulaOS-klipper-mcu | 1 | 0 | 0 | 1 | 0 | 0% |
@@ -57,17 +57,17 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | Category | Items | Documented | Draft | Missing | Documented % |
 |---|---|---|---|---|---|
 | api | 59 | 0 | 59 | 0 | 0% |
-| build-command | 14 | 0 | 0 | 14 | 0% |
+| build-command | 14 | 0 | 7 | 7 | 0% |
 | command | 52 | 50 | 0 | 2 | 96% |
 | config-option | 173 | 137 | 16 | 20 | 79% |
 | developer-tool | 11 | 0 | 0 | 11 | 0% |
 | existing-page | 34 | 16 | 0 | 18 | 47% |
 | extension | 30 | 11 | 0 | 19 | 36% |
 | os-helper | 17 | 0 | 0 | 17 | 0% |
-| repo-overview | 8 | 1 | 1 | 6 | 12% |
-| runtime-helper | 57 | 1 | 0 | 56 | 1% |
+| repo-overview | 8 | 2 | 0 | 6 | 25% |
+| runtime-helper | 57 | 3 | 0 | 54 | 5% |
 | screen | 49 | 34 | 0 | 15 | 69% |
-| service | 35 | 0 | 35 | 0 | 0% |
+| service | 35 | 6 | 29 | 0 | 17% |
 | user-manual-section | 10 | 10 | 0 | 0 | 100% |
 
 ## Source revisions this inventory was discovered at
