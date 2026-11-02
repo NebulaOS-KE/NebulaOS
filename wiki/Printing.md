@@ -124,6 +124,12 @@ The printer stops heating and the status screen shows the print as complete. Let
 before removing the part - parts release far more easily cool, and a warm bed with a stuck
 part invites force you will regret.
 
+The job is added to the printer's record. **Settings → Printer → Statistics** shows the last
+four prints with their result and print time, along with the totals for the printer's whole
+life - see [Statistics](Screen-Reference#statistics-panel). The full list, with filament use
+and thumbnails, is Mainsail's **History** page
+([Opening Mainsail](Opening-Mainsail)).
+
 ## Troubleshooting
 
 | What happens | What to do |

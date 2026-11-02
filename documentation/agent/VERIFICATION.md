@@ -89,7 +89,19 @@ sentence against the source it came from.
 
 ## Hardware verification still outstanding
 
-Kept here on Tim's instruction (2026-11-01), because the user-facing pages no longer carry it.
+Kept here on Tim's instruction (2026-11-01, widened 2026-11-02 — see `DECISIONS.md` D-011),
+because the user-facing pages no longer carry it. **No page in the manual states whether
+anything has been tested.** This file and `coverage.jsonl` are the whole record.
+
+Not observed on a printer by this agent, and so recorded only here:
+
+| Behaviour | Where it is documented | Established from |
+|---|---|---|
+| Installing from stock Creality firmware via the touchscreen | `Installing-NebulaOS` | source only (see below) |
+| USB recovery, both the slot-marker rewrite and the full `.ingenic` rewrite | `Recovery` | source and the firmware's own recovery tooling |
+| The image trial and automatic rollback | `Recovery` | firmware `70ad0b0`, `nebulaos_osconfig/image.py` |
+| Power-loss resume ordering, and the cleanup after a failed resume | `Power-Loss-Recovery` | extensions `f498796` and the repository's own tests |
+| Statistics, including the one-time import of the pre-NebulaOS figures | `Screen-Reference` | screen `36490ed`, firmware `70ad0b0`; reported working on `ke-dev` by Tim |
 
 **Installing from stock Creality firmware using the printer's touchscreen has not been
 observed on a printer by this agent.** The existing wiki recorded on 2026-10-29 that only the

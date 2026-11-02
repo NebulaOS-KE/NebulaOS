@@ -22,7 +22,7 @@ blocked while a print is running.
 |---|---|---|
 | **Reset GUI settings** | Replaces the screen's settings file with the image's default copy, then restarts the screen. Klipper keeps running. | Theme, sleep timeout, which sensors are shown - screen settings only |
 | **Reset touch calibration** | Clears the saved touch calibration. The screen restarts into the calibration wizard. | The touch calibration |
-| **Clean NebulaOS reset** (red frame) | Restarts as if newly installed | Printer configuration and calibration, Wi-Fi networks, network settings, root password, print history, screen settings |
+| **Clean NebulaOS reset** (red frame) | Restarts as if newly installed | Printer configuration and calibration, Wi-Fi networks, network settings, root password, print history and statistics, screen settings |
 | **Swap boot slot (A/B)** (orange frame) | Restarts into the other system slot | Nothing - but see the warning below |
 
 ### What a clean reset does *not* touch
@@ -30,6 +30,10 @@ blocked while a print is running.
 Your **G-code files** and the **other boot slot** survive a clean NebulaOS reset. Afterwards
 you reconnect to Wi-Fi on the screen and calibrate again -
 [Connecting to Wi-Fi](Connecting-To-WiFi), [Calibration guide](Calibration-Guide).
+
+The prints you made **under NebulaOS** are gone from
+[Statistics](Screen-Reference#statistics-panel), but the *Before NebulaOS* figures come back on
+their own: they are read again from files that live outside the NebulaOS folder.
 
 ![The clean reset confirmation](images/09-clean-reset-confirm.png)
 
@@ -76,6 +80,12 @@ timelapse videos. It shows what it would free first.
 
 NebulaOS, your print files and your settings are not affected. But note: if the other slot
 still holds the Creality system, that system will start as though factory reset afterwards.
+
+**Your print statistics are kept.** The cleanup deliberately leaves Creality's lifetime print
+counter and its print list in place, along with the old Moonraker database of an earlier OpenKE
+or helper-script install, so the *Before NebulaOS* figures on
+[Settings → Printer → Statistics](Screen-Reference#statistics-panel) stay right afterwards
+(firmware `70ad0b0`, `cleanup.STATISTICS_KEEP`).
 
 **Keep these two straight.** *Free up space* tidies NebulaOS after itself. *Clean up Creality
 files* reclaims space from the other system, and has a consequence for that system. They stay

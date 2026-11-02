@@ -49,6 +49,10 @@ any more, and no page claims the route is tested either.
 **Still open as verification:** `verify_hardware` for the installation item remains unverified
 and only a printer run can change that. This is no longer blocking documentation work.
 
+**Closed outright on 2026-11-02** (Tim, relayed by the main session): the route stays the normal
+route and the manual says nothing about what was tested — see `DECISIONS.md` D-011. The
+verification record stays in `VERIFICATION.md` and `coverage.jsonl`.
+
 ### B-004 - CLOSED (2026-11-01): the note was stale, not a gap
 
 `extras/nozzle_clear.py`, the native nozzle-wipe routine behind

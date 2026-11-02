@@ -15,6 +15,11 @@ workspace rules and the owner's decisions and wins wherever the two differ.
 
 ## Current phase
 
+**RELEASE 1.0.0 is in progress — skip to "RELEASE 1.0.0 (read this block first)" below before
+acting on anything in this section.** The paragraphs immediately following describe Phase 3 and
+are still accurate about the developer references, but they predate the release freeze and the
+counts are stale (the manual is 30 pages, 129 screenshots, 550 inventory items).
+
 **Phase 2 is complete. Phase 3 is underway.**
 
 The end-user manual is 29 pages with **no stubs**, covering all ten mission sections (10/10 on
@@ -182,9 +187,46 @@ affected inventory items for re-verification rather than assuming the pages stil
 `BLOCKERS.md`: B-001 no printer access (by design; simulator is the mitigation), B-002 two
 repositories not yet cloned locally.
 
-## PAUSED FOR RELEASE 1.0.0 (2026-11-01)
+## RELEASE 1.0.0 (read this block first)
 
-### RELEASE 1.0.0: the user manual is verified and publish-ready (2026-11-02)
+### Second pass, 2026-11-02 evening: re-verified against the release candidate `70ad0b0`
+
+**This supersedes the first pass below.** Read `RELEASE-1.0.0-READINESS.md` for the full report.
+
+Done in this pass:
+
+- **Statistics** documented in `wiki/Screen-Reference.md` (new `## Statistics panel` section),
+  linked from `Home`, `Printing` and `Resetting`, with the real capture `20a-statistics.png`.
+- **Screenshots re-captured at `36490ed`**, the screen commit `70ad0b0` pins. 130 captures:
+  one new, four changed, `07-updates` still excluded. `screenshots.json` records `36490ed`.
+- **Storage/cleanup text corrected:** Clean up Creality files *keeps* the statistics files.
+- **`211d804` is gone** from the branch; 44 inventory items relabelled to `70ad0b0`.
+- **Timelapse-across-a-power-loss documented** in `Power-Loss-Recovery`.
+- **D-011 applied:** no user page says what was tested. `BLOCKERS.md` B-003 closed.
+
+**Three things to carry forward:**
+
+1. **The simulator build still works, without a component worktree.** `_worktrees/docs/screen-sim`
+   is a standalone clone, not a `git worktree`, so it does not register in any source
+   repository's worktree list and the release identity gate is unaffected. Procedure: fetch,
+   `git checkout <pin>`, `make GUPPY_SMALL_SCREEN=1 -j$(nproc) LDFLAGS="-lm -Llibhv/lib
+   -Lspdlog/build -l:libhv.a -latomic -lpthread -lstdc++fs -l:libspdlog.a"`, then
+   `tools/capture_screenshots.sh`. The script skips its own build when the binary exists, so
+   rebuild by hand after moving the checkout or you will capture the old commit.
+2. **`render_dashboard.py` takes two arguments** (`coverage.jsonl` then `COVERAGE.md`). With
+   none it raises `IndexError` *and still exits 0*, so a chained command carries on as if it
+   had worked. Pass the paths; check the output line.
+3. **A range is only cosmetic if you checked the range you cited.** The morning's report said
+   `a2e7634..f498796` was a pure version bump. It is not — that was true of
+   `ed99372..f498796`, and the missing middle commit added a user-visible feature that no page
+   described. Diff the range you are actually claiming about.
+
+**Next batch: Q-064, a Timelapse page.** It ships (manifest pin, `S57nebulaos-timelapse-seed`,
+`camera.cfg` / `print.cfg` macros), the mission lists it as a manual section, and the manual
+mentions it on two pages in passing. Everything needed is readable with `git show` — no
+component worktree required.
+
+### First pass, 2026-11-02 morning (superseded by the block above)
 
 Tim's decision: the end-user manual must be finished before 1.0.0 is published; the developer
 wikis are not required for the release. Resumed in this worktree only - no component worktrees

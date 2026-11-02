@@ -10,8 +10,8 @@ Verification is reported in four separate columns because they prove different t
 
 | Measure | Items | Share |
 |---|---|---|
-| Discovered documentation items | 549 | 100% |
-| Documented (page exists and covers the item) | 275 | 50% |
+| Discovered documentation items | 550 | 100% |
+| Documented (page exists and covers the item) | 276 | 50% |
 | Draft | 110 | 20% |
 | Missing | 164 | 29% |
 | Blocked (cannot proceed without hardware, access or a decision) | 6 | 1% |
@@ -21,16 +21,16 @@ Verification is reported in four separate columns because they prove different t
 
 | Kind | Verified | Partial | Unknown | Blocked | N/A |
 |---|---|---|---|---|---|
-| Code verified | 350 | 36 | 163 | 0 | 0 |
-| Test verified | 46 | 0 | 503 | 0 | 0 |
+| Code verified | 351 | 36 | 163 | 0 | 0 |
+| Test verified | 46 | 0 | 504 | 0 | 0 |
 | Hardware verified | 0 | 0 | 0 | 2 | 545 |
 
 ## Screenshots
 
 | Measure | Items |
 |---|---|
-| Required | 57 |
-| Captured and confirmed current | 41 |
+| Required | 58 |
+| Captured and confirmed current | 42 |
 | Verified against the running UI | 0 |
 | Candidate image exists, version unconfirmed | 0 |
 | Missing outright | 15 |
@@ -48,7 +48,7 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | NebulaOS-kernel | 1 | 1 | 0 | 0 | 1 | 100% |
 | NebulaOS-klipper-extensions | 236 | 199 | 16 | 21 | 215 | 84% |
 | NebulaOS-klipper-mcu | 1 | 1 | 0 | 0 | 1 | 100% |
-| NebulaOS-nebulascreen | 104 | 51 | 0 | 53 | 51 | 49% |
+| NebulaOS-nebulascreen | 105 | 52 | 0 | 53 | 52 | 49% |
 | lv_drivers | 1 | 0 | 0 | 1 | 0 | 0% |
 | nebulaos-packages | 1 | 0 | 0 | 1 | 0 | 0% |
 
@@ -66,7 +66,7 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | os-helper | 17 | 0 | 0 | 17 | 0% |
 | repo-overview | 8 | 5 | 0 | 3 | 62% |
 | runtime-helper | 57 | 5 | 0 | 52 | 8% |
-| screen | 49 | 34 | 0 | 15 | 69% |
+| screen | 50 | 35 | 0 | 15 | 70% |
 | service | 35 | 7 | 28 | 0 | 20% |
 | user-manual-section | 10 | 10 | 0 | 0 | 100% |
 
@@ -79,7 +79,8 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | NebulaOS-kernel | openke | d86790d2e231 | 1 |
 | NebulaOS-klipper-extensions | main | ed993726b892 | 236 |
 | NebulaOS-klipper-mcu | main | 33f5d16daccd | 1 |
-| NebulaOS-nebulascreen | main | dee0f6f22a89 | 104 |
+| NebulaOS-nebulascreen | main | 36490ed0b60d | 2 |
+| NebulaOS-nebulascreen | main | dee0f6f22a89 | 103 |
 | lv_drivers | master | not cloned l | 1 |
 | nebulaos-packages | main | not cloned l | 1 |
 
@@ -92,7 +93,7 @@ Only genuine blockers: something that cannot proceed without hardware, access or
 | repo:nebulaos-packages | nebulaos-packages | not cloned locally; clone into _worktrees/docs |
 | repo:lv_drivers | lv_drivers | not cloned locally; clone into _worktrees/docs |
 | manual:02-installation | NebulaOS | verify_hardware outstanding: the stock-touchscreen route has not been observed on a printer (D-009: user pages document it as the normal route; record kept in VERIFICATION.md) |
-| screen:storage_panel | NebulaOS-nebulascreen | the new Free up space button (screen 3194104) is not in the screenshot tour; needs an extra tour step or a real printer |
+| screen:storage_panel | NebulaOS-nebulascreen | the Free up space / Clean up Creality buttons (screen 36490ed) are not in the screenshot tour; needs an extra tour step or a real printer |
 | screen:updates_panel | NebulaOS-nebulascreen | capture is timing-dependent without a live Moonraker: the busy/idle state varies between runs, so a published image would contradict the page. Needs a real printer. |
 | gcode:NEBULAOS_BED_TRAM | NebulaOS-klipper-extensions | defined as a gcode_macro in the firmware's calibration.cfg, not registered by the extensions; verify the macro file before documenting |
 

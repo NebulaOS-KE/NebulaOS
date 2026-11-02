@@ -1,103 +1,144 @@
 # Publish-readiness report: the end-user manual for release 1.0.0
 
-**Date:** 2026-11-02
-**Verified against:** firmware `211d804` (`NEBULAOS_VERSION=1.0.0`), NebulaScreen `dee0f6f`
-(`v1.0.0`), extensions `f498796` (branch `production`), kernel `d86790d`, UI API `1`
+**Date:** 2026-11-02 (second pass — supersedes the first pass of the same day)
+**Verified against:** firmware `70ad0b0` (`NEBULAOS_VERSION=1.0.0`, the release candidate),
+NebulaScreen `36490ed` (`NEBULASCREEN_VERSION=v1.0.0`), extensions `f498796` (branch
+`production`), host Klipper `58bd67d`, kernel `d86790d`
 **Branch:** `docs/agent` — PR #3 on the central `NebulaOS` repository
 **Published:** no. Nothing has been published and no wiki workflow has been run.
 
 ## Summary
 
-The manual is **ready to publish** as far as this agent can take it: 30 pages, no stubs, 128
-real screenshots, every internal and external link resolving, and every page checked against
-the release commit.
+The manual is **ready to publish**: 30 pages, no stubs, 129 real screenshots, every internal
+and external link resolving, and every page re-checked against the release candidate. The one
+judgement call the first pass left for Tim has since been decided by him and applied.
 
-Four things remain that this agent cannot close. None is a reason to withhold the manual; one
-is a judgement call for the owner.
+The first pass of today verified against firmware `211d804`. The release candidate has since
+moved to `70ad0b0`, which changed the screen pin and added a user-visible feature. This pass
+closes that gap. Everything named below was read at `70ad0b0` / `36490ed` / `f498796`, not
+carried over.
 
-## What was verified for 1.0.0
+## What changed in this pass
 
-| Area | Result |
+### 1. Statistics — the new 1.0.0 feature, now documented
+
+**Settings → Printer → Statistics.** A full section in `wiki/Screen-Reference.md`, linked from
+`Home`, `Printing` and `Resetting`, with a real capture (`images/20a-statistics.png`).
+
+It covers what the page shows (total print time; the NebulaOS figures — print time, prints
+done/cancelled/failed, filament, longest print; the two *Before NebulaOS* sources; the four
+most recent prints and their marks), and the two things about it that surprise people:
+
+- **Print time is printing time** — Klipper's print duration, first extrusion to end, without
+  heating or pauses.
+- **The total is not a sum.** *Before NebulaOS* is the **larger** of Creality's counter and an
+  earlier Moonraker's history, never their sum, because under OpenKE both counted the same
+  prints. Documented from `combine_stats` rather than from the screen's output.
+
+It also states where each number comes from (`nebulaos-osconfig stats baseline`, imported once
+into `/usr/data/nebulaos/system/stats-baseline.json`, reading Creality's files and the old
+Moonraker database read-only), what survives a cleanup, and what a clean reset does to it.
+
+### 2. Storage / cleanup text
+
+`Resetting` now says that **Clean up Creality files keeps the print statistics** — Creality's
+lifetime counter, its print list, and the old Moonraker database — with the source named
+(`cleanup.STATISTICS_KEEP`, `KEEP_IN_PRINTER_DATA`). The `Screen-Reference` Storage row says
+the same and points at the Statistics section. This was the one place where the old text would
+have told a reader the opposite of what 1.0.0 does.
+
+### 3. Release references re-pointed from `211d804` to `70ad0b0`
+
+44 inventory items relabelled, the `Recovery` trial-bounds citation re-cited (the constants
+were re-read at `70ad0b0`: still `TRIAL_SECONDS = 300`, `TRIAL_ATTEMPTS = 3`), and this report
+rewritten. No `211d804` reference remains anywhere in the branch.
+
+### 4. Screenshots re-captured at the release screen pin
+
+The tour was re-run against a build of `36490ed` — the exact commit `70ad0b0` pins. 130
+captures; **one new** (`20a-statistics`) and **four changed**:
+
+| Image | Why it changed |
 |---|---|
-| Release identity | Read from the manifest at `211d804`. All five pins confirmed. |
-| Extensions behaviour | `ed99372..f498796` is a **pure version bump** (one line in `nebulaos-extensions.json`), so the power-loss-recovery behaviour documented yesterday is exactly what 1.0.0 ships. |
-| Screenshots | Captured from `dee0f6f`, which **is** the release screen pin. Current; no re-capture needed. |
-| Trial bounds | Still `TRIAL_SECONDS = 300`, `TRIAL_ATTEMPTS = 3`. Recovery and update pages hold. |
-| Root password | `nebulaos-shadow.sh` seeds the persistent copy **once**, so upgraders keep their existing password. Documented. |
-| SSH prompt | `PS1='\u@\h:\w# '`. Documented, with the source's own reason: so a session says which printer it is on. |
-| Links | 30 pages, 12 external links, all resolving. |
+| `05-printer`, `15-printer` | the Printer settings page gained the **Statistics** button |
+| `35-restart-klipper-refused` | that same page is the dialog's background |
+| `37-spoolman-typing` | the **Use** button's pressed shade — not a code change |
 
-## Fixed in this pass
+`07-updates` stays excluded for the reason recorded in `SCREENSHOTS.md`. `screenshots.json`
+now records `36490ed`.
 
-1. **An asset-name bug.** The install page listed the checksum as
-   `NebulaOS-Ender3V3KE-<version>.sha256`; the published asset is `...-<version>.img.sha256`,
-   and the page's own command four lines later used the correct name. A reader following the
-   list would have hunted for a nonexistent file at the first step.
-2. **The asset list** is now a table of all five 1.0.0 files, with the `.ingenic` marked as USB
-   recovery only and **not** for a normal install — the two differ by one extension and one of
-   them erases the data partition.
-3. **Every `<version>` placeholder** is now concrete `1.0.0`, with one note on adapting for
-   later releases.
-4. **Both "version 0.9.0" statements** are now 1.0.0.
-5. **Two links that would have 404'd at publication** — they pointed at the NebulaScreen
-   GitHub wiki, which is not published. Switched to in-repo URLs that resolve today.
-6. **Two unverifiable size figures removed** ("about 133 MB", "about 140 MB"). Inherited from
-   the old wiki, not checkable here, and they drift every release. The text now points at the
-   screen, which shows the exact size before a download starts.
+### 5. Power-loss recovery: one undocumented 1.0.0 behaviour added
+
+Checking the extensions pin showed that `a2e7634..f498796` is **not** the pure version bump
+the first pass reported — that was true of `ed99372..f498796` only. The real change
+(`ed99372`) added three things, two of which the page already described. The third did not
+exist on any page: **a timelapse keeps the frames recorded before the power cut**, merged back
+in front of the new ones when the print ends. Now documented, with the shipped configuration
+that enables it named (`machine.cfg`, `timelapse_frame_path`).
+
+The page's two source citations now name `f498796`, the commit 1.0.0 ships.
 
 ## What is left, and who can close it
 
-### 1. The stock-touchscreen install route is still unverified on hardware — owner
+### 1. The stock-touchscreen install route — closed by Tim, nothing left to decide
 
-`BLOCKERS.md` B-003. The manual documents it as the normal route, per Tim's decision of
-2026-11-01, and carries no warning. The verification record stays in `VERIFICATION.md`.
+B-003 is closed (2026-11-02, decision D-011). The route stays the normal route and the manual
+states nothing about what was or was not tested, anywhere. Three other places that did — two
+`Recovery` notes and three "not observed on a printer" footnotes — were removed in this pass
+for the same reason, and `Updating-NebulaOS`'s "the tested versions" became the factual claim
+it was reaching for.
 
-**This is the one judgement call before publishing.** It is the route most first-time users
-take, and no one has confirmed it end to end. The decision to present it without a caveat was
-deliberate and is Tim's; it is worth re-confirming now that it ships, because publication is
-when it starts affecting strangers rather than the project's own testers.
+What was deliberately **not** removed: the consequences. The full USB rewrite still says it
+erases settings, print files and calibration. The record of what has actually been observed on
+a printer now lives only in `VERIFICATION.md` and `coverage.jsonl`.
 
-### 2. Thirteen screenshots are missing — owner, or a later pass
+There is no judgement call left outstanding before publication.
 
-Of 57 required images, 41 are captured. The gaps, each acknowledged in the page text rather
-than hidden:
+### 2. There is no Timelapse page — a real gap, not a blocker
 
-- **Needs a photograph of real hardware:** the first-boot screen, and the MCU firmware page.
-- **Needs a live printer:** the Updates page. Its capture is timing-dependent without
-  Moonraker — it would show greyed-out buttons that are not greyed out on a real printer, so
-  publishing it would contradict the page.
-- **Reachable in the simulator, not yet captured:** 10 panels, including Storage (which has the
-  new **Free up space** button), the Spoolman spool list and the bed-mesh 3D view. These need
-  the frozen screen worktree, so they wait for the freeze to lift.
+Timelapse ships (the manifest pins `moonraker-timelapse`, `S57nebulaos-timelapse-seed` seeds
+it, `camera.cfg` and `print.cfg` drive it) and the mission lists it as a manual section, but
+the word appears on only two pages in the whole manual. The power-loss side is now covered;
+a proper page is queued as Q-064 and is the next batch.
 
-None blocks publication. Every affected page says plainly that the picture is missing.
+If the release can wait an iteration, this is worth having. If it cannot, the manual is not
+wrong without it — it is incomplete, and no page promises the section.
 
-### 3. The NebulaScreen wiki should point at this manual — needs the frozen repo
+### 3. Fifteen screenshots are missing — owner, or a later pass
 
-The reuse audit's plan was to leave short redirect pages in the component wiki so existing
-links reach the central manual. That is a change in `NebulaOS-nebulascreen`, which is frozen,
-so it is queued rather than done. Until then the two wikis coexist without cross-links, which
-is untidy but not wrong.
+Of 58 required images, 42 are captured. Unchanged in kind from the first pass: two need a
+photograph of real hardware (first boot, MCU firmware page), one needs a live printer
+(Updates), and the rest are reachable in the simulator but not on the capture tour — Storage
+among them, which is why the **Free up space** and **Clean up Creality files** buttons are
+described in words. Every affected page says plainly that the picture is missing.
 
-### 4. Publishing itself — owner
+### 4. The NebulaScreen wiki should point at this manual — needs the frozen repo
 
-The central repository has no wiki publish workflow yet; the NebulaScreen one
-(`.github/workflows/wiki.yml`) is the working example to copy. This agent has not created or
-run one, by instruction.
+Unchanged. It is a change in `NebulaOS-nebulascreen`, which is frozen for the release.
+
+### 5. Publishing itself — owner
+
+The central repository has no wiki publish workflow. This agent has not created or run one,
+by instruction.
 
 ## Honest notes on scope
 
-**No page claims hardware verification.** Everything is established from source at `211d804`
-and from the repositories' own tests. Where behaviour was reported by the owner rather than
-observed here — the nozzle-clean routine, the install route — the inventory records
-`reported-by-owner`, not `verified`.
+**No page claims hardware verification.** Everything here is established from source at
+`70ad0b0` / `36490ed` / `f498796` and from the repositories' own tests. Where behaviour was
+reported by the owner rather than observed here — the nozzle-clean routine, the install route,
+the Statistics page on `ke-dev` — the inventory records `reported-by-owner`, not `verified`.
 
-**One correction worth remembering.** Until yesterday this manual led with a warning that
-power-cycling a printer on Creality's system could break it permanently. That was false — the
-MCU guard restores the native firmware automatically — and it was caught by the owner, not by
-this agent. The current text says switching is safe and names the one real caution. If any
-reviewer remembers the old warning, that is why it is gone.
+**The screenshots are the real application, not a real printer.** The Statistics capture shows
+the simulator's example figures, and the page says so under the image. The alternative — a
+screenshot implying a particular printer's history — would be worse.
 
-**Coverage is 50% overall (275 of 549 items), and that is not the manual's number.** The
-end-user sections are 10/10. The remaining half is developer documentation, which Tim has
-confirmed is not required for this release.
+**Firmware `main` has already moved past the release candidate** to `78da217`, which touches
+only `tools/hardware/` (a read-only capture profile). Nothing in the manual is affected.
+
+**The extensions developer reference is behind the release.** 189 inventory items are labelled
+at `a2e7634` while 1.0.0 ships `f498796`, and those two differ in runtime code. That is
+developer documentation, which Tim has confirmed is not required for this release; it is
+queued as Q-065 and cannot start until the component worktrees come back.
+
+**Coverage is 50% overall (276 of 550 items), and that is not the manual's number.** The
+end-user sections are 10/10. The remaining half is developer documentation.

@@ -161,3 +161,34 @@ Write the wiki as it should be, not as it was: rename, merge and restructure fre
 This clears the hesitation in `REUSE-AUDIT.md` about the `Installation.md` /
 `Installing-NebulaOS.md` name collision. That pair gets fixed rather than flagged, and the
 component page is retitled to describe what it actually contains.
+
+## D-011 - The manual does not say what was tested
+
+**Date:** 2026-11-02 (relayed from the main session)
+**Decided by:** Tim
+
+*"It's a wiki, it's how it's supposed to work."* No user page states whether a procedure or a
+behaviour has been tested, on hardware or anywhere else. B-003 is closed on the same reasoning:
+the stock-touchscreen install route is the normal route and carries no caveat.
+
+Applied across the manual:
+
+| Page | Removed |
+|---|---|
+| `Recovery` | *"Tested on Linux on 2026-10-14"*; *"This has not been tested on a printer by the NebulaOS project"* |
+| `Recovery`, `Power-Loss-Recovery` | *"Not observed on a printer by the author of this page"* (three footnotes) |
+| `Updating-NebulaOS` | *"the tested versions"* — now *"its own matched versions"*, which is the factual claim that was meant |
+
+**What was kept, deliberately.** The *consequences* are still on the page where they are real:
+the full USB rewrite still says it erases settings, print files and calibration, and still says
+to use it only when nothing else has worked. Removing a statement about testing is not the same
+as removing a warning about what an operation does, and nothing in this decision asks for the
+second.
+
+**Source citations stay.** A footnote naming the commit a behaviour was read from is provenance,
+not a test claim, and it is what lets a later reader re-check a sentence instead of trusting it.
+They are reworded from *"Verified in the implementation at…"* to plain attribution.
+
+**The record moves, it does not disappear.** `verify_hardware` in `coverage.jsonl` and the
+section below in `VERIFICATION.md` still say exactly what has and has not been observed on a
+printer. That is internal bookkeeping, which is where Tim asked for it to live.

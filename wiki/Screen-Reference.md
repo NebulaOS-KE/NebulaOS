@@ -7,13 +7,13 @@ from [Home](Home) - [Printing](Printing), [Filament](Filament),
 [Calibration guide](Calibration-Guide) and the rest explain the common jobs step by step. Come
 here when you want to know what a specific control does.
 
-Screenshots are real captures of the application at screen commit `3194104`, taken at the
+Screenshots are real captures of the application at screen commit `36490ed`, taken at the
 printer's own 480x272 resolution. A few screens have no picture yet; where that is so, the page
 says it rather than showing you something else.
 
 ## Every panel, and where to find it
 
-The complete list is generated from the source - 49 panels in all - so nothing is quietly
+The complete list is generated from the source - 50 panels in all - so nothing is quietly
 left out. Panels marked *detail below* are described on this page; the others are covered by
 the task pages linked, or are internal screens you do not navigate to directly.
 
@@ -61,6 +61,7 @@ the task pages linked, or are internal screens you do not navigate to directly.
 | `spoolman_panel` | [Filament](Filament) | not yet |
 | `spoolman_server_panel` | [Filament](Filament) | yes |
 | `static_ip_panel` | [Connecting to Wi-Fi](Connecting-To-WiFi) | not yet |
+| `statistics_panel` | detail below | yes |
 | `storage_panel` | [Resetting](Resetting) | not yet |
 | `system_panel` | detail below | yes |
 | `tmc_status_panel` | detail below | yes |
@@ -670,7 +671,7 @@ A grid of six tiles. Each opens its own page; **Back** returns to the grid.
 |---|---|
 | **Connections** | Wi-Fi, address, printer name, Mainsail / Moonraker / Spoolman |
 | **Display** | Brightness, sleep, theme, touch beep, boot logo, camera |
-| **Printer** | Jog and temperature defaults, Klipper and MCU restarts, MCU firmware |
+| **Printer** | Jog and temperature defaults, print statistics, Klipper and MCU restarts, MCU firmware |
 | **System** | Version info, report a problem, storage, logs, restart / reboot / shut down |
 | **Updates** | App updates and system image install (USB, upload, online) |
 | **Reset** | GUI settings, touch calibration, clean reset, boot slot swap |
@@ -711,6 +712,7 @@ Invalid names are flagged while you type; saving asks to confirm first.
 | **Default extruder temp** | 180–300 °C. Used by Load/Unload when no target is set. |
 | **Ask before emergency stop** | On: Stop asks "Do you want to emergency stop?" first. Off: acts immediately. Default on. |
 | **Invert Y arrows** / **Invert Z arrows** | Swap the jog arrows in the Homing panel. |
+| **Statistics** | What this printer has printed, over its whole life — see [Statistics panel](#statistics-panel). |
 | **Restart Klipper** | Restarts Klipper. Asks first if a print is running (the print stops). |
 | **Restart MCU** | Restarts the printer board's firmware, then Klipper (`FIRMWARE_RESTART`). Asks first if a print is running. |
 | **MCU firmware** | Installs a new mainboard (MCU) firmware. |
@@ -723,7 +725,7 @@ storage. Buttons:
 | Button | What it does |
 |---|---|
 | **Report a problem** | Three steps: set the **Log level** (Info / Warning / Debug; Debug switches back to Info after 24 hours), **Save logs to USB**, and report on GitHub (QR code and address on screen). |
-| **Storage** | Disk usage, and **Clean up Creality files** — see [Resetting](Resetting#freeing-space-from-the-creality-system). |
+| **Storage** | Disk usage, **Free up space** and **Clean up Creality files** — see [Resetting](Resetting#freeing-up-space). Neither removes the figures behind [Statistics](#statistics-panel). |
 | **Logs** | Read log files on the screen, including the Wi-Fi lines of `system.log`. |
 | **Restart GUI** | Restarts NebulaScreen only. Klipper keeps running. |
 | **Reboot** / **Shut down** | Ask first. After shutting down, switch the printer off at the power switch. |
@@ -745,6 +747,97 @@ back to the previous slot. See [Updating NebulaOS](Updating-NebulaOS).
 ### Reset
 
 See [Resetting](Resetting).
+
+---
+
+## Statistics panel
+
+Opens from Settings → Printer → **Statistics**. It shows what this printer has printed, over its
+whole life — including the time before NebulaOS was installed. Nothing on this page changes the
+printer; it only reads.
+
+![The Statistics page: total print time, the NebulaOS figures, what came before, and the recent prints](images/20a-statistics.png)
+
+*The figures in the picture are the simulator's example data, not a real printer.*
+
+### The left column
+
+| Line | What it means |
+|---|---|
+| **Total print time** | The printer's whole life: what it printed before NebulaOS plus what it has printed since. |
+| **Since NebulaOS — Print time** | Time spent printing since NebulaOS was installed. |
+| **Prints** | How many print jobs, then the split: *done*, *cancelled*, *failed*. |
+| **Filament** | Filament used since NebulaOS, in metres. |
+| **Longest print** | The longest single job since NebulaOS. |
+| **Before NebulaOS — Creality** | Creality's own lifetime counter, and how many prints Creality still lists. |
+| **Before NebulaOS — Earlier Moonraker** | An earlier Moonraker's history, if this printer ran one (OpenKE or the community helper script). |
+
+Each *Before NebulaOS* line says **none found** when that system never ran here, or **could not be
+read** when the file exists but could not be understood.
+
+### Recent prints
+
+The right column lists the **four** most recent jobs, newest first, each with its print time and a
+mark:
+
+| Mark | Meaning |
+|---|---|
+| ✔ | finished |
+| ✘ | cancelled |
+| ▶ | running now |
+| ⚠ | failed |
+
+File names longer than 20 characters are shortened with `...`. For the full list, open
+[Mainsail](Opening-Mainsail) and use its **History** page.
+
+### How the numbers are worked out
+
+Worth knowing, because two of these surprise people.
+
+**Print time is printing time.** It is Klipper's print duration: from the first extrusion to the
+end of the job, *not* counting heating up or time spent paused. So it is always less than the
+wall-clock time you waited.
+
+**The total is not the sum of everything.** The *Before NebulaOS* figure is the **larger** of the
+two sources, never their sum. On a printer that ran OpenKE, Creality's counter and Moonraker's
+history were both running and both counted the same prints; adding them would double the
+printer's life. (`combine_stats` in the NebulaOS Moonraker component, firmware `70ad0b0`.)
+
+Where each figure comes from:
+
+- **Since NebulaOS** is Moonraker's own print history — the same database
+  [Mainsail](Opening-Mainsail)'s History page reads. That is why Mainsail's History lists only
+  prints made under NebulaOS.
+- **Before NebulaOS** is read once from the printer's data drive and then remembered, in
+  `/usr/data/nebulaos/system/stats-baseline.json`. Creality's lifetime counter and print list
+  come from Creality's own files; the earlier-Moonraker figures come from the old Moonraker
+  database. All three are read and never written.
+- A source that is missing or unreadable is looked at again next time, so installing NebulaOS
+  before the import has anything to find is not a problem.
+
+**These figures survive a cleanup.** [Clean up Creality files](Resetting#freeing-up-space) keeps
+Creality's two statistics files and the old Moonraker database on purpose, so your printer's
+history is not lost with the rest of the Creality system (firmware `70ad0b0`,
+`cleanup.STATISTICS_KEEP`).
+
+**What does erase them:** a [clean NebulaOS reset](Resetting) removes everything NebulaOS keeps,
+including its print history and the remembered *Before NebulaOS* figures. The *before* figures
+are simply imported again at the next look, because the files they come from — Creality's and the
+old Moonraker database — live outside the NebulaOS folder and a clean reset does not touch them
+(firmware `70ad0b0`, `nebulaos-clean-reset`). The prints made under NebulaOS are gone for good.
+
+### If the page says something else
+
+| What you see | What it means |
+|---|---|
+| **Adding up...** | Still waiting for the printer. It is normal for a moment. |
+| **The printer could not read the statistics.** | Moonraker answered with an error. Check that Klipper and Moonraker are running — [Troubleshooting](Troubleshooting). |
+| **No answer from the printer.** | The screen has no Moonraker connection. See [Connecting to Wi-Fi](Connecting-To-WiFi). |
+| **Recent prints — None yet.** | No print has been recorded under NebulaOS yet. |
+
+Behind the page: `GET /machine/nebulaos/stats` (JSON-RPC `machine.nebulaos.stats`). Screen source
+`src/statistics_panel.cpp` at `36490ed`; the import is `nebulaos-osconfig stats baseline` at
+firmware `70ad0b0`.
 
 ---
 

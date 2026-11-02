@@ -57,13 +57,17 @@ After choosing **Resume**, the printer works through a deliberate order:
 Objects you had cancelled stay cancelled, and if you were part-way through one, that object is
 started again rather than skipped.
 
+**A timelapse keeps its earlier frames.** If you were recording a timelapse, the frames taken
+before the power cut are put back in front of the new ones when the print ends, so the finished
+video covers the whole print instead of only the part after the resume. Nothing to switch on -
+it is set up in the shipped configuration (`machine.cfg`, `timelapse_frame_path`).
+
 **Why the order matters.** It would be simpler to heat everything at once, and a power-cut test
 on a real printer showed why that is wrong: the nozzle heated *while still sitting over the
 part*, which risks melting into the print you are trying to save. Heating the nozzle only once
 it has moved away costs a little time and removes that risk entirely.
 
-*Verified in the implementation at extensions commit `ed99372`. The ordering change came out of
-a power-cut test on the project's development printer.*
+*The order comes from extensions `f498796`, the version NebulaOS 1.0.0 ships.*
 
 ## If a resume fails partway
 
@@ -83,9 +87,8 @@ done:
 So a failed resume leaves you able to retry, with the part still attached. If you would rather
 not retry, choose **Discard** and turn the bed off yourself.
 
-*Verified in the implementation at extensions commit `a2e7634`
-(`nebulaos_power_loss_recovery.py`, `_undo_failed_resume`), and covered by the repository's
-own tests. Not observed on a printer by the author of this page.*
+*From extensions `f498796`, the 1.0.0 release pin (`nebulaos_power_loss_recovery.py`,
+`_undo_failed_resume`).*
 
 ## Troubleshooting
 

@@ -191,6 +191,26 @@ strongest: the suite already passes and 21 modules are already test-verified.
       Re-run `tools/capture_screenshots.sh` once the screen tip moves.
 - [ ] **Q-061** Restructure under D-010: retitle the component `Installation.md` to say what
       it is, and reconcile the screen wiki's navigation with the central manual.
+- [x] **Q-062** **Statistics for 1.0.0** (Tim via the main session, 2026-11-02). Done:
+      `wiki/Screen-Reference.md` gained a full **Statistics panel** section with the real
+      capture `20a-statistics.png`, and the page is linked from `Home`, `Printing` and
+      `Resetting`. Storage text now says the Creality cleanup keeps the statistics files.
+      Evidence: screen `36490ed` (`statistics_panel.cpp`, `stats_text`), firmware `70ad0b0`
+      (`nebulaos_osconfig/stats.py`, `combine_stats`, `cleanup.STATISTICS_KEEP`).
+- [x] **Q-063** Re-point the release references from firmware `211d804` to the 1.0.0
+      release candidate `70ad0b0`: 44 inventory items, the `Recovery` trial-bounds citation
+      (constants re-read at `70ad0b0` and unchanged) and the readiness report.
+- [ ] **Q-064** **Timelapse is not in the user manual at all** - found while checking the
+      1.0.0 extensions pin. It ships (manifest pins `moonraker-timelapse`, seeded by
+      `S57nebulaos-timelapse-seed`, macros in `camera.cfg`/`print.cfg`), the mission lists it
+      as a manual section, and 1.0.0 adds frame-keeping across a power loss. The power-loss
+      side is now documented in `Power-Loss-Recovery`; a proper `Timelapse` page is the next
+      manual batch.
+- [ ] **Q-065** Re-verify the extensions developer reference against the 1.0.0 pin.
+      189 inventory items are still labelled *0.9.0 (manifest pins a2e7634)*, but 1.0.0 ships
+      `f498796`, and `a2e7634..f498796` is **not** cosmetic: `nebulaos_power_loss_recovery.py`
+      (+155 lines) and `nozzle_clear.py` changed. Developer docs only - not release-blocking,
+      and not startable until the component worktrees come back.
 
 ## Done
 

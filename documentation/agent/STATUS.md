@@ -5,27 +5,50 @@
 
 | | |
 |---|---|
-| Discovered items | **549** |
-| Documented | **275** (50%) |
+| Discovered items | **550** |
+| Documented | **276** (50%) |
 | Draft | 110 |
 | Missing | 164 |
-| Code verified | 350 |
+| Code verified | 351 |
 | Test verified | 46 |
 | Hardware verified | 0 |
-| Screenshots required / captured | 57 / 41 |
+| Screenshots required / captured | 58 / 42 |
 | Blocked (cannot proceed) | 6 |
 | Completeness gaps (work not done) | 6 |
 
 Per-repository and per-category breakdowns are in `COVERAGE.md`.
 <!-- END GENERATED STATUS -->
 
-**PAUSED: RELEASE 1.0.0 freeze (2026-11-01).** The component worktrees are removed for the
-release identity gate; all six `docs/*` branches are pushed and intact. No new work until the
-foreground session lifts the freeze. See `HANDOFF.md` for the resume procedure.
+**RELEASE 1.0.0: the user manual is publish-ready against the release candidate `70ad0b0`
+(2026-11-02).** Full report: `RELEASE-1.0.0-READINESS.md`. Nothing is published; Tim publishes.
 
-**Phase:** 3 - developer wikis. Phase 1 (discovery) and Phase 2 (end-user manual) are complete.
+**The freeze still holds for the component worktrees.** Only the central worktree is in use;
+source is read with `git show <sha>:<path>`. The five `docs/*` component branches are pushed
+and untouched. The one build done here was the standalone `screen-sim` clone, which is not a
+git worktree and does not affect the release identity gate.
+
+**Phase:** 3 - developer wikis, paused. Phases 1 and 2 are complete and the manual is being
+finished for the release.
 
 **Branch:** `docs/agent` in the central `NebulaOS` repository.
+
+## This release pass, in short
+
+- **Statistics** (Settings → Printer → Statistics) is documented, with a real capture from the
+  release screen pin `36490ed`. The two counter-intuitive parts are explained from source: print
+  time excludes heating and pauses, and the lifetime total is the **larger** of the two
+  pre-NebulaOS sources plus the NebulaOS time, never their sum.
+- **Clean up Creality files keeps the statistics.** The old text implied the opposite.
+- **Everything re-pointed from `211d804` to `70ad0b0`**, with the constants re-read rather than
+  assumed.
+- **One behaviour was missing entirely:** a timelapse keeps the frames from before a power cut.
+  Found by checking the extensions pin properly — `a2e7634..f498796` is *not* the pure version
+  bump the morning's report called it; that was true of `ed99372..f498796` only. A range that
+  looks cosmetic because one of its ends was checked is not a checked range.
+- **D-011:** the manual no longer says what was tested, anywhere. Consequences stay, test claims
+  go, and the record moves to `VERIFICATION.md`.
+- **Timelapse has no page at all.** It ships and the mission lists it as a manual section. Queued
+  as Q-064 and it is the next batch.
 
 ## Why the documented figure is low, and what it means
 

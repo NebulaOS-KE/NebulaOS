@@ -48,9 +48,8 @@ trial makes the trial run again on the next start.
 **This does not cover:** an install done through Creality's updater, which has no trial at all,
 or a kernel that does not start.
 
-*Verified in the implementation at firmware commit `82e1320`
-(`nebulaos_osconfig/image.py`: `TRIAL_SECONDS = 300`, `TRIAL_ATTEMPTS = 3`). Not observed on a
-printer by the author of this page.*
+*The bounds come from firmware `70ad0b0` (`nebulaos_osconfig/image.py`: `TRIAL_SECONDS = 300`,
+`TRIAL_ATTEMPTS = 3`).*
 
 ## 2. Swap the boot slot from the screen
 
@@ -106,8 +105,6 @@ Use NebulaOS-firmware's `tools/recovery/usb-set-boot-slot.sh A` (or `B`) with th
 `usbboot` tool. Steps:
 [Developer recovery](https://github.com/NebulaOS-KE/NebulaOS-firmware/blob/main/docs/DEVELOPER_RECOVERY.md#3-usb-recovery--the-panic-button).
 
-Tested on Linux on 2026-10-14.
-
 ### 4b. Write the whole system again
 
 **This erases your settings, your print files and your calibration.** Only the printer's
@@ -117,8 +114,8 @@ Each release includes an `.ingenic` file for the Ingenic USB Cloner - for 1.0.0 
 `NebulaOS-Ender3V3KE-1.0.0.ingenic`, alongside its `.sha256`. It rewrites the printer from
 scratch: NebulaOS in slot 2, Creality's stock system in slot 1.
 
-**This has not been tested on a printer by the NebulaOS project.** Use it only when nothing
-else has worked, and expect to set the printer up from nothing afterwards.
+Use it only when nothing else has worked, and expect to set the printer up from nothing
+afterwards.
 
 ## What survives
 

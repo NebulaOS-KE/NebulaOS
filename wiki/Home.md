@@ -27,6 +27,7 @@ first time it appears, and [Words you will see](Glossary) collects them all.
 | Load or change filament | [Filament](Filament) |
 | Watch the print from your phone | [Camera](Camera) |
 | Install a newer NebulaOS | [Updating NebulaOS](Updating-NebulaOS) |
+| See what this printer has printed | [Statistics](Screen-Reference#statistics-panel) |
 | Undo a setting, or start fresh | [Resetting](Resetting) |
 | Something is broken | [Troubleshooting](Troubleshooting) |
 | The printer will not start | [Recovery](Recovery) |
@@ -41,6 +42,8 @@ first time it appears, and [Words you will see](Glossary) collects them all.
 - Live tuning while a print runs: speed, flow, Z offset and pressure advance.
 - **Mainsail** in your web browser, for uploading files and controlling the printer from a
   computer or phone.
+- **Statistics** for the printer's whole life - including what it printed before NebulaOS was
+  installed, read from the system that was there before.
 - Power-loss recovery, so a print can continue after the power goes out.
 - Two system slots, so a bad update can be undone by starting the other one.
 - Camera support, including the settings of Creality's own Nebula Camera.

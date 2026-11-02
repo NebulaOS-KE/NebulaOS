@@ -85,7 +85,7 @@ Worth knowing how these track upstream:
   branch.
 - **The extensions check at every Klipper start that Klipper still provides what they need,
   and stop with a clear message if it does not.** A mismatch announces itself instead of
-  failing mid-print. The system image keeps the tested versions as a fallback.
+  failing mid-print. The system image keeps its own matched versions as a fallback.
 - The screen app updates from its own releases. A system image brings its own copy of the
   screen app, and after a system image install that copy is used again.
 
