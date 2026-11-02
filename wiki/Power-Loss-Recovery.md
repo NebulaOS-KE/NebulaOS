@@ -57,7 +57,7 @@ After choosing **Resume**, the printer works through a deliberate order:
 Objects you had cancelled stay cancelled, and if you were part-way through one, that object is
 started again rather than skipped.
 
-**A timelapse keeps its earlier frames.** If you were recording a timelapse, the frames taken
+**A timelapse keeps its earlier frames.** If you were recording a [timelapse](Timelapse), the frames taken
 before the power cut are put back in front of the new ones when the print ends, so the finished
 video covers the whole print instead of only the part after the resume. Nothing to switch on -
 it is set up in the shipped configuration (`machine.cfg`, `timelapse_frame_path`).

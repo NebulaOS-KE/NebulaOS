@@ -221,7 +221,19 @@ Done in this pass:
    `ed99372..f498796`, and the missing middle commit added a user-visible feature that no page
    described. Diff the range you are actually claiming about.
 
-**Next batch: Q-064, a Timelapse page.** It ships (manifest pin, `S57nebulaos-timelapse-seed`,
+**Q-064 is done (2026-11-03): `wiki/Timelapse.md`.** The manual is 31 pages. Two findings worth
+keeping: NebulaOS takes the layer pictures itself (a watcher in `camera.cfg` started by
+`START_PRINT`), so no slicer change is needed; and **cancelling a print does not render a
+video** - upstream renders on *"Done printing file"* and nothing else, and the next print
+clears the frames. Reading upstream at its pinned commit rather than assuming is what caught
+the second one; the clone lives in `$TMPDIR/mt` and is disposable.
+
+**The release is published** (v1.0.0, firmware `70ad0b0`, screen `36490ed`) and the main session
+pushed the manual to the GitHub wiki as `NebulaOS.wiki b438b9b`. **The freeze is over** - the
+component worktrees may be recreated with the procedure in "Resuming afterwards" below, and the
+normal Phase 3 queue resumes.
+
+**Superseded: the next batch was Q-064, a Timelapse page.** It ships (manifest pin, `S57nebulaos-timelapse-seed`,
 `camera.cfg` / `print.cfg` macros), the mission lists it as a manual section, and the manual
 mentions it on two pages in passing. Everything needed is readable with `git show` — no
 component worktree required.

@@ -26,6 +26,7 @@ first time it appears, and [Words you will see](Glossary) collects them all.
 | Start, pause or cancel a print | [Printing](Printing) |
 | Load or change filament | [Filament](Filament) |
 | Watch the print from your phone | [Camera](Camera) |
+| Record a video of a print | [Timelapse](Timelapse) |
 | Install a newer NebulaOS | [Updating NebulaOS](Updating-NebulaOS) |
 | See what this printer has printed | [Statistics](Screen-Reference#statistics-panel) |
 | Undo a setting, or start fresh | [Resetting](Resetting) |
@@ -46,7 +47,8 @@ first time it appears, and [Words you will see](Glossary) collects them all.
   installed, read from the system that was there before.
 - Power-loss recovery, so a print can continue after the power goes out.
 - Two system slots, so a bad update can be undone by starting the other one.
-- Camera support, including the settings of Creality's own Nebula Camera.
+- Camera support, including the settings of Creality's own Nebula Camera, and **timelapse**
+  recording that needs no slicer changes.
 
 ## What NebulaOS does not do
 

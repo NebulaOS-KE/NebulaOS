@@ -124,6 +124,9 @@ The printer stops heating and the status screen shows the print as complete. Let
 before removing the part - parts release far more easily cool, and a warm bed with a stuck
 part invites force you will regret.
 
+If you were recording a [timelapse](Timelapse), the video is rendered now and appears in
+Mainsail.
+
 The job is added to the printer's record. **Settings → Printer → Statistics** shows the last
 four prints with their result and print time, along with the totals for the printer's whole
 life - see [Statistics](Screen-Reference#statistics-panel). The full list, with filament use

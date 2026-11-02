@@ -1,15 +1,15 @@
 # Status
 
 <!-- BEGIN GENERATED STATUS -->
-*Figures generated 2026-11-02 from `coverage.jsonl` by `tools/render_dashboard.py`. Do not edit this block by hand.*
+*Figures generated 2026-11-03 from `coverage.jsonl` by `tools/render_dashboard.py`. Do not edit this block by hand.*
 
 | | |
 |---|---|
 | Discovered items | **550** |
-| Documented | **276** (50%) |
-| Draft | 110 |
-| Missing | 164 |
-| Code verified | 351 |
+| Documented | **278** (50%) |
+| Draft | 109 |
+| Missing | 163 |
+| Code verified | 353 |
 | Test verified | 46 |
 | Hardware verified | 0 |
 | Screenshots required / captured | 58 / 42 |
@@ -47,8 +47,12 @@ finished for the release.
   looks cosmetic because one of its ends was checked is not a checked range.
 - **D-011:** the manual no longer says what was tested, anywhere. Consequences stay, test claims
   go, and the record moves to `VERIFICATION.md`.
-- **Timelapse has no page at all.** It ships and the mission lists it as a manual section. Queued
-  as Q-064 and it is the next batch.
+- **Timelapse now has a page** (`wiki/Timelapse.md`, 2026-11-03), which closes the last gap the
+  readiness report named. Two things in it were worth finding: the page explains that **NebulaOS
+  takes the layer pictures itself**, so no slicer change is needed, and that **cancelling a print
+  does not render a video** - the pictures survive only until the next print starts. The second
+  came from reading upstream's `handle_gcode_response`, which renders on *"Done printing file"*
+  and nothing else; the obvious assumption was wrong.
 
 ## Why the documented figure is low, and what it means
 

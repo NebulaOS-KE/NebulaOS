@@ -200,7 +200,14 @@ strongest: the suite already passes and 21 modules are already test-verified.
 - [x] **Q-063** Re-point the release references from firmware `211d804` to the 1.0.0
       release candidate `70ad0b0`: 44 inventory items, the `Recovery` trial-bounds citation
       (constants re-read at `70ad0b0` and unchanged) and the readiness report.
-- [ ] **Q-064** **Timelapse is not in the user manual at all** - found while checking the
+- [x] **Q-064** **Timelapse page written** (2026-11-03). `wiki/Timelapse.md`: switching it on in
+      Mainsail, the park-head trade-off, the NebulaOS layer watcher that removes the slicer
+      change, what a power loss does, storage, and the cancel-does-not-render trap. Linked from
+      the sidebar, `Home`, `Camera`, `Printing` and `Power-Loss-Recovery`. Evidence: firmware
+      `70ad0b0` (`camera.cfg`, `print.cfg`, `nebulaos-seed-timelapse`, `nebulaos.conf`,
+      `machine.cfg`) and upstream `moonraker-timelapse` at the pinned `c7fff11`. **No screenshot
+      yet** - the page is Mainsail's, which this agent cannot capture. Original entry:
+      **Timelapse was not in the user manual at all** - found while checking the
       1.0.0 extensions pin. It ships (manifest pins `moonraker-timelapse`, seeded by
       `S57nebulaos-timelapse-seed`, macros in `camera.cfg`/`print.cfg`), the mission lists it
       as a manual section, and 1.0.0 adds frame-keeping across a power loss. The power-loss

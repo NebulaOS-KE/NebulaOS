@@ -35,6 +35,7 @@
 - [Adaptive meshing and purge](Adaptive-Print-Setup)
 - [Quieter motors (TMC Autotune)](TMC-Autotune)
 - [Camera](Camera)
+- [Timelapse](Timelapse)
 - [Beeps and songs](Beeps-And-Songs)
 - [Power-loss recovery](Power-Loss-Recovery)
 

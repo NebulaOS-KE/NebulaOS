@@ -52,3 +52,8 @@ They change the same saved settings as the screen. The console shows the result.
 | `SET_CAMERA_QUALITY_HIGH` | 1920×1080 at 30 fps (the default) |
 
 All camera macros are part of the NebulaOS image (`/etc/nebulaos/klipper/camera.cfg`).
+
+## Recording a print
+
+The same camera can record a timelapse of a print - off until you switch it on, and it needs
+no slicer changes. See [Timelapse](Timelapse).
