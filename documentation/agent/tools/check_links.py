@@ -1,6 +1,14 @@
 #!/usr/bin/env python3
 """Validate the manual's internal links, image references and sidebar.
 
+Pass --external to also check that every http(s) link resolves. That is off by
+default because it needs the network and is slow, but it is worth running before
+publishing: two links in this manual pointed at
+github.com/NebulaOS-KE/NebulaOS-nebulascreen/wiki/<Page> and returned 404,
+because that repository's GitHub wiki is not published - the pages exist only as
+files in its wiki/ directory. The in-repo blob URLs work today and do not depend
+on anyone running a wiki publish step.
+
 What this proves: every relative link points at a page that exists, and every
 referenced image file is present. What it cannot prove: that a page says
 anything true, or that a screenshot shows the screen it claims to. Those need
@@ -16,8 +24,36 @@ LINK = re.compile(r'\]\(([^)\s]+)\)')
 IMG = re.compile(r'!\[[^\]]*\]\(([^)\s]+)\)')
 
 
+def check_external(wiki):
+    """Every http(s) link, with its status. Needs the network."""
+    import subprocess
+    urls = set()
+    for f in glob.glob(os.path.join(wiki, "*.md")):
+        for u in re.findall(r'https?://[^)\s]+', open(f).read()):
+            u = u.rstrip(".,`\"'")
+            # Skip documentation placeholders - http://<printer-ip> and
+            # http://<printer-name>.local are examples a reader substitutes
+            # into, not addresses that resolve from here.
+            if "<" in u or ">" in u:
+                continue
+            urls.add(u)
+    bad = []
+    for u in sorted(urls):
+        r = subprocess.run(["curl", "-s", "-o", "/dev/null", "-w", "%{http_code}",
+                            "--max-time", "15", u], capture_output=True, text=True)
+        code = r.stdout.strip()
+        if code not in ("200", "301", "302"):
+            bad.append((u, code or "no response"))
+    print(f"{len(urls)} external links checked")
+    for u, code in bad:
+        print(f"  {code:>14}  {u}")
+    return bad
+
+
 def main():
-    wiki = sys.argv[1] if len(sys.argv) > 1 else "wiki"
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    external = "--external" in sys.argv
+    wiki = args[0] if args else "wiki"
     pages = {os.path.basename(f)[:-3] for f in glob.glob(os.path.join(wiki, "*.md"))}
     problems = []
     for f in sorted(glob.glob(os.path.join(wiki, "*.md"))):
@@ -48,6 +84,9 @@ def main():
         for p in sorted(pages):
             if p not in linked and not p.startswith("_"):
                 problems.append(("_Sidebar.md", "page not in navigation", p))
+
+    if external:
+        problems += [(u, "external link", code) for u, code in check_external(wiki)]
 
     print(f"{len(pages)} pages checked in {wiki}/")
     if problems:

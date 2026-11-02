@@ -232,7 +232,7 @@ There are two kinds of row here:
 - **Fans Klipper manages itself** (`heater_fan`, `controller_fan`, and fan pins that are not editable
   rows) are **read-only rows**: the name and the current state, no slider.
 
-See [Configuration](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/wiki/Configuration) for the `fans` list.
+See [Configuration](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/blob/main/wiki/Configuration.md) for the `fans` list.
 
 ---
 

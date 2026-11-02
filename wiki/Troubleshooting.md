@@ -22,10 +22,10 @@ USB stick and shows where to report the issue
 
 | Symptom | Fix |
 |---|---|
-| Screen upside down or rotated | Set `display_rotate` to `2` in `nebulascreen.json` (the KE default). See [Configuration](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/wiki/Configuration). |
+| Screen upside down or rotated | Set `display_rotate` to `2` in `nebulascreen.json` (the KE default). See [Configuration](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/blob/main/wiki/Configuration.md). |
 | Taps land in the wrong place, e.g. after changing `display_rotate` | Calibration is rotation-specific. Redo it: **Settings → Reset → Reset touch calibration**. |
-| Touch calibration came out wrong and you cannot reach the button | Edit `config/nebulascreen/nebulascreen.json` in Mainsail: set `"touch_calibrated": true` and remove `touch_calibration_coeff`, then restart the screen. The wizard runs again. See [Configuration](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/wiki/Configuration). |
-| Sensors shown with raw names like `Heater Bed` | None of the `id`s in `monitored_sensors` matches a Klipper object, so the screen shows every heater and sensor under its Klipper name. Fix the `id`s (an empty or missing list is replaced by Extruder, Bed and MCU Temp at start). See [Configuration](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/wiki/Configuration). |
+| Touch calibration came out wrong and you cannot reach the button | Edit `config/nebulascreen/nebulascreen.json` in Mainsail: set `"touch_calibrated": true` and remove `touch_calibration_coeff`, then restart the screen. The wizard runs again. See [Configuration](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/blob/main/wiki/Configuration.md). |
+| Sensors shown with raw names like `Heater Bed` | None of the `id`s in `monitored_sensors` matches a Klipper object, so the screen shows every heater and sensor under its Klipper name. Fix the `id`s (an empty or missing list is replaced by Extruder, Bed and MCU Temp at start). See [Configuration](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/blob/main/wiki/Configuration.md). |
 | Screen seems stuck | **Settings → System → Restart GUI**, or over SSH `/etc/init.d/S58nebulascreen restart`. |
 | Settings do not stick after a reboot | Check that `config/nebulascreen/nebulascreen.json` exists and is valid JSON. A file that cannot be parsed is ignored and the built-in defaults are used. |
 
@@ -97,4 +97,4 @@ logs to a USB stick and shows where to report the issue. Including those logs ma
 far more likely to be solvable.
 
 Developer and simulator troubleshooting lives in the component wiki:
-[NebulaScreen troubleshooting](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/wiki/Troubleshooting).
+[NebulaScreen troubleshooting](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/blob/main/wiki/Troubleshooting.md).
