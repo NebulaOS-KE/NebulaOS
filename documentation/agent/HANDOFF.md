@@ -184,6 +184,24 @@ repositories not yet cloned locally.
 
 ## PAUSED FOR RELEASE 1.0.0 (2026-11-01)
 
+### RELEASE 1.0.0: the user manual is verified and publish-ready (2026-11-02)
+
+Tim's decision: the end-user manual must be finished before 1.0.0 is published; the developer
+wikis are not required for the release. Resumed in this worktree only - no component worktrees
+recreated, source read via `git show <sha>:<path>` so no working tree was touched.
+
+**Full report: `RELEASE-1.0.0-READINESS.md` in this directory.** It names what was verified,
+what this pass fixed, and the four remaining items with who can close each.
+
+The short version: verified against firmware `211d804`; 30 pages, no stubs, 128 screenshots,
+all internal and external links resolving. Four items left, none blocking publication, one a
+judgement call for Tim - the stock-touchscreen install route is still unverified on hardware
+and the manual now presents it without a caveat.
+
+*The status message to `nebulaos-48` could not be delivered - the session was busy with release
+work and the send failed repeatedly. The report is committed instead, which is the channel that
+does not depend on timing.*
+
 ### PAUSED - acknowledgement to the foreground session
 
 **Status: paused. All six `docs/*` branches are clean and pushed. Safe to remove the five
