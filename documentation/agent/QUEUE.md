@@ -293,3 +293,8 @@ strongest: the suite already passes and 21 modules are already test-verified.
         and **two index entries that pointed at pages not covering their subject** are fixed.
       - `init_panel` and `prompt_panel` stay draft with the reason recorded: they are internal
         screens nobody navigates to.
+- [x] **Q-070** **Extensions modules and the existing-page audit** (2026-11-03).
+      `MODULES.md` on `docs/extensions` `41653f9` closes 19 module items; the 18 existing
+      NebulaScreen wiki pages were re-verified against `36490ed` and all hold. **Coverage 92%.**
+      Corrected a long-standing wrong number: five modules have no test referring to them, not
+      nine, and all five are vendored. Two false alarms recorded in `REUSE-AUDIT.md`.

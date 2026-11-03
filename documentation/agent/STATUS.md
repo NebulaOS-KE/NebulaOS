@@ -130,6 +130,41 @@ contributed nothing.
 Marking them documented once took the headline from 14% to 49% in a single step. That was
 flattering and false, and reverting it is recorded in `STATUS-LOG.md`.
 
+## Coverage is 92%, and two of the last three blocks were verification, not writing
+
+**`MODULES.md`** is new on `docs/extensions`: one section per file in `extras/`, answering the
+question the command and configuration references do not - *what is this file, and do I need to
+care about it.*
+
+**Writing it exposed a number that had been wrong for days.** Test coverage had been recorded by
+asking whether `test_<module>.py` exists, and that rule is wrong in both directions. It listed
+`nebulaos_compat` and `nebulaos_temperature_mcu` as untested when they have test files - they
+are merely excluded from the standalone run for importing real Klipper - and it missed
+`nozzle_clear`, `z_compensate`, `nebulaos_z_offset_probe` and `autotune_tmc`, all covered by
+tests named after what they test rather than after the file.
+
+Coverage is now determined by reading each test for references to the module. **Five modules,
+not nine, have no test referring to them - and all five are vendored.** Every module NebulaOS
+wrote is covered. That coherence is on the page, because the opposite reading is available and
+wrong: those five are not the risky untested corners of NebulaOS, they are the parts NebulaOS
+did not write.
+
+**The 18 existing NebulaScreen wiki pages were re-verified, not rubber-stamped.** Their Q-006
+disposition had never been checked against the code. Every internal link, every `make` target
+and every repository path named on them was checked at `36490ed`. All eighteen hold.
+
+### Two false alarms worth more than the result
+
+Both looked like real findings and would have produced a confident correction to correct text.
+
+- A word-boundary search for the retired `NebulaOS-klipper` fork **matches
+  `NebulaOS-klipper-extensions`**, the live repository, because one name is the other plus a
+  suffix.
+- `coreflake1/guppyscreen` is **not** a retired URL. It is OpenKE, a separate upstream project,
+  credited correctly. The retired path was `coreflake1/NebulaOS-guppyscreen`.
+
+A pattern that matches the right answer is the failure mode a search cannot report.
+
 ## Two index entries pointed at pages that did not cover their subject
 
 Found by checking the screen reference's panel index rather than trusting it. `boot_logo_panel`

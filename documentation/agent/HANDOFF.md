@@ -228,6 +228,18 @@ video** - upstream renders on *"Done printing file"* and nothing else, and the n
 clears the frames. Reading upstream at its pinned commit rather than assuming is what caught
 the second one; the clone lives in `$TMPDIR/mt` and is disposable.
 
+**Q-070 done (2026-11-03): `MODULES.md` and the existing-page audit. Coverage 85% -> 92%.**
+`docs/extensions` `41653f9`, `docs/agent` `08bd373`.
+
+**A recorded number was wrong for days:** modules with no test. The rule was
+`test_<module>.py` exists, which both understated coverage (files excluded from the standalone
+run for importing Klipper) and missed tests named after what they test. Real answer: five, all
+vendored. Determine coverage by reading tests for references, not by matching filenames.
+
+**Remaining:** 13 API endpoints whose responses do not resolve, 11 firmware developer tools, 14
+build commands, 2 extensions commands, 2 internal screen panels, the central repo overview.
+About 43 items, and the end is in sight - check the dashboard before choosing.
+
 **Q-069 done (2026-11-03): the NebulaScreen block.** `docs/screen` `fa7cde0` and the manual.
 **Coverage 79% -> 85%.**
 
