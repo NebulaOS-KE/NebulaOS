@@ -26,10 +26,17 @@ The project is done; this is a slow check for moved tips and new instructions, n
 **2026-11-03, first check: nothing moved.** All eight repository tips are unchanged, all eight
 `docs/*` branches are clean and in sync with their remotes, and no new priority has arrived.
 
-One fact worth recording: **`NebulaOS-firmware` now carries the tag `v1.0.0`, pointing at
-`70ad0b0`** - the commit every release claim here cites. Its manifest pins match the commits the
-references were generated from, and the extensions `production` branch, `main` and the pin all
-read `f498796`. The documented commits are the released ones, checked rather than assumed.
+**2026-11-04: paused again for a 1.0.0 rebuild.** The published image used a 192 MB LZMA
+dictionary, which needs more memory to unpack than the printer has, so online updates ran out of
+memory. Firmware `ba98eec` pins `-md=16m`. Tim is keeping the version name and moving the
+`v1.0.0` tag, so this agent's own note of 2026-11-03 - *"v1.0.0 is tagged at `70ad0b0`"* - is
+superseded and marked as such in `VERIFICATION.md` rather than deleted.
+
+The five component worktrees were removed again for the release identity gate. **Do not recreate
+them.** Work continues in the central worktree only; source is read with `git show`.
+
+The per-behaviour `70ad0b0` citations in the manual stay: they say where a behaviour was read,
+and the rebuild changes image compression, not behaviour.
 
 ## Done: 98% documented, 0 missing, and the caveat that matters
 

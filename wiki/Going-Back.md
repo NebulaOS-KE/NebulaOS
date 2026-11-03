@@ -10,13 +10,42 @@ Nothing, if NebulaOS still starts. Otherwise see [Recovery](Recovery).
 
 ## Before you begin
 
-- Your old system is still installed. NebulaOS was written into the printer's **second**
-  system slot and left the first one alone.
+- Your old system is still installed **if you have not installed a system image since**.
+  NebulaOS was written into the printer's **second** system slot and left the first one alone.
+  See the warning below before you rely on that.
+
 - Your print files, `printer.cfg`, macros, Wi-Fi networks and screen settings live on a shared
   data area. They **survive** the switch, in both directions.
 - **Read this before you press anything:** a stock Creality or OpenKE slot has no NebulaOS
   swap button. Once you switch into it, coming back to NebulaOS needs SSH, a reinstall with
   Creality's updater, or USB recovery - not a button on a screen.
+
+## The one thing that can remove your old system
+
+**Installing a system image always writes the slot you are *not* running.** That is what makes
+updates safe - the system you are using is never overwritten - but it has a consequence on a
+printer that came from stock:
+
+> The first time you install a system image from NebulaOS, it goes into the slot holding your
+> **old** system, and replaces it.
+
+After that, *Swap boot slot* switches between two NebulaOS versions, not between NebulaOS and
+Creality. The page above is then no longer true for your printer.
+
+**You can see this before it happens.** **Settings → Updates → System image** lists both slots
+with what each one holds and which is running, so the slot about to be written is named on
+screen rather than left for you to work out.
+
+### Getting Creality's system back afterwards
+
+Download Creality's official firmware image for the Ender-3 V3 KE and install it the same way
+you would a NebulaOS image, from **Settings → Updates → System image**. NebulaOS's installer
+accepts Creality images: it reads the kernel inside the file, recognises it as Creality's rather
+than NebulaOS's, and tells you which it is before you confirm. It goes into the slot you are not
+running, so NebulaOS stays where it is and you swap into Creality afterwards.
+
+If that does not get you there, [Recovery](Recovery) option 4 rewrites the printer from a USB
+stick - it erases everything, so it is the last resort rather than the first.
 
 ## Steps
 
@@ -53,6 +82,7 @@ installed. The screen tells you when that is happening. See [Safety first](Safet
 | The swap button is greyed out or refuses | A print is running. Stop it first. |
 | The printer does not come up after the switch | [Recovery](Recovery), option 3 or 4. |
 | You are now on stock and want NebulaOS back | Install it again: [Installing NebulaOS](Installing-NebulaOS). |
+| **Swap boot slot** offers another NebulaOS, not your old system | A system image has been installed since, and it replaced the old system. See above for getting Creality's back. |
 
 ## Coming back to NebulaOS later
 

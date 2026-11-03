@@ -298,3 +298,21 @@ strongest: the suite already passes and 21 modules are already test-verified.
       NebulaScreen wiki pages were re-verified against `36490ed` and all hold. **Coverage 92%.**
       Corrected a long-standing wrong number: five modules have no test referring to them, not
       nine, and all five are vendored. Two false alarms recorded in `REUSE-AUDIT.md`.
+
+## From the foreground session (2026-11-04, second release freeze)
+
+- [x] **Q-071** `Going-Back.md`: *"your old system is still installed"* stops being true after
+      the first system-image install, because an install always writes the slot you are not
+      running - which on a stock-installed printer is Creality's. Added the warning, the fact
+      that the Updates page names both slots before you confirm, and the way back (Creality's
+      own `.img` through NebulaOS's image install, which classifies images by their kernel).
+      **Worded without any claim about testing, per D-011** - the main session's phrasing
+      suggested saying it had not been tested on hardware, which Tim's standing decision
+      forbids on user pages. The record is here and in `VERIFICATION.md`.
+- [ ] **Q-072** Re-point release references once the main session sends the final sha for the
+      rebuilt 1.0.0 (`ba98eec` or later). **Scope is small by design:** no user page claims a
+      release build. The manual's `70ad0b0` citations are per-behaviour provenance and stay
+      correct. What needs changing is `RELEASE-1.0.0-READINESS.md`, `VERIFICATION.md` and the
+      `release_applicability` labels in `coverage.jsonl`.
+- [ ] **Q-073** Do not recreate the five component worktrees until the main session says the
+      rebuild is done. Central worktree only; read source with `git show`.

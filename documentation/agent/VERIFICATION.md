@@ -132,10 +132,32 @@ What *is* established from source: the checks run before anything is written, so
 stops without changing the running system. What is not established: that the route completes
 successfully on real hardware.
 
-## The documented commits are the released ones (confirmed 2026-11-03)
+## The documented commits and the release (superseded 2026-11-04)
 
-Checked after the release, not assumed. `NebulaOS-firmware` now carries the tag **`v1.0.0`**,
-and it points at **`70ad0b0`** - the commit every release claim in this documentation cites.
+> **This section was true when written and is not now.** 1.0.0 is being rebuilt and the
+> `v1.0.0` tag is being moved to the fix, under the same version name. What follows is kept as
+> the record of what was checked on 2026-11-03, not as a current claim. The release build is
+> **`ba98eec` or later**; the final commit is pending from the main session.
+>
+> **Why it was rebuilt** (reported by the main session, 2026-11-04): the published 1.0.0 `.img`
+> was compressed with a 192 MB LZMA dictionary, which 7-Zip 26 chose for `-mx=9`. Unpacking it
+> needs more memory than the printer's 248 MB, so an online update ran out of memory. Firmware
+> `ba98eec` pins `-md=16m` and `validate-img.py` now refuses a dictionary above 16 MB.
+>
+> **What this means for the install routes.** The same unpacking happens on the
+> stock-touchscreen route, so that route very likely failed on the published build too. This is
+> the first concrete evidence about a route that `BLOCKERS.md` B-003 has recorded as unverified
+> from the start - and it is evidence of a failure, found by someone running it rather than by
+> reading the code. The failure is in the image, not in the documented procedure, so no page
+> changes; but it is exactly the kind of thing an unverified route hides.
+>
+> **The per-behaviour citations to `70ad0b0` in the manual stay.** They say where a behaviour
+> was read, not which build shipped, and `ba98eec` is a descendant that changes image
+> compression - not the trial bounds, the timelapse handling, the cleanup list or the
+> statistics import.
+
+Checked on 2026-11-03, before the rebuild: `NebulaOS-firmware` carried the tag **`v1.0.0`**
+pointing at **`70ad0b0`**.
 Its manifest at that commit pins:
 
 | Component | Pin |
