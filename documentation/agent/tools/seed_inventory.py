@@ -45,8 +45,13 @@ BLANK = dict(
     doc_page=None, doc_status="missing", verify_code="unknown",
     verify_test="unknown", verify_hardware="n/a",
     screenshot_required=False, screenshot_status="n/a",
-    evidence=[], last_verified=None, blockers=[], priority=3,
+    evidence=[], last_verified=None, blockers=[], priority=3, gaps=None,
 )
+# `gaps` is in BLANK and in main()'s keep list for one reason: it was in
+# neither until 2026-11-03, so every re-seed silently erased every recorded
+# gap. The dashboard went from 22 gaps to 0 with nothing failing and no
+# warning - a field that is read but not preserved looks exactly like a field
+# with nothing in it. Anything added to the schema belongs in both places.
 
 
 def checkout_path(root, checkout):
@@ -435,6 +440,75 @@ def discover(root):
     return items
 
 
+
+def _in_tree(path, tree):
+    """Is `path` a file in the tree, a directory in it, or a placeholder?"""
+    if not path or path.startswith("<"):
+        return True                       # "<repository root>" and friends
+    if path in tree:
+        return True
+    prefix = path if path.endswith("/") else path + "/"
+    return any(f.startswith(prefix) for f in tree)
+
+
+def drop_items_absent_from_their_commit(root, items):
+    """Remove items whose files are not in the commit the item cites.
+
+    Discovery walks the worktrees on disk, but each item records the tip of the
+    branch it describes (`origin/<default>`). Those differ: a docs worktree sits
+    on this agent's own `docs/*` branch. Without this filter, a page *this agent
+    wrote* is discovered as source material to document - and cited at a commit
+    that does not contain it.
+
+    Found on 2026-11-03, when `wiki/Working-on-NebulaScreen.md` - written by this
+    agent, still an unmerged pull request - appeared in the inventory as an
+    existing wiki page awaiting audit, cited at the screen's `origin/main`.
+
+    Items with no `source_paths` or no `source_commit` are kept: there is nothing
+    to check, and silently dropping them would be worse than leaving them. So are
+    items whose "path" is a placeholder (`<repository root>`) or a directory - the
+    first attempt at this filter matched neither and threw away sixteen perfectly
+    good items, which is a reminder that a check with no exemptions is a check
+    that has not met its data yet.
+    """
+    # Categories that describe *this agent's own deliverables* rather than source
+    # to be documented. Their "source path" is a placeholder for the manual, so
+    # the check does not apply and dropping them would delete the inventory's
+    # record of the end-user manual itself.
+    DELIVERABLE = {"user-manual-section"}
+    kept, dropped = [], []
+    cache = {}
+    for item in items:
+        if item.get("category") in DELIVERABLE:
+            kept.append(item)
+            continue
+        paths = item.get("source_paths") or []
+        commit = item.get("source_commit")
+        checkout = checkout_path(root, item.get("repo") or "")
+        if not paths or not commit or not checkout:
+            kept.append(item)
+            continue
+        key = (checkout, commit)
+        if key not in cache:
+            out = subprocess.run(["git", "-C", checkout, "ls-tree", "-r",
+                                  "--name-only", commit],
+                                 capture_output=True, text=True).stdout
+            cache[key] = set(out.split("\n")) if out else None
+        tree = cache[key]
+        if tree is None:                      # could not read the tree: keep
+            kept.append(item)
+            continue
+        if any(_in_tree(p, tree) for p in paths):
+            kept.append(item)
+        else:
+            dropped.append(item["id"])
+    if dropped:
+        print(f"not in the commit they cite, so not inventoried ({len(dropped)}):")
+        for i in sorted(dropped):
+            print(f"  {i}")
+    return kept
+
+
 def main():
     root, out = sys.argv[1], sys.argv[2]
     old = {}
@@ -445,9 +519,10 @@ def main():
                 r = json.loads(line)
                 old[r["id"]] = r
     new = discover(root)
+    new = drop_items_absent_from_their_commit(root, new)
     keep = ("doc_page doc_status verify_code verify_test verify_hardware "
             "screenshot_required screenshot_status evidence last_verified "
-            "blockers priority release_applicability").split()
+            "blockers priority release_applicability gaps").split()
     for r in new:
         o = old.get(r["id"])
         if o:

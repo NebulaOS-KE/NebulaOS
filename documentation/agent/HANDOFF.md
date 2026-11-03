@@ -228,7 +228,21 @@ video** - upstream renders on *"Done printing file"* and nothing else, and the n
 clears the frames. Reading upstream at its pinned commit rather than assuming is what caught
 the second one; the clone lives in `$TMPDIR/mt` and is disposable.
 
-**Q-036 is done and Q-037 is mostly done (2026-11-03).** `CONFIG.md` is 156 of 156 options
+**Q-037 is closed, and `OSCONFIG.md` is new (2026-11-03, `docs/firmware` `c58a260`).**
+18 helper modules and 189 public functions documented - the largest undocumented block in the
+firmware. 46 of 59 endpoints now resolve their response keys. Coverage is 65%.
+
+**Two seeder bugs fixed, both silent (`docs/agent`).** `gaps` was erased on every re-seed
+because it was in neither `BLANK` nor the keep list - 22 gaps became 0 with nothing failing.
+And the seeder enumerated files from the worktree while citing `origin/<default>`, so a page
+this agent wrote was discovered as source to document. **Anything added to the item schema
+belongs in both `BLANK` and `main()`'s keep list**, or it will vanish on the next run.
+
+**Do not re-open example response values expecting a larger yield.** Measured: the 4381-line
+osconfig fixture file gives 3 endpoints and 5 key/value pairs, because it tests the helper
+functions directly rather than through endpoints. The number is in the extractor's docstring.
+
+**Q-036 was done earlier the same day.** `CONFIG.md` is 156 of 156 options
 with a purpose (`docs/extensions` `ba436d8`). The firmware API reference resolves responses for
 43 of 59 endpoints (`docs/firmware` `87116ad`) via the new
 `documentation/agent/tools/gen_firmware_api_responses.py`.

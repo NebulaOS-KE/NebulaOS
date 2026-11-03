@@ -5,16 +5,16 @@
 
 | | |
 |---|---|
-| Discovered items | **551** |
-| Documented | **340** (61%) |
-| Draft | 50 |
-| Missing | 161 |
-| Code verified | 356 |
+| Discovered items | **552** |
+| Documented | **361** (65%) |
+| Draft | 47 |
+| Missing | 144 |
+| Code verified | 374 |
 | Test verified | 47 |
 | Hardware verified | 0 |
 | Screenshots required / captured | 58 / 42 |
 | Blocked (cannot proceed) | 4 |
-| Completeness gaps (work not done) | 22 |
+| Completeness gaps (work not done) | 13 |
 
 Per-repository and per-category breakdowns are in `COVERAGE.md`.
 <!-- END GENERATED STATUS -->
@@ -129,6 +129,51 @@ contributed nothing.
 
 Marking them documented once took the headline from 14% to 49% in a single step. That was
 flattering and false, and reverting it is recorded in `STATUS-LOG.md`.
+
+## Re-seeding the inventory found two bugs in the seeder itself
+
+Both silent, both the same shape: something was read but not preserved, and the result looked
+exactly like a correct one.
+
+**Every recorded `gaps` value was erased on each run.** `gaps` was in neither the schema
+defaults nor the list of fields a re-seed preserves, so the dashboard went from 22 recorded
+gaps to 0 with nothing failing. A field that is read but not kept is indistinguishable from a
+field with nothing in it. Fixed in both places, and a re-seed is now idempotent - checked by
+running it twice and comparing.
+
+**The seeder discovered this agent's own writing as source material.** It enumerated files
+from the worktree on disk while citing `origin/<default>` as the commit. Those differ: a docs
+worktree sits on a `docs/*` branch. So `wiki/Working-on-NebulaScreen.md` - written here, still
+an unmerged pull request - was inventoried as an existing wiki page awaiting audit, cited at a
+commit that does not contain it. Items are now dropped when their files are not in the commit
+they cite, and the drop is printed rather than silent.
+
+The first attempt at that filter threw away sixteen good items, because placeholders like
+`<repository root>` and the manual's own `wiki/` are not file paths. A check with no exemptions
+is a check that has not met its data yet.
+
+## Where the API reference stops, and what picks up after it
+
+**`OSCONFIG.md` is new** and closes the largest undocumented block in the firmware: 18 modules,
+189 public functions. These are where every OS setting is actually read and written, and they
+had nothing written about them at all.
+
+The useful column is *reached by*, taken from the dispatcher rather than from function names:
+**about half the public functions are not reachable from the command line**. They serve another
+module, a boot service or a test. Names alone would suggest otherwise.
+
+**Response resolution reached 46 of 59 endpoints**, after the dispatcher turned out to use an
+inline `{verb: function}[verb]()` for the camera's defaults/reset/version trio.
+
+**Example values were measured, not assumed.** The 4381-line osconfig fixture file yields
+exactly **3 endpoints and 5 key/value pairs**, because it exercises the helper functions
+directly rather than through endpoints. Those three are in the page with the test named. The
+rest are absent because composing plausible examples from key names would read better and be
+unfalsifiable. The measurement is recorded in the extractor's docstring so nobody re-opens this
+expecting more.
+
+One more thing made computed rather than typed: the count of unresolved endpoints in the page's
+own prose. It had already been wrong by three within a single session.
 
 ## The two generated references reached their bar
 

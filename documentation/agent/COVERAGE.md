@@ -10,20 +10,20 @@ Verification is reported in four separate columns because they prove different t
 
 | Measure | Items | Share |
 |---|---|---|
-| Discovered documentation items | 551 | 100% |
-| Documented (page exists and covers the item) | 340 | 61% |
-| Draft | 50 | 9% |
-| Missing | 161 | 29% |
+| Discovered documentation items | 552 | 100% |
+| Documented (page exists and covers the item) | 361 | 65% |
+| Draft | 47 | 8% |
+| Missing | 144 | 26% |
 | Blocked (cannot proceed without hardware, access or a decision) | 4 | 0% |
-| Has a recorded completeness gap (work not done, not stuck) | 22 | 3% |
+| Has a recorded completeness gap (work not done, not stuck) | 13 | 2% |
 
 ## Verification (counted separately, never combined)
 
 | Kind | Verified | Partial | Unknown | Blocked | N/A |
 |---|---|---|---|---|---|
-| Code verified | 356 | 35 | 160 | 0 | 0 |
-| Test verified | 47 | 0 | 503 | 0 | 1 |
-| Hardware verified | 0 | 0 | 0 | 2 | 546 |
+| Code verified | 374 | 35 | 143 | 0 | 0 |
+| Test verified | 47 | 0 | 504 | 0 | 1 |
+| Hardware verified | 0 | 0 | 0 | 2 | 547 |
 
 ## Screenshots
 
@@ -44,7 +44,7 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | Repository | Items | Documented | Draft | Missing | Code verified | Documented % |
 |---|---|---|---|---|---|---|
 | NebulaOS | 11 | 10 | 0 | 1 | 10 | 90% |
-| NebulaOS-firmware | 195 | 59 | 50 | 86 | 75 | 30% |
+| NebulaOS-firmware | 196 | 80 | 47 | 69 | 93 | 40% |
 | NebulaOS-kernel | 1 | 1 | 0 | 0 | 1 | 100% |
 | NebulaOS-klipper-extensions | 236 | 215 | 0 | 21 | 215 | 91% |
 | NebulaOS-klipper-mcu | 1 | 1 | 0 | 0 | 1 | 100% |
@@ -56,14 +56,14 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 
 | Category | Items | Documented | Draft | Missing | Documented % |
 |---|---|---|---|---|---|
-| api | 60 | 44 | 16 | 0 | 73% |
+| api | 60 | 47 | 13 | 0 | 78% |
 | build-command | 14 | 0 | 7 | 7 | 0% |
 | command | 52 | 50 | 0 | 2 | 96% |
 | config-option | 173 | 153 | 0 | 20 | 88% |
 | developer-tool | 11 | 0 | 0 | 11 | 0% |
 | existing-page | 34 | 16 | 0 | 18 | 47% |
 | extension | 30 | 11 | 0 | 19 | 36% |
-| os-helper | 17 | 0 | 0 | 17 | 0% |
+| os-helper | 18 | 18 | 0 | 0 | 100% |
 | repo-overview | 8 | 7 | 0 | 1 | 87% |
 | runtime-helper | 57 | 6 | 0 | 51 | 10% |
 | screen | 50 | 35 | 0 | 15 | 70% |
@@ -75,17 +75,13 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | Repository | Branch | Commit | Items |
 |---|---|---|---|
 | NebulaOS | main | bef8693fb1f4 | 11 |
-| NebulaOS-firmware | main | 70ad0b0b848f | 2 |
-| NebulaOS-firmware | main | 832314df6042 | 133 |
-| NebulaOS-firmware | main | a53e129bf1b0 | 60 |
+| NebulaOS-firmware | main | a53e129bf1b0 | 196 |
 | NebulaOS-kernel | openke | d86790d2e231 | 1 |
-| NebulaOS-klipper-extensions | main | 70ad0b0b848f | 1 |
-| NebulaOS-klipper-extensions | main | f498796fcaa2 | 235 |
+| NebulaOS-klipper-extensions | main | f498796fcaa2 | 236 |
 | NebulaOS-klipper-mcu | main | 33f5d16daccd | 1 |
-| NebulaOS-nebulascreen | main | 36490ed0b60d | 2 |
-| NebulaOS-nebulascreen | main | dee0f6f22a89 | 103 |
-| lv_drivers | master | ea2e4cc00d02 | 1 |
-| nebulaos-packages | main | 9d0d264ad60d | 1 |
+| NebulaOS-nebulascreen | main | 36490ed0b60d | 105 |
+| lv_drivers | master | not cloned l | 1 |
+| nebulaos-packages | main | not cloned l | 1 |
 
 ## Blocked items
 

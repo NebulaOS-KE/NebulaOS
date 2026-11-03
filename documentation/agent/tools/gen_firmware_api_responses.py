@@ -24,6 +24,7 @@ import _srccommit
 
 COMPONENT = "scripts/build/overlay/usr/lib/nebulaos/moonraker/nebulaos.py"
 OSCONFIG = "scripts/build/overlay/usr/lib/nebulaos/python/nebulaos_osconfig"
+TESTS = "tests/nebulaos-osconfig-tests.py"
 
 
 def _str(node):
@@ -206,6 +207,12 @@ def dispatch(path):
                         for d, t in tbl.items():
                             record([d], vrb or readonly.get(d), [t])
                         continue
+                    # an inline {verb: function}[verb]() - cli.py uses this for
+                    # the camera's defaults/reset/version trio
+                    if tbl and isinstance(idx, ast.Name) and idx.id == "verb":
+                        for vb, t in tbl.items():
+                            record(dom, [vb], [t])
+                        continue
                 # table[verb]()
                 if (isinstance(v, ast.Call) and isinstance(v.func, ast.Subscript)
                         and isinstance(v.func.value, ast.Name)
@@ -322,6 +329,66 @@ def module_returns(mod_path):
     return {name: return_keys(fn, fns) for name, fn in fns.items()}
 
 
+
+def _res_chain(node):
+    """["a", "b"] for res["a"]["b"], [] for a bare `res`, or None."""
+    keys = []
+    while isinstance(node, ast.Subscript):
+        k = node.slice
+        if not (isinstance(k, ast.Constant) and isinstance(k.value, str)):
+            return None
+        keys.append(k.value)
+        node = node.value
+    if isinstance(node, ast.Name) and node.id == "res":
+        return list(reversed(keys))
+    return None
+
+
+def examples(path):
+    """{http path: {key path: asserted value}} from the repository's own tests.
+
+    Only an assertion made on the result of a `self.call("/machine/nebulaos/...")`
+    in a test that calls exactly one endpoint counts, so a value can never be
+    attributed to the wrong endpoint.
+
+    The yield is small and that is the finding, not a failure of the extractor:
+    measured on 2026-11-03 at 3 endpoints and 5 key/value pairs out of 59. These
+    tests mostly exercise the osconfig helper functions directly rather than
+    through an endpoint, so they are not a source of per-endpoint examples at
+    scale. Inventing the rest from the key names would be the alternative, and it
+    is not one.
+    """
+    if not os.path.exists(path):
+        return {}
+    tree = ast.parse(open(path).read())
+    out = {}
+    for fn in ast.walk(tree):
+        if not isinstance(fn, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            continue
+        called = {n.args[0].value for n in ast.walk(fn)
+                  if isinstance(n, ast.Call) and isinstance(n.func, ast.Attribute)
+                  and n.func.attr == "call" and n.args
+                  and isinstance(n.args[0], ast.Constant)
+                  and str(n.args[0].value).startswith("/machine/nebulaos")}
+        if len(called) != 1:
+            continue
+        endpoint = called.pop()
+        for n in ast.walk(fn):
+            if not (isinstance(n, ast.Call) and isinstance(n.func, ast.Attribute)
+                    and n.func.attr == "assertEqual" and len(n.args) == 2):
+                continue
+            chain = _res_chain(n.args[0])
+            if chain is None:
+                continue
+            try:
+                value = ast.literal_eval(n.args[1])
+            except Exception:
+                continue
+            out.setdefault(endpoint, {})[".".join(chain)] = {
+                "value": value, "test": fn.name}
+    return out
+
+
 def resolve(root, routes, calls, disp):
     """{http path: row} - the same rows main() writes, for the reference to use."""
     return {r["path"]: r for r in _rows(root, routes, calls, disp)[0]}
@@ -329,6 +396,7 @@ def resolve(root, routes, calls, disp):
 
 def _rows(root, routes, calls, disp):
     cache = {}
+    exs = examples(os.path.join(root, TESTS))
     rows, resolved, unresolved = [], 0, 0
     for path, method, handler in sorted(routes):
         cv = calls.get(handler, [])
@@ -358,6 +426,9 @@ def _rows(root, routes, calls, disp):
         else:
             row["result_keys"] = None
             unresolved += 1
+        ex = exs.get(path)
+        if ex:
+            row["examples"] = ex
         rows.append(row)
     return rows, resolved, unresolved
 
