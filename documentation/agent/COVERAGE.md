@@ -79,7 +79,7 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | NebulaOS-firmware | main | 832314df6042 | 192 |
 | NebulaOS-kernel | openke | d86790d2e231 | 1 |
 | NebulaOS-klipper-extensions | main | 70ad0b0b848f | 1 |
-| NebulaOS-klipper-extensions | main | ed993726b892 | 235 |
+| NebulaOS-klipper-extensions | main | f498796fcaa2 | 235 |
 | NebulaOS-klipper-mcu | main | 33f5d16daccd | 1 |
 | NebulaOS-nebulascreen | main | 36490ed0b60d | 2 |
 | NebulaOS-nebulascreen | main | dee0f6f22a89 | 103 |

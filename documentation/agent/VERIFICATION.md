@@ -39,12 +39,18 @@ comes from. The repositories' own test suites are available and can be run - and
 
 ### Test verification actually performed
 
-On 2026-10-31, in a dedicated worktree at `NebulaOS-klipper-extensions` `8e3447a`:
+Re-run on 2026-11-03 at **`f498796`** - the pin NebulaOS 1.0.0 ships, confirmed equal on
+`main`, on `production` and in the firmware manifest at `70ad0b0`:
 
 ```
 29 of 31 test suites run standalone, the way scripts/ci-tests.sh runs them
-899 individual tests, all passing
+912 individual tests, all passing
 ```
+
+Previously 899 tests at `8e3447a` (2026-10-31). Thirteen more exist now; seven of them are in
+the power-loss suite, which went 169 -> 176 as the parked-nozzle resume, the current-object
+restart and the timelapse frame handling landed. The other six were not traced to a suite and
+that is not claimed here.
 
 The two excluded suites (`test_nebulaos_compat`, `test_nebulaos_temperature_mcu`) import real
 Klipper modules and need the pinned Klipper checkout composed in, exactly as the repository's

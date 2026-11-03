@@ -27,6 +27,7 @@ a reader to assume the silence means "nothing to worry about".
 Usage:  gen_extensions_commands_detail.py <extensions-checkout> <out-file>
 """
 import ast, json, os, subprocess, sys, datetime
+import _srccommit
 
 EFFECTS = {}
 PARAM_GETTERS = {"get": "string", "get_int": "int", "get_float": "float",
@@ -251,8 +252,8 @@ def main():
     global EFFECTS
     root, out = sys.argv[1], sys.argv[2]
     EFFECTS = load_effects()
-    sha = subprocess.run(["git", "-C", root, "rev-parse", "HEAD"],
-                         capture_output=True, text=True).stdout.strip()
+    # The code commit, not this worktree's docs branch - see _srccommit.py.
+    sha, sha_from = _srccommit.source_commit(root)
     ext = os.path.join(root, "extras")
     tests = {f for f in os.listdir(ext) if f.startswith("test_")}
     found = []

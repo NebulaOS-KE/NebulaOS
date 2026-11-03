@@ -15,6 +15,7 @@ computed rather than literal are reported as "computed", never guessed.
 Usage:  gen_extensions_reference.py <extensions-checkout> <out-dir>
 """
 import ast, json, os, re, subprocess, sys, datetime
+import _srccommit
 
 GETTERS = {
     "get": "string", "getint": "int", "getfloat": "float",
@@ -260,8 +261,8 @@ def scan(path, consts):
 
 def main():
     root, out = sys.argv[1], sys.argv[2]
-    sha = subprocess.run(["git", "-C", root, "rev-parse", "HEAD"],
-                         capture_output=True, text=True).stdout.strip()
+    # The code commit, not this worktree's docs branch - see _srccommit.py.
+    sha, sha_from = _srccommit.source_commit(root)
     ext = os.path.join(root, "extras")
     mods = sorted(f for f in os.listdir(ext)
                   if f.endswith(".py") and not f.startswith("test_"))

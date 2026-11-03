@@ -130,6 +130,30 @@ contributed nothing.
 Marking them documented once took the headline from 14% to 49% in a single step. That was
 flattering and false, and reverting it is recorded in `STATUS-LOG.md`.
 
+## The extensions reference now describes what 1.0.0 ships
+
+Re-verified at `f498796` on 2026-11-03. The suite was re-run at that commit (29 of 31
+standalone, **912 tests**, up from 899) and the generated references came out identical apart
+from their provenance line - which is the informative result: nothing documented there moved
+between `ed99372` and the release.
+
+**The pin claim was checked three ways before it was written.** `main`, `production` and
+`KLIPPER_EXTENSIONS_PIN` in the manifest at `70ad0b0` all read `f498796`. That sentence had
+already been wrong once in each direction earlier in this project, which is why it gets three
+checks rather than one.
+
+### An evidence bug in the generators, the same one the seeder already had
+
+All four reference generators recorded the worktree's `HEAD` as the source commit. Those
+worktrees sit on `docs/*` branches, so the first regeneration today stamped `COMMANDS.md` with
+`6ef0610` - a documentation merge commit. Anyone following that SHA to check a command would
+find prose.
+
+`seed_inventory.py` was fixed for exactly this on 2026-11-02 and the generators were not, because
+the fix was made where the bug was noticed rather than where the pattern lived. They now share
+`tools/_srccommit.py`, which resolves `origin/<default-branch>` and reports which of the two it
+used instead of falling back silently.
+
 ## The extensions wiki now has a readable guide, not just references
 
 `docs/reference/ARCHITECTURE.md` on `docs/extensions` - hand-written, because explanation

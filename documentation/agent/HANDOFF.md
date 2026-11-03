@@ -228,6 +228,25 @@ video** - upstream renders on *"Done printing file"* and nothing else, and the n
 clears the frames. Reading upstream at its pinned commit rather than assuming is what caught
 the second one; the clone lives in `$TMPDIR/mt` and is disposable.
 
+**Q-065 is done (2026-11-03): `docs/extensions` `90c646e`.** Extensions reference re-verified
+at `f498796`; suite re-run at that commit (29 of 31 standalone, 912 tests); 235 inventory items
+and 31 test-evidence lines re-pointed; `ARCHITECTURE.md` gained the physical-resume ordering and
+the timelapse frame handling.
+
+**A generator bug worth knowing about, now fixed.** All four `gen_*.py` stamped the worktree's
+`HEAD` as the source commit, so the first run today cited `6ef0610` - a documentation merge - as
+the source of the command reference. `seed_inventory.py` had been fixed for exactly this the day
+before; the generators were not, because the fix went where the bug was noticed rather than where
+the pattern lived. They now share `documentation/agent/tools/_srccommit.py`. **If you add another
+generator, use it** - a citation that points at prose is worse than none, because it looks
+checked.
+
+**Next:** Q-036 (per-option configuration detail, 16 options still with a dash) and Q-037
+(firmware API response examples) are the largest remaining blocks, then Q-007 (clone
+`nebulaos-packages` and `lv_drivers`, the only two repositories with no documentation at all).
+The four other component worktrees still need recreating - only `NebulaOS-klipper-extensions`
+was brought back, deliberately, to keep the footprint small while an OTA test was pending.
+
 **The release is published** (v1.0.0, firmware `70ad0b0`, screen `36490ed`) and the main session
 pushed the manual to the GitHub wiki as `NebulaOS.wiki b438b9b`. **The freeze is over** - the
 component worktrees may be recreated with the procedure in "Resuming afterwards" below, and the

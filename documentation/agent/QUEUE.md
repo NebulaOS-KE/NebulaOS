@@ -213,7 +213,15 @@ strongest: the suite already passes and 21 modules are already test-verified.
       as a manual section, and 1.0.0 adds frame-keeping across a power loss. The power-loss
       side is now documented in `Power-Loss-Recovery`; a proper `Timelapse` page is the next
       manual batch.
-- [ ] **Q-065** Re-verify the extensions developer reference against the 1.0.0 pin.
+- [x] **Q-065** **Extensions reference re-verified at the 1.0.0 pin** (2026-11-03,
+      `docs/extensions` `90c646e`). `main`, `production` and `KLIPPER_EXTENSIONS_PIN` in the
+      manifest at `70ad0b0` all confirmed equal to `f498796` before the "shipped by firmware"
+      claim was changed. Suite re-run: 29 of 31 standalone, **912 tests**, all passing.
+      Generated references unchanged apart from provenance (50 commands, 156 options), 235
+      inventory items re-pointed, 31 test-evidence lines rewritten with today's per-suite
+      counts. `ARCHITECTURE.md` gained the physical-resume ordering and the timelapse frame
+      handling. Original entry:
+      Re-verify the extensions developer reference against the 1.0.0 pin.
       189 inventory items are still labelled *0.9.0 (manifest pins a2e7634)*, but 1.0.0 ships
       `f498796`, and `a2e7634..f498796` is **not** cosmetic: `nebulaos_power_loss_recovery.py`
       (+155 lines) and `nozzle_clear.py` changed. Developer docs only - not release-blocking,

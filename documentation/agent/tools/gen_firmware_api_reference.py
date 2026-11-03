@@ -14,6 +14,7 @@ any of it works on a printer.
 Usage:  gen_firmware_api_reference.py <firmware-checkout> <out-file>
 """
 import ast, os, subprocess, sys, datetime
+import _srccommit
 
 COMPONENT = ("scripts/build/overlay/usr/lib/nebulaos/moonraker/nebulaos.py")
 GETTERS = {"get_str": "string", "get_int": "int", "get_float": "float",
@@ -70,8 +71,8 @@ def handler_params(fn):
 
 def main():
     root, out = sys.argv[1], sys.argv[2]
-    sha = subprocess.run(["git", "-C", root, "rev-parse", "HEAD"],
-                         capture_output=True, text=True).stdout.strip()
+    # The code commit, not this worktree's docs branch - see _srccommit.py.
+    sha, sha_from = _srccommit.source_commit(root)
     path = os.path.join(root, COMPONENT)
     tree = ast.parse(open(path).read())
 
