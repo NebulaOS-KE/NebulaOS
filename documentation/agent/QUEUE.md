@@ -274,4 +274,12 @@ strongest: the suite already passes and 21 modules are already test-verified.
       0 with nothing failing. And it enumerated files from the worktree while citing
       `origin/<default>`, so a page *this agent wrote* was discovered as source to document.
       Both fixed; a re-seed is now idempotent and was checked to be.
-
+- [x] **Q-068** **Runtime helpers and full boot-service detail** (2026-11-03,
+      `docs/firmware` `56fdc1e`). `RUNTIME-HELPERS.md` is new - 57 executables, each with what
+      calls it (searched, not inferred) and its own header; the five impostor names are
+      flagged. `BOOT-SERVICES.md` gains a section per service with the full header and the
+      init verbs read from its own `case "$1"`. Closes 57 `runtime-helper` items that were all
+      `missing` and 35 `service` items. **Coverage 65% -> 79%.**
+      The verb parser was silently wrong twice: `esac` anchored at column 0 missed nine
+      indented scripts, and four more dispatch with `if [ "$1" = "start" ]` and have no `case`
+      at all. Both reported "no verbs" rather than failing.

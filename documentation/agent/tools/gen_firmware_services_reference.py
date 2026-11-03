@@ -8,6 +8,7 @@ comment rather than from a guess about what its name means.
 
 Usage:  gen_firmware_services_reference.py <firmware-checkout> <out-file>
 """
+import textwrap
 import os, re, subprocess, sys, datetime
 import _srccommit
 
@@ -49,6 +50,82 @@ def purpose(path):
     return text.replace("|", "\\|") or "-"
 
 
+
+def verbs(path):
+    """The init verbs the script's own `case "$1"` handles."""
+    try:
+        src = open(path, errors="replace").read()
+    except OSError:
+        return []
+    # `esac` is indented in several of these scripts - anchoring it at column 0
+    # silently reported nine services as having no verbs at all.
+    m = re.search(r'case\s+"?\$1"?\s+in(.*?)^\s*esac', src, re.S | re.M)
+    if not m:
+        # Four of these dispatch with `if [ "$1" = "start" ]` instead of a
+        # case. Reporting them as having no verbs was wrong about the script.
+        found = []
+        for v in re.findall(r'\[\s+"\$1"\s+=\s+"?([a-z_-]+)"?\s+\]', src):
+            if v not in found:
+                found.append(v)
+        return found
+    out = []
+    for arm in re.findall(r"^[ \t]*([a-z|_-]+)\)", m.group(1), re.M):
+        for v in arm.split("|"):
+            v = v.strip()
+            if v and v not in out:
+                out.append(v)
+    return out
+
+
+def full_header(path):
+    """The script's whole header comment, not just its first sentence."""
+    lines = []
+    try:
+        with open(path, errors="replace") as fh:
+            first = fh.readline()
+            if not first.startswith("#!"):
+                fh.seek(0)
+            for line in fh:
+                st = line.rstrip()
+                if st.strip().startswith("#"):
+                    lines.append(st.strip().lstrip("#").strip())
+                elif not st.strip():
+                    if lines:
+                        lines.append("")
+                    continue
+                else:
+                    break
+    except OSError:
+        return ""
+    while lines and not lines[-1]:
+        lines.pop()
+    return "\n".join(lines).strip()
+
+
+def detail_block(name, path):
+    """One section per service: verbs, then its own header kept whole."""
+    L = [f"### `{name}`", ""]
+    v = verbs(path)
+    L.append("Verbs: " + (", ".join(f"`{x}`" for x in v) if v else "*none parsed*") + ".")
+    L.append("")
+    h = full_header(path)
+    if not h:
+        L.append("*No header comment.*")
+        L.append("")
+        return L
+    for para in h.split("\n\n"):
+        lines = [x for x in para.split("\n") if x.strip()]
+        if not lines:
+            continue
+        # A list or a two-column table in a header loses its meaning when
+        # reflowed into prose, so that shape is kept verbatim.
+        if any(re.match(r"^(\s{2,}|[-*]\s|\S+\s{2,}\S)", x) for x in lines):
+            L += ["```"] + lines + ["```", ""]
+        else:
+            L += textwrap.wrap(" ".join(para.split()), 95) + [""]
+    return L
+
+
 def main():
     root, out = sys.argv[1], sys.argv[2]
     # The code commit, not this worktree's docs branch - see _srccommit.py.
@@ -73,6 +150,8 @@ def main():
          "## What this reference proves", "",
          "**Established from source:** that each service exists, its boot order, and what its",
          "own header comment says it does.", "",
+         "**Also established:** the init verbs each script implements, read from its own",
+         "`case \"$1\"` rather than assumed from the BusyBox convention.", "",
          "**Not established:** runtime timings, failure behaviour under load, or anything",
          "observed on a printer. Each purpose below is the script author's description, not an",
          "independent analysis of the script's behaviour.", "",
@@ -82,6 +161,16 @@ def main():
     for f in svcs:
         L.append(f"| `{f[:3]}` | `{f}` | {purpose(os.path.join(d, f))} |")
     L.append("")
+    L.append("## Every service in detail")
+    L.append("")
+    L.append("Each section below is the script's own header, kept whole rather than cut to a")
+    L.append("first sentence - these headers carry the reasoning behind choices that look")
+    L.append("arbitrary from outside, which is the part a developer needs. The verbs are the")
+    L.append("arms of the script's own `case \"$1\"`, so a service that does not implement")
+    L.append("`restart` is visibly missing it rather than assumed to have it.")
+    L.append("")
+    for f in svcs:
+        L.extend(detail_block(f, os.path.join(d, f)))
     L.append("## Reading one of these")
     L.append("")
     L.append("Each script takes `start`, `stop` and usually `restart`, the BusyBox init")

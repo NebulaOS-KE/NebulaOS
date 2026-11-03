@@ -6,10 +6,10 @@
 | | |
 |---|---|
 | Discovered items | **552** |
-| Documented | **361** (65%) |
-| Draft | 47 |
-| Missing | 144 |
-| Code verified | 374 |
+| Documented | **439** (79%) |
+| Draft | 20 |
+| Missing | 93 |
+| Code verified | 452 |
 | Test verified | 47 |
 | Hardware verified | 0 |
 | Screenshots required / captured | 58 / 42 |
@@ -129,6 +129,38 @@ contributed nothing.
 
 Marking them documented once took the headline from 14% to 49% in a single step. That was
 flattering and false, and reverting it is recorded in `STATUS-LOG.md`.
+
+## The firmware's two largest undocumented blocks are closed
+
+**Coverage is 79%** (439 of 552), up from 65%. Two new or rewritten pages did most of it.
+
+**`RUNTIME-HELPERS.md`** covers the 57 executables the image installs outside `/etc/init.d` -
+every one of which had nothing written about it. The column that earns the page is *called by*,
+found by searching the repository for each helper's name rather than inferred from it. These
+are the least discoverable part of the image: you meet one by finding its name inside another
+script.
+
+Exactly one helper is referenced nowhere - `/etc/profile.d/nebulaos-prompt.sh`, sourced at
+login rather than called. The page says so instead of leaving a blank, because *no caller* is a
+fact about the image rather than a hole in the search.
+
+The five executables with ordinary system names are flagged at the top: `sudo`,
+`supervisorctl`, `passwd`, `sftp-server` and `git` are all present and none is the command it
+shadows.
+
+**`BOOT-SERVICES.md`** now has a section per service with its full header rather than a cut
+first sentence, plus the init verbs each script really implements.
+
+### The verb parser was wrong twice, and both failures were silent
+
+It read verbs from each script's own `case "$1"`. Anchoring `esac` at column 0 missed nine
+scripts that indent it, and four more dispatch with `if [ "$1" = "start" ]` and have no `case`
+at all. Both classes were reported as *"none parsed"* - which looks like a property of the
+script rather than a bug in the reader.
+
+What caught it was the count: thirteen of thirty-five services appearing to implement no verbs
+is not a plausible fact about an init system. A number that is suspicious on its face is worth
+more than a check that passes.
 
 ## Re-seeding the inventory found two bugs in the seeder itself
 

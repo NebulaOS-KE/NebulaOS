@@ -11,9 +11,9 @@ Verification is reported in four separate columns because they prove different t
 | Measure | Items | Share |
 |---|---|---|
 | Discovered documentation items | 552 | 100% |
-| Documented (page exists and covers the item) | 361 | 65% |
-| Draft | 47 | 8% |
-| Missing | 144 | 26% |
+| Documented (page exists and covers the item) | 439 | 79% |
+| Draft | 20 | 3% |
+| Missing | 93 | 16% |
 | Blocked (cannot proceed without hardware, access or a decision) | 4 | 0% |
 | Has a recorded completeness gap (work not done, not stuck) | 13 | 2% |
 
@@ -21,7 +21,7 @@ Verification is reported in four separate columns because they prove different t
 
 | Kind | Verified | Partial | Unknown | Blocked | N/A |
 |---|---|---|---|---|---|
-| Code verified | 374 | 35 | 143 | 0 | 0 |
+| Code verified | 452 | 8 | 92 | 0 | 0 |
 | Test verified | 47 | 0 | 504 | 0 | 1 |
 | Hardware verified | 0 | 0 | 0 | 2 | 547 |
 
@@ -44,7 +44,7 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | Repository | Items | Documented | Draft | Missing | Code verified | Documented % |
 |---|---|---|---|---|---|---|
 | NebulaOS | 11 | 10 | 0 | 1 | 10 | 90% |
-| NebulaOS-firmware | 196 | 80 | 47 | 69 | 93 | 40% |
+| NebulaOS-firmware | 196 | 158 | 20 | 18 | 171 | 80% |
 | NebulaOS-kernel | 1 | 1 | 0 | 0 | 1 | 100% |
 | NebulaOS-klipper-extensions | 236 | 215 | 0 | 21 | 215 | 91% |
 | NebulaOS-klipper-mcu | 1 | 1 | 0 | 0 | 1 | 100% |
@@ -65,9 +65,9 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | extension | 30 | 11 | 0 | 19 | 36% |
 | os-helper | 18 | 18 | 0 | 0 | 100% |
 | repo-overview | 8 | 7 | 0 | 1 | 87% |
-| runtime-helper | 57 | 6 | 0 | 51 | 10% |
+| runtime-helper | 57 | 57 | 0 | 0 | 100% |
 | screen | 50 | 35 | 0 | 15 | 70% |
-| service | 35 | 8 | 27 | 0 | 22% |
+| service | 35 | 35 | 0 | 0 | 100% |
 | user-manual-section | 10 | 10 | 0 | 0 | 100% |
 
 ## Source revisions this inventory was discovered at

@@ -228,6 +228,19 @@ video** - upstream renders on *"Done printing file"* and nothing else, and the n
 clears the frames. Reading upstream at its pinned commit rather than assuming is what caught
 the second one; the clone lives in `$TMPDIR/mt` and is disposable.
 
+**Q-068 done (2026-11-03): `docs/firmware` `56fdc1e`.** `RUNTIME-HELPERS.md` (57 helpers,
+with callers found by searching) and full per-service detail in `BOOT-SERVICES.md`.
+**Coverage 65% -> 79%** - the firmware's two largest undocumented blocks.
+
+**Next, by size:** 20 NebulaScreen config-option items, 19 extensions modules, 18 existing
+NebulaScreen wiki pages needing a disposition, 15 screen panels, 13 API endpoints whose
+responses do not resolve, 11 developer tools, 14 build commands. Check the dashboard rather
+than this list - it is accurate only at the moment it was written.
+
+**A habit that keeps paying:** when an extractor reports an implausible count, suspect the
+extractor. Thirteen of thirty-five init scripts implementing no verbs is not a fact about an
+init system, and it was two separate parser bugs.
+
 **Q-037 is closed, and `OSCONFIG.md` is new (2026-11-03, `docs/firmware` `c58a260`).**
 18 helper modules and 189 public functions documented - the largest undocumented block in the
 firmware. 46 of 59 endpoints now resolve their response keys. Coverage is 65%.
