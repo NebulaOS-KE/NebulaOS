@@ -11,17 +11,17 @@ Verification is reported in four separate columns because they prove different t
 | Measure | Items | Share |
 |---|---|---|
 | Discovered documentation items | 552 | 100% |
-| Documented (page exists and covers the item) | 439 | 79% |
-| Draft | 20 | 3% |
-| Missing | 93 | 16% |
+| Documented (page exists and covers the item) | 472 | 85% |
+| Draft | 22 | 3% |
+| Missing | 58 | 10% |
 | Blocked (cannot proceed without hardware, access or a decision) | 4 | 0% |
-| Has a recorded completeness gap (work not done, not stuck) | 13 | 2% |
+| Has a recorded completeness gap (work not done, not stuck) | 15 | 2% |
 
 ## Verification (counted separately, never combined)
 
 | Kind | Verified | Partial | Unknown | Blocked | N/A |
 |---|---|---|---|---|---|
-| Code verified | 452 | 8 | 92 | 0 | 0 |
+| Code verified | 485 | 8 | 59 | 0 | 0 |
 | Test verified | 47 | 0 | 504 | 0 | 1 |
 | Hardware verified | 0 | 0 | 0 | 2 | 547 |
 
@@ -48,7 +48,7 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | NebulaOS-kernel | 1 | 1 | 0 | 0 | 1 | 100% |
 | NebulaOS-klipper-extensions | 236 | 215 | 0 | 21 | 215 | 91% |
 | NebulaOS-klipper-mcu | 1 | 1 | 0 | 0 | 1 | 100% |
-| NebulaOS-nebulascreen | 105 | 52 | 0 | 53 | 52 | 49% |
+| NebulaOS-nebulascreen | 105 | 85 | 2 | 18 | 85 | 80% |
 | lv_drivers | 1 | 1 | 0 | 0 | 1 | 100% |
 | nebulaos-packages | 1 | 1 | 0 | 0 | 1 | 100% |
 
@@ -59,14 +59,14 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | api | 60 | 47 | 13 | 0 | 78% |
 | build-command | 14 | 0 | 7 | 7 | 0% |
 | command | 52 | 50 | 0 | 2 | 96% |
-| config-option | 173 | 153 | 0 | 20 | 88% |
+| config-option | 173 | 173 | 0 | 0 | 100% |
 | developer-tool | 11 | 0 | 0 | 11 | 0% |
 | existing-page | 34 | 16 | 0 | 18 | 47% |
 | extension | 30 | 11 | 0 | 19 | 36% |
 | os-helper | 18 | 18 | 0 | 0 | 100% |
 | repo-overview | 8 | 7 | 0 | 1 | 87% |
 | runtime-helper | 57 | 57 | 0 | 0 | 100% |
-| screen | 50 | 35 | 0 | 15 | 70% |
+| screen | 50 | 48 | 2 | 0 | 96% |
 | service | 35 | 35 | 0 | 0 | 100% |
 | user-manual-section | 10 | 10 | 0 | 0 | 100% |
 

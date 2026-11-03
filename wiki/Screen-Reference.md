@@ -21,7 +21,7 @@ the task pages linked, or are internal screens you do not navigate to directly.
 |---|---|---|
 | `axis_twist_panel` | [Axis twist](Axis-Twist-Compensation) - detail below | yes |
 | `bedmesh_panel` | detail below | yes |
-| `boot_logo_panel` | [Resetting](Resetting) | not yet |
+| `boot_logo_panel` | detail below | not yet |
 | `calibration_menu_panel` | [Calibration guide](Calibration-Guide) | yes |
 | `camera_panel` | [Camera](Camera) | yes |
 | `connections_panel` | [Connecting to Wi-Fi](Connecting-To-WiFi) | yes |
@@ -30,7 +30,7 @@ the task pages linked, or are internal screens you do not navigate to directly.
 | `exclude_object_panel` | [Printing](Printing) - detail below | not yet |
 | `extruder_panel` | [Filament](Filament) - detail below | yes |
 | `fan_panel` | detail below | yes |
-| `filament_runout_panel` | [Filament](Filament) | not yet |
+| `filament_runout_panel` | detail below | not yet |
 | `file_panel` | [Printing](Printing) - detail below | yes |
 | `finetune_panel` | [Printing](Printing) - detail below | yes |
 | `firmware_retraction_panel` | detail below | yes |
@@ -48,7 +48,7 @@ the task pages linked, or are internal screens you do not navigate to directly.
 | `network_detail_panel` | [Connecting to Wi-Fi](Connecting-To-WiFi) | not yet |
 | `pid_calibration_panel` | [Calibration guide](Calibration-Guide) | yes |
 | `power_panel` | detail below | yes |
-| `print_panel` | not yet documented | yes |
+| `print_panel` | the Print tab's container - holds the file browser and the print status screen, both below | yes |
 | `print_status_panel` | [Printing](Printing) - detail below | yes |
 | `printer_select_panel` | detail below | not yet |
 | `printer_settings_panel` | detail below | yes |
@@ -747,6 +747,48 @@ back to the previous slot. See [Updating NebulaOS](Updating-NebulaOS).
 ### Reset
 
 See [Resetting](Resetting).
+
+---
+
+## Filament runout dialog
+
+Not a page you open - it appears by itself when the filament sensor reports that filament has
+run out during a print.
+
+| Button | What it does |
+|---|---|
+| **Load** | Feeds filament in short chunks. While feeding the button reads **Stop**, so you can halt between chunks instead of waiting out one long move. |
+| **Continue** | Checks the sensor again, then resumes the print. |
+| **Cancel** | Cancels the print. |
+
+**If nothing appears when filament runs out, that may be correct.** Creality's `M600`
+filament-change macro, if it is installed, already pauses the print and shows its own prompt for
+the same event. Showing both would stack two dialogs on top of each other, so NebulaScreen stays
+quiet and watches instead. It only steps in if `M600`'s own sequence fails partway through and no
+prompt is up while filament is still missing - so a real failure never leaves you with nothing to
+tap.
+
+*From `src/filament_runout_panel.cpp` at screen `36490ed`.*
+
+---
+
+## Boot logo panel
+
+Opens from Settings → Display → **Boot logo**. Sets the picture shown while the printer starts
+and the power-on logo, for **the slot you are running**.
+
+*No current screenshot of this screen yet - the simulator's capture tour does not reach it.*
+
+| Control | What it does |
+|---|---|
+| The dropdown | NebulaOS, plus every image you have added. The one in use is pre-selected; picking one shows a preview. |
+| **Apply** | Makes the selected image the boot screen and the power-on logo. |
+| **Add from USB** | Copies an image from a plugged-in stick into the printer and selects it. |
+| **Delete** | Removes an image you added. The NebulaOS logo cannot be deleted. |
+| **Restore Creality logo** | Puts the original power-on logo back. |
+
+Images can also be uploaded in Mainsail - PNG, BMP or JPEG, up to 4 MB. See
+[Resetting](Resetting) for the other things under Settings → Display.
 
 ---
 

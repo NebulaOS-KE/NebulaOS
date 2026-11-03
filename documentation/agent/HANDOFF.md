@@ -228,6 +228,16 @@ video** - upstream renders on *"Done printing file"* and nothing else, and the n
 clears the frames. Reading upstream at its pinned commit rather than assuming is what caught
 the second one; the clone lives in `$TMPDIR/mt` and is disposable.
 
+**Q-069 done (2026-11-03): the NebulaScreen block.** `docs/screen` `fa7cde0` and the manual.
+**Coverage 79% -> 85%.**
+
+**Check index pointers, do not trust them.** Two entries in the screen reference's panel index
+sent readers to pages that do not mention their subject. Both looked fine in the table.
+
+**Remaining, by size:** 19 extensions modules, 18 existing NebulaScreen wiki pages needing a
+disposition, 13 API endpoints whose responses do not resolve, 11 developer tools, 14 build
+commands, 2 extensions commands, the central repo overview. Check the dashboard first.
+
 **Q-068 done (2026-11-03): `docs/firmware` `56fdc1e`.** `RUNTIME-HELPERS.md` (57 helpers,
 with callers found by searching) and full per-service detail in `BOOT-SERVICES.md`.
 **Coverage 65% -> 79%** - the firmware's two largest undocumented blocks.

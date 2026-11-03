@@ -6,15 +6,15 @@
 | | |
 |---|---|
 | Discovered items | **552** |
-| Documented | **439** (79%) |
-| Draft | 20 |
-| Missing | 93 |
-| Code verified | 452 |
+| Documented | **472** (85%) |
+| Draft | 22 |
+| Missing | 58 |
+| Code verified | 485 |
 | Test verified | 47 |
 | Hardware verified | 0 |
 | Screenshots required / captured | 58 / 42 |
 | Blocked (cannot proceed) | 4 |
-| Completeness gaps (work not done) | 13 |
+| Completeness gaps (work not done) | 15 |
 
 Per-repository and per-category breakdowns are in `COVERAGE.md`.
 <!-- END GENERATED STATUS -->
@@ -129,6 +129,30 @@ contributed nothing.
 
 Marking them documented once took the headline from 14% to 49% in a single step. That was
 flattering and false, and reverting it is recorded in `STATUS-LOG.md`.
+
+## Two index entries pointed at pages that did not cover their subject
+
+Found by checking the screen reference's panel index rather than trusting it. `boot_logo_panel`
+pointed at `Resetting`, which contains no occurrence of *"boot logo"*. `filament_runout_panel`
+pointed at `Filament`, which has one sentence about what happens when filament runs out and
+nothing about the dialog.
+
+This is the same failure as a caption naming the wrong screenshot, and it has the same effect:
+the reader trusts the pointer, cannot find the thing, and stops trusting the rest. Both now
+have real sections.
+
+**The runout dialog earns its section because its most likely observed behaviour is silence.**
+If Creality's `M600` macro is installed it already pauses and prompts for the same event, so
+NebulaScreen deliberately stays quiet rather than stacking two dialogs - stepping in only if
+`M600`'s own sequence fails with no prompt up. Someone who saw nothing happen would reasonably
+conclude the feature was broken.
+
+**Two config keys were in the wrong file.** `primary_color` and `secondary_color` are read from
+`themes/<theme>.json`, not from `nebulascreen.json`, which holds only the theme name. The
+inventory had them classified as NebulaScreen settings; the page now says where they really
+live.
+
+**Coverage is 85%** (472 of 552).
 
 ## The firmware's two largest undocumented blocks are closed
 

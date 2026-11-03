@@ -283,3 +283,13 @@ strongest: the suite already passes and 21 modules are already test-verified.
       The verb parser was silently wrong twice: `esac` anchored at column 0 missed nine
       indented scripts, and four more dispatch with `if [ "$1" = "start" ]` and have no `case`
       at all. Both reported "no verbs" rather than failing.
+- [x] **Q-069** **The NebulaScreen block** (2026-11-03). 20 config-option items and 13 panel
+      items promoted, after checking rather than assuming.
+      - `docs/screen` `fa7cde0`: the six config fields `Configuration.md` did not have. Two of
+        them (`primary_color`, `secondary_color`) are in the **theme** file, not
+        `nebulascreen.json` - the inventory had them mis-classified. Two more are one-shot
+        migration markers, not settings.
+      - `docs/agent`: `wiki/Screen-Reference.md` gains filament-runout and boot-logo sections,
+        and **two index entries that pointed at pages not covering their subject** are fixed.
+      - `init_panel` and `prompt_panel` stay draft with the reason recorded: they are internal
+        screens nobody navigates to.
