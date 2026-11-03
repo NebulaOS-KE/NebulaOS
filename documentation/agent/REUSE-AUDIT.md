@@ -107,3 +107,33 @@ Less authoring than expected, and a different shape of work:
 4. Section **04** needs the 49-panel reference completing around the page that exists.
 5. Section **06** (everyday printing) is only partly covered by the existing material and
    needs most of its procedures written.
+
+## Re-verified against current source, 2026-11-03
+
+The Q-006 audit gave each of the 34 existing NebulaScreen wiki pages a disposition. Eighteen of
+those were *keep* or *historical* and had never been re-checked against the code since. They
+have been now - the instruction was explicitly not to rubber-stamp them.
+
+What was checked on each page, mechanically:
+
+- every internal wiki link resolves to a page that exists
+- every `` `make <target>` `` named exists in the Makefile
+- every repository path named in backticks exists at the current commit
+- no reference to a retired repository
+
+**Result: no problems.** All eighteen hold at NebulaScreen `36490ed`.
+
+Two findings about the *check* rather than the pages, worth recording because both would have
+produced a false alarm:
+
+- **`NebulaOS-klipper` matched `NebulaOS-klipper-extensions`.** A word-boundary pattern for the
+  retired fork's name matches the live repository's name, because the live one is the retired
+  one plus a suffix. Every hit was correct text.
+- **`coreflake1/guppyscreen` is not a retired URL.** It is OpenKE, a separate upstream project
+  that still exists and is credited correctly. The retired URL was
+  `coreflake1/NebulaOS-guppyscreen`, a different path.
+
+The two *historical* dispositions were checked against the thing they claim is absent, not just
+read: `Emergency-Factory-Reset.md` describes a service and a USB trigger that NebulaOS does not
+have, and neither `S58factoryreset` nor `emergency_factory_reset` appears anywhere in the
+repository. `Upgrading.md` is a redirect stub and the anchor it points at exists.

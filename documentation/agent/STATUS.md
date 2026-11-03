@@ -6,10 +6,10 @@
 | | |
 |---|---|
 | Discovered items | **552** |
-| Documented | **472** (85%) |
+| Documented | **509** (92%) |
 | Draft | 22 |
-| Missing | 58 |
-| Code verified | 485 |
+| Missing | 21 |
+| Code verified | 522 |
 | Test verified | 47 |
 | Hardware verified | 0 |
 | Screenshots required / captured | 58 / 42 |

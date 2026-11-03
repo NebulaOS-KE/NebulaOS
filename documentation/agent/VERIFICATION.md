@@ -57,10 +57,24 @@ Klipper modules and need the pinned Klipper checkout composed in, exactly as the
 own CI script documents. They are not failures; they are a different run.
 
 That result promoted `verify_test` to `verified` on **21 extension modules**, each citing the
-specific test file and the run date. Nine modules have no test of their own and stay
-`unknown`: `autotune_tmc`, `bl24c16f`, `calibrate_shaper_config`, `gcode_shell_command`,
-`motor_constants`, `nebulaos_compat`, `nebulaos_temperature_mcu`, `prtouch_test_support`,
-`virtual_pins`.
+specific test file and the run date.
+
+**Corrected 2026-11-03.** This file previously listed nine modules as having no test, by the
+rule *no `test_<module>.py` exists*. That rule is wrong in both directions and the real answer
+is **five**:
+
+- `nebulaos_compat` and `nebulaos_temperature_mcu` **do** have test files. They are excluded
+  from the standalone run because they import real Klipper, which is a different thing from
+  being untested, and conflating the two understated coverage.
+- `nozzle_clear`, `z_compensate` and `nebulaos_z_offset_probe` are covered by tests named after
+  what they test rather than after the file - `test_nozzle_clear_native.py`,
+  `test_z_compensate_*.py`, `test_z_offset_probe_*.py`.
+- `autotune_tmc` is referred to by `test_nebulaos_tmc_autotune.py`.
+
+The five modules no test refers to are `bl24c16f`, `calibrate_shaper_config`,
+`gcode_shell_command`, `motor_constants` and `virtual_pins` - **all five vendored**. Every
+module NebulaOS wrote is referred to by at least one test. Coverage is now determined by
+reading the test files for references to the module, not by matching filenames.
 
 Two cautions, recorded because both nearly produced a wrong result:
 
