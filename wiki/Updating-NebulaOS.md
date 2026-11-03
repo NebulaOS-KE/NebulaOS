@@ -28,7 +28,12 @@ files and Wi-Fi networks live on a separate data area and are kept through every
 ## Updating the whole system
 
 A system image is written into the boot slot that is **not** running, so the system you are
-using is never overwritten. The printer then restarts into the new slot.
+using is never overwritten. The printer then restarts into the new slot. An **online** update
+and a **USB stick** install are the same operation - only where the file comes from differs.
+
+**On a printer that came from stock, the first update replaces your old system**, because the
+slot that is not running is the one holding it. See
+[Going back](Going-Back#the-one-thing-that-can-remove-your-old-system).
 
 **If the new system does not come up properly, NebulaOS goes back by itself** - within about
 5 minutes, or after 3 restarts that never confirm. See
@@ -110,8 +115,9 @@ Worth knowing how these track upstream:
 
 ## Recovery and reversal
 
-- A system image goes into the other slot, so **[Going back](Going-Back)** returns you to the
-  previous system.
+- A system image goes into the other slot, so **[Going back](Going-Back)** returns you to
+  whatever is in it - the previous NebulaOS once you have updated at least once, your old
+  system only if you have not.
 - A failed system update undoes itself automatically.
 - App updates are managed by Moonraker's update manager and can be re-run from the same list.
 

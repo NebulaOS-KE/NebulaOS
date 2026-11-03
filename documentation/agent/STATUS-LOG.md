@@ -221,3 +221,22 @@ documents which carried the same stale framing because they predate `mcu_restore
 `wiki/Mainboard-Firmware.md`, documents what the screen's MCU page actually does - it had none.
 
 Caught by the project owner, not by me.
+
+## 2026-11-04 - an observation on one route attributed to another
+
+Writing up why 1.0.0 was rebuilt, I recorded the out-of-memory failure as *"the first concrete
+evidence about [the stock-touchscreen route]... found by someone running it rather than by
+reading the code."*
+
+It was found on the **online update** path. That the stock route fails the same way is an
+inference from the same file, the same RAM and Creality's updater also having to unpack it -
+reasonable, and not evidence. The sentence moved an observation from the route where it
+happened to the route this project has been careful to call unverified for days, and it did so
+inside `VERIFICATION.md`, the file whose entire job is keeping those apart.
+
+Nothing in the manual was affected; the fault is in the image, not the procedure. B-003 stays
+unverified rather than becoming *observed failing*.
+
+Caught by the main session on review, not here. The tell was available: I knew the report came
+from an online update and wrote "someone running it" about a different route in the next
+clause.

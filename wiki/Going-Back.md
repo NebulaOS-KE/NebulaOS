@@ -22,15 +22,20 @@ Nothing, if NebulaOS still starts. Otherwise see [Recovery](Recovery).
 
 ## The one thing that can remove your old system
 
-**Installing a system image always writes the slot you are *not* running.** That is what makes
-updates safe - the system you are using is never overwritten - but it has a consequence on a
-printer that came from stock:
+**Updating NebulaOS always writes the slot you are *not* running.** That is what makes updates
+safe - the system you are using is never overwritten - but it has a consequence on a printer
+that came from stock:
 
-> The first time you install a system image from NebulaOS, it goes into the slot holding your
-> **old** system, and replaces it.
+> The first time you take **an online update** (Settings → Updates → System image → Online) or
+> install a system image from a USB stick, it goes into the slot holding your **old** system,
+> and replaces it.
+
+Those are the same operation underneath, which is easy to miss: an online update *is* a system
+image install, just with the file fetched for you. **Almost everyone will meet this through the
+first online update**, not through a USB stick.
 
 After that, *Swap boot slot* switches between two NebulaOS versions, not between NebulaOS and
-Creality. The page above is then no longer true for your printer.
+Creality. The point above is then no longer true for your printer.
 
 **You can see this before it happens.** **Settings → Updates → System image** lists both slots
 with what each one holds and which is running, so the slot about to be written is named on
@@ -82,7 +87,7 @@ installed. The screen tells you when that is happening. See [Safety first](Safet
 | The swap button is greyed out or refuses | A print is running. Stop it first. |
 | The printer does not come up after the switch | [Recovery](Recovery), option 3 or 4. |
 | You are now on stock and want NebulaOS back | Install it again: [Installing NebulaOS](Installing-NebulaOS). |
-| **Swap boot slot** offers another NebulaOS, not your old system | A system image has been installed since, and it replaced the old system. See above for getting Creality's back. |
+| **Swap boot slot** offers another NebulaOS, not your old system | NebulaOS has been updated since - online or from a USB stick - and that replaced the old system. See above for getting Creality's back. |
 
 ## Coming back to NebulaOS later
 

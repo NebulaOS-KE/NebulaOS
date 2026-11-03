@@ -144,12 +144,18 @@ successfully on real hardware.
 > needs more memory than the printer's 248 MB, so an online update ran out of memory. Firmware
 > `ba98eec` pins `-md=16m` and `validate-img.py` now refuses a dictionary above 16 MB.
 >
-> **What this means for the install routes.** The same unpacking happens on the
-> stock-touchscreen route, so that route very likely failed on the published build too. This is
-> the first concrete evidence about a route that `BLOCKERS.md` B-003 has recorded as unverified
-> from the start - and it is evidence of a failure, found by someone running it rather than by
-> reading the code. The failure is in the image, not in the documented procedure, so no page
-> changes; but it is exactly the kind of thing an unverified route hides.
+> **What this means for the install routes - corrected 2026-11-04.** The failure was observed
+> on the **online update** path. That the stock-touchscreen route fails the same way is an
+> **inference**, not an observation: same file, same 248 MB, and Creality's updater also has to
+> unpack it. Plausible, and not evidence.
+>
+> This agent's first version of this paragraph called it *"the first concrete evidence about a
+> route B-003 has recorded as unverified... found by someone running it"*. That attributed an
+> observation on one route to a different route, which is the precise mistake this file exists
+> to prevent, in a file about preventing it. Caught by the main session, not here.
+>
+> **B-003 therefore stays unverified** - it does not become *observed failing*. The failure is
+> in the image rather than in the documented procedure, so no page changes either way.
 >
 > **The per-behaviour citations to `70ad0b0` in the manual stay.** They say where a behaviour
 > was read, not which build shipped, and `ba98eec` is a descendant that changes image
