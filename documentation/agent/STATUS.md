@@ -5,16 +5,16 @@
 
 | | |
 |---|---|
-| Discovered items | **550** |
-| Documented | **280** (50%) |
-| Draft | 109 |
+| Discovered items | **551** |
+| Documented | **340** (61%) |
+| Draft | 50 |
 | Missing | 161 |
-| Code verified | 355 |
+| Code verified | 356 |
 | Test verified | 47 |
 | Hardware verified | 0 |
 | Screenshots required / captured | 58 / 42 |
 | Blocked (cannot proceed) | 4 |
-| Completeness gaps (work not done) | 6 |
+| Completeness gaps (work not done) | 22 |
 
 Per-repository and per-category breakdowns are in `COVERAGE.md`.
 <!-- END GENERATED STATUS -->
@@ -129,6 +129,43 @@ contributed nothing.
 
 Marking them documented once took the headline from 14% to 49% in a single step. That was
 flattering and false, and reverting it is recorded in `STATUS-LOG.md`.
+
+## The two generated references reached their bar
+
+**Configuration is 156 of 156.** The sixteen options that carried a dash were the ones a
+parser could never produce - fifteen in the vendored `[autotune_tmc]`, one in power-loss
+recovery - and each was read in the module that uses it. Where an option is passed straight to
+a stepper driver register field, the purpose names the field and stops there. The datasheet is
+the authority on what the field does, and paraphrasing one from memory would be the same
+invention as guessing from the name, in a more convincing costume.
+
+**The API reference now proves responses for 43 of 59 endpoints**, mechanically. A new
+extractor walks endpoint handler -> `_read`/`_write` call -> CLI dispatcher -> helper function
+-> the keys its `return` statements carry, all with `ast`. The dispatcher needed four shapes
+handled before it gave anything up: tuple comparison, nested `domain`/`verb` ifs, a local
+`{verb: function}` table, and a `{domain: function}[domain]()` lookup whose verb is pinned only
+by the `READ_ONLY` set.
+
+The envelope turned out to be the more valuable half, and it is now documented once rather than
+per endpoint: the helper emits `{"ok": true, ...}` or `{"ok": false, "error", "message"}`, the
+component pops `ok` and **returns the rest verbatim as the JSON-RPC result**, and otherwise
+raises with the HTTP status taken from the exit code. That equivalence is why listing a helper's
+return keys is the same thing as listing the response keys.
+
+**Sixteen endpoints say they are unresolved.** Some compose their answer in the component; some
+helpers return something the extractor cannot read. Each records which. A response example
+invented from an endpoint's name is indistinguishable from a real one to the reader, so the gap
+is the safer failure - and it is counted as a gap, not as coverage.
+
+### The extractor disagreed with the inventory, and the extractor was right
+
+`machine.nebulaos.stats` was missing from `coverage.jsonl` entirely. The seeder last ran before
+1.0.0 added it, so the inventory said 58 endpoints and the component had 59. Nothing failed;
+the count simply described a release-old reality.
+
+**Re-run the seeder after a release** is now the lesson in `HANDOFF.md`. Two independent counts
+disagreeing is the only reason this surfaced, which is the habit this project adopted after the
+first two discovery slices shipped mis-sized inventories.
 
 ## Every repository in the organisation now has documentation
 

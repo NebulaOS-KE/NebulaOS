@@ -228,6 +228,20 @@ video** - upstream renders on *"Done printing file"* and nothing else, and the n
 clears the frames. Reading upstream at its pinned commit rather than assuming is what caught
 the second one; the clone lives in `$TMPDIR/mt` and is disposable.
 
+**Q-036 is done and Q-037 is mostly done (2026-11-03).** `CONFIG.md` is 156 of 156 options
+with a purpose (`docs/extensions` `ba436d8`). The firmware API reference resolves responses for
+43 of 59 endpoints (`docs/firmware` `87116ad`) via the new
+`documentation/agent/tools/gen_firmware_api_responses.py`.
+
+**What is left of Q-037:** example *values*. The keys are established; the contents are not.
+`tests/nebulaos-osconfig-tests.py` is 4381 lines of fixtures and is the honest source for them.
+
+**Re-run `seed_inventory.py` after a release.** `machine.nebulaos.stats` was missing from
+`coverage.jsonl` entirely - the inventory said 58 endpoints, the component had 59 - because the
+seeder last ran before 1.0.0 added it. It surfaced only because the new extractor produced an
+independent count that disagreed. Nothing had failed; the number was just a release out of
+date.
+
 **Q-007 is done (2026-11-03) and B-002 is closed.** `nebulaos-packages` (PR #2) and
 `lv_drivers` (PR #1) are cloned into `_worktrees/docs/`, read and documented. Every repository
 in the organisation now has documentation; eight pull requests are open.

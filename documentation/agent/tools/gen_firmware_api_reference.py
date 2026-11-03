@@ -15,6 +15,7 @@ Usage:  gen_firmware_api_reference.py <firmware-checkout> <out-file>
 """
 import ast, os, subprocess, sys, datetime
 import _srccommit
+import gen_firmware_api_responses as _resp
 
 COMPONENT = ("scripts/build/overlay/usr/lib/nebulaos/moonraker/nebulaos.py")
 GETTERS = {"get_str": "string", "get_int": "int", "get_float": "float",
@@ -73,6 +74,14 @@ def main():
     root, out = sys.argv[1], sys.argv[2]
     # The code commit, not this worktree's docs branch - see _srccommit.py.
     sha, sha_from = _srccommit.source_commit(root)
+    # Response shapes, resolved endpoint -> osconfig helper -> its return keys.
+    try:
+        routes, calls = _resp.endpoints(os.path.join(root, _resp.COMPONENT))
+        disp = _resp.dispatch(os.path.join(root, _resp.OSCONFIG, "cli.py"))
+        responses = _resp.resolve(root, routes, calls, disp)
+    except Exception as exc:            # never lose the reference over this
+        print(f"WARNING: response resolution failed: {exc}")
+        responses = {}
     path = os.path.join(root, COMPONENT)
     tree = ast.parse(open(path).read())
 
@@ -140,13 +149,42 @@ def main():
          "**Established from source:** that each endpoint is registered, its HTTP method, its",
          "JSON-RPC name, its handler, and which request parameters that handler reads with",
          "which defaults.", "",
-         "**Not established here:** response shapes. Responses are produced by the",
-         "`nebulaos-osconfig` helper at runtime, so documenting them from this file alone",
-         "would mean inventing them. The helper modules under",
-         "`usr/lib/nebulaos/python/nebulaos_osconfig/` are the place to read them, and the",
-         "repository's own `tests/nebulaos-osconfig-tests.py` holds real fixtures.", "",
+         "**Also established, since 2026-11-03:** which `nebulaos-osconfig` call each endpoint",
+         "makes, and the keys that helper's own `return` statements carry - see",
+         "[Responses](#responses) for how far that goes and where it stops.", "",
+         "**Not established here:** the *values*. A key is listed because a `return` in the",
+         "helper puts it there, not because anyone saw what it contained on a printer.", "",
          "**No endpoint here is hardware-verified.** Nothing in this reference was observed on",
          "a printer.", "",
+         "## Responses", "",
+         "Every endpoint answers through the same envelope, and it is worth reading once",
+         "rather than per endpoint.", "",
+         "The helper writes a single JSON object to stdout: `{\"ok\": true, ...}` with its own",
+         "result merged in, or `{\"ok\": false, \"error\": \"<CODE>\", \"message\": \"...\"}`.",
+         "The Moonraker component pops `ok`. On success **the JSON-RPC result is the helper's",
+         "object verbatim**, which is why listing the helper's return keys is the same thing",
+         "as listing the response keys. On failure it raises a Moonraker error",
+         "`\"<CODE>: <message>\"`, with the HTTP status taken from the helper's exit code:", "",
+         "| Helper exit | What the client sees |",
+         "|---|---|",
+         "| refused | a refusal, carrying the code and message |",
+         "| 1 or 64 | HTTP 400 |",
+         "| anything else | HTTP 500 |",
+         "| no JSON at all | HTTP 500, *nebulaos-osconfig returned no result* |",
+         "| over the timeout | HTTP 504 |", "",
+         "**Where the keys come from.** They are extracted with `ast` by walking the chain",
+         "this reference already describes - endpoint handler to its `_read`/`_write` call, the",
+         "CLI dispatcher to the helper function, that function's `return` statements to their",
+         "keys. Nothing is transcribed by hand.", "",
+         "**Where it stops, and why that is said out loud.** Sixteen of the 59 endpoints could",
+         "not be resolved this way: some handlers build their answer in the component rather",
+         "than delegating a single call, and some helpers return a value this extractor cannot",
+         "read. Those say *Result keys not resolved from source* rather than carrying a",
+         "plausible list. An invented response example is indistinguishable from a real one to",
+         "the reader, which is exactly why guessing here would be worse than a gap.", "",
+         "A key listed on a branch - added only when some condition holds - is still listed,",
+         "because the response can carry it. The list is what the endpoint *may* return, not",
+         "what it always returns.", "",
          "## Endpoints", "",
          "A parameter with no default is **required**; the request fails without it.", ""]
 
@@ -169,6 +207,20 @@ def main():
         else:
             L.append("*No request parameters.*")
         L.append("")
+        r = responses.get(e["path"])
+        if r and r.get("function"):
+            L.append(f"Runs `nebulaos-osconfig "
+                     f"{' '.join(h['domain'] + ' ' + h['verb'] for h in r['helper'])}`"
+                     f" -> `{'`, `'.join(r['function'])}`.")
+            L.append("")
+        if r and r.get("result_keys"):
+            L.append("Result keys: " +
+                     ", ".join(f"`{k}`" for k in r["result_keys"]) + ".")
+            L.append("")
+        elif r is not None:
+            L.append("*Result keys not resolved from source - see "
+                     "[Responses](#responses).*")
+            L.append("")
 
     if notifications:
         L.append("## Notifications")

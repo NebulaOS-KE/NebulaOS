@@ -104,7 +104,8 @@ strongest: the suite already passes and 21 modules are already test-verified.
 - [~] **Q-030** `NebulaOS-klipper-extensions` - generated reference done (PR #3 on that
       repo): 49 commands, 155 options, README. All 193 items are **draft**, not documented:
       the tables lack the per-item detail mission 6.5 and 6.6 require.
-- [~] **Q-036** Raise the extensions reference to the mission's bar.
+- [x] **Q-036** **Done (2026-11-03).** The last 16 configuration options now carry a purpose, so `CONFIG.md` is **156 of 156** and every extensions config-option item is `documented`. Fifteen were in vendored `[autotune_tmc]` and one was PLR's `prime_length`; each was read in the module that uses it. Where an option is passed straight to a driver register field the purpose names the field and stops - the datasheet is the authority and paraphrasing it would be invention. Original entry:
+      Raise the extensions reference to the mission's bar.
       **Commands done:** `COMMANDS-DETAIL.md` gives handler, help text, parameters with types
       / defaults / valid ranges, errors raised, side effects and an example invocation for all
       49. The 41 user-facing ones are now `documented`, each naming the residual gap -
@@ -128,9 +129,15 @@ strongest: the suite already passes and 21 modules are already test-verified.
       the two-way bounded image trial, recovery by severity, the build pipeline in order.
       Still to write: the 56 runtime helpers individually, per-service failure behaviour,
       Buildroot internals, the filesystem layout, and what each build script does inside.
-- [ ] **Q-037** Raise the firmware API reference to mission 6.7: response examples, verified
-      against `nebulaos_osconfig/` and the fixtures in `tests/nebulaos-osconfig-tests.py`.
-      Do not take them from the component source - it does not contain them.
+- [~] **Q-037** **Mostly done (2026-11-03,** `docs/firmware` `87116ad`**).** A new extractor,
+      `tools/gen_firmware_api_responses.py`, resolves each endpoint to its `nebulaos-osconfig`
+      call and that helper's own return keys, with `ast` - **43 of 59** resolved; the other 16
+      say so and each records which of the two reasons applies. The response envelope and the
+      exit-code-to-HTTP-status mapping are documented once, from source.
+      **Still open:** example *values*. The keys are established, the contents are not, and
+      `tests/nebulaos-osconfig-tests.py` (4381 lines) is the fixture source for them.
+      Also found: `machine.nebulaos.stats` was missing from the inventory - 59 endpoints, not
+      58 - because the seeder last ran before 1.0.0 added it. Re-run the seeder after a release.
 - [~] **Q-033** `NebulaOS-klipper-mcu` - the on-printer lifecycle written (PR #1 on that repo):
       identity classification, automatic restore with its bounds, the `UNKNOWN_APPLICATION`
       branch, user install from the screen, board parameters, and the repository's own
