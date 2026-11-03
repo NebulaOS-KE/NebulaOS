@@ -19,6 +19,18 @@
 Per-repository and per-category breakdowns are in `COVERAGE.md`.
 <!-- END GENERATED STATUS -->
 
+## Maintenance watch (from 2026-11-03)
+
+The project is done; this is a slow check for moved tips and new instructions, not new work.
+
+**2026-11-03, first check: nothing moved.** All eight repository tips are unchanged, all eight
+`docs/*` branches are clean and in sync with their remotes, and no new priority has arrived.
+
+One fact worth recording: **`NebulaOS-firmware` now carries the tag `v1.0.0`, pointing at
+`70ad0b0`** - the commit every release claim here cites. Its manifest pins match the commits the
+references were generated from, and the extensions `production` branch, `main` and the pin all
+read `f498796`. The documented commits are the released ones, checked rather than assumed.
+
 ## Done: 98% documented, 0 missing, and the caveat that matters
 
 **`FINAL-REPORT.md` answers the mission's Definition of Done condition by condition.** The

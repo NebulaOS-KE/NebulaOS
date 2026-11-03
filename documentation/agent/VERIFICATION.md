@@ -132,6 +132,24 @@ What *is* established from source: the checks run before anything is written, so
 stops without changing the running system. What is not established: that the route completes
 successfully on real hardware.
 
+## The documented commits are the released ones (confirmed 2026-11-03)
+
+Checked after the release, not assumed. `NebulaOS-firmware` now carries the tag **`v1.0.0`**,
+and it points at **`70ad0b0`** - the commit every release claim in this documentation cites.
+Its manifest at that commit pins:
+
+| Component | Pin |
+|---|---|
+| Extensions | `f498796`, branch `production` |
+| NebulaScreen | `36490ed` (`NEBULASCREEN_VERSION=v1.0.0`) |
+| Kernel | `d86790d` |
+| Host Klipper | `58bd67d` (upstream `Klipper3d/klipper`) |
+
+All four match the commits the references were generated from, and `production`, `main` and the
+extensions pin all read `f498796`. So *"the 1.0.0 release candidate"*, as several of this
+agent's own records call `70ad0b0`, is simply *the 1.0.0 release*. No user-facing page uses the
+candidate wording - it was removed when the test-status wording went (D-011).
+
 ## Source revisions
 
 Documentation describes the **newest** code: the tip of each repository's default branch.
