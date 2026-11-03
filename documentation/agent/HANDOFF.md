@@ -228,6 +228,20 @@ video** - upstream renders on *"Done printing file"* and nothing else, and the n
 clears the frames. Reading upstream at its pinned commit rather than assuming is what caught
 the second one; the clone lives in `$TMPDIR/mt` and is disposable.
 
+**Q-007 is done (2026-11-03) and B-002 is closed.** `nebulaos-packages` (PR #2) and
+`lv_drivers` (PR #1) are cloned into `_worktrees/docs/`, read and documented. Every repository
+in the organisation now has documentation; eight pull requests are open.
+
+The `lv_drivers` finding to carry: the fork is two commits, and only one is live. The fbdev
+blank/unblank pair is dead code superseded by NebulaScreen's `nsfb`, and `fbdev_blank()` must
+never be called on the KE's panel. Reading the diff alone would have documented both as
+shipped behaviour.
+
+**Next:** Q-036 (16 configuration options still carrying a dash in `CONFIG.md`, which need
+reading module by module - a parser cannot produce these) and Q-037 (firmware API response
+examples, from `nebulaos_osconfig/` and the fixtures in `tests/nebulaos-osconfig-tests.py`).
+The firmware worktree needs recreating first, from its existing remote branch with a merge.
+
 **Q-065 is done (2026-11-03): `docs/extensions` `90c646e`.** Extensions reference re-verified
 at `f498796`; suite re-run at that commit (29 of 31 standalone, 912 tests); 235 inventory items
 and 31 test-evidence lines re-pointed; `ARCHITECTURE.md` gained the physical-resume ordering and

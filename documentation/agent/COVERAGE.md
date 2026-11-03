@@ -11,18 +11,18 @@ Verification is reported in four separate columns because they prove different t
 | Measure | Items | Share |
 |---|---|---|
 | Discovered documentation items | 550 | 100% |
-| Documented (page exists and covers the item) | 278 | 50% |
+| Documented (page exists and covers the item) | 280 | 50% |
 | Draft | 109 | 19% |
-| Missing | 163 | 29% |
-| Blocked (cannot proceed without hardware, access or a decision) | 6 | 1% |
+| Missing | 161 | 29% |
+| Blocked (cannot proceed without hardware, access or a decision) | 4 | 0% |
 | Has a recorded completeness gap (work not done, not stuck) | 6 | 1% |
 
 ## Verification (counted separately, never combined)
 
 | Kind | Verified | Partial | Unknown | Blocked | N/A |
 |---|---|---|---|---|---|
-| Code verified | 353 | 35 | 162 | 0 | 0 |
-| Test verified | 46 | 0 | 504 | 0 | 0 |
+| Code verified | 355 | 35 | 160 | 0 | 0 |
+| Test verified | 47 | 0 | 502 | 0 | 1 |
 | Hardware verified | 0 | 0 | 0 | 2 | 545 |
 
 ## Screenshots
@@ -49,8 +49,8 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | NebulaOS-klipper-extensions | 236 | 199 | 16 | 21 | 215 | 84% |
 | NebulaOS-klipper-mcu | 1 | 1 | 0 | 0 | 1 | 100% |
 | NebulaOS-nebulascreen | 105 | 52 | 0 | 53 | 52 | 49% |
-| lv_drivers | 1 | 0 | 0 | 1 | 0 | 0% |
-| nebulaos-packages | 1 | 0 | 0 | 1 | 0 | 0% |
+| lv_drivers | 1 | 1 | 0 | 0 | 1 | 100% |
+| nebulaos-packages | 1 | 1 | 0 | 0 | 1 | 100% |
 
 ## By category
 
@@ -64,7 +64,7 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | existing-page | 34 | 16 | 0 | 18 | 47% |
 | extension | 30 | 11 | 0 | 19 | 36% |
 | os-helper | 17 | 0 | 0 | 17 | 0% |
-| repo-overview | 8 | 5 | 0 | 3 | 62% |
+| repo-overview | 8 | 7 | 0 | 1 | 87% |
 | runtime-helper | 57 | 6 | 0 | 51 | 10% |
 | screen | 50 | 35 | 0 | 15 | 70% |
 | service | 35 | 8 | 27 | 0 | 22% |
@@ -83,8 +83,8 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | NebulaOS-klipper-mcu | main | 33f5d16daccd | 1 |
 | NebulaOS-nebulascreen | main | 36490ed0b60d | 2 |
 | NebulaOS-nebulascreen | main | dee0f6f22a89 | 103 |
-| lv_drivers | master | not cloned l | 1 |
-| nebulaos-packages | main | not cloned l | 1 |
+| lv_drivers | master | ea2e4cc00d02 | 1 |
+| nebulaos-packages | main | 9d0d264ad60d | 1 |
 
 ## Blocked items
 
@@ -92,8 +92,6 @@ Only genuine blockers: something that cannot proceed without hardware, access or
 
 | Item | Repository | Reason |
 |---|---|---|
-| repo:nebulaos-packages | nebulaos-packages | not cloned locally; clone into _worktrees/docs |
-| repo:lv_drivers | lv_drivers | not cloned locally; clone into _worktrees/docs |
 | manual:02-installation | NebulaOS | verify_hardware outstanding: the stock-touchscreen route has not been observed on a printer (D-009: user pages document it as the normal route; record kept in VERIFICATION.md) |
 | screen:storage_panel | NebulaOS-nebulascreen | the Free up space / Clean up Creality buttons (screen 36490ed) are not in the screenshot tour; needs an extra tour step or a real printer |
 | screen:updates_panel | NebulaOS-nebulascreen | capture is timing-dependent without a live Moonraker: the busy/idle state varies between runs, so a published image would contradict the page. Needs a real printer. |

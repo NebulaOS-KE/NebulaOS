@@ -19,13 +19,19 @@ screens from the real application there. Pages state clearly when behaviour is e
 from source rather than observed on hardware. Genuinely hardware-only captures are recorded
 as blocked in `SCREENSHOTS.md` rather than faked or skipped silently.
 
-### B-002 - Two repositories are not cloned locally
+### B-002 - CLOSED (2026-11-03): both repositories are cloned and documented
 
-`nebulaos-packages` and `lv_drivers` have no checkout in this workspace, so their
-inventories are empty. Not a real obstacle - they will be cloned into
-`_worktrees/docs/` when their turn comes.
+`nebulaos-packages` and `lv_drivers` had no checkout in this workspace, so their inventories
+were empty. Both are now cloned into `_worktrees/docs/`, read, and documented:
 
-**Holds up:** the repo-level items `repo:nebulaos-packages` and `repo:lv_drivers`.
+| Repository | Branch | Pull request |
+|---|---|---|
+| `nebulaos-packages` | `docs/packages` | [#2](https://github.com/NebulaOS-KE/nebulaos-packages/pull/2) |
+| `lv_drivers` | `docs/lv-drivers` | [#1](https://github.com/NebulaOS-KE/lv_drivers/pull/1) |
+
+**Every repository in the organisation now has documentation.** This was never a real
+obstacle - only an unvisited corner - and it is recorded as closed rather than deleted so the
+inventory's history stays readable.
 
 ### B-003 - CLOSED as a documentation blocker (2026-11-01), still an open verification gap
 

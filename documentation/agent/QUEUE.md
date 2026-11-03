@@ -36,8 +36,16 @@ the dashboard in the same batch as the page itself.
       16 keep, 2 historical, all recorded in `coverage.jsonl` and written up in
       `REUSE-AUDIT.md`. Two problems found - a confusable page-name pair, and an install
       path that is documented but untested (now `BLOCKERS.md` B-003).
-- [ ] **Q-007** Clone `nebulaos-packages` and `lv_drivers` into the docs worktree and run
-      discovery on them.
+- [x] **Q-007** **Done (2026-11-03).** Both cloned, read and documented, closing B-002 and
+      leaving every repository in the organisation with documentation.
+      - `nebulaos-packages` `9d0d264` -> `docs/reference/README.md`, PR
+        [#2](https://github.com/NebulaOS-KE/nebulaos-packages/pull/2). Offline tests run:
+        10 passed, 0 failed. Four invariants written down with what breaks if they change.
+      - `lv_drivers` -> `docs/NEBULAOS.md`, PR
+        [#1](https://github.com/NebulaOS-KE/lv_drivers/pull/1). The fork surface is exactly two
+        commits on `guppyscreen-ke-next`; **one is live and one is dead code**, which the diff
+        does not reveal - `fbdev_blank`/`fbdev_unblank` were superseded by NebulaScreen's own
+        `nsfb`, and `fbdev_blank()` must never be called on this panel at all.
 
 ## P1 - Phase 2, the end-user manual (starts as soon as discovery is deep enough)
 

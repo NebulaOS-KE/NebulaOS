@@ -6,14 +6,14 @@
 | | |
 |---|---|
 | Discovered items | **550** |
-| Documented | **278** (50%) |
+| Documented | **280** (50%) |
 | Draft | 109 |
-| Missing | 163 |
-| Code verified | 353 |
-| Test verified | 46 |
+| Missing | 161 |
+| Code verified | 355 |
+| Test verified | 47 |
 | Hardware verified | 0 |
 | Screenshots required / captured | 58 / 42 |
-| Blocked (cannot proceed) | 6 |
+| Blocked (cannot proceed) | 4 |
 | Completeness gaps (work not done) | 6 |
 
 Per-repository and per-category breakdowns are in `COVERAGE.md`.
@@ -129,6 +129,27 @@ contributed nothing.
 
 Marking them documented once took the headline from 14% to 49% in a single step. That was
 flattering and false, and reverting it is recorded in `STATUS-LOG.md`.
+
+## Every repository in the organisation now has documentation
+
+The last two - `nebulaos-packages` and `lv_drivers` - were cloned and documented on
+2026-11-03, closing `BLOCKERS.md` B-002. Eight repositories, eight open pull requests.
+
+**`lv_drivers` is the one worth reading.** For a vendored fork the question that matters is
+*which parts are ours*, and the answer is two commits on `guppyscreen-ke-next`. One of them is
+on the path of every tap: upstream's evdev reader accepted only tracking id `0` as a press, so
+on a controller that assigns increasing ids every contact after the first silently did not
+register. The other is **dead code** - NebulaScreen replaced lv_drivers' framebuffer output
+with its own `nsfb`, and `fbdev_blank()` must never be called on this panel because it cannot
+recover from `FB_BLANK_POWERDOWN`.
+
+Nothing in the diff says which of the two is live. That took reading the call sites in
+NebulaScreen, and it is exactly the thing a reader of the fork would get wrong.
+
+**`nebulaos-packages` needed the opposite treatment.** Its README is genuinely good, so the
+reference adds the half it does not cover: a script map, how to run it, and four invariants
+with what breaks if they change. Its offline tests were run here - 10 passed, 0 failed - while
+a full CI pass needs `gh`, Docker and the pinned build image and is recorded as not run.
 
 ## The extensions reference now describes what 1.0.0 ships
 
