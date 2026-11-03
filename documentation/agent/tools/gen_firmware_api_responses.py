@@ -47,13 +47,47 @@ def endpoints(path):
         # handler bodies: self._read("domain", "verb") / self._write(...)
         if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
             found = []
+            # Local `args = ["domain", "verb", ...]`, for handlers that build the
+            # argv before calling - `_ota_check` appends --force and then calls
+            # self._write(*args).
+            local_lists = {}
             for sub in ast.walk(node):
-                if (isinstance(sub, ast.Call) and isinstance(sub.func, ast.Attribute)
-                        and sub.func.attr in ("_read", "_write") and sub.args):
-                    d = _str(sub.args[0])
-                    v = _str(sub.args[1]) if len(sub.args) > 1 else None
-                    if d and v:
-                        found.append((d, v))
+                if (isinstance(sub, ast.Assign) and isinstance(sub.value, ast.List)
+                        and len(sub.targets) == 1 and isinstance(sub.targets[0], ast.Name)):
+                    vals = [_str(e) for e in sub.value.elts]
+                    if len(vals) >= 2 and vals[0] and vals[1]:
+                        local_lists[sub.targets[0].id] = (vals[0], vals[1])
+            for sub in ast.walk(node):
+                if not (isinstance(sub, ast.Call) and isinstance(sub.func, ast.Attribute)):
+                    continue
+                attr = sub.func.attr
+                if attr not in ("_read", "_write", "_exec"):
+                    continue
+                pair = None
+                if sub.args:
+                    first = sub.args[0]
+                    # self._exec(["domain", "verb", ...]) - and the same shape
+                    # inside _write when the argv was built as a list
+                    if isinstance(first, ast.List) and len(first.elts) >= 2:
+                        d, v = _str(first.elts[0]), _str(first.elts[1])
+                        if d and v:
+                            pair = (d, v)
+                    elif isinstance(first, ast.BinOp) and isinstance(first.left, ast.List) \
+                            and len(first.left.elts) >= 2:
+                        d, v = _str(first.left.elts[0]), _str(first.left.elts[1])
+                        if d and v:
+                            pair = (d, v)
+                    else:
+                        d = _str(first)
+                        v = _str(sub.args[1]) if len(sub.args) > 1 else None
+                        if d and v:
+                            pair = (d, v)
+                for st in sub.args:
+                    if isinstance(st, ast.Starred) and isinstance(st.value, ast.Name) \
+                            and st.value.id in local_lists:
+                        pair = local_lists[st.value.id]
+                if pair:
+                    found.append(pair)
             if found:
                 calls[node.name] = found
     return routes, calls

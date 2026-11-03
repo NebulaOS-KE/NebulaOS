@@ -5,19 +5,34 @@
 
 | | |
 |---|---|
-| Discovered items | **552** |
-| Documented | **509** (92%) |
-| Draft | 22 |
-| Missing | 21 |
-| Code verified | 522 |
+| Discovered items | **551** |
+| Documented | **542** (98%) |
+| Draft | 9 |
+| Missing | 0 |
+| Code verified | 551 |
 | Test verified | 47 |
 | Hardware verified | 0 |
 | Screenshots required / captured | 58 / 42 |
 | Blocked (cannot proceed) | 4 |
-| Completeness gaps (work not done) | 15 |
+| Completeness gaps (work not done) | 9 |
 
 Per-repository and per-category breakdowns are in `COVERAGE.md`.
 <!-- END GENERATED STATUS -->
+
+## Done: 98% documented, 0 missing, and the caveat that matters
+
+**`FINAL-REPORT.md` answers the mission's Definition of Done condition by condition.** The
+verdict is the mission's own term for this situation: **documentation prepared with outstanding
+verification**. Not *fully verified* - this agent has no printer, so hardware verification is 0
+and will stay 0.
+
+551 items. 542 documented, 9 draft each with a recorded reason, **0 missing**. 551 code-verified,
+47 test-verified, 0 hardware-verified - four separate claims that the dashboard never merges,
+because 98% documented does not mean 98% proven to work.
+
+Eight pull requests are open, one per repository in the organisation. The owner published the
+end-user manual to the GitHub wiki on 2026-11-03; this agent has never run a publish workflow.
+
 
 **RELEASE 1.0.0: the user manual is publish-ready against the release candidate `70ad0b0`
 (2026-11-02).** Full report: `RELEASE-1.0.0-READINESS.md`. Nothing is published; Tim publishes.

@@ -171,8 +171,13 @@ def discover(root):
                 continue
             for m in pat.finditer(open(os.path.join(ext, f)).read()):
                 n = m.group(1) or m.group(2)
-                if not re.fullmatch(r"[A-Z_][A-Z0-9_]*", n):
-                    continue          # built from a constant - resolve by hand
+                # Two or more characters and at least one letter. The old
+                # pattern allowed a bare "_", which is what `register_command(
+                # '_' + CMD, ...)` looks like to a regex - so the inventory
+                # carried a G-code command literally named `_`, in two modules.
+                # Names built from a constant are resolved by hand below.
+                if not re.fullmatch(r"[A-Z_][A-Z0-9_]*", n) or not re.search(r"[A-Z]", n):
+                    continue
                 found.setdefault(n, []).append(f"extras/{f}")
         for n, (mod, const) in RESOLVED_COMMANDS.items():
             found.setdefault(n, []).append(f"extras/{mod}")

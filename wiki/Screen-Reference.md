@@ -750,6 +750,27 @@ See [Resetting](Resetting).
 
 ---
 
+## Two screens you do not open
+
+Both appear by themselves. Neither is reachable from a tab, which is why they are easy to meet
+and hard to look up.
+
+**The startup screen** (`init_panel`) is what the printer shows before Klipper is ready. It says
+*"Waiting for printer to initialize..."* while it waits. If no printer is configured at all it
+says so instead, and points at Settings - which is the state a screen reaches only when its
+Moonraker connection has never been set up.
+
+**The question box** (`prompt_panel`) is how a macro asks you something. Klipper macros can send
+a prompt - a title, some text and a set of buttons - and this screen renders whatever the macro
+defines. It is not a fixed dialog with fixed buttons: what you see comes from the macro that
+asked, so the same box can appear with entirely different wording and choices. Creality's `M600`
+filament-change macro uses it, which is why the
+[filament runout dialog](#filament-runout-dialog) below deliberately stays out of its way.
+
+*From `src/init_panel.cpp` and `src/prompt_panel.cpp` at screen `36490ed`.*
+
+---
+
 ## Filament runout dialog
 
 Not a page you open - it appears by itself when the filament sensor reports that filament has

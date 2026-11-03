@@ -1,0 +1,179 @@
+#!/usr/bin/env python3
+"""Generate the reference for the firmware's build scripts and host tooling.
+
+Two groups that a reader meets in different ways:
+
+* `scripts/build/` - the numbered pipeline that produces an image, plus the
+  standalone gates and packaging steps around it.
+* `tools/` - host-side tooling that operates *on* a build or a printer and
+  never changes what the image contains.
+
+The distinction is load-bearing in this repository: `product-inputs.py` exists
+precisely to decide whether a change invalidates an already-built image, and
+host tooling by definition does not. So the page keeps the two apart rather
+than listing fifty scripts alphabetically.
+
+Each entry carries its own header, kept whole, and a usage line where the
+header states one - these authors write the invocation into the comment, so it
+can be quoted rather than reconstructed. A script whose header shows no usage
+gets no invented one.
+
+Usage:  gen_firmware_tooling_reference.py <firmware-checkout> <out-file>
+"""
+import datetime, os, re, sys, textwrap
+import _srccommit
+
+BUILD = "scripts/build"
+TOOLS = "tools"
+SKIP_DIRS = {"overlay", "vendor", "__pycache__"}
+USAGE = re.compile(r"^\s*(?:usage:\s*)?((?:tools|scripts)/[\w./-]+[^\n]*)$", re.I)
+
+
+def header(path):
+    lines = []
+    try:
+        with open(path, errors="replace") as fh:
+            first = fh.readline()
+            if not first.startswith("#!"):
+                fh.seek(0)
+            doc = False
+            for line in fh:
+                st = line.rstrip()
+                t = st.strip()
+                if t.startswith('"""') or t.startswith("'''"):
+                    if doc:
+                        break
+                    doc = True
+                    t = t.strip('"\'')
+                    if t:
+                        lines.append(t)
+                    continue
+                if doc:
+                    lines.append(t)
+                    continue
+                if t.startswith("#"):
+                    lines.append(t.lstrip("#").strip())
+                elif not t:
+                    if lines:
+                        lines.append("")
+                else:
+                    break
+    except OSError:
+        return ""
+    while lines and not lines[-1]:
+        lines.pop()
+    return "\n".join(lines).strip()
+
+
+def usage_of(text, rel):
+    """A usage line the header states, or None. Never reconstructed."""
+    base = os.path.basename(rel)
+    for line in text.split("\n"):
+        t = line.strip()
+        if base in t and (t.startswith("tools/") or t.startswith("scripts/")
+                          or t.lower().startswith("usage:")):
+            return t[len("usage:"):].strip() if t.lower().startswith("usage:") else t
+    return None
+
+
+def entries(root, sub):
+    out = []
+    base = os.path.join(root, sub)
+    if not os.path.isdir(base):
+        return out
+    for dirpath, dirnames, filenames in os.walk(base):
+        dirnames[:] = [d for d in sorted(dirnames) if d not in SKIP_DIRS]
+        for f in sorted(filenames):
+            if not (f.endswith((".sh", ".py")) or os.access(os.path.join(dirpath, f), os.X_OK)):
+                continue
+            if f.endswith((".json", ".txt", ".md", ".conf")):
+                continue
+            full = os.path.join(dirpath, f)
+            out.append((os.path.relpath(full, root), full))
+    return sorted(out)
+
+
+def is_library(path):
+    """A Python module with no entry point: imported, not invoked."""
+    if not path.endswith(".py"):
+        return False
+    try:
+        src = open(path, errors="replace").read()
+    except OSError:
+        return False
+    return '__main__' not in src and "\nif __name__" not in src
+
+
+def render(L, items, with_usage=True):
+    no_usage = 0
+    for rel, full in items:
+        L.append(f"### `{rel}`")
+        L.append("")
+        h = header(full)
+        u = usage_of(h, rel) if with_usage else None
+        if u:
+            L += ["```sh", u, "```", ""]
+        elif is_library(full):
+            # Not a gap: there is no command line because it is not a command.
+            L += ["*A library module - imported by the tools above it, not run directly.*", ""]
+        elif with_usage:
+            no_usage += 1
+        if not h:
+            L += ["*No header comment.*", ""]
+            continue
+        for para in h.split("\n\n"):
+            lines = [x for x in para.split("\n") if x.strip()]
+            if not lines:
+                continue
+            if any(re.match(r"^(\s{2,}|[-*]\s|\S+\s{2,}\S)", x) for x in lines):
+                L += ["```"] + lines + ["```", ""]
+            else:
+                L += textwrap.wrap(" ".join(para.split()), 95) + [""]
+    return no_usage
+
+
+def main():
+    root, out_path = sys.argv[1], sys.argv[2]
+    sha, _ = _srccommit.source_commit(root)
+    build = entries(root, BUILD)
+    tools = entries(root, TOOLS)
+    L = [f"<!-- Generated by documentation/agent/tools/"
+         f"gen_firmware_tooling_reference.py from NebulaOS-firmware@{sha[:7]} on "
+         f"{datetime.date.today().isoformat()}. Do not edit by hand. -->", "",
+         "# Build scripts and host tooling", "",
+         f"Source: `NebulaOS-firmware` at `{sha[:7]}`. "
+         f"**{len(build)} build scripts, {len(tools)} host tools.**", "",
+         "## Why these are two lists and not one", "",
+         "`scripts/build/` produces the image. `tools/` operates on a finished build or on a "
+         "printer and **never changes what the image contains**.", "",
+         "That distinction is load-bearing here rather than tidy-minded. "
+         "`tools/product-inputs.py` exists to decide whether a change invalidates an "
+         "already-built image, and it classifies by a **deny-list**: every path is a product "
+         "input unless it is listed as host-side, so a new directory errs towards *rebuild* "
+         "rather than towards silently reusing a stale image. Listing all of these together "
+         "alphabetically would blur the one line the repository works hardest to keep sharp.",
+         "",
+         "## What each entry shows", "",
+         "The script's own header, kept whole, and a usage line **only where the header states "
+         "one**. These authors write the invocation into the comment, so it is quoted rather "
+         "than reconstructed; a script whose header shows no usage gets no invented one.", "",
+         "Python files with no entry point are marked as **library modules**. That is the "
+         "difference between *we could not find how to run it* and *it is not run* - most of "
+         "`tools/hardware/` is the second, and a reader hunting for a command line there "
+         "would be hunting for something that does not exist.", "",
+         "**Nothing here is hardware-verified, and nothing here was run.** This agent does not "
+         "build firmware - that is the foreground session's launcher - so every statement is "
+         "read from the script.", "",
+         "## The build pipeline and its gates", "",
+         "The numbered scripts run in order; the unnumbered ones are gates, packaging and "
+         "supply-chain steps invoked around them.", ""]
+    nu1 = render(L, build)
+    L += ["## Host tooling", ""]
+    nu2 = render(L, tools)
+    open(out_path, "w").write("\n".join(L) + "\n")
+    print(f"{len(build)} build scripts, {len(tools)} host tools, "
+          f"{nu1 + nu2} without a stated usage line -> {out_path}")
+
+
+if __name__ == "__main__":
+    main()

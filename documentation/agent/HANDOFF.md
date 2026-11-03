@@ -13,6 +13,27 @@ coverage dashboard, delivered as `docs/*` branches and pull requests. Not a plan
 outline: the pages themselves. The full assignment is in `MISSION.md`; `RULES.md` holds the
 workspace rules and the owner's decisions and wins wherever the two differ.
 
+## The project has reached its Definition of Done
+
+**2026-11-03. Read `FINAL-REPORT.md` first** - it answers the mission's Part 15 condition by
+condition, with the caveat attached: **documentation prepared with outstanding verification**,
+not fully verified, because this agent has no printer.
+
+551 items, 542 documented (98%), 0 missing, 9 draft each with a recorded reason. Eight pull
+requests open, one per repository. The dashboard is generated from the inventory.
+
+**Do not start new work without the owner asking.** What remains is genuinely blocked or a limit
+of static analysis, and it is listed in the final report:
+
+- hardware verification (0 items, by design - no printer access)
+- 9 API endpoints whose response keys are not statically knowable
+- 15 screenshots needing a printer or a new tour step
+- example response values, measured at 3 endpoints and recorded as such
+
+**If a tip moves,** re-run `seed_inventory.py`, regenerate the affected reference, and re-check
+the manifest pins. The generators all resolve the code commit through `_srccommit.py`, never the
+worktree's HEAD.
+
 ## Current phase
 
 **RELEASE 1.0.0 is in progress — skip to "RELEASE 1.0.0 (read this block first)" below before
