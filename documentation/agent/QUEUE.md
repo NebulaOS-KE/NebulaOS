@@ -309,10 +309,18 @@ strongest: the suite already passes and 21 modules are already test-verified.
       **Worded without any claim about testing, per D-011** - the main session's phrasing
       suggested saying it had not been tested on hardware, which Tim's standing decision
       forbids on user pages. The record is here and in `VERIFICATION.md`.
-- [ ] **Q-072** Re-point release references once the main session sends the final sha for the
-      rebuilt 1.0.0 (`ba98eec` or later). **Scope is small by design:** no user page claims a
+- [x] **Q-072** **Done (2026-11-04).** The rebuilt 1.0.0 is `ba98eec`, verified here with
+      `git ls-remote --tags` rather than taken on report. Re-pointed: 8 user-page citations,
+      431 `release_applicability` labels, the readiness report and `VERIFICATION.md`.
+      **The scope turned out wider than planned, and for a good reason.** The original plan
+      left the manual's per-behaviour citations alone as still-true provenance. But
+      `scripts/build/overlay`, `manifests` and `scripts/build` are byte-identical between
+      `70ad0b0` and `ba98eec`, so re-pointing them is not just safe - it is better: a reader
+      following a citation reaches the tagged release instead of an untagged ancestor.
+      Original entry: re-point release references once the main session sends the final sha. **Scope is small by design:** no user page claims a
       release build. The manual's `70ad0b0` citations are per-behaviour provenance and stay
       correct. What needs changing is `RELEASE-1.0.0-READINESS.md`, `VERIFICATION.md` and the
       `release_applicability` labels in `coverage.jsonl`.
 - [ ] **Q-073** Do not recreate the five component worktrees until the main session says the
-      rebuild is done. Central worktree only; read source with `git show`.
+      freeze is over - which is now **after Tim's OTA retest on `ke-dev` passes**, not merely
+      after the rebuild. A failed retest would need the release identity gate again. Central worktree only; read source with `git show`.

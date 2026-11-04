@@ -48,7 +48,7 @@ trial makes the trial run again on the next start.
 **This does not cover:** an install done through Creality's updater, which has no trial at all,
 or a kernel that does not start.
 
-*The bounds come from firmware `70ad0b0` (`nebulaos_osconfig/image.py`: `TRIAL_SECONDS = 300`,
+*The bounds come from firmware `ba98eec` (`nebulaos_osconfig/image.py`: `TRIAL_SECONDS = 300`,
 `TRIAL_ATTEMPTS = 3`).*
 
 ## 2. Swap the boot slot from the screen

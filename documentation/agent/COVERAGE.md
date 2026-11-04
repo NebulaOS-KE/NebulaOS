@@ -1,6 +1,6 @@
 # NebulaOS documentation coverage dashboard
 
-Generated 2026-11-03 by `documentation/agent/tools/render_dashboard.py` from `documentation/agent/coverage.jsonl`.
+Generated 2026-11-04 by `documentation/agent/tools/render_dashboard.py` from `documentation/agent/coverage.jsonl`.
 
 **Read this first.** Coverage is relative to the *discovered* inventory, not to some imagined complete list of everything NebulaOS does. Each entry records the exact source commit it was discovered at. A rise in the total item count is normal and healthy: it means discovery found more real functionality, not that documentation regressed.
 

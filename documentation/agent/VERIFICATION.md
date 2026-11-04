@@ -132,51 +132,49 @@ What *is* established from source: the checks run before anything is written, so
 stops without changing the running system. What is not established: that the route completes
 successfully on real hardware.
 
-## The documented commits and the release (superseded 2026-11-04)
+## The documented commits are the released ones (re-checked 2026-11-04)
 
-> **This section was true when written and is not now.** 1.0.0 is being rebuilt and the
-> `v1.0.0` tag is being moved to the fix, under the same version name. What follows is kept as
-> the record of what was checked on 2026-11-03, not as a current claim. The release build is
-> **`ba98eec` or later**; the final commit is pending from the main session.
->
-> **Why it was rebuilt** (reported by the main session, 2026-11-04): the published 1.0.0 `.img`
-> was compressed with a 192 MB LZMA dictionary, which 7-Zip 26 chose for `-mx=9`. Unpacking it
-> needs more memory than the printer's 248 MB, so an online update ran out of memory. Firmware
-> `ba98eec` pins `-md=16m` and `validate-img.py` now refuses a dictionary above 16 MB.
->
-> **What this means for the install routes - corrected 2026-11-04.** The failure was observed
-> on the **online update** path. That the stock-touchscreen route fails the same way is an
-> **inference**, not an observation: same file, same 248 MB, and Creality's updater also has to
-> unpack it. Plausible, and not evidence.
->
-> This agent's first version of this paragraph called it *"the first concrete evidence about a
-> route B-003 has recorded as unverified... found by someone running it"*. That attributed an
-> observation on one route to a different route, which is the precise mistake this file exists
-> to prevent, in a file about preventing it. Caught by the main session, not here.
->
-> **B-003 therefore stays unverified** - it does not become *observed failing*. The failure is
-> in the image rather than in the documented procedure, so no page changes either way.
->
-> **The per-behaviour citations to `70ad0b0` in the manual stay.** They say where a behaviour
-> was read, not which build shipped, and `ba98eec` is a descendant that changes image
-> compression - not the trial bounds, the timelapse handling, the cleanup list or the
-> statistics import.
+`NebulaOS-firmware` carries the tag **`v1.0.0`**, and it resolves to **`ba98eec`** - verified
+here with `git ls-remote --tags`, not taken on report. Its manifest pins:
 
-Checked on 2026-11-03, before the rebuild: `NebulaOS-firmware` carried the tag **`v1.0.0`**
-pointing at **`70ad0b0`**.
-Its manifest at that commit pins:
-
-| Component | Pin |
+| Component | Pin at `ba98eec` |
 |---|---|
 | Extensions | `f498796`, branch `production` |
 | NebulaScreen | `36490ed` (`NEBULASCREEN_VERSION=v1.0.0`) |
 | Kernel | `d86790d` |
 | Host Klipper | `58bd67d` (upstream `Klipper3d/klipper`) |
 
-All four match the commits the references were generated from, and `production`, `main` and the
-extensions pin all read `f498796`. So *"the 1.0.0 release candidate"*, as several of this
-agent's own records call `70ad0b0`, is simply *the 1.0.0 release*. No user-facing page uses the
-candidate wording - it was removed when the test-status wording went (D-011).
+All four are unchanged from `70ad0b0`, the commit this documentation was written against.
+
+**And the documented behaviour is not merely similar at the release - it is identical.** Three
+checks, each one a `git diff --quiet` over the whole subtree:
+
+| Subtree | `70ad0b0` vs `ba98eec` |
+|---|---|
+| `scripts/build/overlay` - everything that lands on the printer | **byte-identical** |
+| `manifests` | identical |
+| `scripts/build` - the pipeline | identical |
+
+The release differs from the documented commit only in `scripts/package/build-img.py` and
+`validate-img.py`, which compress and check the already-built image, and in two host-only
+hardware capture profiles. So every page's citations were re-pointed from `70ad0b0` to
+`ba98eec`: a reader following one now lands on the **tagged release** rather than on an
+untagged ancestor, and finds exactly the code the page describes.
+
+Note the tag is **not** the tip of `main`. `d73dbe3` ("packaging check: compare the .img data
+streams, not the archive sizes") came after it. `REPOSITORY_HEAD != SHIPPING_PIN`, as ever.
+
+### Why it was rebuilt, kept as the record
+
+The first published 1.0.0 `.img` was compressed with a 192 MB LZMA dictionary, chosen by 7-Zip
+26 for `-mx=9`. Unpacking needs more memory than the printer's 248 MB, so an **online update**
+ran out of memory. `ba98eec` pins `-md=16m` - about 25 MB to unpack - and `validate-img.py`
+refuses a dictionary above 16 MB. Tim kept the version name and the tag was moved.
+
+**The stock-touchscreen route was not observed failing.** It plausibly would have - same file,
+same RAM, and Creality's updater also has to unpack it - but that is an inference. `BLOCKERS.md`
+B-003 stays unverified rather than becoming *observed failing*; see `STATUS-LOG.md` for the
+correction this agent needed on exactly that point.
 
 ## Source revisions
 

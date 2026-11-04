@@ -864,7 +864,7 @@ wall-clock time you waited.
 **The total is not the sum of everything.** The *Before NebulaOS* figure is the **larger** of the
 two sources, never their sum. On a printer that ran OpenKE, Creality's counter and Moonraker's
 history were both running and both counted the same prints; adding them would double the
-printer's life. (`combine_stats` in the NebulaOS Moonraker component, firmware `70ad0b0`.)
+printer's life. (`combine_stats` in the NebulaOS Moonraker component, firmware `ba98eec`.)
 
 Where each figure comes from:
 
@@ -880,14 +880,14 @@ Where each figure comes from:
 
 **These figures survive a cleanup.** [Clean up Creality files](Resetting#freeing-up-space) keeps
 Creality's two statistics files and the old Moonraker database on purpose, so your printer's
-history is not lost with the rest of the Creality system (firmware `70ad0b0`,
+history is not lost with the rest of the Creality system (firmware `ba98eec`,
 `cleanup.STATISTICS_KEEP`).
 
 **What does erase them:** a [clean NebulaOS reset](Resetting) removes everything NebulaOS keeps,
 including its print history and the remembered *Before NebulaOS* figures. The *before* figures
 are simply imported again at the next look, because the files they come from — Creality's and the
 old Moonraker database — live outside the NebulaOS folder and a clean reset does not touch them
-(firmware `70ad0b0`, `nebulaos-clean-reset`). The prints made under NebulaOS are gone for good.
+(firmware `ba98eec`, `nebulaos-clean-reset`). The prints made under NebulaOS are gone for good.
 
 ### If the page says something else
 
@@ -900,7 +900,7 @@ old Moonraker database — live outside the NebulaOS folder and a clean reset do
 
 Behind the page: `GET /machine/nebulaos/stats` (JSON-RPC `machine.nebulaos.stats`). Screen source
 `src/statistics_panel.cpp` at `36490ed`; the import is `nebulaos-osconfig stats baseline` at
-firmware `70ad0b0`.
+firmware `ba98eec`.
 
 ---
 

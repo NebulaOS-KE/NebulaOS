@@ -1,7 +1,7 @@
 # Status
 
 <!-- BEGIN GENERATED STATUS -->
-*Figures generated 2026-11-03 from `coverage.jsonl` by `tools/render_dashboard.py`. Do not edit this block by hand.*
+*Figures generated 2026-11-04 from `coverage.jsonl` by `tools/render_dashboard.py`. Do not edit this block by hand.*
 
 | | |
 |---|---|
@@ -26,7 +26,25 @@ The project is done; this is a slow check for moved tips and new instructions, n
 **2026-11-03, first check: nothing moved.** All eight repository tips are unchanged, all eight
 `docs/*` branches are clean and in sync with their remotes, and no new priority has arrived.
 
-**2026-11-04: paused again for a 1.0.0 rebuild.** The published image used a 192 MB LZMA
+**2026-11-04, resolved: 1.0.0 was rebuilt and republished at `ba98eec`**, and every reference
+in this documentation now points there - 8 citations on user pages, 431 inventory labels, the
+readiness report and `VERIFICATION.md`.
+
+Re-pointing was safe to do rather than merely tidy, and that was **checked, not assumed**:
+`scripts/build/overlay`, `manifests` and `scripts/build` are **byte-identical** between
+`70ad0b0` and `ba98eec`. Nothing that lands on a printer changed. The release differs only in
+the two packaging scripts and two host-only capture profiles. So a reader following a citation
+now lands on the **tagged release** instead of an untagged ancestor, and finds exactly the code
+the page describes.
+
+The tag is not the tip: `d73dbe3` came after it. `REPOSITORY_HEAD != SHIPPING_PIN`.
+
+**The freeze still holds** until Tim's OTA retest on `ke-dev` passes - a failed retest would
+need the release identity gate again, so the five component worktrees stay removed.
+
+### What happened, in one paragraph
+
+**2026-11-04: paused for a 1.0.0 rebuild.** The published image used a 192 MB LZMA
 dictionary, which needs more memory to unpack than the printer has, so online updates ran out of
 memory. Firmware `ba98eec` pins `-md=16m`. Tim is keeping the version name and moving the
 `v1.0.0` tag, so this agent's own note of 2026-11-03 - *"v1.0.0 is tagged at `70ad0b0`"* - is

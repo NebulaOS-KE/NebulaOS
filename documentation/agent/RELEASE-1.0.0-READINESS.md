@@ -1,12 +1,22 @@
 # Publish-readiness report: the end-user manual for release 1.0.0
 
 **Date:** 2026-11-02 (second pass — supersedes the first pass of the same day)
-**Verified against:** firmware `70ad0b0` (`NEBULAOS_VERSION=1.0.0`, the release candidate),
+**Verified against:** firmware `ba98eec` (`NEBULAOS_VERSION=1.0.0`, tag `v1.0.0`),
 NebulaScreen `36490ed` (`NEBULASCREEN_VERSION=v1.0.0`), extensions `f498796` (branch
 `production`), host Klipper `58bd67d`, kernel `d86790d`
 **Branch:** `docs/agent` — PR #3 on the central `NebulaOS` repository
 **Published:** no. Nothing has been published and no wiki workflow has been run.
 
+
+> **Updated 2026-11-04 after 1.0.0 was rebuilt and republished.** The first published `.img`
+> used a 192 MB LZMA dictionary and could not be unpacked in the printer's 248 MB, so an online
+> update ran out of memory. The release was rebuilt with a 16 MB dictionary, the version name
+> kept, and the `v1.0.0` tag moved from `70ad0b0` to **`ba98eec`**.
+>
+> Every reference in this report was re-pointed. That is safe to do rather than merely
+> convenient: `scripts/build/overlay`, `manifests` and `scripts/build` are **byte-identical**
+> between the two commits, so nothing this report verified changed. The difference is the
+> packaging scripts and two host-only capture profiles.
 ## Summary
 
 The manual is **ready to publish**: 30 pages, no stubs, 129 real screenshots, every internal
@@ -14,8 +24,8 @@ and external link resolving, and every page re-checked against the release candi
 judgement call the first pass left for Tim has since been decided by him and applied.
 
 The first pass of today verified against firmware `211d804`. The release candidate has since
-moved to `70ad0b0`, which changed the screen pin and added a user-visible feature. This pass
-closes that gap. Everything named below was read at `70ad0b0` / `36490ed` / `f498796`, not
+moved to `ba98eec`, which changed the screen pin and added a user-visible feature. This pass
+closes that gap. Everything named below was read at `ba98eec` / `36490ed` / `f498796`, not
 carried over.
 
 ## What changed in this pass
@@ -47,15 +57,15 @@ lifetime counter, its print list, and the old Moonraker database — with the so
 the same and points at the Statistics section. This was the one place where the old text would
 have told a reader the opposite of what 1.0.0 does.
 
-### 3. Release references re-pointed from `211d804` to `70ad0b0`
+### 3. Release references re-pointed from `211d804` to `ba98eec`
 
 44 inventory items relabelled, the `Recovery` trial-bounds citation re-cited (the constants
-were re-read at `70ad0b0`: still `TRIAL_SECONDS = 300`, `TRIAL_ATTEMPTS = 3`), and this report
+were re-read at `ba98eec`: still `TRIAL_SECONDS = 300`, `TRIAL_ATTEMPTS = 3`), and this report
 rewritten. No `211d804` reference remains anywhere in the branch.
 
 ### 4. Screenshots re-captured at the release screen pin
 
-The tour was re-run against a build of `36490ed` — the exact commit `70ad0b0` pins. 130
+The tour was re-run against a build of `36490ed` — the exact commit `ba98eec` pins. 130
 captures; **one new** (`20a-statistics`) and **four changed**:
 
 | Image | Why it changed |
@@ -124,7 +134,7 @@ by instruction.
 ## Honest notes on scope
 
 **No page claims hardware verification.** Everything here is established from source at
-`70ad0b0` / `36490ed` / `f498796` and from the repositories' own tests. Where behaviour was
+`ba98eec` / `36490ed` / `f498796` and from the repositories' own tests. Where behaviour was
 reported by the owner rather than observed here — the nozzle-clean routine, the install route,
 the Statistics page on `ke-dev` — the inventory records `reported-by-owner`, not `verified`.
 
