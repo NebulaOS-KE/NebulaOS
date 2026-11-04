@@ -2,7 +2,7 @@
 
 ## What this page will help you do
 
-Understand the few things that can actually hurt you or permanently damage your printer, so
+Understand the few things that can actually hurt you or damage your printer, so
 that nothing in this manual takes you by surprise. Please read it before you install NebulaOS.
 
 ## Switching systems is safe, including with the power switch
@@ -24,14 +24,28 @@ A detail worth knowing if you ever install mainboard firmware yourself: NebulaOS
 overwrite firmware it does not recognise. It reinstalls only when it finds a known Creality
 version. Anything you installed deliberately is left alone.
 
-### The one real caution
+### The one thing worth waiting for
 
-**Do not switch the printer off while mainboard firmware is being installed.** That is the
-only moment in normal use when cutting power can leave the board in a state needing a computer
-to fix.
+**Do not switch the printer off while mainboard firmware is being installed.** It is the one
+moment in normal use where cutting power leaves you with a job to finish rather than a printer
+that just works.
 
-You will know when it is happening, because the screen says so - it tells you not to switch
-off, and that Klipper is stopped. It takes a short time. Wait for it.
+**It is not permanent, and it does not need a computer.** The mainboard holds two separate
+things: a small built-in loader that Creality put there, and the firmware on top of it that
+actually runs the printer. Installing firmware replaces the second one - the loader itself is
+never written, which is what makes this recoverable.
+
+So if power is cut partway, the printer will not print, because the firmware on top is
+incomplete. The loader is still there, and NebulaOS can still talk to it. The screen notices
+and offers the fix itself: *"The firmware was written, but Klipper does not reach the
+mainboard. Reinstall the built-in MCU firmware?"* Accept, and it writes it again.
+
+You can also do it whenever you like from **Settings → Printer → MCU firmware → Reinstall
+built-in firmware**.
+
+You will know when an install is happening, because the screen says so - it tells you not to
+switch off, and that Klipper is stopped. It takes a short time. Waiting for it saves you the
+reinstall; it does not save the printer.
 
 [Mainboard firmware](Mainboard-Firmware) explains this in full, including how to reinstall it.
 

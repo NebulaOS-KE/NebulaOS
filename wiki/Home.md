@@ -10,8 +10,8 @@ first time it appears, and [Words you will see](Glossary) collects them all.
 
 ## New here? Read these three, in order
 
-1. **[Safety first](Safety-First)** - what can go wrong, and the one mistake that can
-   permanently damage your printer's mainboard. Five minutes, before you install anything.
+1. **[Safety first](Safety-First)** - the hot and moving parts, and what is and is not
+   risky about switching systems. Five minutes, before you install anything.
 2. **[Installing NebulaOS](Installing-NebulaOS)** - how to put NebulaOS on the printer, and
    how to get back to what you had before.
 3. **[First-time setup](First-Time-Setup)** - Wi-Fi, finding the printer on your network,

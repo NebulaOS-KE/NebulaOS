@@ -25,14 +25,23 @@ you cannot get stuck by using the power switch.
 **Firmware you installed yourself is left alone.** NebulaOS only replaces what it recognises as
 a known Creality version. If you deliberately installed something else, it stays.
 
-## The one real caution
+## The one thing worth waiting for
 
 **Do not switch the printer off while firmware is being installed.** The screen tells you when
 that is happening - it says not to switch off, and that Klipper is stopped. It takes a short
 time. Wait for it.
 
-That is the only moment in normal use when cutting power can leave the board needing a computer
-to recover.
+**If it does get interrupted, the printer fixes it.** The board keeps Creality's small built-in
+loader in a place firmware installs never write; only the firmware on top of it is replaced. An
+interrupted install therefore leaves the loader intact and the firmware incomplete, which means
+the printer will not print until the firmware is written again - and writing it again is
+something this printer can do on its own.
+
+The screen notices and offers it: *"The firmware was written, but Klipper does not reach the
+mainboard. Reinstall the built-in MCU firmware?"* You can also start it yourself at any time
+with **Reinstall built-in firmware** below.
+
+No computer, no cable, no disassembly.
 
 ## Where the controls are
 
