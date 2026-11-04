@@ -5,7 +5,7 @@ with the work it holds up named. Nothing gets quietly dropped.
 
 ## Open
 
-### B-005 - the screen names the wrong reason when an install stops (NebulaScreen)
+### B-005 - CLOSED (2026-11-04): the screen now names the real reason
 
 **Found 2026-11-04** while checking the main session's report that the OTA retest produced
 *"a print was started"* for a `LOW_MEMORY` stop. Firmware `53502bb` fixes the cause it found -
@@ -33,12 +33,18 @@ still says a print was started.
 been removed from the profile, so the reported symptom should not recur. The mismatch remains
 for the other six.
 
-**Not this agent's to fix** - that is production code. Reported to the foreground session on
-2026-11-04. The fix looks small from outside: `nebulaos_refusal.cpp` already maps every one of
-those reasons to text, and the screen already receives `error`.
+**Fixed in NebulaScreen `123ef31`**, pinned by firmware `f73b851`, within hours of the report.
+The screen now uses the `message` the worker already sent - which names the real reason - and
+falls back to *"Stopped because the printer became busy"* when there is none, rather than
+naming a print. The source comment records why the phase keeps its misleading name:
+*"The phase is named after a print, but any busy reason stops it."* Two tests came with it.
 
-**Holds up:** nothing documented. No page states which reason a stopped install reports, and
-none will until the screen's text can be trusted to match.
+**Reported, not fixed here** - production code is not this agent's to write. What made the
+report actionable was that the data was already arriving: the firmware had been sending
+`error` and `message` all along, and only the screen's rendering ignored them.
+
+**Held up:** nothing documented, then or now. No page states which reason a stopped install
+reports - and now that the screen relays the firmware's own message, no page needs to.
 
 ### B-001 - No printer access (by design)
 
