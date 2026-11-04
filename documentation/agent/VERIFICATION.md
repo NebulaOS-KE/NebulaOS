@@ -176,6 +176,30 @@ same RAM, and Creality's updater also has to unpack it - but that is an inferenc
 B-003 stays unverified rather than becoming *observed failing*; see `STATUS-LOG.md` for the
 correction this agent needed on exactly that point.
 
+## The published wiki matches the branch (checked 2026-11-04)
+
+End-to-end, by cloning `NebulaOS-KE/NebulaOS.wiki` read-only and comparing it with `wiki/` at
+`docs/agent` `e38a3c3`:
+
+| | |
+|---|---|
+| Pages | **31, all byte-identical** |
+| Screenshots | **129 PNGs, all byte-identical** |
+| Pages on one side only | none, in either direction |
+
+Worth doing rather than assuming, because the branch and the published wiki are two artefacts
+and only one of them is what a reader sees. A screenshot that is stale **on the wiki** would be
+invisible from here - the inventory would say *captured* and the reader would see something
+else.
+
+The check also answered a smaller worry the right way round. The main session's summary of the
+last wiki push listed four pages, and two more had changed on the branch since the push before
+it. The clone shows an intermediate wiki commit (`1f7addd`) carrying exactly those two, so
+nothing was dropped - the summary described one commit, not the range.
+
+This is read-only verification. This agent does not push to the wiki and has never run a
+publish workflow.
+
 ## Source revisions
 
 Documentation describes the **newest** code: the tip of each repository's default branch.
