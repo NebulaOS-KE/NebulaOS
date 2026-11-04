@@ -448,6 +448,12 @@ tab grid, described below.
 
 First-layer baby-stepping. Same as tapping Z on the print-status screen, but also usable outside a print.
 
+**This is not the `z_offset` from `printer.cfg`.** The number here is Klipper's live gcode
+offset - the baby-stepping adjustment on top of the probe's calibrated offset. On a system
+without NebulaOS's `nebulaos_z_adjust` (OpenKE, for instance) that live offset is forgotten at
+every Klipper restart, which is why such a screen shows `0.000 mm` after a reboot. NebulaOS
+re-applies its saved adjustment at every Klipper start, so it keeps showing yours.
+
 - **Raise (farther from bed)** / **Lower (closer to bed)** buttons, plus a **Reset** button that sets
   the offset to exactly 0.
 - Step size buttons: **0.001 / 0.005 / 0.01 / 0.025 / 0.05 mm**
@@ -872,7 +878,10 @@ Where each figure comes from:
   [Mainsail](Opening-Mainsail)'s History page reads. That is why Mainsail's History lists only
   prints made under NebulaOS.
 - **Before NebulaOS** is read once from the printer's data drive and then remembered, in
-  `/usr/data/nebulaos/system/stats-baseline.json`. Creality's lifetime counter and print list
+  `/usr/data/nebulaos/system/stats-baseline.json`. **The reading happens the first time this
+  page is opened**, not when NebulaOS is installed - so a printer whose Statistics page has
+  never been opened has not read anything yet. Creality's files are only ever read, never
+  written: NebulaOS does not add its print time to Creality's counter. Creality's lifetime counter and print list
   come from Creality's own files; the earlier-Moonraker figures come from the old Moonraker
   database. All three are read and never written.
 - A source that is missing or unreadable is looked at again next time, so installing NebulaOS

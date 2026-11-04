@@ -159,6 +159,16 @@ fusing/gaps = too high, lines translucent/flat = too low, squished and fused wit
 
 Those faint echoes trailing sharp corners are vibration. Input shaping cancels them.
 
+**The accelerometer is the Creality one for this printer.** NebulaOS configures an ADXL345 on
+the KE's own SPI wiring - the same wiring the stock firmware uses - and drives it with
+**upstream Klipper's `[adxl345]` and `[resonance_tester]`**, not Creality's patched versions.
+So the accelerometer you would use on stock is the accelerometer you use here.
+
+Two values are tuned for this printer rather than left at Klipper's defaults: the test runs to
+80 Hz at 50 mm/s² per Hz, because this board's dual-core MIPS SoC produced *"Timer too close"*
+shutdowns near 80 Hz at a higher rate. The fitted results sit well below that ceiling
+(`machine.cfg`, firmware `ba98eec`).
+
 **On the screen:** Tune → Calibration → **5 Input Shaper** (the NebulaOS workflow
 `NEBULAOS_INPUT_SHAPER_CALIBRATE`). Have the accelerometer ready. Everything happens on this page, with
 no popups:

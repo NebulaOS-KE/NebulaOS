@@ -10,8 +10,8 @@ Verification is reported in four separate columns because they prove different t
 
 | Measure | Items | Share |
 |---|---|---|
-| Discovered documentation items | 551 | 100% |
-| Documented (page exists and covers the item) | 542 | 98% |
+| Discovered documentation items | 552 | 100% |
+| Documented (page exists and covers the item) | 543 | 98% |
 | Draft | 9 | 1% |
 | Missing | 0 | 0% |
 | Blocked (cannot proceed without hardware, access or a decision) | 4 | 0% |
@@ -21,16 +21,16 @@ Verification is reported in four separate columns because they prove different t
 
 | Kind | Verified | Partial | Unknown | Blocked | N/A |
 |---|---|---|---|---|---|
-| Code verified | 551 | 0 | 0 | 0 | 0 |
-| Test verified | 47 | 0 | 503 | 0 | 1 |
-| Hardware verified | 0 | 0 | 0 | 2 | 546 |
+| Code verified | 552 | 0 | 0 | 0 | 0 |
+| Test verified | 47 | 0 | 504 | 0 | 1 |
+| Hardware verified | 0 | 0 | 0 | 2 | 547 |
 
 ## Screenshots
 
 | Measure | Items |
 |---|---|
-| Required | 58 |
-| Captured and confirmed current | 42 |
+| Required | 59 |
+| Captured and confirmed current | 43 |
 | Verified against the running UI | 0 |
 | Candidate image exists, version unconfirmed | 0 |
 | Missing outright | 15 |
@@ -43,7 +43,7 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 
 | Repository | Items | Documented | Draft | Missing | Code verified | Documented % |
 |---|---|---|---|---|---|---|
-| NebulaOS | 11 | 11 | 0 | 0 | 11 | 100% |
+| NebulaOS | 12 | 12 | 0 | 0 | 12 | 100% |
 | NebulaOS-firmware | 196 | 187 | 9 | 0 | 196 | 95% |
 | NebulaOS-kernel | 1 | 1 | 0 | 0 | 1 | 100% |
 | NebulaOS-klipper-extensions | 235 | 235 | 0 | 0 | 235 | 100% |
@@ -68,12 +68,13 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | runtime-helper | 57 | 57 | 0 | 0 | 100% |
 | screen | 50 | 50 | 0 | 0 | 100% |
 | service | 35 | 35 | 0 | 0 | 100% |
-| user-manual-section | 10 | 10 | 0 | 0 | 100% |
+| user-manual-section | 11 | 11 | 0 | 0 | 100% |
 
 ## Source revisions this inventory was discovered at
 
 | Repository | Branch | Commit | Items |
 |---|---|---|---|
+| NebulaOS | main | ba98eecbba13 | 1 |
 | NebulaOS | main | bef8693fb1f4 | 11 |
 | NebulaOS-firmware | main | a53e129bf1b0 | 196 |
 | NebulaOS-kernel | openke | d86790d2e231 | 1 |

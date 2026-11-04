@@ -324,3 +324,11 @@ strongest: the suite already passes and 21 modules are already test-verified.
 - [ ] **Q-073** Do not recreate the five component worktrees until the main session says the
       freeze is over - which is now **after Tim's OTA retest on `ke-dev` passes**, not merely
       after the rebuild. A failed retest would need the release identity gate again. Central worktree only; read source with `git show`.
+- [x] **Q-074** **The Discord questions** (2026-11-04, Tim via the main session). Nine claims
+      from Tim's chat replies checked against source before any was written down - six hold,
+      two needed correcting, one was right for the wrong reason. Full record:
+      `DISCORD-CLAIMS-CHECK.md`. New page `wiki/Two-System-Slots.md` explains the A/B
+      lifecycle once, which answers most of the thread; targeted additions to
+      `Screen-Reference` (statistics import trigger, Z-offset vs `printer.cfg`),
+      `Calibration-Explained` (the accelerometer), `Updating-NebulaOS` (Mainsail 2.18.2 and
+      independent updates) and `Going-Back`.

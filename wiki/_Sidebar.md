@@ -8,6 +8,7 @@
 - [Words you will see](Glossary)
 
 **Install it**
+- [Two system slots](Two-System-Slots)
 - [Installing NebulaOS](Installing-NebulaOS)
 - [Going back to your old firmware](Going-Back)
 

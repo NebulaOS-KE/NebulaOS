@@ -28,7 +28,8 @@ files and Wi-Fi networks live on a separate data area and are kept through every
 ## Updating the whole system
 
 A system image is written into the boot slot that is **not** running, so the system you are
-using is never overwritten. The printer then restarts into the new slot. An **online** update
+using is never overwritten. [Two system slots](Two-System-Slots) explains what that means for
+your old system - it is the page to read before your first update. The printer then restarts into the new slot. An **online** update
 and a **USB stick** install are the same operation - only where the file comes from differs.
 
 **On a printer that came from stock, the first update replaces your old system**, because the
@@ -91,6 +92,9 @@ Worth knowing how these track upstream:
 - **The extensions check at every Klipper start that Klipper still provides what they need,
   and stop with a clear message if it does not.** A mismatch announces itself instead of
   failing mid-print. The system image keeps its own matched versions as a fallback.
+- **Mainsail** updates itself from its own repository (`mainsail-crew/mainsail`, channel
+  `stable`). NebulaOS 1.0.0 ships **2.18.2**; that is the version in the image, not a ceiling -
+  Moonraker's update manager moves it on without a system image.
 - The screen app updates from its own releases. A system image brings its own copy of the
   screen app, and after a system image install that copy is used again.
 

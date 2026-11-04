@@ -20,6 +20,9 @@ Nothing, if NebulaOS still starts. Otherwise see [Recovery](Recovery).
   swap button. Once you switch into it, coming back to NebulaOS needs SSH, a reinstall with
   Creality's updater, or USB recovery - not a button on a screen.
 
+Full picture, including how to keep Creality's system through NebulaOS updates:
+[Two system slots](Two-System-Slots).
+
 ## The one thing that can remove your old system
 
 **Updating NebulaOS always writes the slot you are *not* running.** That is what makes updates
