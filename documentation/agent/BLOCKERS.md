@@ -5,6 +5,41 @@ with the work it holds up named. Nothing gets quietly dropped.
 
 ## Open
 
+### B-005 - the screen names the wrong reason when an install stops (NebulaScreen)
+
+**Found 2026-11-04** while checking the main session's report that the OTA retest produced
+*"a print was started"* for a `LOW_MEMORY` stop. Firmware `53502bb` fixes the cause it found -
+`_stop_check` now uses the `image_switch` profile, which excludes `LOW_MEMORY`. **The wording
+bug itself is in NebulaScreen and is not fixed by that commit.**
+
+The firmware carries the real reason. `image.py`'s `stopped()` writes
+`phase="stopped_print"` **plus** `error=<reason>` and `message=<the real message>`:
+
+```python
+_state(state="failed", phase="stopped_print", error=busy["reason"],
+       message=STOPPED_MESSAGE % busy["message"], ...)
+```
+
+The screen ignores both and keys only on the phase name
+(`src/nebulaos_image.cpp`, the `phase == "stopped_print"` branch):
+
+> "Stopped because a print was started. Nothing changed. Install again after the print."
+
+But `image_switch` still counts **`PRINTING`, `PAUSED`, `ACTIVE`, `CALIBRATING`, `UPDATING`,
+`UNKNOWN`, `update_manager`**. Stop an install because a calibration is running and the screen
+still says a print was started.
+
+**Narrower than it was, not gone.** `LOW_MEMORY` was the likely trigger in practice and it has
+been removed from the profile, so the reported symptom should not recur. The mismatch remains
+for the other six.
+
+**Not this agent's to fix** - that is production code. Reported to the foreground session on
+2026-11-04. The fix looks small from outside: `nebulaos_refusal.cpp` already maps every one of
+those reasons to text, and the screen already receives `error`.
+
+**Holds up:** nothing documented. No page states which reason a stopped install reports, and
+none will until the screen's text can be trusted to match.
+
 ### B-001 - No printer access (by design)
 
 Hardware verification and real-hardware screenshots are out of reach: this session has no
