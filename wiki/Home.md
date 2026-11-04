@@ -34,6 +34,15 @@ first time it appears, and [Words you will see](Glossary) collects them all.
 | Something is broken | [Troubleshooting](Troubleshooting) |
 | The printer will not start | [Recovery](Recovery) |
 
+## More than a touchscreen replacement
+
+NebulaOS replaces the KE's original Linux system with a newer real-time kernel,
+hardware-specific drivers, official Klipper and its own system management tools. It includes
+memory and performance safeguards, independent application updates, and recovery mechanisms
+designed around the printer's hardware.
+
+Curious what happens behind the scenes? Read [Under the hood](Under-the-Hood).
+
 ## What NebulaOS gives you
 
 - A touchscreen app on the printer's own 480x272 display, with print control, temperatures,

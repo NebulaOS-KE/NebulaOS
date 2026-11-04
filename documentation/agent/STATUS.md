@@ -5,14 +5,14 @@
 
 | | |
 |---|---|
-| Discovered items | **552** |
-| Documented | **543** (98%) |
+| Discovered items | **553** |
+| Documented | **544** (98%) |
 | Draft | 9 |
 | Missing | 0 |
-| Code verified | 552 |
+| Code verified | 553 |
 | Test verified | 47 |
 | Hardware verified | 0 |
-| Screenshots required / captured | 59 / 43 |
+| Screenshots required / captured | 60 / 44 |
 | Blocked (cannot proceed) | 4 |
 | Completeness gaps (work not done) | 9 |
 

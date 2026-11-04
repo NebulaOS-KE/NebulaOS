@@ -332,3 +332,16 @@ strongest: the suite already passes and 21 modules are already test-verified.
       `Screen-Reference` (statistics import trigger, Z-offset vs `printer.cfg`),
       `Calibration-Explained` (the accelerometer), `Updating-NebulaOS` (Mainsail 2.18.2 and
       independent updates) and `Going-Back`.
+- [x] **Q-075** **The false "permanent mainboard damage" claim** (2026-11-04, Tim). Removed from
+      `Home`, `Safety-First` and `Mainboard-Firmware` after checking what an interrupted flash
+      really does: the bootloader lives below the application (`0x08003000`) and is never
+      written, `mcu_flash_file.py` can enter it without a working application, and the screen
+      already offers *"Reinstall the built-in MCU firmware?"* for exactly this case. The
+      caution to wait is kept and sized to what happens. **Second false mainboard warning in
+      this manual** - both overstated the same component, both caught by someone with a printer.
+- [x] **Q-076** **`wiki/Under-the-Hood.md`** from Tim's mockup, every claim checked. Two
+      corrections (the RAM figure; the unverifiable vsync claim), seven sharpened, one addition
+      (GD32F303 vs the `stm32f103xe` a user will see). Full list for Tim:
+      `UNDER-THE-HOOD-CHANGES.md`. One discrepancy left open there: the source guarantees
+      Klipper's checkout is never `-dirty`, but a `-dirty` was reported - needs one look at a
+      real `klippy.log`.

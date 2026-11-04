@@ -3,6 +3,7 @@
 **Start here**
 - [Home](Home)
 - [What NebulaOS is](What-NebulaOS-Is)
+- [Under the hood](Under-the-Hood)
 - [Supported hardware](Supported-Hardware)
 - [Safety first](Safety-First)
 - [Words you will see](Glossary)
