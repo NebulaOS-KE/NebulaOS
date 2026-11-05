@@ -120,8 +120,11 @@ Using a new server, or stopping, asks first, because Moonraker restarts:
 
 *The real screen app. An example state: the address was typed in for the picture.*
 
-There is no picture of the spool list yet: it comes from a Spoolman server, and the pictures
-were made without one.
+The spool list:
+
+![The Spoolman spool list: ID, name, material, colour, remaining weight and length, with a select and an archive button per spool](images/p-spoolman-spools.png)
+
+*The real screen on a printer running NebulaOS 1.0.1.*
 
 ## Expected results
 

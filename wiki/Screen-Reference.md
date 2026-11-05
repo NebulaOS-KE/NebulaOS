@@ -62,7 +62,7 @@ the task pages linked, or are internal screens you do not navigate to directly.
 | `reset_panel` | [Resetting](Resetting) | page and all four questions |
 | `setting_panel` | Settings - detail below | tiles |
 | `skew_correction_panel` | [Skew correction](Skew-Correction) - detail below | page, keypad |
-| `spoolman_panel` | [Filament](Filament) | **Not yet:** the spool list comes from a Spoolman server, which the pictures did not have |
+| `spoolman_panel` | [Filament](Filament) | spool list (the real screen) |
 | `spoolman_server_panel` | [Filament](Filament) | in use, typing, none, save question, remove question |
 | `static_ip_panel` | [Connecting to Wi-Fi](Connecting-To-WiFi) - detail below | page, keypad, invalid value, back-to-DHCP question |
 | `statistics_panel` | detail below | page (the real screen) |
@@ -1237,7 +1237,9 @@ Each configured printer is a card with its name, IP and port, plus:
 
 ## Spoolman panel
 
-*No picture yet: the spool list comes from a Spoolman server, and the pictures were made without one.*
+![The Spoolman spool list: ID, name, material, colour, remaining weight and length, with a select and an archive button per spool](images/p-spoolman-spools.png)
+
+*The real screen on a printer running NebulaOS 1.0.1.*
 
 Opens from the Filament panel. Requires a [Spoolman](https://github.com/Donkie/Spoolman) server,
 set in Settings → Connections → **Spoolman** (or by hand in `moonraker.conf`).
