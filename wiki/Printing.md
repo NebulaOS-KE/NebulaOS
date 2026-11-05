@@ -173,8 +173,7 @@ and thumbnails, is Mainsail's **History** page
 
 ## Next step
 
-[Filament](Filament) for loading and colour changes, and
-[Updating NebulaOS](Updating-NebulaOS) to stay current.
+[Updating NebulaOS](Updating-NebulaOS) - staying current.
 
 ## Related
 

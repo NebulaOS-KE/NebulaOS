@@ -8,17 +8,29 @@ This manual is for the person using the printer. It assumes no Linux, no SSH, no
 not much 3D printing experience. Where a technical word is unavoidable it is explained the
 first time it appears, and [Words you will see](Glossary) collects them all.
 
-## New here? Read these three, in order
+## New here? Follow this path, in order
 
-1. **[Safety first](Safety-First)** - the hot and moving parts, and what is and is not
+Each page ends with a **Next step** link to the one after it, and the sidebar numbers them the
+same way.
+
+1. **[What NebulaOS is](What-NebulaOS-Is)** - what it replaces, and whether it is for you.
+2. **[Supported hardware](Supported-Hardware)** - check your printer, and what else you need.
+3. **[Safety first](Safety-First)** - the hot and moving parts, and what is and is not
    risky about switching systems. Five minutes, before you install anything.
-2. **[Installing NebulaOS](Installing-NebulaOS)** - how to put NebulaOS on the printer, and
+4. **[Two system slots](Two-System-Slots)** - what installing does to the system you have now.
+5. **[Installing NebulaOS](Installing-NebulaOS)** - how to put NebulaOS on the printer, and
    how to get back to what you had before.
-3. **[First-time setup](First-Time-Setup)** - Wi-Fi, finding the printer on your network,
-   and your first print.
-
-Then, before that first print: the [Calibration guide](Calibration-Guide) and
-[Setting up your slicer](Slicer-Setup) - two lines of start and end G-code.
+6. **[First-time setup](First-Time-Setup)** - the overview of steps 7 to 12.
+7. **[Connecting to Wi-Fi](Connecting-To-WiFi)**
+8. **[Opening Mainsail](Opening-Mainsail)** - the printer in your web browser.
+9. **[Calibration guide](Calibration-Guide)** - the Calibration menu, top to bottom. The
+   [Calibration walkthrough](Calibration-Explained) is the long version.
+10. **[Setting up your slicer](Slicer-Setup)** - **do not skip this.** Two lines of start and
+    end G-code, once, before you print anything. Without them the print skips the mesh and
+    purge line that calibration prepared for.
+11. **[Filament](Filament)** - loading it.
+12. **[Printing](Printing)** - your first print.
+13. **[Updating NebulaOS](Updating-NebulaOS)** - staying current.
 
 ## Already running NebulaOS?
 

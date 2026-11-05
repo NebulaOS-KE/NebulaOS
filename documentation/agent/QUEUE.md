@@ -355,6 +355,9 @@ stopped-install wording, Under-the-Hood `-dirty`, 17 screenshots embedded, next-
   `_scratch/run23/api-snapshot/redacted/` only (regenerated after an IP-replacement bug - re-read),
   labelled "measured on a printer running 1.0.0". Lives on `docs/firmware`, whose worktree is not
   recreated; deferred because this batch was limited to pushing `docs/agent`.
-- **Q-075: storyline page order** - proposal in HANDOFF.md, waiting for Tim. Do not move pages
-  until he decides.
+- [x] **Q-075: storyline page order** - Tim approved 2026-11-05 ("agent can apply it"). Applied:
+  sidebar numbers the 13-step path, Home lists it, every path page ends with one "Next step" to the
+  following page; Under the hood, Glossary and Screen reference moved to a Reference group; Filament
+  before Printing; Slicer setup is step 10 with callouts in First-time setup, Calibration guide and
+  the walkthrough.
 - **Q-076: re-point `ba98eec` references** once the main session names the final 1.0.0 sha.

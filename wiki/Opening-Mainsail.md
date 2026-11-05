@@ -78,6 +78,6 @@ Save the address in your browser. If you set a fixed address
 ([Connecting to Wi-Fi](Connecting-To-WiFi)), the bookmark keeps working permanently; with
 DHCP it may occasionally change.
 
-## Next
+## Next step
 
-[First-time setup](First-Time-Setup) - calibration and your first print.
+[Calibration guide](Calibration-Guide) - the Calibration menu, top to bottom.

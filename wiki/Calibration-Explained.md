@@ -7,6 +7,10 @@ the way you want — you don't need every step.
 > version: the Calibration menu's 1-7 (Bed Tramming, Heaters (PID), Axis Twist, Auto Calibration,
 > ...), then fine-tune the Z offset on the first print - and when to redo which step.
 
+> **Before any test print in this walkthrough,** set up your slicer once:
+> [Setting up your slicer](Slicer-Setup). Without its start and end G-code the print skips the
+> mesh and purge line.
+
 > **Golden rule: change one thing, then print a test.** If you tweak five settings and the next print is
 > worse, you won't know which one did it.
 
@@ -286,5 +290,5 @@ recalibrate — it overwrites.
 
 ## Next step
 
-[Setting up your slicer](Slicer-Setup) - the two lines of start and end G-code your slicer
-needs, then [Printing](Printing).
+**[Setting up your slicer](Slicer-Setup)** - the two lines of start and end G-code your slicer
+needs, once, before the first print. Then [Filament](Filament) and [Printing](Printing).

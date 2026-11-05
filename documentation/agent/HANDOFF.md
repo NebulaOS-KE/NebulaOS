@@ -21,7 +21,7 @@ PRINTER-SCREENSHOTS, SIM-SCREENSHOTS-AND-STOPPED-INSTALL. Sources: firmware `e52
 `docs/agent`; the main session publishes. Next: Q-074 (API examples, needs the `docs/firmware`
 worktree), Q-075 (Tim's page-order decision), Q-076 (final 1.0.0 sha).
 
-**Proposed new-owner page order (not applied):** What NebulaOS is -> Supported hardware -> Safety
+**New-owner page order (applied 2026-11-05 after Tim approved it, Q-075):** What NebulaOS is -> Supported hardware -> Safety
 first -> Two system slots -> Installing -> First-time setup -> Connecting to Wi-Fi -> Opening
 Mainsail -> Calibration guide (walkthrough as the long version) -> Setting up your slicer ->
 Filament -> Printing -> Updating. Sidebar today puts Under the hood and Glossary inside "Start

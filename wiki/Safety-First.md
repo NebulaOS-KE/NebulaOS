@@ -89,5 +89,4 @@ with moving parts, and a working smoke alarm in the same room is a sensible prec
 
 ## Next step
 
-[Two system slots](Two-System-Slots) - what installing does to the system you have now. Then
-[Installing NebulaOS](Installing-NebulaOS).
+[Two system slots](Two-System-Slots) - what installing does to the system you have now.

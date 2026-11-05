@@ -4,6 +4,10 @@ All calibrations are in **Tune → Calibration**, numbered in the order a new pr
 do 1, 2, 3, ... from the top. For background, every other calibration and troubleshooting, see
 the [full calibration walkthrough](Calibration-Explained).
 
+> **When you are done here: [Setting up your slicer](Slicer-Setup).** Two lines of start and
+> end G-code, once, before you print anything - including the test part for Skew Correction.
+> Without them the print skips the mesh and purge line that this calibration prepares for.
+
 ![The Calibration menu, numbered in the order a new printer needs](images/m19-calibration.png)
 
 *The Calibration menu, numbered in the order a new printer needs.*
@@ -21,6 +25,7 @@ the [full calibration walkthrough](Calibration-Explained).
 | 5 | **Input Shaper** | the accelerometer | about 5 min |
 | 6 | **E-Steps** | a ruler or caliper, a marker | about 5 min |
 | 7 | **Skew Correction** | a printed test part, a caliper | about 30 min |
+| - | then **[set up your slicer](Slicer-Setup)** - start and end G-code | your slicer | once |
 | - | then the first print: **Tune → Z Offset** or **Fine Tune** | a test print | while printing |
 
 Below them, **OTHER**: **Load Cell Calibration** (automatic re-check or manual with a bottle),
@@ -211,4 +216,5 @@ pages do the same on their own: while a print runs, their **Run**/**Start** butt
 
 **Set up your slicer before the first print.** Its start and end G-code must call NebulaOS's
 `START_PRINT` and `END_PRINT`, or the print skips the mesh and purge line that this calibration
-prepared for: [Setting up your slicer](Slicer-Setup). Then [Printing](Printing).
+prepared for: **[Setting up your slicer](Slicer-Setup)**. Then [Filament](Filament) and
+[Printing](Printing).

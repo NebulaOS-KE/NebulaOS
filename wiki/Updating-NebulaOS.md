@@ -186,6 +186,12 @@ removes NebulaOS's own leftovers - old logs, old update backups, unfinished down
 system images and the download cache - and shows what it will free before doing it. Your print
 files, settings and calibration are never touched. See [Resetting](Resetting).
 
+## Next step
+
+This is the last page of the main path. From here, look things up as you need them: the
+[Screen reference](Screen-Reference) for every button, the **Advanced** pages in the sidebar,
+and [Troubleshooting](Troubleshooting) when something is wrong.
+
 ## Related
 
 - [Resetting](Resetting)

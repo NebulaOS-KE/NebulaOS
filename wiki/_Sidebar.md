@@ -1,38 +1,41 @@
 ### 🖨️ NebulaOS manual
 
+[Home](Home)
+
+New here? Follow steps 1 to 13 in order.
+
 **Start here**
-- [Home](Home)
-- [What NebulaOS is](What-NebulaOS-Is)
-- [Under the hood](Under-the-Hood)
-- [Supported hardware](Supported-Hardware)
-- [Safety first](Safety-First)
-- [Words you will see](Glossary)
+- 1\. [What NebulaOS is](What-NebulaOS-Is)
+- 2\. [Supported hardware](Supported-Hardware)
+- 3\. [Safety first](Safety-First)
 
 **Install it**
-- [Two system slots](Two-System-Slots)
-- [Installing NebulaOS](Installing-NebulaOS)
+- 4\. [Two system slots](Two-System-Slots)
+- 5\. [Installing NebulaOS](Installing-NebulaOS)
 - [Going back to your old firmware](Going-Back)
 
 **Set it up**
-- [First-time setup](First-Time-Setup)
-- [Connecting to Wi-Fi](Connecting-To-WiFi)
-- [Opening Mainsail](Opening-Mainsail)
+- 6\. [First-time setup](First-Time-Setup)
+- 7\. [Connecting to Wi-Fi](Connecting-To-WiFi)
+- 8\. [Opening Mainsail](Opening-Mainsail)
 
-**Use the screen**
-- [Screen reference](Screen-Reference)
-
-**Get good prints**
-- [Calibration guide](Calibration-Guide)
-- [Calibration walkthrough](Calibration-Explained)
+**Calibrate**
+- 9\. [Calibration guide](Calibration-Guide)
+- [Calibration walkthrough (the long version)](Calibration-Explained)
 - [Bed tramming](Bed-Tramming)
 - [Load cell calibration](Load-Cell-Calibration)
 - [Axis twist](Axis-Twist-Compensation)
 - [Square parts (skew)](Skew-Correction)
 
-**Everyday printing**
-- [Setting up your slicer](Slicer-Setup)
-- [Printing](Printing)
-- [Filament](Filament)
+**Print**
+- 10\. **[Setting up your slicer](Slicer-Setup)** - once, before the first print
+- 11\. [Filament](Filament)
+- 12\. [Printing](Printing)
+
+**Keep it running**
+- 13\. [Updating NebulaOS](Updating-NebulaOS)
+- [Mainboard firmware](Mainboard-Firmware)
+- [Resetting](Resetting)
 
 **Advanced**
 - [Adaptive meshing and purge](Adaptive-Print-Setup)
@@ -42,14 +45,14 @@
 - [Beeps and songs](Beeps-And-Songs)
 - [Power-loss recovery](Power-Loss-Recovery)
 
-**Keep it running**
-- [Updating NebulaOS](Updating-NebulaOS)
-- [Mainboard firmware](Mainboard-Firmware)
-- [Resetting](Resetting)
-
 **When something is wrong**
 - [Troubleshooting](Troubleshooting)
 - [Recovery](Recovery)
+
+**Reference**
+- [Screen reference](Screen-Reference)
+- [Under the hood](Under-the-Hood)
+- [Words you will see](Glossary)
 
 ---
 Developer documentation lives in each component repository. Start from the

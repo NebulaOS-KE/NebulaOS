@@ -71,8 +71,6 @@ calibrating.
 **Probably not if** you need the printer working reliably tomorrow with no time to set it up,
 or you are not comfortable that going back involves a menu rather than a button.
 
-## Next
+## Next step
 
-- [Supported hardware](Supported-Hardware) - check your printer
-- [Safety first](Safety-First) - read before installing
-- [Installing NebulaOS](Installing-NebulaOS)
+[Supported hardware](Supported-Hardware) - check your printer, and what else you need.

@@ -98,6 +98,6 @@ heating the nozzle, the purge - and then the first layer begins.
 firmware `e523e8c`. The OrcaSlicer field names and placeholders are OrcaSlicer's, not
 NebulaOS's.*
 
-## Next
+## Next step
 
-[Printing](Printing) - start your first print and watch it.
+[Filament](Filament) - load it, then [Printing](Printing) - start your first print and watch it.

@@ -134,7 +134,7 @@ Tapping a box opens a number keypad. A value outside 0-255 is marked, and nothin
 
 Unless you have a reason to need a fixed address, DHCP is the simpler choice.
 
-## Next
+## Next step
 
 [Opening Mainsail](Opening-Mainsail) - using the printer from a browser on your computer or
 phone.

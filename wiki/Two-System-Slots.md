@@ -145,7 +145,7 @@ The one thing that does erase settings is a
 
 ## Next step
 
-New to NebulaOS? [Installing NebulaOS](Installing-NebulaOS).
+[Installing NebulaOS](Installing-NebulaOS).
 
 ## Related
 

@@ -76,7 +76,6 @@ To calibrate:
 - A ruler or caliper.
 - For skew correction only, a printed test part.
 
-## Next
+## Next step
 
-- [Safety first](Safety-First)
-- [Installing NebulaOS](Installing-NebulaOS)
+[Safety first](Safety-First) - read it before you install anything.

@@ -148,7 +148,10 @@ were made without one.
 Loading and unloading are repeatable and harmless - if a load goes wrong, unload and start
 again. Nothing here changes your configuration or calibration.
 
+## Next step
+
+[Printing](Printing) - start your first print and watch it.
+
 ## Related
 
-- [Printing](Printing)
 - [Calibration guide](Calibration-Guide) - E-steps calibration affects how much filament is fed

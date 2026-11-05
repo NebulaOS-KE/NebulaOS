@@ -176,5 +176,5 @@ Once NebulaOS is running, it updates itself from the screen - no USB stick and n
 
 ## Next step
 
-[First-time setup](First-Time-Setup) - Wi-Fi, Mainsail, calibration, your slicer and your first
-print, in that order.
+[First-time setup](First-Time-Setup) - the overview of what comes next: Wi-Fi, Mainsail,
+calibration, your slicer, filament and your first print, in that order.
