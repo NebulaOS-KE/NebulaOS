@@ -188,3 +188,26 @@ Deliberately not used: `L61-image.png` (0.9.9 test build in slot A), `not-for-wi
 `L41-mcu` and `L60-updates` (the real-display `p-` grabs replace them), `L51-camera` (`41-camera`
 already in use). Still missing: first-boot screen (Tim deferred), boot logo panel, Spoolman,
 TMC tune, the Logs page.
+
+## Run 23 rounds 1-3 embedded (2026-11-05, second batch)
+
+Source: `_scratch/run23/wiki-shots/` (MANIFEST.md there; screen `123ef31` + unpushed sim-only
+tour commits, mock Moonraker on the redacted ke-dev snapshot). 53 files copied into
+`wiki/images/` under descriptive names: the MANIFEST name without its `Lxx-` prefix
+(`L52-boot-logo.png` -> `boot-logo.png`). `boot-logo-delete-confirm.png` is L57a cropped with
+PIL to the dialog border (29,70)-(451,202), which removes the mock's refusal text behind it.
+Every image was looked at for a real SSID, 192.168.0.x, MAC or serial: none (names are the
+snapshot's HomeWiFi stand-ins, addresses 192.168.1.x / 127.0.0.1).
+
+Fed states are captioned "An example state ... fed in for the picture": print-cancel-confirm,
+exclude-object-confirm, unavailable-while-printing, plr-resume-offer, static-ip-invalid,
+wifi-password, 03-wifi (fed scan), spoolman-save-confirm, download-progress/-stopped/-done,
+after-clean-reset-notice. online-up-to-date is derived (captioned as the same check answered
+by 1.0.0).
+
+Skipped: L1F (not clean), L61 (0.9.9 build in slot A), L13/L14/L15 (background says
+"calibration not available"; L13 shows a stray background letter between its buttons even when
+cropped, L14/L15 hide their last warning line behind the buttons), L42 (16-vs-20 count bug,
+see earlier), L60 / L41 (the real-display p- grabs cover them), L01 / L02 / L1G (real+ gaps;
+m01 / m09 / m07 stay), L51 (41-camera stays), not-for-wiki/L34. Identical to images already
+in wiki/ (md5): L04 L05 L06 L17 L1H L20 L21 L22 L23 L27 L30 L31 L32 L33 L35 L40 L50 L70 L73.

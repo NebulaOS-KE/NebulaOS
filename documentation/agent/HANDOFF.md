@@ -28,6 +28,16 @@ Filament -> Printing -> Updating. Sidebar today puts Under the hood and Glossary
 here", Two system slots before Installing (fine), Filament after Printing although Printing needs
 filament loaded, and Slicer-Setup is now first under "Everyday printing".
 
+## Batch 3 (2026-11-05): screenshots for every screen
+
+53 Run 23 images embedded (SCREENSHOTS.md lists source, names, fed states and every skip).
+Going-Back has "If your old changes come back with it" (stock overlay mmcblk0p9 survives a
+Creality .img). Installing-NebulaOS's "install from the stock touchscreen" was deliberately NOT
+touched: the main session is testing the file-name rule and will send the correction.
+Open question for the main session: Camera.md says Manual exposure comes back to automatic with
+Restart camera "(or Defaults)", while the screen's own Manual-exposure question says only
+Restart camera brings it back - check camera_panel.cpp before 1.0.1.
+
 ## The project has reached its Definition of Done
 
 **2026-11-03. Read `FINAL-REPORT.md` first** - it answers the mission's Part 15 condition by

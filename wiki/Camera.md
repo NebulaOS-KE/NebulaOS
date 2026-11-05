@@ -30,6 +30,20 @@ firmware version.
 - **Defaults** puts every camera setting back to its default (asks first).
 - **Flip or rotate** the picture in Mainsail's webcam settings.
 
+The three questions the page asks:
+
+![The Manual exposure question](images/camera-manual-exposure-confirm.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+
+![The Restart camera question](images/camera-restart-confirm.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+
+![The Defaults question](images/camera-defaults-confirm.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+
 ## The same from Mainsail: Camera macros
 
 Mainsail's **Camera** macro group has them next to the quality presets:

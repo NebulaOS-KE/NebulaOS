@@ -110,6 +110,19 @@ If you use Spoolman, the **Spoolman** button opens the spool list, and loading a
 filament you are using so it can track what you have left. The server is set under **Settings
 → Connections → Spoolman**. Spoolman is optional - everything else works without it.
 
+![The Spoolman server page with a server in use](images/spoolman-server.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0. Addresses are examples.*
+
+Using a new server, or stopping, asks first, because Moonraker restarts:
+
+![The question before using a new Spoolman server](images/spoolman-save-confirm.png)
+
+*The real screen app. An example state: the address was typed in for the picture.*
+
+There is no picture of the spool list yet: it comes from a Spoolman server, and the pictures
+were made without one.
+
 ## Expected results
 
 | Action | What you should see |

@@ -7,9 +7,13 @@ from [Home](Home) - [Printing](Printing), [Filament](Filament),
 [Calibration guide](Calibration-Guide) and the rest explain the common jobs step by step. Come
 here when you want to know what a specific control does.
 
-Screenshots are real captures of the application at screen commit `36490ed`, taken at the
-printer's own 480x272 resolution. A few screens have no picture yet; where that is so, the page
-says it rather than showing you something else.
+Screenshots are captures of the real application at the printer's own 480x272 resolution.
+The older ones are from screen commit `36490ed` with example data. The newer ones are from
+screen `123ef31` (the 1.0.0 version) with data read from a printer running NebulaOS 1.0.0, and
+two are grabs of the printer's own display. Where a state cannot happen on an idle
+printer (a print running, a power cut, a download), it was fed in for the picture, and the
+caption says it is an example. A few screens have no picture yet; the table below says which,
+and why.
 
 ## Every panel, and where to find it
 
@@ -17,58 +21,60 @@ The complete list is generated from the source - 50 panels in all - so nothing i
 left out. Panels marked *detail below* are described on this page; the others are covered by
 the task pages linked, or are internal screens you do not navigate to directly.
 
-| Panel | Where it is documented | Screenshot |
+| Panel | Where it is documented | Screenshots (states shown) |
 |---|---|---|
-| `axis_twist_panel` | [Axis twist](Axis-Twist-Compensation) - detail below | yes |
-| `bedmesh_panel` | detail below | yes |
-| `boot_logo_panel` | detail below | not yet |
-| `calibration_menu_panel` | [Calibration guide](Calibration-Guide) | yes |
-| `camera_panel` | [Camera](Camera) | yes |
-| `connections_panel` | [Connecting to Wi-Fi](Connecting-To-WiFi) | yes |
-| `console_panel` | detail below | yes |
-| `display_panel` | detail below | yes |
-| `exclude_object_panel` | [Printing](Printing) - detail below | not yet |
-| `extruder_panel` | [Filament](Filament) - detail below | yes |
-| `fan_panel` | detail below | yes |
-| `filament_runout_panel` | detail below | not yet |
-| `file_panel` | [Printing](Printing) - detail below | yes |
-| `finetune_panel` | [Printing](Printing) - detail below | yes |
-| `firmware_retraction_panel` | detail below | yes |
-| `guided_calibration_panel` | [Calibration guide](Calibration-Guide) | yes |
-| `homing_panel` | detail below | yes |
-| `hostname_panel` | [Opening Mainsail](Opening-Mainsail) | yes |
-| `image_panel` | [Updating NebulaOS](Updating-NebulaOS) | yes |
-| `init_panel` | shown while the printer starts up | not yet |
-| `led_panel` | detail below | yes |
-| `limits_panel` | detail below | yes |
-| `logs_panel` | detail below | not yet |
-| `macros_panel` | detail below | yes |
-| `main_panel` | Home tab - detail below | yes |
-| `mcu_panel` | detail below | yes |
-| `network_detail_panel` | [Connecting to Wi-Fi](Connecting-To-WiFi) | not yet |
-| `pid_calibration_panel` | [Calibration guide](Calibration-Guide) | yes |
-| `power_panel` | detail below | yes |
-| `print_panel` | the Print tab's container - holds the file browser and the print status screen, both below | yes |
-| `print_status_panel` | [Printing](Printing) - detail below | yes |
-| `printer_select_panel` | detail below | not yet |
-| `printer_settings_panel` | detail below | yes |
-| `printertune_panel` | Tune tab - detail below | yes |
-| `prompt_panel` | shown by the printer when it needs an answer | not yet |
-| `report_panel` | detail below | not yet |
-| `reset_panel` | [Resetting](Resetting) | yes |
-| `setting_panel` | Settings - detail below | yes |
-| `skew_correction_panel` | [Skew correction](Skew-Correction) - detail below | yes |
-| `spoolman_panel` | [Filament](Filament) | not yet |
-| `spoolman_server_panel` | [Filament](Filament) | yes |
-| `static_ip_panel` | [Connecting to Wi-Fi](Connecting-To-WiFi) | not yet |
-| `statistics_panel` | detail below | yes |
-| `storage_panel` | [Resetting](Resetting) | not yet |
-| `system_panel` | detail below | yes |
-| `tmc_status_panel` | detail below | yes |
-| `tmc_tune_panel` | [TMC Autotune](TMC-Autotune) - detail below | not yet |
-| `updates_panel` | [Updating NebulaOS](Updating-NebulaOS) | needs a real printer |
-| `wifi_panel` | [Connecting to Wi-Fi](Connecting-To-WiFi) | yes |
-| `zoffset_panel` | [Printing](Printing) - detail below | yes |
+| `axis_twist_panel` | [Axis twist](Axis-Twist-Compensation) - detail below | intro. **Not yet:** the running probe steps - they need a live `axis_twist` run |
+| `bedmesh_panel` | detail below | no mesh, saved mesh, a real mesh, 3D view, save-profile prompt |
+| `boot_logo_panel` | detail below | page, logo list, another logo selected, both Apply questions, Restore, Delete, no USB stick. **Not yet:** the USB picker with images on a stick, and the import result - they need a stick in the printer |
+| `calibration_menu_panel` | [Calibration guide](Calibration-Guide) | menu, status lines |
+| `camera_panel` | [Camera](Camera) | page, unsaved changes, Defaults, Manual exposure and Restart questions |
+| `connections_panel` | [Connecting to Wi-Fi](Connecting-To-WiFi) | page |
+| `console_panel` | detail below | terminal, keyboard. **Not yet:** the command browser |
+| `display_panel` | detail below | page, camera button with and without a camera |
+| `exclude_object_panel` | [Printing](Printing) - detail below | objects, exclude question |
+| `extruder_panel` | [Filament](Filament) - detail below | page. **Not yet:** the busy spinner while extruding |
+| `fan_panel` | detail below | page |
+| `filament_runout_panel` | detail below | runout dialog |
+| `file_panel` | [Printing](Printing) - detail below | file list, selected file |
+| `finetune_panel` | [Printing](Printing) - detail below | page, page while printing |
+| `firmware_retraction_panel` | detail below | page |
+| `guided_calibration_panel` | [Calibration guide](Calibration-Guide) | the steps of every guided calibration |
+| `homing_panel` | detail below | Move page, emergency stop question, "Homing required" |
+| `hostname_panel` | [Opening Mainsail](Opening-Mainsail) | typing, invalid name, confirm |
+| `image_panel` | [Updating NebulaOS](Updating-NebulaOS) | page, install questions, refused, writing, restarting, failed, rolled back, stopped, next power-on; online: available, up to date, downloading, download stopped, downloaded; installed after the trial start |
+| `init_panel` | [two screens you do not open](#two-screens-you-do-not-open) | waiting for the printer, "NebulaOS was reset". **Not yet:** the other one-time NebulaOS notices |
+| `led_panel` | detail below | "No LEDs or lights are set up" |
+| `limits_panel` | detail below | page |
+| `logs_panel` | [System](#system) (the **Logs** button) | **Not yet:** the picture needs the printer's log list, which was not captured, and a log's text is read on the printer itself |
+| `macros_panel` | detail below | list. **Not yet:** the search keyboard |
+| `main_panel` | Home tab - detail below | idle, printing, "Unavailable while printing" |
+| `mcu_panel` | [Mainboard firmware](Mainboard-Firmware) | page, confirm, busy, done, failed, reinstall question |
+| `network_detail_panel` | [Connecting to Wi-Fi](Connecting-To-WiFi) - detail below | page |
+| `pid_calibration_panel` | [Calibration guide](Calibration-Guide) | page, running, done, bed and hotend start questions |
+| `power_panel` | detail below | page, the power-loss resume offer. **Not yet:** the page's own Resume question. Power devices: none - NebulaOS ships no `[power]` devices, so that part is never shown |
+| `print_panel` | the Print tab's container - holds the file browser and the print status screen, both below | file list |
+| `print_status_panel` | [Printing](Printing) - detail below | printing, the start steps, Pause during the start, cancel question |
+| `printer_select_panel` | detail below | list, add-printer keyboard. **Not yet:** the remove question |
+| `printer_settings_panel` | detail below | page, Restart Klipper refused |
+| `printertune_panel` | Tune tab - detail below | tiles |
+| `prompt_panel` | shown by the printer when it needs an answer | the M600 question box |
+| `report_panel` | [System](#system) | page, Save logs question. **Not yet:** saving and its result - they only follow Save |
+| `reset_panel` | [Resetting](Resetting) | page and all four questions |
+| `setting_panel` | Settings - detail below | tiles |
+| `skew_correction_panel` | [Skew correction](Skew-Correction) - detail below | page, keypad |
+| `spoolman_panel` | [Filament](Filament) | **Not yet:** the spool list comes from a Spoolman server, which the pictures did not have |
+| `spoolman_server_panel` | [Filament](Filament) | in use, typing, none, save question, remove question |
+| `static_ip_panel` | [Connecting to Wi-Fi](Connecting-To-WiFi) - detail below | page, keypad, invalid value, back-to-DHCP question |
+| `statistics_panel` | detail below | page |
+| `storage_panel` | [Resetting](Resetting) | page, both clean-up questions. **Not yet:** "Deleting..." and the results - they only follow OK |
+| `system_panel` | detail below | page, reboot and shut down questions |
+| `tmc_status_panel` | detail below | page |
+| `tmc_tune_panel` | [TMC Autotune](TMC-Autotune) - detail below | the KE defaults |
+| `updates_panel` | [Updating NebulaOS](Updating-NebulaOS) | page (the printer's own display), update one and update all questions. **Not yet:** updating and its result - they only follow Update |
+| `wifi_panel` | [Connecting to Wi-Fi](Connecting-To-WiFi) - detail below | network list, password, hidden network, forget question |
+| `zoffset_panel` | [Printing](Printing) - detail below | saved, save error, older extensions |
+
+"Not yet" means no picture exists; the page still describes that screen from the source.
 
 ## Getting around — the five tabs
 
@@ -125,13 +131,23 @@ Five icon buttons below the temperatures. Each opens a **floating panel** over t
 | **LED** | Case light controls |
 | **Print** | File browser |
 
+While a print runs (not while it is paused), **Homing** and **Extrude** answer with a message
+instead of opening; the calibration rows, Bed Mesh's buttons and some System buttons do the same
+(`KUtils::notify_locked` at screen `123ef31`):
+
+![The Unavailable while printing message over the Home tab](images/unavailable-while-printing.png)
+
+*The real screen app. An example state: the print behind it was fed in for the picture.*
+
 ---
 
 ## Homing panel (movement)
 
 Opens from the Home tab **Homing** button.
 
-![Homing panel](images/m05-move.png)
+![Homing panel](images/move.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
 
 ### Jog controls
 
@@ -154,6 +170,18 @@ Opens from the Home tab **Homing** button.
 | **Stop** | Emergency stop — asks "Do you want to emergency stop?" first, then cuts power to motors/heaters immediately if confirmed. Same underlying action as the print-status screen's Emergency Stop. |
 
 There is no button to home a single axis (X, Y, or Z) by itself — only the two combined options above.
+
+![The emergency stop question over the Move page](images/emergency-stop-confirm.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+
+When something needs the printer homed - the Z offset buttons, or a command Klipper refuses with
+*Must home axis first* - the screen asks to home. **Home** runs `G28`; **Cancel** closes the
+question (`src/utils.cpp`, `src/notification_manager.cpp` at screen `123ef31`):
+
+![The Homing required question](images/homing-required.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0 (not homed at the time).*
 
 ### Motors off
 
@@ -315,8 +343,12 @@ Six buttons in total: **Fine Tune**, **Objects**, **Pause** (becomes **Resume** 
 | **Fine Tune** | Shortcut straight to the [Fine Tune panel](#fine-tune) — same one reachable from the Tune tab. |
 | **Objects** | Opens the [Exclude Object screen](#exclude-object-screen) below. |
 | **Pause / Resume** | Parks the toolhead, holds temperatures. **Resume** brings it back and continues. |
-| **Cancel** | Cancels the print. Shows a red Confirm dialog. For the very last remaining object (Exclude Object), shows a "Cancel print?" confirmation. |
+| **Cancel** | Cancels the print. Asks *"Cancel the print?"* first, with a red **Cancel Print** button and **Back**. For the very last remaining object (Exclude Object), shows a "Cancel print?" confirmation. |
 | **Stop** | The button's actual label is just **"Stop"**, not "Emergency Stop" — but it is the same emergency-stop action as everywhere else in the app. Cuts all movement and heaters immediately. Use only if something is going wrong physically. Requires a power-cycle or `FIRMWARE_RESTART` to recover. |
+
+![The Cancel the print question over the print status screen](images/print-cancel-confirm.png)
+
+*The real screen app. An example state: the print (a real file name, at 20 %) was fed in for the picture.*
 
 ---
 
@@ -332,6 +364,12 @@ can tap: green means **"Printing now"**, plain means **"Tap to exclude"**, red m
 Skipping an object stops printing it partway through without cancelling the whole job — useful if one
 part of a multi-part print has failed but the rest is still going well. A counter below the legend
 reads exactly **"N object(s), N excluded"**.
+
+Tapping an object asks first; excluding cannot be undone:
+
+![The Exclude CUBE_2 question](images/exclude-object-confirm.png)
+
+*The real screen app. An example state: the objects are made up for the picture.*
 
 ---
 
@@ -372,6 +410,12 @@ Type any gcode command directly, same as the Mainsail terminal.
   flood the history. Tap a history entry to re-run it.
 - The small **list icon** to the left of the text field (not a separate tab) is how you get to the
   Command Browser described below.
+
+Tapping the text field opens the keyboard:
+
+![The Console tab with the keyboard open](images/console-keyboard.png)
+
+*The real screen app.*
 
 ### Command browser
 
@@ -542,9 +586,21 @@ actually works.
   'default' - each print measures its own mesh at the start*; it is not loaded. Without any saved
   mesh: *No bed mesh yet - run Calibration > Auto Calibration.*
 
+![The Bed Mesh panel with a real saved mesh](images/bedmesh.png)
+
+*The real screen app, showing a saved mesh measured on a printer running NebulaOS 1.0.0.*
+
+**Save Profile** asks for a name. At 480x272 the keyboard covers the name field, so what you type is not visible while you type it:
+
+![The save-profile prompt with the keyboard](images/bedmesh-save-prompt.png)
+
+*The real screen app.*
+
 #### 3D View screen
 
-*No current screenshot of this screen yet - the simulator's capture tour does not reach it. Tracked in the screenshot inventory.*
+![The 3D view of a real bed mesh](images/bedmesh-3d.png)
+
+*The real screen app, showing a mesh measured on a printer running NebulaOS 1.0.0. The "Z: ... to ..." label runs into the axis numbers at this size.*
 
 - **Drag anywhere on the mesh** to rotate it — the angle readout in the top-left (`View: X=... Y=...
   Z=...`) updates live as you drag.
@@ -565,6 +621,12 @@ actually works.
 |---|---|
 | **Power devices** | On/off buttons for smart plugs or relays configured in Moonraker's `[power]` section. NebulaOS ships none, so this section is normally not shown. |
 | **Power Loss Recovery** | Shows the state of NebulaOS power-loss recovery (the Klipper object `nebulaos_power_loss_recovery`). After a power cut the screen asks by itself: "A print was interrupted by a power loss... Resume?" with **Later** and **Resume** (Mainsail shows the same question). **Resume** heats, homes X and Y, lifts, primes and continues; **Later** keeps the record for this screen. While a print runs it says the print is being recorded. After a power cut it shows the interrupted file and, when the printer allows a physical resume, a **Resume Print** button (asks to confirm); **Discard** drops the record. If the record cannot be resumed (file or printer configuration changed), it says why and offers only **Discard**. |
+
+![The power-loss resume offer at start-up](images/plr-resume-offer.png)
+
+*The real screen app. An example state: the power cut and its record were fed in for the picture. On the 480x272 screen the text runs on under the Later / Resume buttons.*
+
+Power devices: NebulaOS ships none, so there is no picture of that section.
 
 ### TMC Metrics
 
@@ -617,6 +679,16 @@ show a message instead of opening when their Klipper section (`[axis_twist_compe
 `[skew_correction]`) is missing; NebulaOS ships both. **TMC Autotune** is greyed out when Klipper has
 no `motor_database.cfg`.
 
+**Heaters (PID)** asks before each run:
+
+![The Heaters (PID) question for the bed](images/pid-confirm-bed.png)
+
+*The real screen app.*
+
+![The Heaters (PID) question for the hotend](images/pid-confirm-hotend.png)
+
+*The real screen app.*
+
 #### The guided screens (Bed Tramming, Auto Calibration, Input Shaper, E-Steps, Load Cell Calibration)
 
 These run NebulaOS calibration workflows in Klipper (`NEBULAOS_*` macros). Each screen shows a short
@@ -657,13 +729,20 @@ layers that are uneven left to right despite re-meshing. Full guide:
 Corrects parts that come out as slight parallelograms instead of squares.
 
 - Enter three caliper measurements from a printed test square: **AC diagonal**, **BD diagonal**, **AD side**.
+  Tapping a field opens a number keypad.
 - Tap **Apply & Save** — this sends the correction *and* runs `SAVE_CONFIG` (Klipper restarts).
 
 Full guide: [Skew Correction](Skew-Correction).
 
+![Skew Correction with the number keypad open](images/skew-keypad.png)
+
+*The real screen app.*
+
 #### TMC Autotune
 
-*No current screenshot of this screen yet - the simulator's capture tour does not reach it. Tracked in the screenshot inventory.*
+![TMC Autotune with the KE's stock motors pre-selected](images/tmc-tune.png)
+
+*The real screen app, with NebulaOS's shipped configuration and motor list. A printer that has saved its own choices shows those instead.*
 
 Quieter, cooler steppers. For each stepper pick a **Motor** and a **Tuning Goal** (`auto`, `silent`,
 `performance`, `autoswitch`), then tap **Save/Restart**. Steppers without a saved choice are
@@ -703,6 +782,20 @@ has no Spoolman). Buttons:
   `moonraker.conf` (`[spoolman] server`) and restarts Moonraker; the screen reconnects after a few
   seconds. The keyboard's keyboard key hides it; tap a field to bring it back. The spool list itself
   is in the Filament panel ([Spoolman panel](#spoolman-panel)).
+
+![The Spoolman server page with a server in use](images/spoolman-server.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0. Addresses are examples.*
+
+Both changes ask first, because Moonraker restarts:
+
+![The question before using a new Spoolman server](images/spoolman-save-confirm.png)
+
+*The real screen app. An example state: the address was typed in for the picture.*
+
+![The Stop using Spoolman question](images/spoolman-remove-confirm.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
 
 **Change** (printer name) sets the network name: the printer is then reachable as `<name>.local`.
 Invalid names are flagged while you type; saving asks to confirm first.
@@ -755,6 +848,20 @@ storage. Buttons:
 | **Restart GUI** | Restarts NebulaScreen only. Klipper keeps running. |
 | **Reboot** / **Shut down** | Ask first. After shutting down, switch the printer off at the power switch. |
 
+![The Reboot question](images/reboot-confirm.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+
+![The Shut down question](images/shutdown-confirm.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+
+**Save logs to USB** (in Report a problem) also asks first:
+
+![The Save logs to USB question](images/report-save-confirm.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+
 ### Updates
 
 Lists what Moonraker's update manager knows (Klipper, Moonraker, Mainsail, NebulaOS extensions, ...)
@@ -766,6 +873,15 @@ update.
 
 *The printer's own display, running NebulaOS 1.0.0.*
 
+Each update asks first:
+
+![The Update Klipper question](images/update-klipper-confirm.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+
+![The Update all question](images/update-all-confirm.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
 
 **System image** installs a NebulaOS (or Creality) `.img` from a USB stick or from
 `config/uploads/system-image` into the boot slot that is not running, then restarts into it.
@@ -793,6 +909,16 @@ and hard to look up.
 *"Waiting for printer to initialize..."* while it waits. If no printer is configured at all it
 says so instead, and points at Settings - which is the state a screen reaches only when its
 Moonraker connection has never been set up.
+
+![Waiting for printer to initialize](images/init-waiting.png)
+
+*The real screen app, with no printer answering yet.*
+
+After a [clean NebulaOS reset](Resetting) it shows a one-time notice once the printer is up:
+
+![The NebulaOS was reset notice](images/after-clean-reset-notice.png)
+
+*The real screen app and its own text. An example state: the reset was fed in for the picture.*
 
 **The question box** (`prompt_panel`) is how a macro asks you something. Klipper macros can send
 a prompt - a title, some text and a set of buttons - and this screen renders whatever the macro
@@ -840,7 +966,9 @@ tap.
 Opens from Settings → Display → **Boot logo**. Sets the picture shown while the printer starts
 and the power-on logo, for **the slot you are running**.
 
-*No current screenshot of this screen yet - the simulator's capture tour does not reach it.*
+![The Boot logo page with the logo in use and its preview](images/boot-logo.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.* The preview is worked out by NebulaOS's own boot-display code from the shipped logo.
 
 | Control | What it does |
 |---|---|
@@ -849,6 +977,48 @@ and the power-on logo, for **the slot you are running**.
 | **Add from USB** | Copies an image from a plugged-in stick into the printer and selects it. |
 | **Delete** | Removes an image you added. The NebulaOS logo cannot be deleted. |
 | **Restore Creality logo** | Puts the original power-on logo back. |
+
+The dropdown open, with every logo on that printer - the ones NebulaOS ships and the images
+uploaded to it:
+
+![The logo dropdown open](images/boot-logo-list.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+
+Picking another logo shows its preview and *Not applied yet - tap Apply*:
+
+![Another logo selected, not applied yet](images/boot-logo-other-selected.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+
+**Apply** asks first, for an image and for the NebulaOS logo; it shows from the next start:
+
+![The Apply question for an image](images/boot-logo-apply-confirm.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+
+![The Apply question for the NebulaOS logo](images/boot-logo-apply-nebulaos-confirm.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+
+**Restore Creality logo** and **Delete** ask too:
+
+![The Restore Creality logo question](images/boot-logo-restore-confirm.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+
+![The Delete image question](images/boot-logo-delete-confirm.png)
+
+*The real screen app; the picture is cut down to the question box.*
+
+**Add from USB** without a stick plugged in:
+
+![No USB stick found](images/boot-logo-add-from-usb.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+
+There is no picture yet of the list of images on a stick, or of the result after adding one -
+that needs a stick in the printer.
 
 Images can also be uploaded in Mainsail - PNG, BMP or JPEG, up to 4 MB. See
 [Resetting](Resetting) for the other things under Settings → Display.
@@ -963,7 +1133,27 @@ its name.
 | **Known, not connected** | Reconnects to it | A separate **✕** to forget it (asks first) |
 | **Not known** | Asks for the password (empty for an open network) | — |
 
+![The Wi-Fi network list](images/03-wifi.png)
+
+*The real screen app. An example state: the two saved names stand in for real ones, and `OtherNetwork` and the signal levels were fed in for the picture.*
+
 The password field has an eye button to show or hide what you type.
+
+![Typing the password for a network](images/wifi-password.png)
+
+*The real screen app. An example state, for the made-up `OtherNetwork`.*
+
+**Other network (hidden)...** asks for the name first:
+
+![Typing the name of a hidden network](images/wifi-hidden-network.png)
+
+*The real screen app.*
+
+Forgetting a saved network asks first:
+
+![The Forget network question](images/wifi-forget-confirm.png)
+
+*The real screen app. The network name stands in for a real one.*
 
 ---
 
@@ -996,6 +1186,22 @@ the setting is global for the Wi-Fi interface, not per network.
 **✓ Save** stays visible outside the scrolling area. With a static address set, **Revert to DHCP**
 appears (asks first).
 
+Tapping an octet box opens a number keypad:
+
+![The Static IP panel with the keypad](images/static-ip-keypad.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0. Addresses are examples.*
+
+A value outside 0-255 is marked and nothing is sent:
+
+![Static IP with an invalid value](images/static-ip-invalid.png)
+
+*The real screen app. An example state: 300 was typed in for the picture.*
+
+![The Switch back to DHCP question](images/static-ip-revert-confirm.png)
+
+*The real screen app. Behind the question, the error line from the previous picture is still showing.*
+
 NebulaOS checks a new setting (static: the gateway answers; DHCP: a lease) and reverts it by itself
 when it does not work. This can take a couple of minutes.
 
@@ -1017,11 +1223,15 @@ Each configured printer is a card with its name, IP and port, plus:
 **Add a printer:** fill in **Printer Name**, the Moonraker IP address and the port (pre-filled with
 `7125`), then tap the green **+ Printer** button.
 
+![Adding a printer, with the keyboard](images/printer-add-keyboard.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+
 ---
 
 ## Spoolman panel
 
-*No current screenshot of this screen yet - the simulator's capture tour does not reach it. Tracked in the screenshot inventory.*
+*No picture yet: the spool list comes from a Spoolman server, and the pictures were made without one.*
 
 Opens from the Filament panel. Requires a [Spoolman](https://github.com/Donkie/Spoolman) server,
 set in Settings → Connections → **Spoolman** (or by hand in `moonraker.conf`).

@@ -71,6 +71,16 @@ the progress: "Heating up", then "Measuring: cycle n of 6, about m min left". Th
 minutes; the bed much longer, because each of its swings takes about 3 minutes. The Calibration
 menu remembers both heaters. Redo it after changing a heater, a thermistor or the hotend.
 
+Each button asks first:
+
+![The Heaters (PID) question for the bed](images/pid-confirm-bed.png)
+
+*The real screen app.*
+
+![The Heaters (PID) question for the hotend](images/pid-confirm-hotend.png)
+
+*The real screen app.*
+
 It comes before Auto Calibration on purpose: the hotend oozes during the long hot phase, and Auto
 Calibration's nozzle clean removes that before the Z offset is measured.
 
@@ -139,6 +149,10 @@ Shows the active mesh. Klipper does not load a saved mesh by itself after a rest
 Auto Calibration the page shows the saved one instead, with *Saved mesh 'default' - each print
 measures its own mesh at the start* - nothing is loaded. Only when no mesh was ever saved it says
 *No bed mesh yet - run Calibration > Auto Calibration.*
+
+![The Bed Mesh page with a saved mesh](images/bedmesh.png)
+
+*The real screen app, showing a saved mesh measured on a printer running NebulaOS 1.0.0.*
 
 ## Then: fine-tune on the first print
 

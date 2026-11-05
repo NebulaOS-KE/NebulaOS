@@ -48,14 +48,49 @@ less frightening than it sounds.
    knows what is available without you choosing a file.
 2. If a newer version exists, it shows the version and the exact download size. Tap
    **Download**.
+
+   ![NebulaOS 1.0.0 is available - Download?](images/online-available.png)
+
+   *The real screen app, showing a real check made by a printer that was running a 0.9.9 test
+   build at the time.*
+
+   If you already run the newest version, it says so:
+
+   ![NebulaOS is up to date](images/online-up-to-date.png)
+
+   *The real screen app. The same release check, as a printer on 1.0.0 answers it.*
+
+   While it downloads, the screen shows how far it is:
+
+   ![Downloading NebulaOS 1.0.0: 37 %](images/download-progress.png)
+
+   *The real screen app and its own text. An example state, fed in for the picture.*
+
 3. When it finishes, the download appears in the list as **Downloaded**. Tap **Install** next
    to it.
+
+   ![NebulaOS 1.0.0 is downloaded and checked](images/download-done.png)
+
+   *The real screen app and its own text. An example state, fed in for the picture.*
+
+   If the download stops (Wi-Fi drops, for example), nothing was installed - start it again:
+
+   ![Download failed - nothing was installed](images/download-stopped.png)
+
+   *The real screen app and its own text. An example state, fed in for the picture.*
+
 4. NebulaOS checks the file again, asks you to confirm, installs it over a few minutes, and
    restarts.
 
 ![The system image install confirmation](images/23-image-confirm-nebulaos.png)
 
-Once the new system has started properly, the downloaded file is deleted automatically.
+Once the new system has started properly, the screen says so once, and the downloaded file is
+deleted automatically:
+
+![System image installed - now running NebulaOS 1.0.0 from slot B](images/image-update-confirmed.png)
+
+*The real screen app, showing a real result record from a printer that went through an online
+update.*
 
 **A note on the clock.** HTTPS needs the printer's clock to be roughly right, and the printer
 sets it from the internet once Wi-Fi is up. Right after a first start this can take a minute,
@@ -79,7 +114,15 @@ component's version and state.
 
 - **Check now** refreshes the list.
 - **Update all** installs every available update.
-- Each row has its own **Update** button.
+- Each row has its own **Update** button. Both ask first:
+
+![The Update Klipper question](images/update-klipper-confirm.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+
+![The Update all question](images/update-all-confirm.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
 
 ![The Updates page on a printer](images/p-updates.png)
 

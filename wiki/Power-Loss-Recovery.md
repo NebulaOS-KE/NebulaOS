@@ -34,15 +34,19 @@ is not offered, rather than being offered and then failing.
 3. If a recoverable print was interrupted, the screen offers it to you, naming the file.
 4. Choose:
    - **Resume** - carry on from the checkpoint.
-   - **Discard** - forget the checkpoint and start fresh.
+   - **Later** - keep the checkpoint and decide afterwards. **Tune → Power Settings** still
+     offers **Resume Print**, and **Discard** to forget the checkpoint and start fresh.
 
 Look at the part before you choose. Resuming only makes sense if the print is still stuck to
 the bed in the position it was in. If it came loose, or you have moved the bed or the part,
 discard it.
 
-*No screenshot yet: the recovery offer appears as a prompt during startup, which the
-simulator's screenshot tour does not reach. This one needs a photograph of a real printer
-after a power cut.*
+![The power-loss resume offer at start-up](images/plr-resume-offer.png)
+
+*The real screen app. An example state: the power cut and its record were fed in for the
+picture. On the 480x272 screen the end of the text runs on under the Later / Resume buttons.*
+
+*Buttons from `src/power_panel.cpp` (`offer_resume`) at screen `123ef31`.*
 
 ## Expected result
 

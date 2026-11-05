@@ -67,6 +67,11 @@ another system.
 1. **Settings → Printer → MCU firmware**.
 2. Tap **Built-in MCU firmware**.
 3. Confirm.
+
+   ![The Reinstall built-in MCU firmware question](images/mcu-reinstall-confirm.png)
+
+   *The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+
 4. **Wait.** Klipper stops, the board is reflashed, and Klipper restarts. The screen says not to
    switch off while this runs.
 5. The screen reports the firmware it now finds on the board.

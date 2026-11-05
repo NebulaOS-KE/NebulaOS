@@ -102,6 +102,11 @@ if your calipers allow):
 
 1. On the printer: **Tune → Calibration → 7 Skew Correction**.
 2. Tap each field and type the millimetre value (the keypad has a decimal point): **A-C**, **B-D**, **A-D**.
+
+   ![Skew Correction with the number keypad open](images/skew-keypad.png)
+
+   *The real screen app.*
+
 3. Tap **Apply & Save**.
 
 That sends `SET_SKEW` and saves it permanently (the printer restarts briefly to lock it in). Done — every

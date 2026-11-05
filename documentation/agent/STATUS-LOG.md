@@ -246,3 +246,9 @@ clause.
 OpenKE SSH section shortened (Tim), new Slicer-Setup page, stopped-install wording on three pages,
 Under-the-Hood `-dirty` from upstream klippy.py `58bd67db3`, 17 screenshots embedded, next-step
 links along the new-owner path. Link checker: 34 pages, no broken links or missing images.
+
+- 2026-11-05 (batch 3): 53 Run 23 screenshots embedded across 14 pages; Screen-Reference panel
+  table rewritten (states pictured + honest "not yet" with reason); Going-Back overlay note;
+  doc fixes found on the way: PLR start-up offer is Later/Resume (Discard only on Tune > Power
+  Settings, power_panel.cpp offer_resume), Logs is under Settings > System not Display, the
+  Cancel-print question text, mcu/logs rows no longer say "detail below".

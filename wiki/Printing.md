@@ -69,7 +69,12 @@ On the left: the thumbnail, the file name and a progress bar. On the right, ten 
 
 If you navigate back to the **Home** tab mid-print, a compact progress widget replaces the
 usual buttons there - tap it to return to the full screen. That shortcut is only on the Home
-tab.
+tab. While a print runs, **Homing** and **Extrude** on the Home tab answer with a message
+instead of opening (they work again while the print is paused):
+
+![Unavailable while printing](images/unavailable-while-printing.png)
+
+*The real screen app. An example state: the print was fed in for the picture.*
 
 ## Fixing the first layer while it prints
 
@@ -123,6 +128,12 @@ Cancelling the last remaining object asks whether you meant to cancel the whole 
 
 *Green is printing now, red is excluded. The objects here are made up for the picture.*
 
+Tapping an object asks first - excluding cannot be undone:
+
+![Exclude CUBE_2? This cannot be undone.](images/exclude-object-confirm.png)
+
+*The real screen app. An example state, with the made-up objects above.*
+
 ## When the print finishes
 
 The printer stops heating and the status screen shows the print as complete. Let the bed cool
@@ -152,7 +163,11 @@ and thumbnails, is Mainsail's **History** page
 ## Recovery and reversal
 
 - **Pause** is fully reversible with **Resume**.
-- **Cancel** ends the print; the file stays, so you can start again.
+- **Cancel** ends the print; the file stays, so you can start again. It asks first:
+
+![Cancel the print?](images/print-cancel-confirm.png)
+
+*The real screen app. An example state: the print was fed in for the picture.*
 - **Stop** requires a power-cycle or `FIRMWARE_RESTART`.
 - A power cut may be recoverable - [Power-loss recovery](Power-Loss-Recovery).
 

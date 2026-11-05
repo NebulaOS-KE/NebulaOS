@@ -54,7 +54,10 @@ If your motors are already quiet and you have no thermal concerns, this is a nic
 
 ## Pick your motors and tune
 
-*No current screenshot of this screen yet - the capture tour does not reach it. Tracked in the screenshot inventory.*
+![TMC Autotune with the KE's stock motors pre-selected](images/tmc-tune.png)
+
+*The real screen app, with NebulaOS's shipped configuration and motor list: X and Y are shown,
+Z is further down the list. A printer that has saved its own choices shows those instead.*
 
 For each axis, choose the **Motor** from the dropdown, then a **Tuning Goal**, then tap **Save/Restart**.
 

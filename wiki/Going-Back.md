@@ -57,6 +57,18 @@ accepts Creality images: it reads the kernel inside the file, recognises it as C
 than NebulaOS's, and tells you which it is before you confirm. It goes into the slot you are not
 running, so NebulaOS stays where it is and you swap into Creality afterwards.
 
+### If your old changes come back with it
+
+Creality's `.img` rewrites the system, but **not** stock's overlay partition (`mmcblk0p9`, the
+changes kept in `/overlay/upper`). So whatever was changed on stock before comes back with it.
+For example, if OpenKE or GuppyScreen replaced Creality's screen, that screen is back too: its
+`S99guppyscreen` start script is still there, and a whiteout file still hides Creality's
+`S99start_app`.
+
+To get Creality's own screen back, undo the tool that changed it. For GuppyScreen that is its
+installer's `uninstall`. If its backup folder is gone, Creality's original start scripts are in
+`/rom/etc/init.d/`.
+
 If that does not get you there, [Recovery](Recovery) option 4 rewrites the printer from a USB
 stick - it erases everything, so it is the last resort rather than the first.
 

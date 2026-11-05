@@ -29,6 +29,16 @@ blocked while a print is running.
 | **Clean NebulaOS reset** (red frame) | Restarts as if newly installed | Printer configuration and calibration, Wi-Fi networks, network settings, root password, print history and statistics, screen settings |
 | **Swap boot slot (A/B)** (orange frame) | Restarts into the other system slot | Nothing - but see the warning below |
 
+Every button asks first and says what it does:
+
+![The Reset GUI settings question](images/reset-gui-confirm.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+
+![The Reset touch calibration question](images/reset-touch-confirm.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+
 ### What a clean reset does *not* touch
 
 Your **G-code files** and the **other boot slot** survive a clean NebulaOS reset. Afterwards
@@ -41,6 +51,12 @@ their own: they are read again from files that live outside the NebulaOS folder.
 
 ![The clean reset confirmation](images/09-clean-reset-confirm.png)
 
+After the restart, the screen says once that the reset happened and where to connect Wi-Fi again:
+
+![NebulaOS was reset - connect to Wi-Fi under Settings > Connections](images/after-clean-reset-notice.png)
+
+*The real screen app and its own text. An example state: the reset was fed in for the picture.*
+
 ## Swapping boot slots
 
 The printer has two system slots, A and B. A system image installed from **Settings → Updates
@@ -50,7 +66,12 @@ overwritten.
 ![The Swap boot slot confirmation, naming what is in the other slot](images/30-swap-confirm-nebulaos.png)
 
 The confirmation tells you what is installed in the other slot. Read it - that is how you
-check you are about to start what you expect.
+check you are about to start what you expect. Here, on a printer whose slot A held a NebulaOS
+test build:
+
+![The Swap boot slot question naming the build in slot A](images/swap-slot-confirm.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
 
 **The one-way warning.** If the other slot runs NebulaOS, you can come straight back the same
 way. If it runs Creality's system or OpenKE, those have **no NebulaOS swap button**, so getting

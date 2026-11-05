@@ -40,12 +40,20 @@ do anything.
 ![The Wi-Fi networks panel, showing saved networks and others in range](images/03-wifi.png)
 
 *The Wi-Fi networks panel. Saved networks appear first, then everything else in range, each
-with signal bars.*
+with signal bars. An example state: the names and signal levels stand in for real ones.*
+
+![Typing the password for a network](images/wifi-password.png)
+
+*Step 6: the password field with its eye button. An example state, for a made-up network.*
 
 ### If your network does not appear
 
 Some networks are set not to broadcast their name. For those, scroll to the end of the list
 and tap **Other network (hidden)...**, then type the network name and password yourself.
+
+![Typing the name of a hidden network](images/wifi-hidden-network.png)
+
+*The real screen app.*
 
 ### If the network is open, with no password
 
@@ -68,7 +76,16 @@ From there you can also:
 
 - **Configure Static IP** - give the printer a fixed address instead of one your router
   assigns. Most people do not need this; see below.
-- **Forget This Network** - remove the saved network.
+- **Forget This Network** - remove the saved network. The **✕** on a saved network in the list
+  does the same; both ask first.
+
+![The Network Details panel](images/r-network-detail.png)
+
+*The real screen app, showing data from a printer. Signal shows `-` here only because the picture was made without a Wi-Fi scan.*
+
+![The Forget network question](images/wifi-forget-confirm.png)
+
+*The real screen app. The network name stands in for a real one.*
 
 ## Troubleshooting
 
@@ -78,7 +95,7 @@ From there you can also:
 | Your network is not listed | It may be hidden - use **Other network (hidden)...**. Or it may be 5 GHz only. |
 | It connects, then drops | Check the signal bars. One or two bars next to a metal-framed printer is often the cause. |
 | No **Address** appears after connecting | Wait a few seconds and look again; the address comes from your router. |
-| Wi-Fi worked before and now does not | **Settings → Display → Logs** can show the Wi-Fi lines of the system log. |
+| Wi-Fi worked before and now does not | **Settings → System → Logs** can show the Wi-Fi lines of the system log. |
 
 ## A fixed address, if you want one
 
@@ -98,6 +115,22 @@ appears once a static address is set.
 ![The Static IP panel](images/r-static-ip.png)
 
 *The real screen app, showing data from a printer running NebulaOS 1.0.0. Addresses are examples.*
+
+Tapping a box opens a number keypad. A value outside 0-255 is marked, and nothing is sent:
+
+![The Static IP panel with the keypad](images/static-ip-keypad.png)
+
+*The real screen app. Addresses are examples.*
+
+![Static IP with an invalid value](images/static-ip-invalid.png)
+
+*The real screen app. An example state: 300 was typed in for the picture.*
+
+**Revert to DHCP** asks first:
+
+![The Switch back to DHCP question](images/static-ip-revert-confirm.png)
+
+*The real screen app. Behind the question, the error line from the previous picture is still showing.*
 
 Unless you have a reason to need a fixed address, DHCP is the simpler choice.
 
