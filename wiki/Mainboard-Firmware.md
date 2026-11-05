@@ -40,17 +40,22 @@ a known Creality version. If you deliberately installed something else, it stays
 that is happening - it says not to switch off, and that Klipper is stopped. It takes a short
 time. Wait for it.
 
-**If it does get interrupted, the printer fixes it.** The board keeps Creality's small built-in
-loader in a place firmware installs never write; only the firmware on top of it is replaced. An
-interrupted install therefore leaves the loader intact and the firmware incomplete, which means
-the printer will not print until the firmware is written again - and writing it again is
-something this printer can do on its own.
+**If it does get interrupted.** The board keeps Creality's small built-in loader in a place
+firmware installs never write; only the firmware on top of it is replaced. An interrupted
+install therefore leaves the loader in place and the firmware incomplete, and the printer will
+not print until the firmware is written again.
 
-The screen notices and offers it: *"The firmware was written, but Klipper does not reach the
-mainboard. Reinstall the built-in MCU firmware?"* You can also start it yourself at any time
-with **Reinstall built-in firmware** below.
+What to do:
 
-No computer, no cable, no disassembly.
+1. Switch the printer on again and let NebulaOS start.
+2. NebulaOS does **not** rewrite firmware it does not recognise by itself, and a half-written
+   firmware is one it does not recognise. It starts Klipper anyway and leaves the board alone.
+3. Install the firmware again yourself: **Settings → Printer → MCU firmware → Reinstall
+   built-in firmware**, as below. Do not switch off while it runs.
+4. If the screen says the mainboard is not answering, switch the printer off, wait 10 seconds,
+   switch it on, and try step 3 again.
+5. If the board still does not answer, see [Recovery](Recovery) and report it with what the
+   screen showed: [Troubleshooting](Troubleshooting).
 
 ## Where the controls are
 
@@ -107,7 +112,7 @@ The screen reports the board running the firmware you installed, and Klipper con
 | MCU error right after installing NebulaOS from stock Creality firmware | Switch the printer off, wait 10 seconds, switch it on, once. Reinstalling from the screen does not help until the power has been cut. |
 | "Klipper can't reach the board" | Reinstall the built-in firmware, as above. |
 | No files are listed | Check the USB stick is FAT32, or that the upload went to **uploads → mainboard-firmware**. |
-| You switched off during a flash | The board may need recovery from a computer. See [Recovery](Recovery). |
+| You switched off during a flash | Switch on again, then **Reinstall built-in firmware**. See "If it does get interrupted" above. |
 | The firmware changed by itself after switching systems | Expected - each system reinstalls its own. See the short version above. |
 
 ## Recovery and reversal

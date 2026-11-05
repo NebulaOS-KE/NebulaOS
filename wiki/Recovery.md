@@ -110,8 +110,8 @@ Use NebulaOS-firmware's `tools/recovery/usb-set-boot-slot.sh A` (or `B`) with th
 **This erases your settings, your print files and your calibration.** Only the printer's
 factory serial number and network address are kept.
 
-Each release includes an `.ingenic` file for the Ingenic USB Cloner - for 1.0.0 that is
-`NebulaOS-Ender3V3KE-1.0.0.ingenic`, alongside its `.sha256`. It rewrites the printer from
+Each release includes an `.ingenic` file for the Ingenic USB Cloner - for 1.0.1 that is
+`NebulaOS-Ender3V3KE-1.0.1.ingenic`, alongside its `.sha256`. It rewrites the printer from
 scratch: NebulaOS in slot 2, Creality's stock system in slot 1.
 
 Use it only when nothing else has worked, and expect to set the printer up from nothing

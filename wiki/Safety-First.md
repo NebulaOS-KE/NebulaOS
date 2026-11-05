@@ -37,22 +37,19 @@ version. Anything you installed deliberately is left alone.
 moment in normal use where cutting power leaves you with a job to finish rather than a printer
 that just works.
 
-**It is not permanent, and it does not need a computer.** The mainboard holds two separate
-things: a small built-in loader that Creality put there, and the firmware on top of it that
-actually runs the printer. Installing firmware replaces the second one - the loader itself is
-never written, which is what makes this recoverable.
+**The loader underneath is never touched.** The mainboard holds two separate things: a small
+built-in loader that Creality put there, and the firmware on top of it that actually runs the
+printer. Installing firmware replaces only the second one - the loader itself is never written.
 
 So if power is cut partway, the printer will not print, because the firmware on top is
-incomplete. The loader is still there, and NebulaOS can still talk to it. The screen notices
-and offers the fix itself: *"The firmware was written, but Klipper does not reach the
-mainboard. Reinstall the built-in MCU firmware?"* Accept, and it writes it again.
-
-You can also do it whenever you like from **Settings → Printer → MCU firmware → Reinstall
-built-in firmware**.
+incomplete. NebulaOS does not rewrite it by itself. Switch the printer on again, then install
+the firmware again from **Settings → Printer → MCU firmware → Reinstall built-in firmware**.
+[Mainboard firmware](Mainboard-Firmware#the-one-thing-worth-waiting-for) has the steps,
+including what to do if the board does not answer.
 
 You will know when an install is happening, because the screen says so - it tells you not to
 switch off, and that Klipper is stopped. It takes a short time. Waiting for it saves you the
-reinstall; it does not save the printer.
+reinstall.
 
 [Mainboard firmware](Mainboard-Firmware) explains this in full, including how to reinstall it.
 

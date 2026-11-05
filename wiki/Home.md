@@ -83,7 +83,7 @@ Curious what happens behind the scenes? Read [Under the hood](Under-the-Hood).
   [Supported hardware](Supported-Hardware).
 - It is not Creality's software and is not supported by Creality. Installing it is your
   decision and your responsibility.
-- This manual describes **NebulaOS 1.0.0**, the first full release.
+- This manual describes **NebulaOS 1.0.1**.
 
 ## How to read this manual
 

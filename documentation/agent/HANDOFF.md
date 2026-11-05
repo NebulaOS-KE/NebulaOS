@@ -35,9 +35,14 @@ ke-dev on 2026-11-05: the stock touchscreen route needs the file with `ota_img` 
 (shipped from 1.0.1, e.g. `NebulaOS-Ender3V3KE-F005_ota_img_V9.1.0.1.img`; the normal `.img`
 is for SSH and online updates), and after a software restart from Creality's system into
 NebulaOS one power cycle (off, 10 s, on) is needed before NebulaOS can install its mainboard
-firmware. Installing-NebulaOS examples now use 1.0.1. Not changed, worth a look: the
-Mainboard-Firmware troubleshooting row "You switched off during a flash -> may need recovery
-from a computer" contradicts that page's own "No computer, no cable" paragraph.
+firmware. Installing-NebulaOS examples now use 1.0.1. Follow-up commit: "describes 1.0.0" -> 1.0.1 (Home,
+What-NebulaOS-Is, Recovery's .ingenic example), and the interrupted-flash contradiction resolved
+from firmware origin/main `4febc2a` / screen `123ef31`: the guard classifies a half-written
+application as SUPPORTED_HW_UNKNOWN_APP and never auto-flashes it (mcu_lifecycle.py), so it does
+NOT retry at every start; the "Klipper can't reach the board" prompt (mcu_panel.cpp) appears
+only at the end of a screen-started install, not after a power cut. Pages now give the safe
+advice (switch on, Reinstall built-in firmware, power-cycle if "not answering", then Recovery)
+and claim neither "fixes itself" nor "needs a computer".
 
 ## Batch 3 (2026-11-05): screenshots for every screen
 
