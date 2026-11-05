@@ -101,7 +101,7 @@ still holds the Creality system, that system will start as though factory reset 
 counter and its print list in place, along with the old Moonraker database of an earlier OpenKE
 or helper-script install, so the *Before NebulaOS* figures on
 [Settings → Printer → Statistics](Screen-Reference#statistics-panel) stay right afterwards
-(firmware `ba98eec`, `cleanup.STATISTICS_KEEP`).
+(firmware `3bd9675`, `cleanup.STATISTICS_KEEP`).
 
 **Keep these two straight.** *Free up space* tidies NebulaOS after itself. *Clean up Creality
 files* reclaims space from the other system, and has a consequence for that system. They stay
