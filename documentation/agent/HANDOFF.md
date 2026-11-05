@@ -28,6 +28,17 @@ Filament -> Printing -> Updating. Sidebar today puts Under the hood and Glossary
 here", Two system slots before Installing (fine), Filament after Printing although Printing needs
 filament loaded, and Slicer-Setup is now first under "Everyday printing".
 
+## Batch 4 (2026-11-05): page order applied, install corrections from the ke-dev run
+
+Commit A applied Q-075 (13-step path). Commit B took the main session's corrections measured on
+ke-dev on 2026-11-05: the stock touchscreen route needs the file with `ota_img` in its name
+(shipped from 1.0.1, e.g. `NebulaOS-Ender3V3KE-F005_ota_img_V9.1.0.1.img`; the normal `.img`
+is for SSH and online updates), and after a software restart from Creality's system into
+NebulaOS one power cycle (off, 10 s, on) is needed before NebulaOS can install its mainboard
+firmware. Installing-NebulaOS examples now use 1.0.1. Not changed, worth a look: the
+Mainboard-Firmware troubleshooting row "You switched off during a flash -> may need recovery
+from a computer" contradicts that page's own "No computer, no cable" paragraph.
+
 ## Batch 3 (2026-11-05): screenshots for every screen
 
 53 Run 23 images embedded (SCREENSHOTS.md lists source, names, fed states and every skip).

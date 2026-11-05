@@ -54,7 +54,9 @@ USB stick and shows where to report the issue
 
 | Symptom | Fix |
 |---|---|
-| Creality's updater stops with `failed to get .../ota_config.in` | The `.img` was renamed. Download it again or give it back its release name, `NebulaOS-Ender3V3KE-1.0.0.img` for 1.0.0. Nothing was installed. |
+| Creality's updater stops with `failed to get .../ota_config.in` | The `.img` was renamed. Download it again or give it back its release name. Nothing was installed. |
+| Creality's touchscreen does not offer the NebulaOS file on the USB stick | Use the file with `ota_img` in its name, not the normal `.img`; do not rename it, and put it at the top level of the stick. See [Installing NebulaOS](Installing-NebulaOS#2b-from-stock-creality-firmware-using-the-touchscreen). |
+| MCU Protocol error, or the mainboard not answering, after installing from stock | Power-cycle once: switch the printer off, wait 10 seconds, switch it on. NebulaOS then installs its mainboard firmware by itself - do not switch off while it runs. See [Installing NebulaOS](Installing-NebulaOS#3-first-start). |
 | Creality's updater ends with `ota update ok`, but the printer still runs the old system | It does not restart by itself. Reboot it: `ssh root@<printer-ip> reboot`. See [Installing NebulaOS](Installing-NebulaOS). |
 | **Online** says the clock is not set | The printer sets its clock from the internet after Wi-Fi connects. Wait a minute and try again. |
 | **Online** says it could not reach the release channel | No internet, or GitHub was not reachable. Check Wi-Fi; try again later. |

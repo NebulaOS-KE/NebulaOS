@@ -94,8 +94,18 @@ installed NebulaOS.
 
 Creality's system installs its own mainboard firmware when it starts from cold, and NebulaOS
 reinstalls its own when you come back - automatically, at boot, whenever it finds a known
-Creality version there. So moving between the two is recoverable in both directions without
-you doing anything, and the power switch is fine.
+Creality version there.
+
+**One case needs you to switch the printer off once.** When the printer restarts *by software*
+from Creality's system into NebulaOS - Creality's updater does this when you reinstall
+NebulaOS from stock - the mainboard does not accept new firmware until its power has been cut.
+NebulaOS's mainboard install then fails and Klipper shows an MCU error. Switch the printer off,
+wait 10 seconds and switch it on: NebulaOS then installs its mainboard firmware by itself. There
+is no software way round this - nothing in the printer can reset the mainboard except its power.
+From 1.0.1 the screen shows a notice telling you to do this.
+
+Apart from that one power cycle, moving between the two is recoverable in both directions, and
+the power switch is fine.
 
 The one thing to avoid is switching the printer off *while* mainboard firmware is being
 installed. The screen tells you when that is happening. See [Safety first](Safety-First).
@@ -107,6 +117,7 @@ installed. The screen tells you when that is happening. See [Safety first](Safet
 | The swap button is greyed out or refuses | A print is running. Stop it first. |
 | The printer does not come up after the switch | [Recovery](Recovery), option 3 or 4. |
 | You are now on stock and want NebulaOS back | Install it again: [Installing NebulaOS](Installing-NebulaOS). |
+| Back on NebulaOS from stock, Klipper shows an MCU error | Switch the printer off, wait 10 seconds, switch it on. See "Important, once you are back" above. |
 | **Swap boot slot** refuses because the other slot holds no system | An install stopped and cleared the other slot. Install again; once it completes, the other slot holds the system you were running. |
 | **Swap boot slot** offers another NebulaOS, not your old system | NebulaOS has been updated since - online or from a USB stick - and that replaced the old system. See above for getting Creality's back. |
 

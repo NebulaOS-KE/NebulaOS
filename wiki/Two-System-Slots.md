@@ -31,9 +31,9 @@ OpenKE if you installed that. The other is empty or holds an old copy.
    └────────────────────┘      └────────────────────┘
 ```
 
-**1. You install NebulaOS.** You run Creality's own updater on the NebulaOS `.img`, from the
-stock touchscreen or over SSH. It writes the slot that is not running - slot 2 - and the
-printer starts it.
+**1. You install NebulaOS.** You run Creality's own updater on a NebulaOS image, from the
+stock touchscreen (the file with `ota_img` in its name) or over SSH (the normal `.img`). It
+writes the slot that is not running - slot 2 - and the printer starts it.
 
 ```
    ┌────────────────────┐      ┌────────────────────┐
@@ -73,8 +73,10 @@ rather keep it:
 
 **Run the update while Creality's system is the one running.** The rule does the rest: the slot
 that is not running is then the NebulaOS one, so that is what gets overwritten and stock stays
-put. In practice this means swapping to stock, installing the NebulaOS `.img` with Creality's
-own updater there, and swapping back.
+put. In practice this means swapping to stock and installing NebulaOS with Creality's own
+updater there - on the touchscreen, the file with `ota_img` in its name. The updater restarts
+into the new NebulaOS; then switch the printer off and on once, as
+[Installing NebulaOS](Installing-NebulaOS#3-first-start) describes for the stock route.
 
 That needs a way to run the updater on the stock side - its touchscreen, or SSH if your stock
 side is OpenKE. **Creality's stock firmware does not normally give you SSH**, and NebulaOS does

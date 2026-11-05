@@ -19,8 +19,17 @@ needs its own version, and **each system puts its own version back automatically
 - NebulaOS checks the board at every boot and reinstalls its own if it finds a known Creality
   version there.
 
-So switching between systems is safe and self-correcting. You do not need to do anything, and
-you cannot get stuck by using the power switch.
+So switching between systems is safe and self-correcting, and you cannot get stuck by using
+the power switch.
+
+**The one time you need to act: after a software restart from Creality's system.** When the
+printer restarts by software from Creality's system into NebulaOS - as Creality's updater does
+when you install NebulaOS from the stock touchscreen - the mainboard does not accept new
+firmware until its power has been cut. NebulaOS's install of its mainboard firmware fails, and
+Klipper shows an MCU error. Switch the printer off, wait 10 seconds, switch it on: NebulaOS then
+installs its firmware by itself. Do not switch off while that runs. There is no software way to
+do this, because nothing in the printer can reset the mainboard except its power. From 1.0.1
+the screen shows a notice telling you to do this.
 
 **Firmware you installed yourself is left alone.** NebulaOS only replaces what it recognises as
 a known Creality version. If you deliberately installed something else, it stays.
@@ -95,6 +104,7 @@ The screen reports the board running the firmware you installed, and Klipper con
 
 | What happens | What to do |
 |---|---|
+| MCU error right after installing NebulaOS from stock Creality firmware | Switch the printer off, wait 10 seconds, switch it on, once. Reinstalling from the screen does not help until the power has been cut. |
 | "Klipper can't reach the board" | Reinstall the built-in firmware, as above. |
 | No files are listed | Check the USB stick is FAT32, or that the upload went to **uploads → mainboard-firmware**. |
 | You switched off during a flash | The board may need recovery from a computer. See [Recovery](Recovery). |

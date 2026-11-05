@@ -18,7 +18,14 @@ boot it checks what the mainboard is running, and if it finds a known Creality v
 reinstalls its own automatically.
 
 So each system puts back the mainboard firmware it needs, by itself, and switching back and
-forth - power switch included - is recoverable without your intervention.
+forth - power switch included - is recoverable.
+
+**One exception, and it is the power switch that fixes it.** When the printer restarts *by
+software* from Creality's system into NebulaOS - installing NebulaOS from the stock touchscreen
+does this - the mainboard does not accept new firmware until its power has been cut, and Klipper
+shows an MCU error. Switch the printer off, wait 10 seconds and switch it on once; NebulaOS then
+installs its mainboard firmware by itself. See [Installing NebulaOS](Installing-NebulaOS),
+section 3.
 
 A detail worth knowing if you ever install mainboard firmware yourself: NebulaOS will **not**
 overwrite firmware it does not recognise. It reinstalls only when it finds a known Creality
