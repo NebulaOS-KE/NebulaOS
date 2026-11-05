@@ -45,7 +45,7 @@ the task pages linked, or are internal screens you do not navigate to directly.
 | `init_panel` | [two screens you do not open](#two-screens-you-do-not-open) | waiting for the printer, "NebulaOS was reset". **Not yet:** the other one-time NebulaOS notices |
 | `led_panel` | detail below | "No LEDs or lights are set up" |
 | `limits_panel` | detail below | page |
-| `logs_panel` | [System](#system) (the **Logs** button) | **Not yet:** the picture needs the printer's log list, which was not captured, and a log's text is read on the printer itself |
+| `logs_panel` | [System](#system) (the **Logs** button) | the log list with a log open (the real screen) |
 | `macros_panel` | detail below | list. **Not yet:** the search keyboard |
 | `main_panel` | Home tab - detail below | idle, printing, "Unavailable while printing" |
 | `mcu_panel` | [Mainboard firmware](Mainboard-Firmware) | page, confirm, busy, done, failed, reinstall question |
@@ -65,7 +65,7 @@ the task pages linked, or are internal screens you do not navigate to directly.
 | `spoolman_panel` | [Filament](Filament) | **Not yet:** the spool list comes from a Spoolman server, which the pictures did not have |
 | `spoolman_server_panel` | [Filament](Filament) | in use, typing, none, save question, remove question |
 | `static_ip_panel` | [Connecting to Wi-Fi](Connecting-To-WiFi) - detail below | page, keypad, invalid value, back-to-DHCP question |
-| `statistics_panel` | detail below | page |
+| `statistics_panel` | detail below | page (the real screen) |
 | `storage_panel` | [Resetting](Resetting) | page, both clean-up questions. **Not yet:** "Deleting..." and the results - they only follow OK |
 | `system_panel` | detail below | page, reboot and shut down questions |
 | `tmc_status_panel` | detail below | page |
@@ -848,6 +848,12 @@ storage. Buttons:
 | **Restart GUI** | Restarts NebulaScreen only. Klipper keeps running. |
 | **Reboot** / **Shut down** | Ask first. After shutting down, switch the printer off at the power switch. |
 
+**Logs** lists the printer's log files on the left; tap one to read it on the right:
+
+![The Logs page: the list of log files, with boot-timing.log open](images/p-logs.png)
+
+*The real screen on a printer running NebulaOS 1.0.1. The open log is `boot-timing.log`.*
+
 ![The Reboot question](images/reboot-confirm.png)
 
 *The real screen app, showing data from a printer running NebulaOS 1.0.0.*
@@ -1031,9 +1037,9 @@ Opens from Settings → Printer → **Statistics**. It shows what this printer h
 whole life — including the time before NebulaOS was installed. Nothing on this page changes the
 printer; it only reads.
 
-![The Statistics page: total print time, the NebulaOS figures, what came before, and the recent prints](images/20a-statistics.png)
+![The Statistics page: total print time, the NebulaOS figures, what came before, and the recent prints](images/p-statistics.png)
 
-*The figures in the picture are the simulator's example data, not a real printer.*
+*The real screen on a printer running NebulaOS 1.0.1.*
 
 ### The left column
 

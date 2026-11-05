@@ -5,9 +5,15 @@ corners the same height first, so the mesh has less to correct. The printer
 measures the corners and tells you exactly what to do, **one corner at a
 time**.
 
-![Bed tramming, before it starts](images/m40-tram-idle.png)
+![Bed tramming, before it starts](images/p-bed-tram-start.png)
 
-*Bed tramming, before it starts.*
+*The real screen on a printer running NebulaOS 1.0.1. Bed tramming, before it starts.*
+
+**Start** asks first:
+
+![The Start question: the printer will home and measure the four bed corners](images/p-bed-tram-start-confirm.png)
+
+*The real screen on a printer running NebulaOS 1.0.1.*
 
 ![The printer tells you which corner to adjust, and by how much](images/m42-tram-adjust-rigid.png)
 

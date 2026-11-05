@@ -187,7 +187,17 @@ Deliberately not used: `L61-image.png` (0.9.9 test build in slot A), `not-for-wi
 1.0.1), `L01-home` / `L02-print-files` (real+ gaps; the existing `m01`/`m09` are better),
 `L41-mcu` and `L60-updates` (the real-display `p-` grabs replace them), `L51-camera` (`41-camera`
 already in use). Still missing: first-boot screen (Tim deferred), boot logo panel, Spoolman,
-TMC tune, the Logs page.
+TMC tune.
+
+## 1.0.1 real-display grabs (2026-11-05)
+
+Source: `_scratch/run23/printer-101/` (main session; ke-dev on 1.0.1, firmware `2074c34`, screen
+`fd47cb6`; checked by the main session for private data). Copied as `p-logs.png` (Screen-Reference
+System, closes the Logs "Not yet"), `p-statistics.png` (replaces the example-data `20a-statistics`
+in the Statistics panel; 20 prints = 7 done + 9 cancelled + 4 failed), `p-bed-tram-start.png`
+(replaces the simulator `m40-tram-idle` on Bed-Tramming) and `p-bed-tram-start-confirm.png`.
+Captioned "the real screen on a printer running NebulaOS 1.0.1". `20a-statistics.png` and
+`m40-tram-idle.png` stay in `images/` but are no longer embedded.
 
 ## Run 23 rounds 1-3 embedded (2026-11-05, second batch)
 
