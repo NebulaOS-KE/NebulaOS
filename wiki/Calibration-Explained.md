@@ -167,7 +167,7 @@ So the accelerometer you would use on stock is the accelerometer you use here.
 Two values are tuned for this printer rather than left at Klipper's defaults: the test runs to
 80 Hz at 50 mm/s² per Hz, because this board's dual-core MIPS SoC produced *"Timer too close"*
 shutdowns near 80 Hz at a higher rate. The fitted results sit well below that ceiling
-(`machine.cfg`, firmware `ba98eec`).
+(`machine.cfg`, firmware `3bd9675`).
 
 **On the screen:** Tune → Calibration → **5 Input Shaper** (the NebulaOS workflow
 `NEBULAOS_INPUT_SHAPER_CALIBRATE`). Have the accelerometer ready. Everything happens on this page, with

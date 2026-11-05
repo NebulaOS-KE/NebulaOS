@@ -71,7 +71,7 @@ is recognised as the end of a long hop rather than a new layer.
 pictures per layer.
 
 *From the NebulaOS image: `/etc/nebulaos/klipper/camera.cfg` (`_NEBULAOS_TIMELAPSE`), started and
-stopped by `START_PRINT`, `END_PRINT` and `CANCEL_PRINT` in `print.cfg`, firmware `ba98eec`.*
+stopped by `START_PRINT`, `END_PRINT` and `CANCEL_PRINT` in `print.cfg`, firmware `3bd9675`.*
 
 ## A power cut does not cost you the video
 
@@ -130,7 +130,7 @@ Macros you can run from the console: `GET_TIMELAPSE_SETUP` prints the current se
 `HYPERLAPSE ACTION=START [CYCLE=<seconds>]` / `HYPERLAPSE ACTION=STOP` drives the other mode by
 hand (the cycle defaults to 30 seconds).
 
-*From firmware `ba98eec`: `manifests/dependencies.conf` (upstream pinned at `c7fff11`),
+*From firmware `3bd9675`: `manifests/dependencies.conf` (upstream pinned at `c7fff11`),
 `/usr/libexec/nebulaos-seed-timelapse`, `etc/nebulaos/moonraker/nebulaos.conf`
 (`[timelapse]`), and `etc/nebulaos/klipper/camera.cfg`.*
 
