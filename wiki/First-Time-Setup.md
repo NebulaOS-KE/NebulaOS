@@ -86,11 +86,13 @@ descriptions.
 
 ### 5. Your first print
 
-1. Upload a G-code file in Mainsail, or put it on a USB stick and use the printer's file
+1. Set up your slicer once: its start and end G-code must call NebulaOS's `START_PRINT` and
+   `END_PRINT`. Two lines - [Setting up your slicer](Slicer-Setup).
+2. Upload a G-code file in Mainsail, or put it on a USB stick and use the printer's file
    browser.
-2. Load filament - see [Filament](Filament).
-3. Start the print - see [Printing](Printing).
-4. Watch the first layer. While it prints, **Tune → Z Offset** or **Fine Tune** adjusts the
+3. Load filament - see [Filament](Filament).
+4. Start the print - see [Printing](Printing).
+5. Watch the first layer. While it prints, **Tune → Z Offset** or **Fine Tune** adjusts the
    nozzle height live. This is normal and expected: the first layer is tuned by watching it,
    not by calculating it.
 
@@ -133,6 +135,8 @@ clean NebulaOS reset, and the boot slot swap puts your old firmware back. See
 
 ## Next
 
+- **Next step:** [Setting up your slicer](Slicer-Setup), if you have not done it yet - then
+  [Printing](Printing)
 - [Printing](Printing) - everyday use
 - [Screen reference](Screen-Reference) - what every button does
 - [Updating NebulaOS](Updating-NebulaOS) - staying current

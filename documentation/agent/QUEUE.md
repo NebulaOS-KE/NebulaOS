@@ -345,3 +345,16 @@ strongest: the suite already passes and 21 modules are already test-verified.
       `UNDER-THE-HOOD-CHANGES.md`. One discrepancy left open there: the source guarantees
       Klipper's checkout is never `-dirty`, but a `-dirty` was reported - needs one look at a
       real `klippy.log`.
+
+## From the foreground session (2026-11-05, inbox batch)
+
+Done on `docs/agent` this batch: OpenKE SSH section (Tim's correction), `Slicer-Setup.md` (new),
+stopped-install wording, Under-the-Hood `-dirty`, 17 screenshots embedded, next-step links.
+
+- **Q-074 (next): API example responses into the firmware reference.** From
+  `_scratch/run23/api-snapshot/redacted/` only (regenerated after an IP-replacement bug - re-read),
+  labelled "measured on a printer running 1.0.0". Lives on `docs/firmware`, whose worktree is not
+  recreated; deferred because this batch was limited to pushing `docs/agent`.
+- **Q-075: storyline page order** - proposal in HANDOFF.md, waiting for Tim. Do not move pages
+  until he decides.
+- **Q-076: re-point `ba98eec` references** once the main session names the final 1.0.0 sha.

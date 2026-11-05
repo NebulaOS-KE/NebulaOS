@@ -322,7 +322,9 @@ Six buttons in total: **Fine Tune**, **Objects**, **Pause** (becomes **Resume** 
 
 ### Exclude Object screen
 
-*No current screenshot of this screen yet - the simulator's capture tour does not reach it. Tracked in the screenshot inventory.*
+![The Exclude Object screen with three objects: one printing, one excluded](images/r-exclude-object.png)
+
+*The real screen app. The three objects are made up for the picture; a real print shows its own.*
 
 Opens from the print status screen's **Objects** button — only useful for gcode files sliced with
 object labels (the same "Label Objects" slicer setting adaptive meshing relies on). Shows each object as a shape you
@@ -688,6 +690,11 @@ Shows the current **Wi-Fi** network, **Address**, printer **Name** (with **Chang
 **Mainsail**, **Moonraker** and **Spoolman** addresses (Spoolman says "not configured" when Moonraker
 has no Spoolman). Buttons:
 
+![The Connections page](images/r-connections.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0. Addresses are examples.*
+
+
 - **Wi-Fi networks** — see [Wi-Fi panel](#wi-fi-panel).
 - **Printers** — see [Printers panel](#printers-panel).
 - **Spoolman** — the Spoolman server the printer uses. On the right, **In use** shows the current
@@ -702,6 +709,10 @@ Invalid names are flagged while you type; saving asks to confirm first.
 
 ### Display
 
+![The Display page](images/r-display.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+
 | Setting | What it does |
 |---|---|
 | **Brightness** | Backlight level. The levels come from NebulaOS. |
@@ -712,6 +723,10 @@ Invalid names are flagged while you type; saving asks to confirm first.
 | **Camera** | Creality Nebula Camera settings: night mode, anti-flicker, white balance, exposure, picture sliders, **Defaults**, **Restart camera**. See [Camera](Camera). |
 
 ### Printer
+
+![The Printer settings page](images/r-printer.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
 
 | Setting | What it does |
 |---|---|
@@ -728,6 +743,10 @@ Invalid names are flagged while you type; saving asks to confirm first.
 An info block with the NebulaScreen version, the NebulaOS build, boot slot, kernel, host name and
 storage. Buttons:
 
+![The System page: version, build, boot slot, kernel, host name and storage](images/r-system.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+
 | Button | What it does |
 |---|---|
 | **Report a problem** | Three steps: set the **Log level** (Info / Warning / Debug; Debug switches back to Info after 24 hours), **Save logs to USB**, and report on GitHub (QR code and address on screen). |
@@ -743,6 +762,11 @@ with version and state. **Check now** refreshes the list, **Update all** install
 update, and each row has its own **Update** button. Klipper stops while Klipper or the extensions
 update.
 
+![The Updates page on a printer](images/p-updates.png)
+
+*The printer's own display, running NebulaOS 1.0.0.*
+
+
 **System image** installs a NebulaOS (or Creality) `.img` from a USB stick or from
 `config/uploads/system-image` into the boot slot that is not running, then restarts into it.
 **Online** asks GitHub for a newer NebulaOS release and downloads it (checked against the
@@ -751,6 +775,10 @@ image, the new slot gets a trial start: if Klipper and the screen do not come up
 back to the previous slot. See [Updating NebulaOS](Updating-NebulaOS).
 
 ### Reset
+
+![The Reset page with its four tiles](images/r-reset.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
 
 See [Resetting](Resetting).
 
@@ -773,6 +801,10 @@ asked, so the same box can appear with entirely different wording and choices. C
 filament-change macro uses it, which is why the
 [filament runout dialog](#filament-runout-dialog) below deliberately stays out of its way.
 
+![M600's filament-change question box](images/r-prompt-m600.png)
+
+*The real screen app, showing the text of NebulaOS's `M600` macro. The title scrolls when it is too long for the box, so it was caught mid-scroll.*
+
 *From `src/init_panel.cpp` and `src/prompt_panel.cpp` at screen `36490ed`.*
 
 ---
@@ -781,6 +813,10 @@ filament-change macro uses it, which is why the
 
 Not a page you open - it appears by itself when the filament sensor reports that filament has
 run out during a print.
+
+![The filament runout dialog over the Home tab](images/r-filament-runout.png)
+
+*The real screen app. The runout was simulated for the picture.*
 
 | Button | What it does |
 |---|---|
@@ -935,6 +971,10 @@ The password field has an eye button to show or hide what you type.
 
 Reached by tapping the connected network's row in the Wi-Fi panel.
 
+![The Network Details panel](images/r-network-detail.png)
+
+*The real screen app, showing data from a printer. Signal shows `-` here only because the picture was made without a Wi-Fi scan.*
+
 An info card (**Signal**, **Security**, **IP address**) plus two buttons:
 
 - **Configure Static IP** — opens the [Static IP panel](#static-ip-panel).
@@ -946,6 +986,10 @@ An info card (**Signal**, **Security**, **IP address**) plus two buttons:
 
 Reached from Network Details → **Configure Static IP**. Titled **"Static IP (all Wi-Fi networks)"**:
 the setting is global for the Wi-Fi interface, not per network.
+
+![The Static IP panel with a static address set](images/r-static-ip.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0. Addresses are examples.*
 
 **DHCP** / **Manual** switches the view. **Manual** has four address rows — **IP**, **Netmask**,
 **Gateway**, **DNS** — each as four octet boxes; a value outside 0–255 is flagged red at once.
@@ -961,7 +1005,9 @@ when it does not work. This can take a couple of minutes.
 
 Opens from Settings → Connections → **Printers**. Manages Moonraker connections.
 
-*No current screenshot of this screen yet - the simulator's capture tour does not reach it. Tracked in the screenshot inventory.*
+![The Printers panel with the one built-in entry](images/r-printer-select.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
 
 Each configured printer is a card with its name, IP and port, plus:
 

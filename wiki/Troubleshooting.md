@@ -81,6 +81,11 @@ USB stick and shows where to report the issue
 
 - Screen log: `/opt/printer_data/logs/nebulascreen.log` (rotates at 10 MB, keeps 3 old files). It is in
   Mainsail's log list too.
+
+![The Report a problem page: log level, QR code and Save logs to USB](images/r-report.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+
 - Raise the detail: **Settings → System → Report a problem → Log level → Debug**. Debug switches back
   to Info by itself after 24 hours.
 - **Settings → System → Logs** shows logs on the screen; **Save logs to USB** (in Report a problem)

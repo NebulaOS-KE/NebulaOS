@@ -17,12 +17,16 @@ first time it appears, and [Words you will see](Glossary) collects them all.
 3. **[First-time setup](First-Time-Setup)** - Wi-Fi, finding the printer on your network,
    and your first print.
 
+Then, before that first print: the [Calibration guide](Calibration-Guide) and
+[Setting up your slicer](Slicer-Setup) - two lines of start and end G-code.
+
 ## Already running NebulaOS?
 
 | What you want | Where to go |
 |---|---|
 | Learn what a button on the screen does | [Screen reference](Screen-Reference) |
 | Get the first layer right | [Calibration guide](Calibration-Guide) |
+| Set up the slicer's start and end G-code | [Setting up your slicer](Slicer-Setup) |
 | Start, pause or cancel a print | [Printing](Printing) |
 | Load or change filament | [Filament](Filament) |
 | Watch the print from your phone | [Camera](Camera) |

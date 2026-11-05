@@ -283,3 +283,8 @@ be harmful — then set it back to a safe default.
 **Reset commands (rarely needed):** skew → `SET_SKEW CLEAR=1`; active mesh → `BED_MESH_CLEAR`;
 disable a shaper axis → set `shaper_freq_x: 0` (or `_y`) in config. For everything else, just
 recalibrate — it overwrites.
+
+## Next step
+
+[Setting up your slicer](Slicer-Setup) - the two lines of start and end G-code your slicer
+needs, then [Printing](Printing).

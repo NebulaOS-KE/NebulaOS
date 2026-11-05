@@ -240,3 +240,9 @@ unverified rather than becoming *observed failing*.
 Caught by the main session on review, not here. The tell was available: I knew the report came
 from an online update and wrote "someone running it" about a different route in the next
 clause.
+
+## 2026-11-05 - inbox batch after the power cut
+
+OpenKE SSH section shortened (Tim), new Slicer-Setup page, stopped-install wording on three pages,
+Under-the-Hood `-dirty` from upstream klippy.py `58bd67db3`, 17 screenshots embedded, next-step
+links along the new-owner path. Link checker: 34 pages, no broken links or missing images.

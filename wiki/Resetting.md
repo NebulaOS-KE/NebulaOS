@@ -18,6 +18,10 @@ blocked while a print is running.
 
 ## The reset options
 
+![The Reset page](images/r-reset.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+
 | Button | What it does | What it erases |
 |---|---|---|
 | **Reset GUI settings** | Replaces the screen's settings file with the image's default copy, then restarts the screen. Klipper keeps running. | Theme, sleep timeout, which sensors are shown - screen settings only |
@@ -63,10 +67,18 @@ not do what you wanted.
 
 ### Settings → System → Storage → Free up space
 
+![The Storage page: the space breakdown and the two buttons](images/r-storage.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+
 Removes **NebulaOS's own leftovers**: old logs, old update backups, unfinished downloads,
 uploaded system images and the download cache.
 
 It shows you what it would free, grouped by kind, before removing anything.
+
+![The Free up space confirmation](images/r-storage-free-up-space.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
 
 **Your print files, settings and calibration are never touched.** Neither is Creality's data.
 
@@ -77,6 +89,10 @@ says so.
 
 Removes **the Creality system's data** from the data drive, and can also delete Creality's
 timelapse videos. It shows what it would free first.
+
+![The Clean up Creality files confirmation](images/r-storage-clean-creality.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
 
 NebulaOS, your print files and your settings are not affected. But note: if the other slot
 still holds the Creality system, that system will start as though factory reset afterwards.

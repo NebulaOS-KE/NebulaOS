@@ -1,5 +1,7 @@
 # Adaptive meshing and purge line
 
+*Setting up a slicer for the first time? The short version is [Setting up your slicer](Slicer-Setup).*
+
 NebulaOS prepares the bed for each print in its `START_PRINT` macro:
 
 - **Adaptive bed mesh** — probes only the area the print covers instead of the whole bed, using

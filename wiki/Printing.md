@@ -8,7 +8,8 @@ Start a print, watch it, adjust it while it runs, and stop it safely.
 
 - A calibrated printer - [First-time setup](First-Time-Setup).
 - Filament loaded - [Filament](Filament).
-- A sliced `.gcode` file.
+- A sliced `.gcode` file, from a slicer set up for NebulaOS -
+  [Setting up your slicer](Slicer-Setup).
 
 ## Before you begin
 
@@ -118,6 +119,10 @@ has failed.
 
 Cancelling the last remaining object asks whether you meant to cancel the whole print.
 
+![The Exclude Object screen](images/r-exclude-object.png)
+
+*Green is printing now, red is excluded. The objects here are made up for the picture.*
+
 ## When the print finishes
 
 The printer stops heating and the status screen shows the print as complete. Let the bed cool
@@ -150,6 +155,11 @@ and thumbnails, is Mainsail's **History** page
 - **Cancel** ends the print; the file stays, so you can start again.
 - **Stop** requires a power-cycle or `FIRMWARE_RESTART`.
 - A power cut may be recoverable - [Power-loss recovery](Power-Loss-Recovery).
+
+## Next step
+
+[Filament](Filament) for loading and colour changes, and
+[Updating NebulaOS](Updating-NebulaOS) to stay current.
 
 ## Related
 

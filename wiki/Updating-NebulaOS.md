@@ -81,6 +81,10 @@ component's version and state.
 - **Update all** installs every available update.
 - Each row has its own **Update** button.
 
+![The Updates page on a printer](images/p-updates.png)
+
+*The printer's own display, running NebulaOS 1.0.0.*
+
 While a check or an update is running the buttons are greyed out and a line of text says what
 is happening. Klipper stops while Klipper or the NebulaOS extensions update - that is expected.
 The same list appears in Mainsail under **Machine → Update Manager**.
@@ -111,6 +115,7 @@ Worth knowing how these track upstream:
 | Updates are refused | The printer is printing, heating or calibrating. Wait and try again. |
 | **Online** fails right after a first start | The clock is not set yet. Wait a minute. |
 | The download stops partway | Try again - an incomplete download is discarded, never installed. |
+| The install stops with **Stopped:** and a reason (for example, a print started) | Nothing changed on the system you are running. Wait until the printer is free and install again. |
 | A downloaded file will not install | Its size or checksum did not match, so it was rejected. Download it again. |
 | The new system starts, then goes back to the old one | The automatic trial decided it had not come up properly. See [Recovery](Recovery). |
 | The screen is blank after an update | Wait five minutes for the automatic fallback before doing anything. Then [Recovery](Recovery). |
@@ -123,6 +128,12 @@ Worth knowing how these track upstream:
   whatever is in it - the previous NebulaOS once you have updated at least once, your old
   system only if you have not.
 - A failed system update undoes itself automatically.
+- **If an install stops, nothing changed on the system you are running. Just install again.**
+  It can stop on its own if the printer becomes busy - a print starts, for example - before it
+  switches over.
+- **Until an install completes, you cannot switch back to the system that was in the other
+  slot.** The install was already writing that slot when it stopped, so it is cleared rather
+  than left half-written.
 - App updates are managed by Moonraker's update manager and can be re-run from the same list.
 
 ## Freeing up space afterwards

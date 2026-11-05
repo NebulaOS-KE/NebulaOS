@@ -44,6 +44,11 @@ Creality. The point above is then no longer true for your printer.
 with what each one holds and which is running, so the slot about to be written is named on
 screen rather than left for you to work out.
 
+**A stopped install counts too.** If an install stops before it finishes (the printer became
+busy, for example), nothing changed on the system you are running - just install again. But
+the other slot was already being written, so it is cleared: **until an install completes, you
+cannot switch back to the system that was in the other slot.**
+
 ### Getting Creality's system back afterwards
 
 Download Creality's official firmware image for the Ender-3 V3 KE and install it the same way
@@ -90,6 +95,7 @@ installed. The screen tells you when that is happening. See [Safety first](Safet
 | The swap button is greyed out or refuses | A print is running. Stop it first. |
 | The printer does not come up after the switch | [Recovery](Recovery), option 3 or 4. |
 | You are now on stock and want NebulaOS back | Install it again: [Installing NebulaOS](Installing-NebulaOS). |
+| **Swap boot slot** refuses because the other slot holds no system | An install stopped and cleared the other slot. Install again; once it completes, the other slot holds the system you were running. |
 | **Swap boot slot** offers another NebulaOS, not your old system | NebulaOS has been updated since - online or from a USB stick - and that replaced the old system. See above for getting Creality's back. |
 
 ## Coming back to NebulaOS later

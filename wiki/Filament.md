@@ -65,7 +65,14 @@ does not eject the whole length.
 
 ## Changing colour
 
-Unload, then load. Expect to waste some filament - the new colour has to push the old one out
+Unload, then load. A print that asks for a colour change (`M600`) shows this box and walks you
+through the same steps:
+
+![M600's filament-change box](images/r-prompt-m600.png)
+
+*The real screen app, showing the text of NebulaOS's `M600` macro (the title scrolls).*
+
+Expect to waste some filament - the new colour has to push the old one out
 of the nozzle completely, which is exactly why you wait for the extrusion to run clean before
 tapping **Cooldown**.
 
@@ -92,6 +99,10 @@ If your printer has a filament sensor configured, the print pauses when filament
 rather than carrying on printing nothing.
 
 To continue: load the new filament as above, then **Resume** on the print status screen.
+
+![The filament runout dialog](images/r-filament-runout.png)
+
+*The screen's own runout dialog: **Load**, **Continue** or **Cancel**. Details in the [Screen reference](Screen-Reference#filament-runout-dialog).*
 
 ## Spoolman
 

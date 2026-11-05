@@ -22,7 +22,7 @@ NebulaOS, and your old system is still there in the other slot in case you want 
 
   Download the `.img` and, if you want to check it, the `.img.sha256`.
 - **If you are coming from stock Creality firmware:** a USB stick formatted as FAT32.
-- **If you are coming from OpenKE:** a computer that can use SSH, and your printer's root
+- **If you are coming from OpenKE:** your usual SFTP and SSH tools, and OpenKE's root
   password.
 - About 15 minutes, and a printer you do not need to use during them.
 
@@ -53,39 +53,27 @@ If you are not sure, you are almost certainly on stock Creality firmware: sectio
 
 ## 2a. From OpenKE, over SSH
 
-Replace `<printer-ip>` with your printer's address. The examples use `1.0.0`; if you
-downloaded a different version, use its number instead.
+You need the SFTP and SSH tools you already use with OpenKE - for example WinSCP, FileZilla or
+`scp` for copying, and PuTTY or a terminal for the shell. Log in as `root` with **OpenKE's**
+password (the system running on the printer now, not NebulaOS's). The examples use `1.0.0`;
+if you downloaded a different version, use its number.
 
-1. Copy the image to the printer:
-
-   ```
-   scp NebulaOS-Ender3V3KE-1.0.0.img root@<printer-ip>:/usr/data/
-   ```
-
-   It will ask for your printer's root password - the password of the system running on it
-   **now** (OpenKE), not NebulaOS's. The file is well over 100 MB, so this takes a minute or
-   two.
-
-2. Start the installation:
+1. Copy `NebulaOS-Ender3V3KE-1.0.0.img` to `/usr/data/` on the printer. Do not rename it.
+2. In an SSH session on the printer, run:
 
    ```
-   ssh root@<printer-ip> /etc/ota_bin/local_ota_update.sh /usr/data/NebulaOS-Ender3V3KE-1.0.0.img
+   /etc/ota_bin/local_ota_update.sh /usr/data/NebulaOS-Ender3V3KE-1.0.0.img
    ```
 
-   The updater unpacks the file, checks every part, then writes the kernel, the system and the
-   power-on logo, printing percentages as it goes. It finishes with `ota update ok`.
-
-   **One normal-looking error:** a line reading `sh: 1.1.0.15: bad number` is harmless. It
-   comes from the updater's own version check and stops nothing. Keep going.
-
-3. Restart the printer with a soft reboot:
+   Wait for `ota update ok`. A line `sh: 1.1.0.15: bad number` on the way is harmless - it
+   comes from the updater's own version check and stops nothing.
+3. Then, in the same session:
 
    ```
-   ssh root@<printer-ip> reboot
+   reboot
    ```
 
-   The updater does not restart the printer by itself, so this step is required. A soft reboot
-   is the tidy way to do it: it lets the system shut down cleanly rather than being cut off.
+   The updater does not restart the printer by itself, so this step is required.
 
 Now go to section 3.
 
@@ -117,10 +105,11 @@ When it comes up:
    ![The Wi-Fi networks panel](images/03-wifi.png)
 2. Calibrate the printer once before printing - the calibrations from your old system do not
    carry over. [Calibration guide](Calibration-Guide).
-3. If you used SSH, delete the copied image to free the space it used:
+3. If you came from OpenKE, delete the copied image to free the space it used - in an SSH
+   session on the printer:
 
    ```
-   ssh root@<printer-ip> rm /usr/data/NebulaOS-Ender3V3KE-1.0.0.img
+   rm /usr/data/NebulaOS-Ender3V3KE-1.0.0.img
    ```
 
 Mainsail is now at `http://<printer-ip>` in a web browser, or
@@ -184,3 +173,8 @@ either direction.
 
 Once NebulaOS is running, it updates itself from the screen - no USB stick and no SSH. See
 [Updating NebulaOS](Updating-NebulaOS).
+
+## Next step
+
+[First-time setup](First-Time-Setup) - Wi-Fi, Mainsail, calibration, your slicer and your first
+print, in that order.

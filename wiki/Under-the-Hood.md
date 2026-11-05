@@ -128,6 +128,11 @@ Klipper's `extras/` directory and listed in that checkout's own private ignore l
 checkouts stay content-pristine, which is exactly what lets Moonraker's update manager keep
 treating Klipper as an untouched repository.
 
+**If you see `-dirty` after Klipper's version** (in `klippy.log`, for example): Klipper's files
+are not modified. Klipper itself adds `-dirty` to its version whenever extra modules are present
+in its extras folder, which is where NebulaOS's extensions are linked. Its log lists them as
+*Untracked files*; a real change to Klipper would appear as *Modified files* instead.
+
 Those extensions provide automatic Z-offset calibration, load-cell probing, the guided
 calibration workflows, stepper-driver tuning and power-loss recovery.
 

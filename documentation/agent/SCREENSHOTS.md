@@ -170,3 +170,21 @@ Two further things to know before attempting it:
    you will "discover" changes that did not happen.
 
 Building the simulator in this agent's own worktree is permitted. Firmware builds are not.
+
+## Run 23 captures embedded (2026-11-05)
+
+Source: `_scratch/run23/wiki-shots/` (main session). 17 files copied into `wiki/images/`:
+
+- `p-*.png` - exact framebuffer grabs from ke-dev's own display (1.0.0 `ba98eec`, screen
+  `36490ed`, hardware profile `screen-grab`): `p-updates.png` (from `printer/updates.png`),
+  `p-mcu-firmware.png` (from `printer/mcu-firmware.png`). Captioned "the printer's own display".
+- `r-*.png` - the real NebulaScreen `123ef31` as the simulator, fed only from ke-dev's redacted
+  API snapshot (MANIFEST.md there). Captioned "the real screen app, showing data from a printer".
+  `r-exclude-object`, `r-prompt-m600`, `r-filament-runout` are synthetic states and say so.
+
+Deliberately not used: `L61-image.png` (0.9.9 test build in slot A), `not-for-wiki/L34-logs.png`
+(false "No log files found"), `L42-statistics.png` (shows the 16-vs-20 count bug tracked for
+1.0.1), `L01-home` / `L02-print-files` (real+ gaps; the existing `m01`/`m09` are better),
+`L41-mcu` and `L60-updates` (the real-display `p-` grabs replace them), `L51-camera` (`41-camera`
+already in use). Still missing: first-boot screen (Tim deferred), boot logo panel, Spoolman,
+TMC tune, the Logs page.

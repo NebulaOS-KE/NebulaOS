@@ -30,6 +30,7 @@
 - [Square parts (skew)](Skew-Correction)
 
 **Everyday printing**
+- [Setting up your slicer](Slicer-Setup)
 - [Printing](Printing)
 - [Filament](Filament)
 

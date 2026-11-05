@@ -55,8 +55,9 @@ No computer, no cable, no disassembly.
 To provide a file, put it either on a USB stick, or upload it in Mainsail to **Machine →
 config → uploads → mainboard-firmware**. The screen lists what it finds.
 
-*No screenshot yet: the MCU firmware page is not reached by the simulator's capture tour. This
-one needs a photograph of a real printer.*
+![The MCU firmware page on a printer](images/p-mcu-firmware.png)
+
+*The printer's own display, running NebulaOS 1.0.0. The* Last install *line shows that printer's own history.*
 
 ## Step-by-step: reinstalling the built-in firmware
 

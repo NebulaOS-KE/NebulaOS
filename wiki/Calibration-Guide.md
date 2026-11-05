@@ -192,3 +192,9 @@ happens:
 
 Wait until the print or the calibration ends, or set the heaters to 0, then tap again. Calibration
 pages do the same on their own: while a print runs, their **Run**/**Start** buttons are not offered.
+
+## Next step
+
+**Set up your slicer before the first print.** Its start and end G-code must call NebulaOS's
+`START_PRINT` and `END_PRINT`, or the print skips the mesh and purge line that this calibration
+prepared for: [Setting up your slicer](Slicer-Setup). Then [Printing](Printing).

@@ -61,6 +61,11 @@ you take the first update rather than after.
 **You can see it coming.** *Settings → Updates → System image* lists both slots with what each
 one holds and which is running, before you confirm.
 
+**If an install stops, nothing changed on the system you are running. Just install again.**
+An install can stop by itself - for example when a print starts while it is writing. The
+other slot was already being written by then, so it is cleared: **until an install completes,
+you cannot switch back to the system that was in the other slot.**
+
 ## If you want to keep Creality's system
 
 Nothing stops you taking NebulaOS updates and losing stock; most people will. If you would
@@ -137,6 +142,10 @@ is not replaced, so it does not need restoring.
 
 The one thing that does erase settings is a
 [clean NebulaOS reset](Resetting), and it says so before it runs.
+
+## Next step
+
+New to NebulaOS? [Installing NebulaOS](Installing-NebulaOS).
 
 ## Related
 

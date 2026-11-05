@@ -95,6 +95,10 @@ You need four values from your router: **IP**, **Netmask**, **Gateway** and **DN
 entered as four boxes, and a number outside 0-255 turns red immediately. **Revert to DHCP**
 appears once a static address is set.
 
+![The Static IP panel](images/r-static-ip.png)
+
+*The real screen app, showing data from a printer running NebulaOS 1.0.0. Addresses are examples.*
+
 Unless you have a reason to need a fixed address, DHCP is the simpler choice.
 
 ## Next

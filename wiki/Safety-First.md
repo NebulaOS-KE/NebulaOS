@@ -86,3 +86,8 @@ with moving parts, and a working smoke alarm in the same room is a sensible prec
 - Anything that can lose data says so before you do it, not after.
 - Every procedure names what you should see at each stage, so you can tell whether a step
   worked rather than guessing.
+
+## Next step
+
+[Two system slots](Two-System-Slots) - what installing does to the system you have now. Then
+[Installing NebulaOS](Installing-NebulaOS).

@@ -101,7 +101,14 @@ register-compatible with that STM32 part and Klipper builds for it through its S
   separate machines and must match byte for byte.
 - **No 5 GHz**, and the closing "this does not make your prints faster" framing.
 
-## One discrepancy to resolve on hardware
+## One discrepancy to resolve on hardware (resolved 2026-11-05)
+
+**Resolved.** Upstream `klippy/klippy.py` at `58bd67db3` (lines 311-327) appends `-dirty` itself
+whenever `git status --porcelain --ignored` lists untracked or ignored `.py` files or symlinks under
+`klippy/extras/` or `klippy/kinematics/`, and logs them as *Untracked files*. The checkout is
+content-pristine; the marker is Klipper's own signal that extra modules are present. The page now
+says so. Measured on ke-dev by the main session (capture `klipper-dirty`, firmware `57d5e70`): no
+*Modified files* line. The text below is the original note, kept for history.
 
 The main session reported that `klippy.log`'s git information shows **`-dirty`**, with the
 extension files linked in as untracked.

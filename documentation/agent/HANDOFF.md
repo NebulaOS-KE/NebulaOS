@@ -13,6 +13,21 @@ coverage dashboard, delivered as `docs/*` branches and pull requests. Not a plan
 outline: the pages themselves. The full assignment is in `MISSION.md`; `RULES.md` holds the
 workspace rules and the owner's decisions and wins wherever the two differ.
 
+## Latest batch (2026-11-05, resumed after a power cut)
+
+Inbox notes processed: FREEZE-OVER, API-SNAPSHOT, CORRECTION-OPENKE-SSH, FLOW-AND-SLICER-MACROS,
+PRINTER-SCREENSHOTS, SIM-SCREENSHOTS-AND-STOPPED-INSTALL. Sources: firmware `e523e8c`, screen
+`123ef31`, extensions `f498796`; Klipper `58bd67db3` for the `-dirty` marker. Wiki changes only on
+`docs/agent`; the main session publishes. Next: Q-074 (API examples, needs the `docs/firmware`
+worktree), Q-075 (Tim's page-order decision), Q-076 (final 1.0.0 sha).
+
+**Proposed new-owner page order (not applied):** What NebulaOS is -> Supported hardware -> Safety
+first -> Two system slots -> Installing -> First-time setup -> Connecting to Wi-Fi -> Opening
+Mainsail -> Calibration guide (walkthrough as the long version) -> Setting up your slicer ->
+Filament -> Printing -> Updating. Sidebar today puts Under the hood and Glossary inside "Start
+here", Two system slots before Installing (fine), Filament after Printing although Printing needs
+filament loaded, and Slicer-Setup is now first under "Everyday printing".
+
 ## The project has reached its Definition of Done
 
 **2026-11-03. Read `FINAL-REPORT.md` first** - it answers the mission's Part 15 condition by
