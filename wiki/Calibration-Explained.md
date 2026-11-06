@@ -240,7 +240,7 @@ after the first layer and motion quality are solid. Tuning these first wastes ti
   retraction problem, not pressure advance. Most slicer profiles already retract in the gcode directly,
   which this app doesn't control. If your slicer's retraction *type* is instead set to "Firmware"
   (`G10`/`G11`), you can adjust retraction length/speed live from **Tune → Retraction** — but check
-  [Retraction](Screen-Reference#retraction) in the screen reference first, since that panel only does
+  [Retraction](Screen-Tune#retraction) in the screen reference first, since that panel only does
   anything for gcode sliced that specific way.
 - **Temperature:** print a temperature tower from your slicer's test model library and pick the layer
   that looks cleanest.

@@ -14,6 +14,11 @@ referenced image file is present. What it cannot prove: that a page says
 anything true, or that a screenshot shows the screen it claims to. Those need
 source verification and a human eye respectively.
 
+Anchors (#fragment) are checked against GitHub's heading slugs. A page that
+contains the marker <!-- moved-page-stub --> is a pointer left at an old name
+so outside links still land; it need not be in the sidebar, and no other page
+may link it.
+
 Exits non-zero if anything is broken, so it can gate a pull request.
 
 Usage:  check_links.py <wiki-dir>
@@ -50,30 +55,69 @@ def check_external(wiki):
     return bad
 
 
+STUB = "<!-- moved-page-stub -->"
+
+
+def slug(heading):
+    """GitHub's heading anchor: lower case, punctuation and emoji dropped,
+    spaces to hyphens (runs are not collapsed)."""
+    h = re.sub(r'[`*_]', '', heading.strip().lower())
+    h = re.sub(r'\[([^\]]*)\]\([^)]*\)', r'\1', h)
+    h = ''.join(c for c in h if c.isalnum() or c in ' -')
+    return h.replace(' ', '-')
+
+
+def anchors(text):
+    out, seen = set(), {}
+    in_code = False
+    for line in text.splitlines():
+        if line.startswith("```"):
+            in_code = not in_code
+            continue
+        m = re.match(r'#{1,6}\s+(.*)', line)
+        if m and not in_code:
+            a = slug(m.group(1))
+            n = seen.get(a, 0)
+            seen[a] = n + 1
+            out.add(a if n == 0 else f"{a}-{n}")
+    return out
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     external = "--external" in sys.argv
     wiki = args[0] if args else "wiki"
     pages = {os.path.basename(f)[:-3] for f in glob.glob(os.path.join(wiki, "*.md"))}
     problems = []
+    texts = {os.path.basename(f)[:-3]: open(f).read()
+             for f in glob.glob(os.path.join(wiki, "*.md"))}
+    stubs = {p for p, t in texts.items() if STUB in t}
+    page_anchors = {p: anchors(t) for p, t in texts.items()}
     for f in sorted(glob.glob(os.path.join(wiki, "*.md"))):
         text = open(f).read()
         name = os.path.basename(f)
+        me = name[:-3]
         for target in IMG.findall(text):
             if target.startswith(("http://", "https://")):
                 continue
             if not os.path.exists(os.path.join(wiki, target)):
                 problems.append((name, "missing image", target))
         for target in LINK.findall(text):
-            if target.startswith(("http://", "https://", "mailto:", "#")):
+            if target.startswith(("http://", "https://", "mailto:")):
                 continue
-            page = target.split("#")[0]
-            if not page:
-                continue
+            page, _, frag = target.partition("#")
             if page.endswith((".png", ".jpg", ".jpeg", ".gif", ".svg")):
                 continue
-            if page not in pages:
+            if page and page not in pages:
                 problems.append((name, "missing page", page))
+                continue
+            dest = page or me
+            if frag and dest in page_anchors and frag not in page_anchors[dest]:
+                problems.append((name, "missing anchor", f"{dest}#{frag}"))
+            # A moved page is only a landing spot for old outside links; the
+            # manual itself must link the new place.
+            if page in stubs and me not in stubs and not me.startswith("_"):
+                problems.append((name, "links a moved-page stub", page))
 
     if not os.path.exists(os.path.join(wiki, "_Sidebar.md")):
         problems.append(("_Sidebar.md", "missing file", "navigation sidebar"))
@@ -82,13 +126,13 @@ def main():
                   in LINK.findall(open(os.path.join(wiki, "_Sidebar.md")).read())
                   if not t.startswith(("http", "mailto:", "#"))}
         for p in sorted(pages):
-            if p not in linked and not p.startswith("_"):
+            if p not in linked and not p.startswith("_") and p not in stubs:
                 problems.append(("_Sidebar.md", "page not in navigation", p))
 
     if external:
         problems += [(u, "external link", code) for u, code in check_external(wiki)]
 
-    print(f"{len(pages)} pages checked in {wiki}/")
+    print(f"{len(pages)} pages checked in {wiki}/ ({len(stubs)} moved-page stubs)")
     if problems:
         for where, kind, what in problems:
             print(f"  {kind:24s} {what}   (in {where})")

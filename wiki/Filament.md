@@ -102,7 +102,7 @@ To continue: load the new filament as above, then **Resume** on the print status
 
 ![The filament runout dialog](images/r-filament-runout.png)
 
-*The screen's own runout dialog: **Load**, **Continue** or **Cancel**. Details in the [Screen reference](Screen-Reference#filament-runout-dialog).*
+*The screen's own runout dialog: **Load**, **Continue** or **Cancel**. Details in the [Screen reference](Screen-Home#filament-runout-dialog).*
 
 ## Spoolman
 

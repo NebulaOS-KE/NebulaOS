@@ -145,7 +145,7 @@ Mainsail.
 
 The job is added to the printer's record. **Settings → Printer → Statistics** shows the last
 four prints with their result and print time, along with the totals for the printer's whole
-life - see [Statistics](Screen-Reference#statistics-panel). The full list, with filament use
+life - see [Statistics](Screen-Printer#statistics-panel). The full list, with filament use
 and thumbnails, is Mainsail's **History** page
 ([Opening Mainsail](Opening-Mainsail)).
 

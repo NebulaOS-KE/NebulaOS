@@ -45,7 +45,7 @@ same way.
 | Record a video of a print | [Timelapse](Timelapse) |
 | Know what an update replaces, and keep Creality | [Two system slots](Two-System-Slots) |
 | Install a newer NebulaOS | [Updating NebulaOS](Updating-NebulaOS) |
-| See what this printer has printed | [Statistics](Screen-Reference#statistics-panel) |
+| See what this printer has printed | [Statistics](Screen-Printer#statistics-panel) |
 | Undo a setting, or start fresh | [Resetting](Resetting) |
 | Something is broken | [Troubleshooting](Troubleshooting) |
 | The printer will not start | [Recovery](Recovery) |

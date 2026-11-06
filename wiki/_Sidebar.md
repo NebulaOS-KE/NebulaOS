@@ -49,8 +49,19 @@ New here? Follow steps 1 to 13 in order.
 - [Troubleshooting](Troubleshooting)
 - [Recovery](Recovery)
 
+**Using NebulaScreen**
+- [Using NebulaScreen](Screen-Reference)
+- [Home and printing](Screen-Home)
+- [Macros and Console](Screen-Macros-Console)
+- [Tune](Screen-Tune)
+- [Settings → Connections](Screen-Connections)
+- [Settings → Display](Screen-Display)
+- [Settings → Printer](Screen-Printer)
+- [Settings → System](Screen-System)
+- [Settings → Updates](Screen-Updates)
+- [Settings → Reset](Screen-Reset)
+
 **Reference**
-- [Screen reference](Screen-Reference)
 - [Under the hood](Under-the-Hood)
 - [Words you will see](Glossary)
 

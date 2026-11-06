@@ -46,7 +46,7 @@ you reconnect to Wi-Fi on the screen and calibrate again -
 [Connecting to Wi-Fi](Connecting-To-WiFi), [Calibration guide](Calibration-Guide).
 
 The prints you made **under NebulaOS** are gone from
-[Statistics](Screen-Reference#statistics-panel), but the *Before NebulaOS* figures come back on
+[Statistics](Screen-Printer#statistics-panel), but the *Before NebulaOS* figures come back on
 their own: they are read again from files that live outside the NebulaOS folder.
 
 ![The clean reset confirmation](images/09-clean-reset-confirm.png)
@@ -121,7 +121,7 @@ still holds the Creality system, that system will start as though factory reset 
 **Your print statistics are kept.** The cleanup deliberately leaves Creality's lifetime print
 counter and its print list in place, along with the old Moonraker database of an earlier OpenKE
 or helper-script install, so the *Before NebulaOS* figures on
-[Settings → Printer → Statistics](Screen-Reference#statistics-panel) stay right afterwards
+[Settings → Printer → Statistics](Screen-Printer#statistics-panel) stay right afterwards
 (firmware `3bd9675`, `cleanup.STATISTICS_KEEP`).
 
 **Keep these two straight.** *Free up space* tidies NebulaOS after itself. *Clean up Creality
