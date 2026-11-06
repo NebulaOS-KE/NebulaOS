@@ -45,8 +45,9 @@ Start.
                                    Verifying
    ```
 
-   The ten steps are: **Load cell check**, **Homing**, **Nozzle clean**, **Heating up** (bed 65 °C,
-   nozzle 150 °C), **Settling**, **Load cell check (hot)**, **Measuring the Z offset**, **Bed
+   The ten steps are: **Load cell check**, **Homing**, **Nozzle clean** (the bed
+   heats to 65 °C and the nozzle to 150 °C first, so this is the longest wait), **Heating up**
+   (checks both temperatures), **Settling**, **Load cell check (hot)**, **Measuring the Z offset**, **Bed
    mesh**, **Saving (Klipper restarts)**, **Verifying**.
 5. During **Saving** the screen says *"Klipper restarts now to save the result. The screen
    reconnects by itself - do not switch the printer off."* Wait for it.

@@ -6,7 +6,9 @@ survives an update or a reset, and how to keep a copy.
 ## The three folders that are yours
 
 Mainsail shows them, and SFTP opens in them ([SSH, SFTP and security](SSH-And-SFTP)). On the
-printer they are under `/opt/printer_data` (stored in `/usr/data/nebulaos/printer_data`).
+printer they are under `/opt/printer_data`. `config/` and `logs/` are stored in
+`/usr/data/nebulaos/printer_data`; `gcodes/` is the print-file folder shared with the other
+system slot (`/usr/data/printer_data/gcodes`), which is why print files survive a clean reset.
 
 | Folder | What is in it |
 |---|---|
@@ -59,7 +61,8 @@ NebulaOS's macros, such as the purge settings in `_KAMP_Settings` - see
 | **Swapping system slots** | Kept (shared data area) | Kept | Kept | Kept |
 | **Free up space** (Settings → System → Storage) | Kept | Kept | Kept | Kept |
 | **Clean NebulaOS reset** (Settings → Reset) | **Erased** | Kept | **Erased** | **Erased** (the *Before NebulaOS* figures come back) |
-| **USB recovery** | **Erased** | **Erased** | **Erased** | **Erased** |
+| **USB recovery: switch the boot slot** ([Recovery 4a](Recovery#4a-just-switch-the-boot-slot-back)) | Kept | Kept | Kept | Kept |
+| **USB recovery: write the whole system again** (`.ingenic`, [Recovery 4b](Recovery#4b-write-the-whole-system-again)) | **Erased** | **Erased** | **Erased** | **Erased** |
 
 An update replaces `config/nebulaos/`, and may make small, one-line migrations in your files when
 an option was renamed. When an update brings different Klipper or extension versions than you
@@ -74,7 +77,9 @@ Creality's data". It is refused while printing or updating. Details: [Resetting]
 
 NebulaOS keeps **automatic copies of your settings** in `config/backups/settings-<date>-<reason>/`:
 `printer.cfg`, `moonraker.conf`, `songs.conf`, `macros/`, the screen settings and the calibration
-files, plus a copy of Moonraker's database. A copy is taken at the first start of every new or
+files. Moonraker's database (Mainsail's settings, history, and also login data and API keys) is
+copied too, but deliberately **not** into `config/`: it goes to the printer's system area, so
+downloading `config/` does not include it. A copy is taken at the first start of every new or
 rolled-back system and whenever settings change; the newest 5 are kept.
 
 **They live on the printer, so a clean reset deletes them too.** Before a reset, or just to be
@@ -84,12 +89,13 @@ safe, download your own copy:
   them.
 - **SFTP:** copy `/opt/printer_data/config/` to your computer.
 
-To restore, upload the files back into `config/` and restart Klipper.
+To restore, upload the files back into `config/` and restart Klipper. If you restored
+`moonraker.conf`, restart the printer instead, so Moonraker reads it too.
 
 *From `usr/share/nebulaos/printer_data-README.txt`, `etc/nebulaos/config-materialize.sh:7-68`,
-`etc/init.d/S04nebulaos-migrate:47-70` and `1227-1238`, `etc/init.d/S01persistent-datastore:142-143`,
+`etc/init.d/S04nebulaos-migrate:47-70` and `1227-1238`, `etc/init.d/S01persistent-datastore:142-143` and `213-217`,
 `usr/libexec/nebulaos/nebulaos-clean-reset:7-17`, `usr/lib/nebulaos/python/nebulaos_osconfig/cleanup.py:277-295`
-and `snapshot.py:1-44`, firmware `dc868e3`.*
+and `snapshot.py:1-44`, `tools/recovery/nebulaos-usb.py:7-14`, firmware `4ee5147`.*
 
 ## Next
 
