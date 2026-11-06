@@ -55,7 +55,7 @@ mark:
 | ▶ | running now |
 | ⚠ | failed |
 
-File names longer than 20 characters are shortened with `...`. For the full list, open
+Each name is shown from its start, on at most two lines, ending in `...` when it is longer. For the full list, open
 [Mainsail](Mainsail-And-Moonraker) and use its **History** page.
 
 ### How the numbers are worked out
@@ -107,7 +107,7 @@ old Moonraker database — live outside the NebulaOS folder and a clean reset do
 | **Recent prints — None yet.** | No print has been recorded under NebulaOS yet. |
 
 Behind the page: `GET /machine/nebulaos/stats` (JSON-RPC `machine.nebulaos.stats`). Screen source
-`src/statistics_panel.cpp` at `123ef31`; the import is `nebulaos-osconfig stats baseline` at
+`src/statistics_panel.cpp` at `fd47cb6`; the import is `nebulaos-osconfig stats baseline` at
 firmware `3bd9675`.
 
 ---

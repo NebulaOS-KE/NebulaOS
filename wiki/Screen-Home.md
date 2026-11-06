@@ -41,7 +41,7 @@ Five icon buttons below the temperatures. Each opens a **floating panel** over t
 
 While a print runs (not while it is paused), **Homing** and **Extrude** answer with a message
 instead of opening; the calibration rows, Bed Mesh's buttons and some System buttons do the same
-(`KUtils::notify_locked` at screen `123ef31`):
+(`KUtils::notify_locked` at screen `fd47cb6`):
 
 ![The Unavailable while printing message over the Home tab](images/unavailable-while-printing.png)
 
@@ -85,7 +85,7 @@ There is no button to home a single axis (X, Y, or Z) by itself — only the two
 
 When something needs the printer homed - the Z offset buttons, or a command Klipper refuses with
 *Must home axis first* - the screen asks to home. **Home** runs `G28`; **Cancel** closes the
-question (`src/utils.cpp`, `src/notification_manager.cpp` at screen `123ef31`):
+question (`src/utils.cpp`, `src/notification_manager.cpp` at screen `fd47cb6`):
 
 ![The Homing required question](images/homing-required.png)
 
@@ -301,7 +301,7 @@ quiet and watches instead. It only steps in if `M600`'s own sequence fails partw
 prompt is up while filament is still missing - so a real failure never leaves you with nothing to
 tap.
 
-*From `src/filament_runout_panel.cpp` at screen `123ef31`.*
+*From `src/filament_runout_panel.cpp` at screen `fd47cb6`.*
 
 ## Spoolman panel
 

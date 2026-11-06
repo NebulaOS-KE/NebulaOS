@@ -46,7 +46,7 @@ discard it.
 *The real screen app. An example state: the power cut and its record were fed in for the
 picture. On the 480x272 screen the end of the text runs on under the Later / Resume buttons.*
 
-*Buttons from `src/power_panel.cpp` (`offer_resume`) at screen `123ef31`.*
+*Buttons from `src/power_panel.cpp` (`offer_resume`) at screen `fd47cb6`.*
 
 ## Expected result
 

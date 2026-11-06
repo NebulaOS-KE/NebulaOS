@@ -91,7 +91,7 @@ filament-change macro uses it, which is why the
 
 *The real screen app, showing the text of NebulaOS's `M600` macro. The title scrolls when it is too long for the box, so it was caught mid-scroll.*
 
-*From `src/init_panel.cpp` and `src/prompt_panel.cpp` at screen `123ef31`.*
+*From `src/init_panel.cpp` and `src/prompt_panel.cpp` at screen `fd47cb6`.*
 
 ## Every panel, and where to find it
 
