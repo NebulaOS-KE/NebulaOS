@@ -25,14 +25,14 @@ Also binding: the workspace's own `AGENTS.md`, `WORKSPACE_RULES.md` and `CLAUDE.
 ## Where things live
 
 - Foreground checkouts (READ ONLY for you; never checkout/reset/stash/commit there):
-  `/home/tim/workspace/NebulaOS/NebulaOS-{firmware,nebulascreen,klipper-extensions,
+  `<workspace>/NebulaOS-{firmware,nebulascreen,klipper-extensions,
   klipper-mcu,kernel}`.
-- Your worktrees: `/home/tim/workspace/NebulaOS/_worktrees/docs/<repo>`, made with
+- Your worktrees: `<workspace>/_worktrees/docs/<repo>`, made with
   `git -C <checkout> fetch origin && git -C <checkout> worktree add
-  /home/tim/workspace/NebulaOS/_worktrees/docs/<repo> -b docs/<topic> origin/<default>`.
+  <workspace>/_worktrees/docs/<repo> -b docs/<topic> origin/<default>`.
   Repositories that are not checked out locally (`NebulaOS`, `nebulaos-packages`,
   `lv_drivers`): `git clone https://github.com/NebulaOS-KE/<repo>.git` into
-  `/home/tim/workspace/NebulaOS/_worktrees/docs/<repo>` and branch there.
+  `<workspace>/_worktrees/docs/<repo>` and branch there.
 - Your state (mission copy, STATUS, COVERAGE, coverage.jsonl, QUEUE, BLOCKERS,
   VERIFICATION, SCREENSHOTS, DECISIONS, HANDOFF): `documentation/agent/` in the central
   `NebulaOS` repo, on branch `docs/agent` in `_worktrees/docs/NebulaOS`. Commit after

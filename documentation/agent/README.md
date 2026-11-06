@@ -27,7 +27,7 @@ rediscovering anything.
 
 ```sh
 python3 documentation/agent/tools/seed_inventory.py \
-        /home/tim/workspace/NebulaOS documentation/agent/coverage.jsonl
+        <workspace> documentation/agent/coverage.jsonl
 python3 documentation/agent/tools/render_dashboard.py \
         documentation/agent/coverage.jsonl documentation/agent/COVERAGE.md
 ```

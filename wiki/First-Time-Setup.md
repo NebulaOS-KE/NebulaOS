@@ -48,7 +48,7 @@ Back on **Settings → Connections**, the **Address** line now shows an address 
 
 ![The Connections page, showing Wi-Fi, address, printer name and service addresses](images/02-connections.png)
 
-*Read the **Address** line here. The printer's name is just above it.*
+*Read the **Address** line here; the printer's name is just below it. The real screen app at screen `fd47cb6`, with its example data.*
 
 The printer also answers to its own name, so you do not have to remember the numbers. NebulaOS
 names a new printer `nebulaos-` followed by four characters from its own hardware, for example

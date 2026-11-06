@@ -207,8 +207,11 @@ tour commits, mock Moonraker on the redacted ke-dev snapshot). 53 files copied i
 `wiki/images/` under descriptive names: the MANIFEST name without its `Lxx-` prefix
 (`L52-boot-logo.png` -> `boot-logo.png`). `boot-logo-delete-confirm.png` is L57a cropped with
 PIL to the dialog border (29,70)-(451,202), which removes the mock's refusal text behind it.
-Every image was looked at for a real SSID, 192.168.0.x, MAC or serial: none (names are the
-snapshot's HomeWiFi stand-ins, addresses 192.168.1.x / 127.0.0.1).
+~~Every image was looked at for a real SSID, 192.168.0.x, MAC or serial: none.~~ **Wrong**: that
+check covered these 53 new files only, not the older images already in `wiki/images/`. Four older
+ones showed the owner's real network (SSID and 192.168.0.x addresses): `02-connections.png`,
+`14-hostname-confirm.png`, `36-spoolman.png`, `37-spoolman-typing.png` - corrected 2026-11-06,
+see "Privacy check" below.
 
 Fed states are captioned "An example state ... fed in for the picture": print-cancel-confirm,
 exclude-object-confirm, unavailable-while-printing, plr-resume-offer, static-ip-invalid,
@@ -231,4 +234,30 @@ No new images. Images moved with their sections: the Screen-Reference sections i
 images into `Printing.md`. `m40-tram-idle.png`, `20a-statistics.png`, `m01`-era duplicates stay
 in `images/` unused. The older `m*` simulator images (screen `36490ed`) were kept where they
 were; they were not re-checked against 1.0.1 one by one.
+
+## Privacy check (2026-11-06)
+
+`02-connections.png` re-captured with `tools/capture_screenshots.sh` at screen `fd47cb6` (worktree
+`_worktrees/docs/screen-sim`): the tour's own example data - HomeWiFi, 192.168.1.98 (DHCP),
+`nebulaos.local`, Spoolman `http://192.168.1.20:7912`. Looked at: no real SSID, address, MAC or
+serial. (The source's example address is .98, not .42; the page text uses .42 as "an address
+like".) `14-hostname-confirm.png`, `36-spoolman.png` and `37-spoolman-typing.png` were referenced
+by no page and are removed.
+
+Then every image whose name suggests network, Wi-Fi, connections, host name, Spoolman, system,
+settings, slots, updates, storage, MCU, logs, statistics, report, display or camera content was
+looked at, as contact sheets of four (52 files): 01-settings, 02-connections, 03-wifi, 04-display,
+05-printer, 06-system, 09-clean-reset-confirm, 10-swap-confirm, 12-hostname, 13-hostname-invalid,
+15-printer, 16-mcu, 19-mcu-done, 21-updates, 22-image, 23-image-confirm-nebulaos,
+24-image-confirm-creality, 29-image-rolled-back, 30-swap-confirm-nebulaos, 34-image-next-power-on,
+38-spoolman-none, 40-display-nebula-camera, 41-camera, image-update-confirmed, init-waiting,
+p-logs, p-mcu-firmware, p-statistics, p-updates, printer-add-keyboard, r-connections, r-display,
+r-network-detail, r-printer, r-printer-select, r-report, r-static-ip, r-storage,
+r-storage-clean-creality, r-storage-free-up-space, r-system, report-save-confirm,
+spoolman-remove-confirm, spoolman-save-confirm, spoolman-server, static-ip-invalid,
+static-ip-keypad, static-ip-revert-confirm, swap-slot-confirm, wifi-forget-confirm,
+wifi-hidden-network, wifi-password. **None shows a real SSID, a 192.168.0.x address, a MAC or the
+printer's serial.** Names seen: HomeWiFi, HomeWiFi2, OtherNetwork, ke-workshop, nebulaos(.local),
+default_printer; addresses 192.168.1.x and 127.0.0.1; build ids and a firmware SHA-256 prefix,
+which are not private.
 

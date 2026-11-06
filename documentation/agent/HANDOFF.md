@@ -477,7 +477,7 @@ and this file.
 
 1. Recreate each worktree from its **existing remote branch**, not from `origin/main`:
    ```sh
-   git -C <checkout> worktree add /home/tim/workspace/NebulaOS/_worktrees/docs/<repo> docs/<topic>
+   git -C <checkout> worktree add <workspace>/_worktrees/docs/<repo> docs/<topic>
    ```
    Use an absolute path - a relative one resolves against `-C`, which once created a worktree
    inside a foreground checkout.
