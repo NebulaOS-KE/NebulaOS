@@ -153,5 +153,5 @@ The one thing that does erase settings is a
 
 - [Installing NebulaOS](Installing-NebulaOS)
 - [Updating NebulaOS](Updating-NebulaOS)
-- [Going back to your old firmware](Going-Back)
+- [Going back to stock](Going-Back)
 - [Recovery](Recovery) - when the printer will not start

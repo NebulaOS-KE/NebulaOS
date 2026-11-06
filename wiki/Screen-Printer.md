@@ -56,7 +56,7 @@ mark:
 | ⚠ | failed |
 
 File names longer than 20 characters are shortened with `...`. For the full list, open
-[Mainsail](Opening-Mainsail) and use its **History** page.
+[Mainsail](Mainsail-And-Moonraker) and use its **History** page.
 
 ### How the numbers are worked out
 
@@ -74,7 +74,7 @@ printer's life. (`combine_stats` in the NebulaOS Moonraker component, firmware `
 Where each figure comes from:
 
 - **Since NebulaOS** is Moonraker's own print history — the same database
-  [Mainsail](Opening-Mainsail)'s History page reads. That is why Mainsail's History lists only
+  [Mainsail](Mainsail-And-Moonraker)'s History page reads. That is why Mainsail's History lists only
   prints made under NebulaOS.
 - **Before NebulaOS** is read once from the printer's data drive and then remembered, in
   `/usr/data/nebulaos/system/stats-baseline.json`. **The reading happens the first time this
@@ -103,7 +103,7 @@ old Moonraker database — live outside the NebulaOS folder and a clean reset do
 |---|---|
 | **Adding up...** | Still waiting for the printer. It is normal for a moment. |
 | **The printer could not read the statistics.** | Moonraker answered with an error. Check that Klipper and Moonraker are running — [Troubleshooting](Troubleshooting). |
-| **No answer from the printer.** | The screen has no Moonraker connection. See [Connecting to Wi-Fi](Connecting-To-WiFi). |
+| **No answer from the printer.** | The screen has no Moonraker connection. See [Connect to Wi-Fi](First-Time-Setup#connect-to-wi-fi). |
 | **Recent prints — None yet.** | No print has been recorded under NebulaOS yet. |
 
 Behind the page: `GET /machine/nebulaos/stats` (JSON-RPC `machine.nebulaos.stats`). Screen source

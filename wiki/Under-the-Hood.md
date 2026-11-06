@@ -1,4 +1,4 @@
-# Under the hood — what makes NebulaOS different?
+# How NebulaOS works
 
 NebulaOS is more than a new touchscreen interface for the **Creality Ender-3 V3 KE**. It is a
 rebuilt Linux operating system, developed specifically for the printer's hardware.
@@ -6,7 +6,21 @@ rebuilt Linux operating system, developed specifically for the printer's hardwar
 A lot of the work happens where you cannot see it: inside the Linux kernel, hardware drivers,
 memory management, and the services that keep Klipper running.
 
-Here is what is different, and why it matters.
+Here is what is different, and why it matters. The two system slots and how updates use them
+have their own page: [Two system slots](Two-System-Slots).
+
+## What is inside the KE
+
+| | |
+|---|---|
+| Processor | Ingenic X2000, a MIPS chip. Not ARM, not x86 |
+| Touchscreen | 480 x 272 pixels, resistive touch |
+| Mainboard | Creality's own, with a separate microcontroller (GD32F303) driving the motors |
+| Storage | Internal eMMC with **two system slots**, plus a shared data area |
+| Network | 2.4 GHz Wi-Fi |
+
+The 480 x 272 screen is small, which is why NebulaScreen's layout is dense - and why every
+screenshot in this manual is that size.
 
 ---
 
@@ -144,7 +158,7 @@ new Klipper against old extensions, or the reverse.
 **Why it matters:** upstream Klipper development stays available, without maintaining a separate
 Klipper fork.
 
-See [Calibration walkthrough](Calibration-Explained) for what these features do day to day.
+See [Calibration explained](Calibration-Explained) for what these features do day to day.
 
 ## Built-in safeguards and recovery
 
@@ -216,6 +230,9 @@ The main components are:
 - [NebulaOS-kernel](https://github.com/NebulaOS-KE/NebulaOS-kernel) — Linux kernel and hardware support
 - [NebulaOS-klipper-extensions](https://github.com/NebulaOS-KE/NebulaOS-klipper-extensions) — printer-specific Klipper functionality
 - [NebulaOS-nebulascreen](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen) — the touchscreen application
+- [NebulaOS-klipper-mcu](https://github.com/NebulaOS-KE/NebulaOS-klipper-mcu) — the mainboard firmware
+
+Builds and developer internals are documented in those repositories, not in this manual.
 
 ## What does all this mean for your prints?
 

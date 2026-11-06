@@ -1,150 +1,88 @@
-# First-time setup
+# 3. First start
 
-## What this guide will help you do
+## What this step does
 
-Take a printer that has just had NebulaOS installed and get it to a good first print. This is
-the overview that links the pieces together in the right order.
-
-Set aside **about an hour** for the calibrations, most of which is waiting rather than working.
+Puts the printer on your Wi-Fi and opens it in your browser. Nothing moves and nothing heats up
+during this.
 
 ## What you need
 
-- A printer running NebulaOS - see [Installing NebulaOS](Installing-NebulaOS).
-- Your Wi-Fi name and password.
-- Filament you intend to print with.
-- A sheet of paper, and a ruler or caliper. A few calibrations ask for these.
-- An empty, clean bed.
+- NebulaOS installed and its screen showing - [2. Install NebulaOS](Installing-NebulaOS). If you
+  came from stock Creality firmware, do the one power cycle first (it is in that step).
+- Your **2.4 GHz** Wi-Fi name and password. If your router publishes separate names for its 2.4 and
+  5 GHz networks, pick the 2.4 GHz one.
+- A computer, tablet or phone on the same network.
 
-## Before you begin
+The first start of NebulaOS takes about a minute. Later starts take about 15 seconds.
 
-Read [Safety first](Safety-First) if you have not. The relevant part here: **several
-calibrations move the printhead and bed without warning you first.** Keep hands and tools
-clear once you start one.
+## Connect to Wi-Fi
 
-Your old calibrations do not carry over. Even if the printer was calibrated under its previous
-firmware, NebulaOS starts fresh, and skipping this leaves you chasing first-layer problems
-that calibration would have fixed in an hour.
+1. On the printer's screen, tap **Settings** (the gear icon, last tab on the left).
+2. Tap **Connections**. This page shows the current Wi-Fi network, the printer's address, its
+   name, and the Mainsail, Moonraker and Spoolman addresses.
+3. Tap **Wi-Fi networks**. You see two groups:
+   - **KNOWN NETWORKS** - networks the printer has connected to before and remembers;
+   - **OTHER NETWORKS IN RANGE** - everything else it can currently see.
 
-## The order
+   Each row shows signal strength as bars.
+4. Tap your network's row.
+5. Type the password. The small eye button at the end of the field shows what you have typed -
+   worth using, because a mistyped password is the most common reason this fails. For an open
+   network, leave the field empty.
+6. Confirm.
 
-### 1. Connect to Wi-Fi
+![The Wi-Fi networks panel, showing saved networks and others in range](images/03-wifi.png)
 
-**Settings → Connections → Wi-Fi networks.** Full steps:
-[Connecting to Wi-Fi](Connecting-To-WiFi).
+*The Wi-Fi networks panel. An example state: the names and signal levels stand in for real ones.*
 
-Do this first, because it makes everything afterwards easier - updates, uploading files, and
-watching the printer from another room.
+![Typing the password for a network](images/wifi-password.png)
 
-### 2. Open Mainsail and bookmark it
+*The password field with its eye button. An example state, for a made-up network.*
 
-Read the printer's address from **Settings → Connections**, then open it in a browser. Full
-steps: [Opening Mainsail](Opening-Mainsail).
+**Your network is not in the list?** Some networks do not broadcast their name. Scroll to the end
+and tap **Other network (hidden)...**, then type the name and password yourself.
 
-### 3. Calibrate, in order
+## Find the printer's address
 
-All calibrations live under **Tune → Calibration**, and they are **numbered in the order a new
-printer needs them**. Work down from the top.
+Back on **Settings → Connections**, the **Address** line now shows an address like `192.168.1.42`.
 
-| # | Menu row | What you need | Roughly how long |
-|---|---|---|---|
-| 1 | **Bed Tramming** | An empty bed, maybe a printed shim | 5-15 min |
-| 2 | **Heaters (PID)** | An empty, cool printer | Hotend a few minutes, bed longer |
-| 3 | **Axis Twist** | A sheet of paper | About 5 min |
-| 4 | **Auto Calibration** | An empty bed, no tools | About 7 min |
-| 5 | **Input Shaper** | Nothing - uses the built-in accelerometer | About 5 min |
-| 6 | **E-Steps** | A ruler or caliper, and a marker | About 5 min |
-| 7 | **Skew Correction** | A printed test part and a caliper | About 30 min |
+![The Connections page, showing Wi-Fi, address, printer name and service addresses](images/02-connections.png)
 
-Below those, under **OTHER**, are three you do not need on day one: **Load Cell
-Calibration**, **TMC Autotune** (optional, makes the motors quieter) and **Bed Mesh** (view or
-re-measure).
+*Read the **Address** line here. The printer's name is just above it.*
 
-**You do not have to do all seven before printing.** Numbers 1 to 4 get most printers to a
-good first layer. Skew Correction in particular is worth leaving until you have a reason.
+The printer also answers to its own name, so you do not have to remember the numbers. NebulaOS
+names a new printer `nebulaos-` followed by four characters from its own hardware, for example
+`nebulaos-4f2a`, so two printers on one network do not collide. **Change** next to **Name** renames
+it. The address is then `http://<name>.local`. This works on most home networks but not all - some
+routers and some Android versions do not support it; then use the numbers.
 
-Detail for each one: [Calibration guide](Calibration-Explained) for the short version,
-[Calibration walkthrough](Calibration-Explained) for the full background.
+## Open Mainsail
 
-### 4. Read the status line under each row
+Mainsail is a web page served by the printer itself. You do not install anything and you do not
+need an account or an internet connection.
 
-This is the part people miss, and it is the most useful thing on the screen. Every calibration
-row tells you where you stand:
+1. On your computer or phone, open a web browser.
+2. Type the address into the address bar - for example `192.168.1.42` or `nebulaos-4f2a.local` -
+   and press Enter. Do not add `www.` and do not search for it.
+3. Mainsail opens with your printer's dashboard: temperatures, a file list and controls.
 
-- **Green**, for example *"Done 24 Oct - Z offset 1.752 mm, mesh range 0.16 mm"* - when it
-  last ran, and its result.
-- **Grey** - not done yet, with a one-line description and how long it takes.
-- **Orange with a bar on the left**, for example *"Redo: Axis Twist changed"* - something you
-  did since has invalidated it, so run it again.
-
-That last one matters. The calibrations depend on each other, and the printer tracks the
-dependencies for you. Saving **Axis Twist** marks **Auto Calibration** as needing a redo.
-Adding a shim at the front-left corner during **Bed Tramming** marks both **Load Cell
-Calibration** and **Auto Calibration**. Running the calibration again clears the flag.
-
-If your printer's NebulaOS does not keep a calibration history, the rows show only the
-descriptions.
-
-### 5. Set up your slicer - before you print anything
-
-Your slicer's start and end G-code must call NebulaOS's `START_PRINT` and `END_PRINT`. Two
-lines, done once - [Setting up your slicer](Slicer-Setup). Without them the print skips the
-mesh and purge line that calibration prepared for. Do it before the first print, including the
-test parts some calibrations ask you to print.
-
-### 6. Your first print
-
-1. Upload a G-code file in Mainsail, or put it on a USB stick and use the printer's file
-   browser.
-2. Load filament - see [Filament](Filament).
-3. Start the print - see [Printing](Printing).
-4. Watch the first layer. While it prints, **Tune → Z Offset** or **Fine Tune** adjusts the
-   nozzle height live. This is normal and expected: the first layer is tuned by watching it,
-   not by calculating it.
-
-Pick something small and simple for the first one. A 20 mm calibration cube tells you more in
-20 minutes than a six-hour model tells you in six hours.
-
-![The Calibration menu, numbered in the order a new printer needs them](images/m19-calibration.png)
-
-*The Calibration menu. The rows are numbered in the order to do them.*
-
-![Calibration rows showing their status lines with dates and results](images/m19b-calibration-status.png)
-
-*The status lines in use: what ran, when, and what it measured.*
-
-![The Z Offset screen after saving](images/m16-zoffset-saved.png)
-
-*Live Z offset adjustment - the screen you use while watching the first layer.*
-
-## Expected result
-
-- The printer is on your network and reachable in a browser.
-- Calibration rows 1 to 4 show green status lines with results.
-- A first print whose first layer is even and stuck down.
+Bookmark it. The screen and Mainsail show the same printer and work at the same time.
 
 ## Troubleshooting
 
 | What happens | What to do |
 |---|---|
-| A calibration refuses to start | Something else is running, or a dependency is unmet. Read the row's status line. |
-| A calibration fails partway | Note the message and see [Troubleshooting](Troubleshooting). Nothing is saved from a failed run. |
-| The first layer is squished or lifting | Adjust live with **Tune → Z Offset** while it prints. |
-| One side is good, the other is not | That is the classic **Axis Twist** symptom - row 3. |
-| Parts come out as parallelograms | **Skew Correction** - row 7. |
-
-## If you want to start over
-
-Nothing here is irreversible. **Settings → Reset** can clear the screen's settings or do a
-clean NebulaOS reset, and the boot slot swap puts your old firmware back. See
-[Resetting](Resetting) and [Going back](Going-Back).
+| The password is rejected | Retype it with the eye button on. Check for a capital letter you missed. |
+| Your network is not listed | It may be hidden - use **Other network (hidden)...**. Or it may be 5 GHz only. |
+| It connects, then drops | Check the signal bars. One or two bars next to a metal-framed printer is often the cause. |
+| No **Address** appears after connecting | Wait a few seconds and look again; the address comes from your router. |
+| The page does not load | The computer or phone must be on the same network - not a guest network or mobile data. |
+| `.local` does not work but the numbers do | Your network does not support `.local` names. Use the numbers. |
+| The address has changed | Your router may hand out a different one after a restart. Read it again on **Settings → Connections**, or set a fixed address: [Settings → Connections](Screen-Connections#static-ip-panel). |
+| Mainsail loads but cannot reach the printer | Klipper may still be starting. Wait a minute and reload. |
 
 ## Next step
 
-[Connecting to Wi-Fi](Connecting-To-WiFi) - the first step above. From there each page links
-to the next: [Opening Mainsail](Opening-Mainsail), the [Calibration guide](Calibration-Explained),
-[Setting up your slicer](Slicer-Setup), [Filament](Filament), [Printing](Printing).
+[4. First calibration](First-Calibration) - one guided run, about 7 minutes.
 
-## Related
-
-- [Screen reference](Screen-Reference) - what every button does
-- [Updating NebulaOS](Updating-NebulaOS) - staying current
+Need help? [Troubleshooting](Troubleshooting) · How this works: [Mainsail and Moonraker](Mainsail-And-Moonraker)

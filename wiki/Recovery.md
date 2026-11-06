@@ -68,7 +68,7 @@ This button is blocked while a print is running.
 NebulaOS swap button, so coming back needs option 3 or 4. Know that before you press it.
 
 Switching into a stock or OpenKE slot is safe, including with the power switch: each system
-reinstalls the mainboard firmware it needs at boot. See [Safety first](Safety-First).
+reinstalls the mainboard firmware it needs at boot. See [Safety first](What-NebulaOS-Is#safety-first).
 
 ## 3. Over SSH
 

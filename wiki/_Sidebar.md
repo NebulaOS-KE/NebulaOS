@@ -2,51 +2,22 @@
 
 [Home](Home)
 
-New here? Follow steps 1 to 13 in order.
+**1. Get printing**
+- 1\. [What is NebulaOS](What-NebulaOS-Is)
+- 2\. [Install NebulaOS](Installing-NebulaOS)
+- 3\. [First start](First-Time-Setup)
+- 4\. [First calibration](First-Calibration)
+- 5\. **[Set up your slicer](Slicer-Setup)**
+- 6\. [Your first print](Printing)
+- 7\. [Keeping NebulaOS updated](Updating-NebulaOS)
 
-**Start here**
-- 1\. [What NebulaOS is](What-NebulaOS-Is)
-- 2\. [Supported hardware](Supported-Hardware)
-- 3\. [Safety first](Safety-First)
-
-**Install it**
-- 4\. [Two system slots](Two-System-Slots)
-- 5\. [Installing NebulaOS](Installing-NebulaOS)
-- [Going back to your old firmware](Going-Back)
-
-**Set it up**
-- 6\. [First-time setup](First-Time-Setup)
-- 7\. [Connecting to Wi-Fi](Connecting-To-WiFi)
-- 8\. [Opening Mainsail](Opening-Mainsail)
-
-**Calibrate**
-- 9\. [First calibration](First-Calibration)
-- [Improve your prints](Improve-Your-Prints)
+**2. Improve your prints**
+- [First-layer problems](Improve-Your-Prints)
 - [Calibration explained](Calibration-Explained)
-
-**Print**
-- 10\. **[Setting up your slicer](Slicer-Setup)** - once, before the first print
-- 11\. [Filament](Filament)
-- 12\. [Printing](Printing)
-
-**Keep it running**
-- 13\. [Updating NebulaOS](Updating-NebulaOS)
-- [Mainboard firmware](Mainboard-Firmware)
-- [Resetting](Resetting)
-
-**Advanced**
 - [Print setup NebulaOS adds](Adaptive-Print-Setup)
-- [Camera](Camera)
-- [Timelapse](Timelapse)
-- [Beeps and songs](Beeps-And-Songs)
-- [Power-loss recovery](Power-Loss-Recovery)
 
-**When something is wrong**
-- [Troubleshooting](Troubleshooting)
-- [Recovery](Recovery)
-
-**Using NebulaScreen**
-- [Using NebulaScreen](Screen-Reference)
+**3. Using NebulaScreen**
+- [Overview](Screen-Reference)
 - [Home and printing](Screen-Home)
 - [Macros and Console](Screen-Macros-Console)
 - [Tune](Screen-Tune)
@@ -56,10 +27,27 @@ New here? Follow steps 1 to 13 in order.
 - [Settings → System](Screen-System)
 - [Settings → Updates](Screen-Updates)
 - [Settings → Reset](Screen-Reset)
+- [Camera](Camera)
+- [Timelapse](Timelapse)
+- [Power-loss recovery](Power-Loss-Recovery)
 
-**Reference**
-- [Under the hood](Under-the-Hood)
+**4. Advanced and integrations**
+- [SSH, SFTP and security](SSH-And-SFTP)
+- [Files, configuration and backups](Files-And-Configuration)
+- [Mainsail and Moonraker](Mainsail-And-Moonraker)
+- [Custom macros and integrations](Macros-And-Integrations)
+- [Beeps and songs](Beeps-And-Songs)
+- [How NebulaOS works](Under-the-Hood)
+- [Two system slots](Two-System-Slots)
 - [Words you will see](Glossary)
+
+**5. Help and recovery**
+- [Troubleshooting](Troubleshooting)
+- [Report a problem](Report-A-Problem)
+- [Going back to stock](Going-Back)
+- [Resetting](Resetting)
+- [Mainboard firmware](Mainboard-Firmware)
+- [Recovery (when it will not start)](Recovery)
 
 ---
 Developer documentation lives in each component repository. Start from the

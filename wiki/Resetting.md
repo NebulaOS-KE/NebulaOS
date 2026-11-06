@@ -43,7 +43,7 @@ Every button asks first and says what it does:
 
 Your **G-code files** and the **other boot slot** survive a clean NebulaOS reset. Afterwards
 you reconnect to Wi-Fi on the screen and calibrate again -
-[Connecting to Wi-Fi](Connecting-To-WiFi), [First calibration](First-Calibration).
+[Connect to Wi-Fi](First-Time-Setup#connect-to-wi-fi), [First calibration](First-Calibration).
 
 The prints you made **under NebulaOS** are gone from
 [Statistics](Screen-Printer#statistics-panel), but the *Before NebulaOS* figures come back on
@@ -79,7 +79,7 @@ back needs SSH, reinstalling with Creality's updater, or USB recovery. See
 [Going back](Going-Back) and [Recovery](Recovery).
 
 Switching into a stock slot is safe, power switch included: each system reinstalls the
-mainboard firmware it needs at boot. See [Safety first](Safety-First).
+mainboard firmware it needs at boot. See [Safety first](What-NebulaOS-Is#safety-first).
 
 ## Freeing up space
 
@@ -161,5 +161,5 @@ separate buttons precisely so that going back to stock keeps working.
 ## Related
 
 - [Updating NebulaOS](Updating-NebulaOS)
-- [Going back to your old firmware](Going-Back)
+- [Going back to stock](Going-Back)
 - [Recovery](Recovery)

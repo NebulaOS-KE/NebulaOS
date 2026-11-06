@@ -1,4 +1,4 @@
-# Updating NebulaOS
+# 7. Keeping NebulaOS updated
 
 ## What this guide will help you do
 
@@ -7,7 +7,7 @@ USB stick and no computer needed once the printer is on your network.
 
 ## What you need
 
-- A printer on your Wi-Fi network - [Connecting to Wi-Fi](Connecting-To-WiFi).
+- A printer on your Wi-Fi network - [3. First start](First-Time-Setup).
 - A printer that is not printing. Updates are refused while it is busy printing, heating or
   calibrating, and the screen says which.
 - For a whole-system update: a download of well over 100 MB, and a few minutes. The screen
@@ -21,6 +21,9 @@ Two kinds of update exist, and they are not the same thing:
 |---|---|---|
 | **The whole system** - kernel, system, screen app, everything in the image | **Settings → Updates → System image** | Once per NebulaOS release |
 | **Apps** - Klipper, Moonraker, Mainsail, the NebulaOS extensions, the screen app | **Settings → Updates**, the list | When a component has a newer version |
+
+**Which version am I running?** **Settings → System** shows the NebulaOS build, the screen
+version and the boot slot; **Settings → Updates** lists every app with its version.
 
 **Your settings survive both.** Configuration, calibration, `printer.cfg`, macros, uploaded
 files and Wi-Fi networks live on a separate data area and are kept through every update.
@@ -36,10 +39,16 @@ and a **USB stick** install are the same operation - only where the file comes f
 slot that is not running is the one holding it. See
 [Going back](Going-Back#the-one-thing-that-can-remove-your-old-system).
 
-**If the new system does not come up properly, NebulaOS goes back by itself** - within about
-5 minutes, or after 3 restarts that never confirm. See
-[Recovery](Recovery#1-automatic-the-trial-start). That safety net is why a system update is
-less frightening than it sounds.
+**If the new system does not come up properly, NebulaOS goes back by itself.** The new system
+starts on trial: if Klipper and the screen are not both up within 5 minutes, or after 3 restarts
+that never confirm, the printer switches back to the previous system once and restarts. The
+screen then says what happened. That safety net is why a system update is less frightening than
+it sounds.
+
+It cannot catch everything: a system that does not start at all, before NebulaOS itself runs,
+needs [USB recovery](Recovery). App updates have their own check - a Klipper, extensions or
+screen update that does not come up healthy is put back to the last working version. Details:
+[Recovery](Recovery#1-automatic-the-trial-start).
 
 ### Online, the easy way
 
@@ -186,14 +195,18 @@ removes NebulaOS's own leftovers - old logs, old update backups, unfinished down
 system images and the download cache - and shows what it will free before doing it. Your print
 files, settings and calibration are never touched. See [Resetting](Resetting).
 
-## Next step
-
-This is the last page of the main path. From here, look things up as you need them: the
-[Screen reference](Screen-Reference) for every button, the **Advanced** pages in the sidebar,
-and [Troubleshooting](Troubleshooting) when something is wrong.
-
 ## Related
 
+- [Settings → Updates](Screen-Updates) - every control on the page
 - [Resetting](Resetting)
-- [Recovery](Recovery)
-- [Going back to your old firmware](Going-Back)
+- [Going back to stock](Going-Back)
+
+## Next step
+
+That is the whole path. From here:
+
+- [Improve your prints](Improve-Your-Prints) - when a print shows a problem
+- [Using NebulaScreen](Screen-Reference) - every button on the screen
+- [Advanced and integrations](SSH-And-SFTP) - SSH, configuration files, Mainsail and Moonraker
+
+Need help? [Troubleshooting](Troubleshooting)

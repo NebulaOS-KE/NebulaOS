@@ -1,4 +1,4 @@
-# Setting up your slicer
+# 5. Set up your slicer
 
 ## What this guide will help you do
 
@@ -8,9 +8,11 @@ line, timelapse - or heat up twice.
 
 ## What you need
 
-- A slicer. The examples use **OrcaSlicer**, which most KE owners use. Its **Creality Ender-3
-  V3 KE** printer profile is a good starting point.
-- A calibrated printer - [Calibration guide](Calibration-Explained).
+- A slicer. Any slicer that lets you edit its start and end G-code works; the examples use
+  **OrcaSlicer**, which most KE owners use. **NebulaOS ships no slicer profile.** Start from the
+  printer profile your slicer offers for the Ender-3 V3 KE, if it has one, and change the two
+  fields below.
+- A calibrated printer - [4. First calibration](First-Calibration).
 
 ## The two lines
 
@@ -45,7 +47,7 @@ names will not run NebulaOS's preparation.
 
 4. In the print settings, tab **Others**, tick **Label objects**. NebulaOS uses the object
    outlines to probe only the area the print covers, to purge next to it, and to let you
-   [cancel one object](Printing#cancelling-one-object-out-of-several) during a print.
+   [cancel one object](Screen-Home#exclude-object-screen) during a print.
 5. Save the printer profile.
 
 Leave out the heating, homing, mesh and purge lines a stock Creality profile may have had:
@@ -56,10 +58,22 @@ Leave out the heating, homing, mesh and purge lines a stock Creality profile may
 In order: checks that filament is loaded, starts heating, homes, waits for the bed, probes a
 fresh bed mesh of the print area, parks next to the print, waits for the nozzle and draws a
 purge line. It also starts the [timelapse](Timelapse) watcher, if timelapse is on. The details,
-and what each step costs in time, are in [Adaptive meshing and purge](Adaptive-Print-Setup).
+and what each step costs in time, are in [Print setup NebulaOS adds](Adaptive-Print-Setup).
 
 `END_PRINT` turns the heaters off, retracts, and parks the nozzle at the back with the bed
 forward, so the print is presented to you.
+
+## Sending files from the slicer
+
+Moonraker, the printer's API, accepts uploads directly from the slicer, so you do not have to copy
+files by hand. In your slicer's printer connection settings, choose the host type
+**Octo/Klipper** (OrcaSlicer; PrusaSlicer and Cura have an OctoPrint option) and enter the
+printer's address, for example `http://192.168.1.42` or `http://nebulaos-4f2a.local`. NebulaOS
+answers OctoPrint-style uploads on that plain address. Other ways to connect are in
+[Mainsail and Moonraker](Mainsail-And-Moonraker).
+
+You can also drag the file into Mainsail's file list, or use a USB stick - see
+[6. Your first print](Printing).
 
 ## Optional extras
 
@@ -95,9 +109,11 @@ heating the nozzle, the purge - and then the first layer begins.
 | No timelapse video, and timelapse is on | The print has to start with `START_PRINT`. See [Timelapse](Timelapse). |
 
 *From `START_PRINT`, `_START_PRINT_BED_MESH` and `END_PRINT` in `etc/nebulaos/klipper/print.cfg`,
-firmware `e523e8c`. The OrcaSlicer field names and placeholders are OrcaSlicer's, not
+and the upload route from `etc/nebulaos/moonraker/nebulaos.conf:16-21`, firmware `dc868e3`. The OrcaSlicer field names and placeholders are OrcaSlicer's, not
 NebulaOS's.*
 
 ## Next step
 
-[Filament](Filament) - load it, then [Printing](Printing) - start your first print and watch it.
+[6. Your first print](Printing) - load filament, print a small test, and tune the first layer.
+
+Need help? [Troubleshooting](Troubleshooting) · How this works: [Print setup NebulaOS adds](Adaptive-Print-Setup)

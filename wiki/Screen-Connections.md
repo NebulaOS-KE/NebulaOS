@@ -91,7 +91,13 @@ An info card (**Signal**, **Security**, **IP address**) plus two buttons:
 ## Static IP panel
 
 Reached from Network Details → **Configure Static IP**. Titled **"Static IP (all Wi-Fi networks)"**:
-the setting is global for the Wi-Fi interface, not per network.
+the setting is global for the Wi-Fi interface, not per network. You need four values from your
+router: **IP**, **Netmask**, **Gateway** and **DNS**. Unless you have a reason to need a fixed
+address, DHCP is the simpler choice.
+
+NebulaOS checks a new setting before keeping it - for a static address, that the gateway answers;
+for DHCP, that a lease arrives - and **undoes it by itself if it does not work**. That check can
+take a couple of minutes, so a slow result is not a failure.
 
 ![The Static IP panel with a static address set](images/r-static-ip.png)
 

@@ -1,4 +1,4 @@
-# Going back to your old firmware
+# Going back to stock
 
 ## What this guide will help you do
 
@@ -22,6 +22,17 @@ Nothing, if NebulaOS still starts. Otherwise see [Recovery](Recovery).
 
 Full picture, including how to keep Creality's system through NebulaOS updates:
 [Two system slots](Two-System-Slots).
+
+## First, check what is in the other slot
+
+**Swapping does not always return to stock.** After your first NebulaOS update, both slots can hold
+NebulaOS (next section). Check before you rely on it - two places say it:
+
+- **Settings → Updates → System image** lists both slots, what each holds and which one is running.
+- The **Swap boot slot** question itself names what is installed in the other slot, before you
+  confirm.
+
+**Settings → System** shows the slot you are running now.
 
 ## The one thing that can remove your old system
 
@@ -108,7 +119,7 @@ Apart from that one power cycle, moving between the two is recoverable in both d
 the power switch is fine.
 
 The one thing to avoid is switching the printer off *while* mainboard firmware is being
-installed. The screen tells you when that is happening. See [Safety first](Safety-First).
+installed. The screen tells you when that is happening. See [Safety first](What-NebulaOS-Is#safety-first).
 
 ## Troubleshooting
 

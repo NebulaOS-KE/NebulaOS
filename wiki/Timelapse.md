@@ -9,7 +9,7 @@ and understand the two settings that decide whether the result looks good.
 
 - A camera that works in Mainsail. Any USB webcam, or Creality's Nebula Camera. If you can see
   the live picture in Mainsail, timelapse can use it. See [Camera](Camera).
-- [Mainsail open in a browser](Opening-Mainsail). **Everything on this page is done in
+- [Mainsail open in a browser](First-Time-Setup#open-mainsail). **Everything on this page is done in
   Mainsail.** There is no timelapse control on the printer's own touchscreen.
 
 ## Before you begin
@@ -139,4 +139,4 @@ hand (the cycle defaults to 30 seconds).
 - [Camera](Camera) - the live picture, and the Nebula Camera's own settings
 - [Printing](Printing) - starting and watching a print
 - [Power-loss recovery](Power-Loss-Recovery) - what happens to a recording when the power goes
-- [Opening Mainsail](Opening-Mainsail) - reaching Mainsail from your computer or phone
+- [Mainsail and Moonraker](Mainsail-And-Moonraker) - reaching Mainsail from your computer or phone

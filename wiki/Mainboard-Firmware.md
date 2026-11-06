@@ -122,6 +122,6 @@ available and does not need a file.
 
 ## Related
 
-- [Safety first](Safety-First)
-- [Going back to your old firmware](Going-Back)
+- [Safety first](What-NebulaOS-Is#safety-first)
+- [Going back to stock](Going-Back)
 - [Recovery](Recovery)

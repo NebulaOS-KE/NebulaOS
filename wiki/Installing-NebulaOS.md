@@ -1,4 +1,4 @@
-# Installing NebulaOS
+# 2. Install NebulaOS
 
 ## What this guide will help you do
 
@@ -8,7 +8,7 @@ NebulaOS, and your old system is still there in the other slot in case you want 
 ## What you need
 
 - A Creality Ender-3 V3 KE. Nothing else is supported - see
-  [Supported hardware](Supported-Hardware).
+  [Check you have the right printer](What-NebulaOS-Is#check-you-have-the-right-printer).
 - The right NebulaOS image file, from
   [NebulaOS releases](https://github.com/NebulaOS-KE/NebulaOS/releases). **Which one depends on
   the route** (section 1 below). For 1.0.1 the files are:
@@ -32,7 +32,7 @@ NebulaOS, and your old system is still there in the other slot in case you want 
 
 ## Before you begin
 
-- Read [Safety first](Safety-First). The point that applies here: switching between systems is
+- Read [Safety first](What-NebulaOS-Is#safety-first). The point that applies here: switching between systems is
   safe, but **do not switch the printer off while mainboard firmware is being installed** - the
   screen tells you when that is happening.
 - **Coming from stock Creality firmware?** Plan for one power cycle after the install - see
@@ -80,7 +80,9 @@ password (the system running on the printer now, not NebulaOS's). This route use
    reboot
    ```
 
-   The updater does not restart the printer by itself, so this step is required.
+   The updater does not restart the printer by itself, so this step is required. Use `reboot`,
+   not the power switch: a stock-based system that starts from power-on can install its own
+   firmware into the mainboard again.
 
 Now go to section 3.
 
@@ -118,42 +120,27 @@ the printer can reset the mainboard except its power.
 3. On this start NebulaOS installs its mainboard firmware by itself. **Do not switch off while
    it runs** - the screen tells you when it is happening. Klipper then connects.
 
-From 1.0.1 the screen shows a notice telling you to do this. Came from OpenKE and see the same MCU
-error? The same power cycle applies.
+From 1.0.1 the screen shows a notice telling you to do this: *"The mainboard firmware could not
+be installed. Switch the printer off, wait 10 seconds and switch it on again - NebulaOS installs it
+when it starts."*
 
-When it comes up:
+**If you came from OpenKE (section 2a):** the `reboot` is a software restart too, and the same
+rule applies. Whether NebulaOS has to install its mainboard firmware at all depends on what OpenKE
+left on the board, so on some printers nothing is needed. If the screen shows that notice, or
+*"The printer's mainboard is not answering. Switch the printer off, wait 10 seconds and switch it
+on again."*, do exactly that, once.
 
-1. Connect to Wi-Fi: **Settings → Connections → Wi-Fi networks**. Step-by-step in
-   [Connecting to Wi-Fi](Connecting-To-WiFi).
+If you came from OpenKE, delete the copied image afterwards to free the space it used - in an SSH
+session on the printer:
 
-   ![The Wi-Fi networks panel](images/03-wifi.png)
-2. Calibrate the printer once before printing - the calibrations from your old system do not
-   carry over. [Calibration guide](Calibration-Explained).
-3. If you came from OpenKE, delete the copied image to free the space it used - in an SSH
-   session on the printer:
+```
+rm /usr/data/NebulaOS-Ender3V3KE-1.0.1.img
+```
 
-   ```
-   rm /usr/data/NebulaOS-Ender3V3KE-1.0.1.img
-   ```
+**SSH on NebulaOS:** user `root`, password `NebulaOS` on a new install. Change it, and never make
+SSH reachable from the internet: [SSH, SFTP and security](SSH-And-SFTP).
 
-Mainsail is now at `http://<printer-ip>` in a web browser, or
-`http://<printer-name>.local`. See [Opening Mainsail](Opening-Mainsail).
-
-Your printer has given itself a name like `nebulaos-4f2a` - four characters derived from its
-own hardware, so that two printers on one network do not collide. You can change it on
-**Settings → Connections → Name → Change**.
-
-**If you ever need SSH**, the root password on a **newly installed** NebulaOS is `NebulaOS`.
-You do not need SSH for normal use, and you should change that password if your printer is
-reachable from beyond your own network.
-
-**Upgrading from an earlier NebulaOS?** Your existing password is kept. The printer stores it
-separately from the system image, so it survives updates - including this one. If you never
-changed it, it is still the old default (`openke`), not `NebulaOS`.
-
-Once you are in, the prompt shows the printer's name and the directory, like
-`root@nebulaos-4f2a:~#`. Worth a glance if you have more than one printer - it is the quickest
-way to be sure which one you are typing into.
+*The notices are from `etc/init.d/S50nebulaos-mcu-guard:98-132`, firmware `dc868e3`.*
 
 *One screenshot is still missing here: the NebulaOS screen as it looks on the very first
 start. The simulator's screenshot tour does not cover the boot and init screens, so this one
@@ -163,7 +150,6 @@ needs a photograph of a real printer starting up.*
 
 - The printer starts into NebulaOS, showing the NebulaScreen interface rather than Creality's.
 - **Settings → System** reports a NebulaOS version.
-- Mainsail opens in a browser on the same network.
 - Your old system is still installed in the other slot.
 
 ## If it stops
@@ -202,5 +188,6 @@ Once NebulaOS is running, it updates itself from the screen - no USB stick and n
 
 ## Next step
 
-[First-time setup](First-Time-Setup) - the overview of what comes next: Wi-Fi, Mainsail,
-calibration, your slicer, filament and your first print, in that order.
+[3. First start](First-Time-Setup) - Wi-Fi, the printer's address, and Mainsail.
+
+Need help? [Troubleshooting](Troubleshooting) · How this works: [Two system slots](Two-System-Slots)

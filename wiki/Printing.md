@@ -1,20 +1,24 @@
-# Printing
+# 6. Your first print
 
-## What this guide will help you do
+## What this step does
 
-Start a print, watch it, adjust it while it runs, and stop it safely.
+Loads filament, prints a small test, and tunes the first layer while you watch it. Pick something
+small and simple: a 20 mm calibration cube tells you more in 20 minutes than a six-hour model
+tells you in six hours.
 
 ## What you need
 
-- A calibrated printer - [First-time setup](First-Time-Setup).
-- Filament loaded - [Filament](Filament).
-- A sliced `.gcode` file, from a slicer set up for NebulaOS -
-  [Setting up your slicer](Slicer-Setup).
+- A calibrated printer - [4. First calibration](First-Calibration).
+- A slicer set up for NebulaOS - [5. Set up your slicer](Slicer-Setup) - and a sliced `.gcode` file.
+- Filament.
 
 ## Before you begin
 
-**Learn the difference between Cancel and Stop before you need it.** They sit next to each
-other and they are not alternatives:
+**The nozzle reaches 200 °C and above while loading and printing.** It does not look hot. Do not
+touch the nozzle or the metal around it.
+
+**Learn the difference between Cancel and Stop before you need it.** They sit next to each other
+on the print screen and they are not alternatives:
 
 | Button | What it does | When to use it |
 |---|---|---|
@@ -22,66 +26,70 @@ other and they are not alternatives:
 | **Cancel** | Ends the print tidily. Asks you to confirm. | You have changed your mind |
 | **Stop** | **Emergency stop.** Cuts all movement and all heaters instantly. | Something is going physically wrong |
 
-**Stop needs a power-cycle or a firmware restart afterwards** before the printer will do
-anything again. Its label is only "Stop", not "Emergency Stop", so it is easy to press
-expecting a gentler Cancel. Use **Cancel** unless something is actually wrong.
+**Stop needs a power-cycle or a firmware restart afterwards** before the printer does anything
+again. Its label is only "Stop", so it is easy to press expecting a gentler Cancel. Use **Cancel**
+unless something is actually wrong.
 
-## Getting a file onto the printer
+## Load filament
+
+**Home → Extrude** opens the filament panel.
+
+![The filament panel](images/m06-extruder.png)
+
+1. Cut the filament end at a clean angle. A squashed or stringy end jams.
+2. Feed it into the extruder inlet until it will not go further easily. **Do this before you tap
+   Load** - Load expects the filament to be in the throat already.
+3. Choose the hotend target for your filament - 200 °C suits most PLA, 240 °C most PETG. The
+   selector offers 180 to 300 °C in steps of 20; for an exact value, tap the temperature on the
+   **Home** tab instead.
+4. Tap **Load**. The nozzle heats, then filament feeds forward. If Spoolman is set up, it asks
+   **"Use this filament?"** first.
+5. When the plastic coming out runs **clean and consistent in your new colour**, tap **Cooldown**.
+   During Load, **Cooldown** is the stop control - the only button that stays active.
+
+**Unloading:** choose the target for the filament that is loaded, tap **Unload**, and when it
+stops, **pull the filament out from the top of the extruder by hand**. The printer pulls it clear
+of the hot end but does not eject the whole length.
+
+**Changing colour:** unload, then load. A print that asks for a colour change (`M600`) shows this
+box and walks you through the same steps:
+
+![M600's filament-change box](images/r-prompt-m600.png)
+
+*The real screen app, showing the text of NebulaOS's `M600` macro (the title scrolls).*
+
+Every other control on the filament panel: [Home and printing](Screen-Home#filament-panel-extruder).
+
+## Get the file onto the printer
 
 Three ways, all equivalent:
 
-- **Mainsail** - drag the file into the file list in your browser. Easiest from a computer.
+- **From the slicer** - upload straight to the printer ([5. Set up your slicer](Slicer-Setup#sending-files-from-the-slicer)).
+- **Mainsail** - drag the file into the file list in your browser.
 - **USB stick** - plug it in; the printer's file browser reads it directly.
-- **Your slicer** - if it can upload to Moonraker, point it at the printer's address.
 
-## Starting a print
+## Start the print
 
-1. On the screen, open the **Files** tab (or **Home → Files**).
+1. On the **Home** tab, tap **Print**. The file browser opens.
 2. Find your file. Files on a USB stick appear alongside the ones stored on the printer.
-3. Tap it, then confirm.
+3. Tap it, then **Print**.
 
 ![The file browser](images/m09-files.png)
 
-The printer heats up, may run a bed soak and a purge line, and begins.
-
-### What happens before the first layer
-
-Depending on your configuration, NebulaOS may probe only the area the print actually covers
-rather than the whole bed, and may purge next to the print instead of on it. Both are normal
-and both save time.
-
-## Watching a print
-
-The print status screen appears by itself the moment a print starts, whatever you were looking
-at.
+The print status screen appears by itself. Before the first layer, the screen shows the start
+steps: preparing, heating the bed, the bed mesh of the print area, heating the nozzle, the purge
+line next to the print. Then the first layer begins.
 
 ![The print status screen during a print](images/m60-print-status.png)
 
-On the left: the thumbnail, the file name and a progress bar. On the right, ten readouts:
+*Every readout on this screen: [Home and printing](Screen-Home#print-status-screen).*
 
-| | |
-|---|---|
-| **Extruder** temperature, current or `current / target` | **Bed** temperature, same format |
-| **Chamber** temperature - always shown here | **Speed** in mm/s |
-| **Z-offset** - tap it to adjust live | **Flow** in mm³/s |
-| **Layers**, as `current / total` | **Elapsed** time |
-| **Fan speed** | **Time left**, an estimate |
+## Watch the first layer, and fix it live
 
-If you navigate back to the **Home** tab mid-print, a compact progress widget replaces the
-usual buttons there - tap it to return to the full screen. That shortcut is only on the Home
-tab. While a print runs, **Homing** and **Extrude** on the Home tab answer with a message
-instead of opening (they work again while the print is paused):
+This is the most useful thing on the screen, and it is meant to be used.
 
-![Unavailable while printing](images/unavailable-while-printing.png)
-
-*The real screen app. An example state: the print was fed in for the picture.*
-
-## Fixing the first layer while it prints
-
-This is the single most useful thing on this screen, and it is meant to be used.
-
-Tap the **Z-offset** readout to get step buttons: ±0.001, ±0.005, ±0.01, ±0.025 and ±0.05 mm.
-Watch the first layer and nudge:
+Tap the **Z-offset** readout on the print screen (or **Tune → Z Offset**) to get step buttons:
+±0.001, ±0.005, ±0.01, ±0.025 and ±0.05 mm. Watch the first layer and nudge:
 
 | What you see | What to do |
 |---|---|
@@ -89,94 +97,61 @@ Watch the first layer and nudge:
 | Lines translucent or completely flat | Nozzle too low - press **+** |
 | Lines squished together and fused, no gaps | Correct - leave it |
 
-Move in small steps and give the printer a few seconds to show the result.
+Move in small steps and give the printer a few seconds to show the result. Every tap is **saved
+immediately** and used for the next print too.
 
 ![The Z offset screen](images/m16-zoffset-saved.png)
 
-## Adjusting speed, flow and pressure advance
-
-**Tune → Fine Tune**, or the **Fine Tune** button on the print status screen.
+**Fine Tune** (a button on the print screen, also **Tune → Fine Tune**) adjusts speed, flow and
+pressure advance live. Speed and flow there are percentages of what the file asked for.
 
 ![The Fine Tune panel during a print](images/m61-finetune-printing.png)
 
-Speed and flow here are **percentages** of what the file asked for. The flow figure on the
-print status screen is a different thing - a volumetric rate in mm³/s.
-
-Pressure advance can also be adjusted live from Fine Tune. It is not shown on the print status
-screen.
-
-## Temperatures and fans
-
-From the **Home** tab:
-
-- **Tap any temperature** to set a target. A numpad opens - type the exact value. The reading
-  shows `current / target`, so `45 / 210` means 45 °C now, heating toward 210.
-- **Tap the target** to clear it and cool down.
-- There are **no material presets** - no PLA or PETG buttons. Type the number.
-- Chamber and MCU readings are display-only.
-- **Fans** opens the fan controls. Fans the printer manages itself are shown read-only.
-
-## Cancelling one object out of several
-
-If your file was sliced with object labels, the **Objects** button on the print status screen
-lets you cancel a single object while the rest carries on - useful when one part of a plate
-has failed.
-
-Cancelling the last remaining object asks whether you meant to cancel the whole print.
-
-![The Exclude Object screen](images/r-exclude-object.png)
-
-*Green is printing now, red is excluded. The objects here are made up for the picture.*
-
-Tapping an object asks first - excluding cannot be undone:
-
-![Exclude CUBE_2? This cannot be undone.](images/exclude-object-confirm.png)
-
-*The real screen app. An example state, with the made-up objects above.*
+Still not right after a few nudges? [Improve your prints](Improve-Your-Prints) starts from what
+you see.
 
 ## When the print finishes
 
-The printer stops heating and the status screen shows the print as complete. Let the bed cool
-before removing the part - parts release far more easily cool, and a warm bed with a stuck
-part invites force you will regret.
+The printer stops heating and parks, and the status screen shows the print as complete. Let the
+bed cool before removing the part - parts release far more easily cool.
 
-If you were recording a [timelapse](Timelapse), the video is rendered now and appears in
-Mainsail.
+If you were recording a [timelapse](Timelapse), the video is rendered now and appears in Mainsail.
+**Settings → Printer → Statistics** shows your recent prints and the totals for the printer's whole
+life ([Statistics](Screen-Printer#statistics-panel)).
 
-The job is added to the printer's record. **Settings → Printer → Statistics** shows the last
-four prints with their result and print time, along with the totals for the printer's whole
-life - see [Statistics](Screen-Printer#statistics-panel). The full list, with filament use
-and thumbnails, is Mainsail's **History** page
-([Opening Mainsail](Opening-Mainsail)).
+## If filament runs out
+
+With a filament sensor, the print pauses when filament runs out instead of printing nothing. The
+screen offers **Load**, **Continue** or **Cancel**: load the new filament, then **Continue**.
+
+![The filament runout dialog](images/r-filament-runout.png)
+
+*The screen's own runout dialog. Details: [Home and printing](Screen-Home#filament-runout-dialog).*
+
+## Spoolman (optional)
+
+If you run a [Spoolman](https://github.com/Donkie/Spoolman) server, NebulaOS can track what is left
+on each spool: set the server under **Settings → Connections → Spoolman**, then **Home → Extrude →
+Spoolman** shows the spool list, and loading asks which spool you are using. Everything else works
+without it. Details: [Settings → Connections](Screen-Connections) and
+[Home and printing](Screen-Home#spoolman-panel).
 
 ## Troubleshooting
 
 | What happens | What to do |
 |---|---|
+| Filament will not feed | Cut a fresh clean end, and make sure it is in the throat before tapping Load. |
+| Nothing comes out, motor clicking | Nozzle not hot enough, or a blockage. Raise the target and try again. |
+| The old colour keeps coming | Normal - keep going until it runs clean, then Cooldown. |
 | The print will not start | Check the printer is not already busy, and that the file sliced correctly. |
-| First layer is poor | Adjust Z offset live, as above. If one side is consistently worse, you need [Axis Twist](Calibration-Explained). |
+| No mesh or purge line before the print | The slicer's start G-code does not call `START_PRINT` - [5. Set up your slicer](Slicer-Setup). |
+| First layer is poor | Adjust Z offset live, as above. One side consistently worse: [Axis Twist](Calibration-Explained#axis-twist). |
 | The print stops partway | Check for filament runout. After a power cut, see [Power-loss recovery](Power-Loss-Recovery). |
 | You pressed Stop | Power-cycle the printer, or run `FIRMWARE_RESTART` from the console. |
-| Time remaining looks wrong | It is an estimate, and it improves as the print proceeds. |
 | The part will not come off | Let the bed cool completely first. |
-
-## Recovery and reversal
-
-- **Pause** is fully reversible with **Resume**.
-- **Cancel** ends the print; the file stays, so you can start again. It asks first:
-
-![Cancel the print?](images/print-cancel-confirm.png)
-
-*The real screen app. An example state: the print was fed in for the picture.*
-- **Stop** requires a power-cycle or `FIRMWARE_RESTART`.
-- A power cut may be recoverable - [Power-loss recovery](Power-Loss-Recovery).
 
 ## Next step
 
-[Updating NebulaOS](Updating-NebulaOS) - staying current.
+[7. Keeping NebulaOS updated](Updating-NebulaOS).
 
-## Related
-
-- [Filament](Filament)
-- [Calibration guide](Calibration-Explained)
-- [Power-loss recovery](Power-Loss-Recovery)
+Need help? [Troubleshooting](Troubleshooting) · Every button: [Home and printing](Screen-Home)
