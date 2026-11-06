@@ -28,6 +28,26 @@ Filament -> Printing -> Updating. Sidebar today puts Under the hood and Glossary
 here", Two system slots before Installing (fine), Filament after Printing although Printing needs
 filament loaded, and Slicer-Setup is now first under "Everyday printing".
 
+## Batch 5 (2026-11-06): the wiki restructure (Tim's merged plan)
+
+Navigation and structure change, content moved not rewritten. Five sidebar groups: 1 Get
+printing (7 numbered pages: What-NebulaOS-Is, Installing-NebulaOS, First-Time-Setup = "First
+start", First-Calibration, Slicer-Setup, Printing = "Your first print", Updating-NebulaOS),
+2 Improve your prints (Improve-Your-Prints, Calibration-Explained = every routine,
+Adaptive-Print-Setup = "Print setup NebulaOS adds"), 3 Using NebulaScreen (Screen-Reference
+overview + Screen-Home, -Macros-Console, -Tune, -Connections, -Display, -Printer, -System,
+-Updates, -Reset, plus Camera, Timelapse, Power-Loss-Recovery), 4 Advanced (SSH-And-SFTP,
+Files-And-Configuration, Mainsail-And-Moonraker, Macros-And-Integrations, Beeps-And-Songs,
+Under-the-Hood = "How NebulaOS works", Two-System-Slots, Glossary), 5 Help (Troubleshooting,
+Report-A-Problem, Going-Back, Resetting, Mainboard-Firmware, Recovery).
+
+Eleven moved-page stubs (marker `<!-- moved-page-stub -->`): Supported-Hardware, Safety-First,
+Connecting-To-WiFi, Opening-Mainsail, Filament, Calibration-Guide, Bed-Tramming,
+Load-Cell-Calibration, Axis-Twist-Compensation, Skew-Correction, TMC-Autotune.
+`check_links.py` now checks anchors and forbids manual pages linking a stub. The central
+README links Safety-First (now a stub) - the main session fixes README links. Discrepancies
+found: BLOCKERS.md (release-notes nozzle wipe and sudo; firmware INSTALL_FROM_STOCK.md).
+
 ## Batch 4 (2026-11-05): page order applied, install corrections from the ke-dev run
 
 Commit A applied Q-075 (13-step path). Commit B took the main session's corrections measured on

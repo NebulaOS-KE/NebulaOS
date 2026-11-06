@@ -19,6 +19,13 @@
 Per-repository and per-category breakdowns are in `COVERAGE.md`.
 <!-- END GENERATED STATUS -->
 
+## 2026-11-06: wiki restructure on docs/agent
+
+Tim's merged plan applied in commits `bfc3ee9` (Using NebulaScreen split), `bc85375` (Improve
+your prints), `0251447` (Get printing path, Advanced, Help, Home, sidebar), `5f836bc`
+(citations). 50 pages, 11 of them moved-page stubs; link checker clean including anchors.
+Not published - the main session reviews, Tim decides.
+
 ## Maintenance watch (from 2026-11-03)
 
 The project is done; this is a slow check for moved tips and new instructions, not new work.

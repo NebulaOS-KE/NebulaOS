@@ -222,3 +222,13 @@ cropped, L14/L15 hide their last warning line behind the buttons), L42 (16-vs-20
 see earlier), L60 / L41 (the real-display p- grabs cover them), L01 / L02 / L1G (real+ gaps;
 m01 / m09 / m07 stay), L51 (41-camera stays), not-for-wiki/L34. Identical to images already
 in wiki/ (md5): L04 L05 L06 L17 L1H L20 L21 L22 L23 L27 L30 L31 L32 L33 L35 L40 L50 L70 L73.
+
+## Restructure (2026-11-06)
+
+No new images. Images moved with their sections: the Screen-Reference sections into
+`Screen-*.md` (one page per tab / Settings tile), the calibration pages' images into
+`Calibration-Explained.md`, Connecting-To-WiFi's into `First-Time-Setup.md`, Filament's load
+images into `Printing.md`. `m40-tram-idle.png`, `20a-statistics.png`, `m01`-era duplicates stay
+in `images/` unused. The older `m*` simulator images (screen `36490ed`) were kept where they
+were; they were not re-checked against 1.0.1 one by one.
+

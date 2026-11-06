@@ -134,7 +134,22 @@ alone.
 Discrepancies between code and documentation go here, never into a code change. This agent
 does not edit production code, tests or configuration to make documentation look right.
 
-*(none recorded yet)*
+**2026-11-06, found during the wiki restructure (firmware `dc868e3`, screen `fd47cb6`,
+extensions `f498796`). Reported to the main session; none changed.**
+
+- **Release notes 1.0.1, "Adaptive print start: an automatic nozzle wipe".** `START_PRINT`
+  (`print.cfg:158-278`) has no nozzle wipe or clean. The nozzle clean is a step of Auto
+  Calibration (`nebulaos_calibration.py:1753-1762`) and a separate macro
+  `NEBULAOS_NOZZLE_CLEAN` (`calibration.cfg:109-112`). The manual says so.
+- **Release notes 1.0.1, "For tinkerers: SSH and SFTP access, `sudo`".** `/usr/bin/sudo` is an
+  adapter that only runs `reboot`/`poweroff`/`halt` for a caller that is already root (its own
+  header). There is no general sudo. The manual says root needs none.
+- **Firmware `docs/INSTALL_FROM_STOCK.md`** (stock touchscreen section) still says to copy
+  `NebulaOS-Ender3V3KE-<version>.img` and "Not tested on hardware yet"; the 1.0.1 notes and the
+  ke-dev run say the touchscreen needs the `ota_img` file. Developer doc, firmware repository.
+- **Not settled from source:** which mainboard firmware OpenKE leaves and whether it matches
+  the single `KNOWN_STOCK` identity (`mcu_known_identities.py:45-47`); so whether NebulaOS
+  re-flashes after an OpenKE install. The manual gives the screen's notices as the trigger.
 
 ## Cleared
 
