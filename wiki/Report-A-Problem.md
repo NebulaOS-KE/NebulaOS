@@ -40,6 +40,34 @@ you expected, what happened instead, and the zip.
 *From `src/report_panel.cpp:26-124` at screen `fd47cb6` and
 `usr/share/nebulaos/printer_data-README.txt`, firmware `dc868e3`.*
 
+## After the printer restarted by itself
+
+From NebulaOS 1.0.2 the printer keeps a small "black box" in memory that survives a restart. If
+its touchscreen computer ever freezes, the watchdog restarts it after about a minute, as before,
+and the black box still holds what happened just before:
+
+- the system's last messages, and a crash report if the system crashed;
+- a line every 10 seconds with how busy the printer was and which programs used the processor.
+
+At the next start NebulaOS works out why the printer stopped - switched off, restarted, froze or
+crashed - and after a freeze or crash it keeps the evidence and shows a notice on the screen.
+
+You don't have to find anything: **Save logs to USB** (above) puts all of it in the zip. If you
+want to look yourself, it is on the printer under `/usr/data/nebulaos/logs/`:
+
+| File | What it holds |
+|---|---|
+| `reset-history.log` | One line per start: why the previous one ended |
+| `crash/` | The evidence of the last five freezes or crashes |
+| `previous-boot-kernel.log` | The system's messages from the previous start |
+
+`logs/nebulaos-state.txt` also has a **last restart** section.
+
+A real power cut erases the memory, so after one the printer can only say it was switched off.
+
+*From `usr/libexec/nebulaos-blackbox`, `etc/init.d/S03nebulaos-blackbox` and
+`nebulaos_osconfig/logs.py`, firmware `53c7e7d`.*
+
 ## Next
 
 - [Troubleshooting](Troubleshooting)

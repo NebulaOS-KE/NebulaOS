@@ -13,6 +13,7 @@ the logs for you.
 | The screen works but nothing responds to touch | See **Screen and touch** below - most often the touch calibration. |
 | The screen is fine but Mainsail will not open | See **Network** below, and [First start](First-Time-Setup#open-mainsail). |
 | It worked before an update and not after | Wait five minutes: a system image that does not come up properly is undone automatically. See [Recovery](Recovery#1-automatic-the-trial-start). |
+| The printer restarted by itself, and the screen says *"The printer restarted by itself because its system stopped responding"* | The touchscreen computer froze and its watchdog restarted it. If a print was running, see whether the screen offers to resume it ([Power-loss recovery](Power-Loss-Recovery)). Then please send us the logs: the printer kept what happened just before the freeze. See [After the printer restarted by itself](Report-A-Problem#after-the-printer-restarted-by-itself). |
 | You just installed NebulaOS and nothing works | [Installing NebulaOS](Installing-NebulaOS), then [Recovery](Recovery). Your old system is still in the other slot. |
 
 ---
