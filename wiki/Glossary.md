@@ -85,7 +85,7 @@ How the printer measures Z offset automatically.
 heaters, taking orders from Klipper. It has its own firmware.
 
 **TMC** - the type of motor driver the KE uses. Tunable for quieter running - see
-[TMC Autotune](TMC-Autotune).
+[TMC Autotune](Calibration-Explained#tmc-autotune).
 
 ## The system
 

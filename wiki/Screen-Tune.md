@@ -196,22 +196,22 @@ needed for normal printing or normal troubleshooting. If you suspect a driver is
 
 One menu for every calibration routine, reached from the **Calibration** tile. It is a scrollable
 list: the numbered **IN ORDER** steps are the order a new printer needs them (just do 1, 2, 3, ...;
-short version: [Calibration guide](Calibration-Guide)), then an **OTHER** section. **Up / ✓ / Down**
+every routine in detail: [Calibration explained](Calibration-Explained)), then an **OTHER** section. **Up / ✓ / Down**
 on the right move through the list; **Back** is the tile in the bottom-right corner, like on every
 page.
 
 | # | Row | Opens |
 |---|---|---|
-| 1 | **Bed Tramming** | Guided four-corner tramming ([Bed tramming](Bed-Tramming)) |
-| 2 | **Heaters (PID)** | PID tuning: **Bed 65 C** and **Hotend 230 C**, each saved with one Klipper restart |
-| 3 | **Axis Twist** | Axis Twist Compensation wizard; its Save also removes the saved bed mesh |
-| 4 | **Auto Calibration** | Load cell check, nozzle clean, Z offset, bed mesh - about 7 min, no tools needed |
-| 5 | **Input Shaper** | Guided resonance measurement |
-| 6 | **E-Steps** | Guided mark-extrude-measure calibration |
-| 7 | **Skew Correction** | Skew Correction (needs a printed test part) |
-| — | **Load Cell Calibration** *(Other)* | Automatic re-check or manual with a bottle ([Load cell calibration](Load-Cell-Calibration)) |
-| — | **TMC Autotune** *(Other, optional)* | TMC Autotune - quieter motors |
-| — | **Bed Mesh** *(Other)* | The same Bed Mesh panel as the Tune-tab tile — view or measure |
+| 1 | **Bed Tramming** | Guided four-corner tramming ([Bed tramming](Calibration-Explained#bed-tramming)) |
+| 2 | **Heaters (PID)** | PID tuning: **Bed 65 C** and **Hotend 230 C**, each saved with one Klipper restart ([details](Calibration-Explained#heaters-pid)) |
+| 3 | **Axis Twist** | Axis Twist Compensation wizard; its Save also removes the saved bed mesh ([details](Calibration-Explained#axis-twist)) |
+| 4 | **Auto Calibration** | Load cell check, nozzle clean, Z offset, bed mesh - about 7 min, no tools needed ([details](Calibration-Explained#auto-calibration-z-offset-and-bed-mesh)) |
+| 5 | **Input Shaper** | Guided resonance measurement ([details](Calibration-Explained#input-shaper)) |
+| 6 | **E-Steps** | Guided mark-extrude-measure calibration ([details](Calibration-Explained#e-steps-rotation-distance)) |
+| 7 | **Skew Correction** | Skew Correction (needs a printed test part) ([details](Calibration-Explained#skew-correction)) |
+| — | **Load Cell Calibration** *(Other)* | Automatic re-check or manual with a bottle ([Load cell calibration](Calibration-Explained#load-cell-calibration)) |
+| — | **TMC Autotune** *(Other, optional)* | TMC Autotune - quieter motors ([details](Calibration-Explained#tmc-autotune)) |
+| — | **Bed Mesh** *(Other)* | The same Bed Mesh panel as the Tune-tab tile — view or measure ([details](Calibration-Explained#bed-mesh)) |
 
 Under every row a status line: **Done 24 Oct - <result>** (green) when it has run, a one-line
 description with the time it takes when not, or **Redo: <reason>** (orange, with a bar on the left)
@@ -249,7 +249,7 @@ screen reconnects by itself), and at the end either **Done <date>** with the new
   and probes; the bed must be empty.
 - **Auto Calibration** (formerly *Z-Offset & Bed Mesh*) — load cell check, nozzle clean, Z offset
   and bed mesh, saved with one Klipper restart; resets the Z adjustment to 0. About 7 minutes; the
-  bed must be empty. Full walkthrough: [Calibration walkthrough](Calibration-Explained).
+  bed must be empty. Step by step: [First calibration](First-Calibration).
 - **Input Shaper** — measures resonances with the accelerometer, first mounted on the toolhead (X),
   then on the bed (Y), and saves the result with one Klipper restart.
 - **E-Steps** — the hotend heats; you mark the filament at the extruder entry, the printer
@@ -265,7 +265,7 @@ screen reconnects by itself), and at the end either **Done <date>** with the new
 
 A 5-point paper test across X (`AXIS_TWIST_COMPENSATION_CALIBRATE SAMPLE_COUNT=5`). Fixes first
 layers that are uneven left to right despite re-meshing. Full guide:
-[Axis Twist Compensation](Axis-Twist-Compensation).
+[Calibration explained → Axis Twist](Calibration-Explained#axis-twist).
 
 #### Skew Correction
 
@@ -277,7 +277,7 @@ Corrects parts that come out as slight parallelograms instead of squares.
   Tapping a field opens a number keypad.
 - Tap **Apply & Save** — this sends the correction *and* runs `SAVE_CONFIG` (Klipper restarts).
 
-Full guide: [Skew Correction](Skew-Correction).
+Full guide: [Calibration explained → Skew Correction](Calibration-Explained#skew-correction).
 
 ![Skew Correction with the number keypad open](images/skew-keypad.png)
 
@@ -291,7 +291,7 @@ Full guide: [Skew Correction](Skew-Correction).
 
 Quieter, cooler steppers. For each stepper pick a **Motor** and a **Tuning Goal** (`auto`, `silent`,
 `performance`, `autoswitch`), then tap **Save/Restart**. Steppers without a saved choice are
-pre-selected with the KE's stock motors. Full guide: [TMC Autotune](TMC-Autotune).
+pre-selected with the KE's stock motors. Full guide: [Calibration explained → TMC Autotune](Calibration-Explained#tmc-autotune).
 
 ---
 

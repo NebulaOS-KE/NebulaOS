@@ -10,7 +10,7 @@ line, timelapse - or heat up twice.
 
 - A slicer. The examples use **OrcaSlicer**, which most KE owners use. Its **Creality Ender-3
   V3 KE** printer profile is a good starting point.
-- A calibrated printer - [Calibration guide](Calibration-Guide).
+- A calibrated printer - [Calibration guide](Calibration-Explained).
 
 ## The two lines
 

@@ -128,7 +128,7 @@ When it comes up:
 
    ![The Wi-Fi networks panel](images/03-wifi.png)
 2. Calibrate the printer once before printing - the calibrations from your old system do not
-   carry over. [Calibration guide](Calibration-Guide).
+   carry over. [Calibration guide](Calibration-Explained).
 3. If you came from OpenKE, delete the copied image to free the space it used - in an SSH
    session on the printer:
 

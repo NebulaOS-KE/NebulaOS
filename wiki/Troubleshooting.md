@@ -38,14 +38,14 @@ USB stick and shows where to report the issue
 | A print will not start at all | Check the printer is idle and the file sliced correctly. See [Printing](Printing). |
 | The print stopped partway | Check for filament runout - see [Filament](Filament). After a power cut, see [Power-loss recovery](Power-Loss-Recovery). |
 | You pressed **Stop** and now nothing works | **Stop** is an emergency stop. Power-cycle the printer, or run `FIRMWARE_RESTART` from the console. See [Printing](Printing). |
-| First layer uneven left to right, bed mesh does not help | [Axis Twist Compensation](Axis-Twist-Compensation). |
-| One corner of the bed high or low | [Bed tramming](Bed-Tramming). |
+| First layer uneven left to right, bed mesh does not help | [Axis Twist Compensation](Calibration-Explained#axis-twist). |
+| One corner of the bed high or low | [Bed tramming](Calibration-Explained#bed-tramming). |
 | First layer uneven everywhere | Re-run the bed mesh: **Tune → Bed Mesh → Calibrate**. Clean the bed (IPA) and check nothing is loose. |
 | First layer too high or too low everywhere | Baby-step Z offset: **Tune → Z Offset**, or tap the Z readout on the print status screen. |
-| Parts not square | [Skew Correction](Skew-Correction). |
-| Ghosting / echoes after sharp corners | [Input shaper](Calibration-Explained#step-5--input-shaper-kill-ringingghosting): **Tune → Calibration → Input Shaper**. |
+| Parts not square | [Skew Correction](Calibration-Explained#skew-correction). |
+| Ghosting / echoes after sharp corners | [Input shaper](Calibration-Explained#input-shaper): **Tune → Calibration → Input Shaper**. |
 | Adaptive mesh not used, full bed meshed instead | The print covers more than 75 % of the bed, the file has no object labels, or the start G-code passes `BED_MESH_ADAPTIVE=0` or `BED_MESH_PROFILE=`. See [Adaptive meshing and purge](Adaptive-Print-Setup). |
-| Corner bulges, blobs or gaps | Pressure advance and flow: [Calibration walkthrough](Calibration-Explained#step-7--pressure-advance-flow--temperature-slicer-side). |
+| Corner bulges, blobs or gaps | Pressure advance and flow: [Calibration explained](Calibration-Explained#flow-pressure-advance-and-temperature). |
 | A panel says "locked during print" | Expected: calibration, homing, extruding and similar actions are blocked while printing. See [Screen reference](Screen-Reference). |
 
 ---

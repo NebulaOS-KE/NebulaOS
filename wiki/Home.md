@@ -23,7 +23,7 @@ same way.
 6. **[First-time setup](First-Time-Setup)** - the overview of steps 7 to 12.
 7. **[Connecting to Wi-Fi](Connecting-To-WiFi)**
 8. **[Opening Mainsail](Opening-Mainsail)** - the printer in your web browser.
-9. **[Calibration guide](Calibration-Guide)** - the Calibration menu, top to bottom. The
+9. **[Calibration guide](Calibration-Explained)** - the Calibration menu, top to bottom. The
    [Calibration walkthrough](Calibration-Explained) is the long version.
 10. **[Setting up your slicer](Slicer-Setup)** - **do not skip this.** Two lines of start and
     end G-code, once, before you print anything. Without them the print skips the mesh and
@@ -37,7 +37,7 @@ same way.
 | What you want | Where to go |
 |---|---|
 | Learn what a button on the screen does | [Screen reference](Screen-Reference) |
-| Get the first layer right | [Calibration guide](Calibration-Guide) |
+| Get the first layer right | [Calibration guide](Calibration-Explained) |
 | Set up the slicer's start and end G-code | [Setting up your slicer](Slicer-Setup) |
 | Start, pause or cancel a print | [Printing](Printing) |
 | Load or change filament | [Filament](Filament) |

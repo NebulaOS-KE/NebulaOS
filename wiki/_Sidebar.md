@@ -20,12 +20,9 @@ New here? Follow steps 1 to 13 in order.
 - 8\. [Opening Mainsail](Opening-Mainsail)
 
 **Calibrate**
-- 9\. [Calibration guide](Calibration-Guide)
-- [Calibration walkthrough (the long version)](Calibration-Explained)
-- [Bed tramming](Bed-Tramming)
-- [Load cell calibration](Load-Cell-Calibration)
-- [Axis twist](Axis-Twist-Compensation)
-- [Square parts (skew)](Skew-Correction)
+- 9\. [First calibration](First-Calibration)
+- [Improve your prints](Improve-Your-Prints)
+- [Calibration explained](Calibration-Explained)
 
 **Print**
 - 10\. **[Setting up your slicer](Slicer-Setup)** - once, before the first print
@@ -38,8 +35,7 @@ New here? Follow steps 1 to 13 in order.
 - [Resetting](Resetting)
 
 **Advanced**
-- [Adaptive meshing and purge](Adaptive-Print-Setup)
-- [Quieter motors (TMC Autotune)](TMC-Autotune)
+- [Print setup NebulaOS adds](Adaptive-Print-Setup)
 - [Camera](Camera)
 - [Timelapse](Timelapse)
 - [Beeps and songs](Beeps-And-Songs)

@@ -178,5 +178,5 @@ and thumbnails, is Mainsail's **History** page
 ## Related
 
 - [Filament](Filament)
-- [Calibration guide](Calibration-Guide)
+- [Calibration guide](Calibration-Explained)
 - [Power-loss recovery](Power-Loss-Recovery)

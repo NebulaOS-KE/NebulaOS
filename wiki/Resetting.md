@@ -43,7 +43,7 @@ Every button asks first and says what it does:
 
 Your **G-code files** and the **other boot slot** survive a clean NebulaOS reset. Afterwards
 you reconnect to Wi-Fi on the screen and calibrate again -
-[Connecting to Wi-Fi](Connecting-To-WiFi), [Calibration guide](Calibration-Guide).
+[Connecting to Wi-Fi](Connecting-To-WiFi), [First calibration](First-Calibration).
 
 The prints you made **under NebulaOS** are gone from
 [Statistics](Screen-Printer#statistics-panel), but the *Before NebulaOS* figures come back on

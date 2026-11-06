@@ -157,4 +157,4 @@ again. Nothing here changes your configuration or calibration.
 
 ## Related
 
-- [Calibration guide](Calibration-Guide) - E-steps calibration affects how much filament is fed
+- [Calibration guide](Calibration-Explained) - E-steps calibration affects how much filament is fed

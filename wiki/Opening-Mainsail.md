@@ -80,4 +80,4 @@ DHCP it may occasionally change.
 
 ## Next step
 
-[Calibration guide](Calibration-Guide) - the Calibration menu, top to bottom.
+[Calibration guide](Calibration-Explained) - the Calibration menu, top to bottom.

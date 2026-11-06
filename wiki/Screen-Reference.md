@@ -20,7 +20,7 @@ Also on the screen: [Camera](Camera), [Timelapse](Timelapse) and
 [Power-loss recovery](Power-Loss-Recovery).
 
 **Looking for a job rather than a button?** [Get printing](Home) walks through the common tasks
-in order, and [Calibration explained](Calibration-Explained) covers every calibration.
+in order, and [Improve your prints](Improve-Your-Prints) starts from what you see on the print.
 
 Screenshots are captures of the real application at the printer's own 480x272 resolution. The
 `p-` pictures are grabs of a printer's own display. The others come from the screen app with
@@ -100,7 +100,7 @@ out.
 
 | Panel | Where it is described | Screenshots (states shown) |
 |---|---|---|
-| `axis_twist_panel` | [Tune](Screen-Tune) - task: [Calibration explained](Calibration-Explained) | intro. **Not yet:** the running probe steps - they need a live `axis_twist` run |
+| `axis_twist_panel` | [Tune](Screen-Tune) - task: [Calibration explained](Calibration-Explained#axis-twist) | intro. **Not yet:** the running probe steps - they need a live `axis_twist` run |
 | `bedmesh_panel` | [Tune](Screen-Tune) | no mesh, saved mesh, a real mesh, 3D view, save-profile prompt |
 | `boot_logo_panel` | [Settings → Display](Screen-Display) | page, logo list, another logo selected, both Apply questions, Restore, Delete, no USB stick. **Not yet:** the USB picker with images on a stick, and the import result - they need a stick in the printer |
 | `calibration_menu_panel` | [Tune](Screen-Tune) - task: [Calibration explained](Calibration-Explained) | menu, status lines |
@@ -127,7 +127,7 @@ out.
 | `main_panel` | [Home and printing](Screen-Home) | idle, printing, "Unavailable while printing" |
 | `mcu_panel` | [Settings → Printer](Screen-Printer) - task: [Mainboard firmware](Mainboard-Firmware) | page, confirm, busy, done, failed, reinstall question |
 | `network_detail_panel` | [Settings → Connections](Screen-Connections) | page |
-| `pid_calibration_panel` | [Tune](Screen-Tune) - task: [Calibration explained](Calibration-Explained) | page, running, done, bed and hotend start questions |
+| `pid_calibration_panel` | [Tune](Screen-Tune) - task: [Calibration explained](Calibration-Explained#heaters-pid) | page, running, done, bed and hotend start questions |
 | `power_panel` | [Tune](Screen-Tune) - task: [Power-loss recovery](Power-Loss-Recovery) | page, the power-loss resume offer. **Not yet:** the page's own Resume question. Power devices: none - NebulaOS ships no `[power]` devices, so that part is never shown |
 | `print_panel` | [Home and printing](Screen-Home) | file list |
 | `print_status_panel` | [Home and printing](Screen-Home) - task: [Your first print](Printing) | printing, the start steps, Pause during the start, cancel question |
@@ -138,7 +138,7 @@ out.
 | `report_panel` | [Settings → System](Screen-System) | page, Save logs question. **Not yet:** saving and its result - they only follow Save |
 | `reset_panel` | [Settings → Reset](Screen-Reset) - task: [Resetting](Resetting) | page and all four questions |
 | `setting_panel` | this page, below | tiles |
-| `skew_correction_panel` | [Tune](Screen-Tune) - task: [Calibration explained](Calibration-Explained) | page, keypad |
+| `skew_correction_panel` | [Tune](Screen-Tune) - task: [Calibration explained](Calibration-Explained#skew-correction) | page, keypad |
 | `spoolman_panel` | [Home and printing](Screen-Home) | spool list (the real screen) |
 | `spoolman_server_panel` | [Settings → Connections](Screen-Connections) | in use, typing, none, save question, remove question |
 | `static_ip_panel` | [Settings → Connections](Screen-Connections) | page, keypad, invalid value, back-to-DHCP question |
@@ -146,7 +146,7 @@ out.
 | `storage_panel` | [Settings → System](Screen-System) - task: [Resetting](Resetting#freeing-up-space) | page, both clean-up questions. **Not yet:** "Deleting..." and the results - they only follow OK |
 | `system_panel` | [Settings → System](Screen-System) | page, reboot and shut down questions |
 | `tmc_status_panel` | [Tune](Screen-Tune) | page |
-| `tmc_tune_panel` | [Tune](Screen-Tune) - task: [Calibration explained](Calibration-Explained) | the KE defaults |
+| `tmc_tune_panel` | [Tune](Screen-Tune) - task: [Calibration explained](Calibration-Explained#tmc-autotune) | the KE defaults |
 | `updates_panel` | [Settings → Updates](Screen-Updates) - task: [Keeping NebulaOS updated](Updating-NebulaOS) | page (the printer's own display), update one and update all questions. **Not yet:** updating and its result - they only follow Update |
 | `wifi_panel` | [Settings → Connections](Screen-Connections) - task: [First start](First-Time-Setup) | network list, password, hidden network, forget question |
 | `zoffset_panel` | [Tune](Screen-Tune) | saved, save error, older extensions |

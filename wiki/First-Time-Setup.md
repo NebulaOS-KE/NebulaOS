@@ -62,7 +62,7 @@ re-measure).
 **You do not have to do all seven before printing.** Numbers 1 to 4 get most printers to a
 good first layer. Skew Correction in particular is worth leaving until you have a reason.
 
-Detail for each one: [Calibration guide](Calibration-Guide) for the short version,
+Detail for each one: [Calibration guide](Calibration-Explained) for the short version,
 [Calibration walkthrough](Calibration-Explained) for the full background.
 
 ### 4. Read the status line under each row
@@ -141,7 +141,7 @@ clean NebulaOS reset, and the boot slot swap puts your old firmware back. See
 ## Next step
 
 [Connecting to Wi-Fi](Connecting-To-WiFi) - the first step above. From there each page links
-to the next: [Opening Mainsail](Opening-Mainsail), the [Calibration guide](Calibration-Guide),
+to the next: [Opening Mainsail](Opening-Mainsail), the [Calibration guide](Calibration-Explained),
 [Setting up your slicer](Slicer-Setup), [Filament](Filament), [Printing](Printing).
 
 ## Related
