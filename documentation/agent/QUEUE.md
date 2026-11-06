@@ -1,0 +1,363 @@
+# Work queue
+
+Priority order follows `MISSION.md` Part 8.6: critical user instructions first, then safety
+and recovery, then installation and setup, then high-impact screenshots, then undocumented
+commands and configuration, then developer implementation references, then the rest.
+
+Items are taken from the coverage inventory. A finished item updates `coverage.jsonl` and
+the dashboard in the same batch as the page itself.
+
+## P1 - Finish Phase 1 discovery
+
+- [x] **Q-001** Resolve the G-code command names assembled from module constants. Done:
+      8 resolved, each recorded in `tools/seed_inventory.py` next to the constant it comes
+      from. Command total is 51, not the 43 the literal-string scan could see.
+- [x] **Q-002** Discover configuration keys. Done: 152 Klipper extension options with
+      declared types, and 20 real NebulaScreen settings. The first attempt over-collected
+      badly - see the discovery mistake recorded in `STATUS.md`. Declared **defaults** are
+      still to be extracted per key when each reference page is written, which is the right
+      time to read them accurately.
+- [x] **Q-003** Discover the Moonraker / JSON-RPC surface. Done: **56** `machine.nebulaos.*`
+      endpoints plus the `nebulaos:settings_changed` notification, inventoried from the
+      server-side registration table and cross-checked against the UI's call sites, plus 17
+      `nebulaos_osconfig` helper modules. Still open as a smaller follow-up: the **Klipper
+      status objects** the UI subscribes to via `printer.objects.subscribe` - the ~85
+      pointers rejected from configuration discovery belong here, and need their
+      subscription sites found before they can be inventoried honestly.
+- [x] **Q-004** Discover developer-facing commands. Done for the firmware, which holds
+      nearly all of them: 14 build pipeline scripts, 11 tool sets, 56 overlay runtime
+      helpers. The other repositories' build entry points are covered by their
+      repo-overview items and will be detailed when each developer wiki is written.
+- [x] **Q-005** Inventory the update, rollback, A/B slot and recovery mechanisms. Done as
+      items rather than as a file list: the update supervisor, slot swap, clean reset, OTA
+      markers and image trial/confirm services, together with the `ota.*`, `image.*` and
+      `updates.*` API groups.
+- [x] **Q-006** Audit the 34 existing NebulaScreen wiki pages. Done: 15 move, 1 adapt,
+      16 keep, 2 historical, all recorded in `coverage.jsonl` and written up in
+      `REUSE-AUDIT.md`. Two problems found - a confusable page-name pair, and an install
+      path that is documented but untested (now `BLOCKERS.md` B-003).
+- [x] **Q-007** **Done (2026-11-03).** Both cloned, read and documented, closing B-002 and
+      leaving every repository in the organisation with documentation.
+      - `nebulaos-packages` `9d0d264` -> `docs/reference/README.md`, PR
+        [#2](https://github.com/NebulaOS-KE/nebulaos-packages/pull/2). Offline tests run:
+        10 passed, 0 failed. Four invariants written down with what breaks if they change.
+      - `lv_drivers` -> `docs/NEBULAOS.md`, PR
+        [#1](https://github.com/NebulaOS-KE/lv_drivers/pull/1). The fork surface is exactly two
+        commits on `guppyscreen-ke-next`; **one is live and one is dead code**, which the diff
+        does not reveal - `fbdev_blank`/`fbdev_unblank` were superseded by NebulaScreen's own
+        `nsfb`, and `fbdev_blank()` must never be called on this panel at all.
+
+## P1 - Phase 2, the end-user manual (starts as soon as discovery is deep enough)
+
+- [x] **Q-010** Manual skeleton and navigation. Done: `wiki/` with `Home.md` and
+      `_Sidebar.md` covering all ten sections, plus `tools/check_links.py` which gates
+      broken links, missing images and pages unreachable from the sidebar.
+- [x] **Q-011** Section 02, Installation. Done: `wiki/Installing-NebulaOS.md`, both routes,
+      with the untested stock-touchscreen caveat given its own section near the top rather
+      than buried.
+- [x] **Q-012** Section 10, Recovery, plus the safety material. Done:
+      `wiki/Recovery.md`, `wiki/Going-Back.md`, `wiki/Safety-First.md`. Trial timings
+      verified in source rather than copied from the old wiki.
+- [~] **Q-017** Replace the stub pages with real content. Done so far:
+      `First-Time-Setup`, `Connecting-To-WiFi`, `Opening-Mainsail`, `Power-Loss-Recovery`,
+      **all 17 done**, plus 6 calibration sub-pages brought across that were never stubs.
+      The manual is 29 pages with no stubs remaining.
+- [ ] **Q-018** Describe the 21 panels that `Screen-Reference.md` only indexes with a pointer.
+      They are counted `missing`, not credited to the pointer.
+- [ ] **Q-013** Section 03, First-time setup - startup, Wi-Fi, finding the IP, Mainsail,
+      first calibration, first print.
+- [ ] **Q-014** Section 04, the complete NebulaScreen guide - 49 panels, task pages plus a
+      full screen reference.
+- [ ] **Q-015** Section 05, Calibration - every workflow, what it changes, how to read the
+      result, verified against the calibration extensions.
+- [ ] **Q-016** Sections 06 to 09 - everyday printing, advanced features, updates and
+      maintenance, troubleshooting.
+
+## P2 - Screenshots
+
+- [x] **Q-020** **Solved.** Simulator builds, and the app has a built-in screenshot tour
+      (`GUPPY_SIM_SHOTS`). 129 real screenshots at 480x272 from commit `94869f7`, captured
+      headless. Reproducible via `tools/capture_screenshots.sh`.
+- [x] **Q-023** Moot. The 2026-07-01 images are superseded by captures from the documented
+      commit, so they are not used rather than confirmed.
+- [ ] **Q-024** Embed the captures. Only **7 of 129** are in pages. Do this as each page is
+      written rather than as a sweep at the end.
+- [ ] **Q-025** Capture the panels the tour misses. `boot_logo_panel` and `init_panel` need
+      real hardware; the rest are reachable with existing `sim_*` hooks. **Priority:
+      `storage_panel`** - it has a brand-new user-facing button (**Free up space**) and no
+      picture of it.
+- [ ] **Q-026** `screen:updates_panel` is now `blocked` for screenshots: the capture is
+      timing-dependent without a live Moonraker. Only a real printer can supply a trustworthy
+      image of that page.
+- [ ] **Q-021** Capture the install and first-setup screens first - the highest-impact
+      images in the manual.
+- [ ] **Q-022** Capture the remaining panels, then annotate the ones used in procedures.
+
+## P1 - Phase 3 is now the priority
+
+The end-user manual is complete; the developer wikis are untouched and hold most of the
+inventory. Start with the extensions, because that is where verification is cheapest and
+strongest: the suite already passes and 21 modules are already test-verified.
+
+## P2 - Phase 3, developer wikis, one repository at a time
+
+- [~] **Q-030** `NebulaOS-klipper-extensions` - generated reference done (PR #3 on that
+      repo): 49 commands, 155 options, README. All 193 items are **draft**, not documented:
+      the tables lack the per-item detail mission 6.5 and 6.6 require.
+- [x] **Q-036** **Done (2026-11-03).** The last 16 configuration options now carry a purpose, so `CONFIG.md` is **156 of 156** and every extensions config-option item is `documented`. Fifteen were in vendored `[autotune_tmc]` and one was PLR's `prime_length`; each was read in the module that uses it. Where an option is passed straight to a driver register field the purpose names the field and stops - the datasheet is the authority and paraphrasing it would be invention. Original entry:
+      Raise the extensions reference to the mission's bar.
+      **Commands done:** `COMMANDS-DETAIL.md` gives handler, help text, parameters with types
+      / defaults / valid ranges, errors raised, side effects and an example invocation for all
+      49. The 41 user-facing ones are now `documented`, each naming the residual gap -
+      expected output, preconditions beyond the handler's guards, and safety warnings, none of
+      which the source contains.
+      **Configuration still draft.** `CONFIG.md` now carries each section's module-header
+      purpose and the verified fact that every option needs a Klipper restart (all reads
+      happen at load time; none are re-read at runtime). But the **per-option** purpose,
+      runtime behaviour, dependencies and example that 6.6 asks for are not written, and those
+      *can* be written by reading each of the 18 modules.
+      **139 of 155 now carry a per-option purpose** - 109 written by reading the module, the
+      rest quoted from the author's comment above the option - and only those are promoted.
+      **16 remain draft** with a dash, which is the honest answer where no reading has been
+      done. Remaining: scattered options in `autotune_tmc`, `bl24c16f`, `virtual_pins` and
+      `nebulaos_probe_pair`.
+      Seven options are now marked **accepted but not acted on**; see `CONFIG.md`.
+- [ ] **Q-031** `NebulaOS-nebulascreen` - LVGL architecture, the panel system, Moonraker
+      integration, simulator, build and testing. Reuse the existing developer pages.
+- [~] **Q-032** `NebulaOS-firmware` - API, boot services and now an **architecture guide**
+      (PR #5): slots and the marker, boot order, why there is no automatic rollback to stock,
+      the two-way bounded image trial, recovery by severity, the build pipeline in order.
+      Still to write: the 56 runtime helpers individually, per-service failure behaviour,
+      Buildroot internals, the filesystem layout, and what each build script does inside.
+- [x] **Q-037** **Done (2026-11-03,** `docs/firmware` `87116ad`**).** A new extractor,
+      `tools/gen_firmware_api_responses.py`, resolves each endpoint to its `nebulaos-osconfig`
+      call and that helper's own return keys, with `ast` - **43 of 59** resolved; the other 16
+      say so and each records which of the two reasons applies. The response envelope and the
+      exit-code-to-HTTP-status mapping are documented once, from source.
+      **Closed (2026-11-03):** 46 of 59 resolved after handling the dispatcher's inline
+      `{verb: function}[verb]()`. Example *values* were measured rather than assumed: the
+      4381-line fixture file yields **3 endpoints, 5 key/value pairs**, because it exercises
+      the helper functions directly rather than through endpoints. Those three are in the
+      page with the test named; the rest are not there because composing them from key names
+      would be unfalsifiable. Do not re-open this expecting a larger yield - the number is
+      measured and recorded in the extractor's own docstring.
+      Also found: `machine.nebulaos.stats` was missing from the inventory - 59 endpoints, not
+      58 - because the seeder last ran before 1.0.0 added it. Re-run the seeder after a release.
+- [~] **Q-033** `NebulaOS-klipper-mcu` - the on-printer lifecycle written (PR #1 on that repo):
+      identity classification, automatic restore with its bounds, the `UNKNOWN_APPLICATION`
+      branch, user install from the screen, board parameters, and the repository's own
+      qualification status quoted rather than paraphrased. Its existing docs already covered
+      building, the Creality header, the patch queue, reproducibility and the toolchain and
+      were left alone. Still to write: the patch series file by file, flash layout detail,
+      validation tooling.
+- [~] **Q-034** `NebulaOS-kernel` - written (PR #2 on that repo): branch layout with `main` as
+      the pristine vendor baseline, the three layers on `openke`, the five vendor board-file
+      fixes, the eight NebulaOS changes with their subsystems, how three of them serve
+      components above the kernel, and the build-applies-nothing answer. Still to write:
+      device-tree detail, PREEMPT_RT behaviour, the vendor SDK, U-Boot.
+- [ ] **Q-035** `nebulaos-packages` and `lv_drivers`.
+
+## P3 - Audit, publishing, maintenance
+
+- [ ] **Q-040** Phase 5 full audit against the complete inventory.
+- [ ] **Q-041** Markdown, link, image and navigation validation, run as a script.
+- [ ] **Q-042** Publishing preparation: pull requests per batch, validated workflows, final
+      dashboard. Publishing itself waits for the project owner.
+- [ ] **Q-043** Phase 7 maintenance guide: how a contributor documents a new feature,
+      refreshes screenshots and runs validation.
+
+## Verification debt (do not let this accumulate silently)
+
+- [ ] **Q-050** 59 inventory items require a screenshot; **0** exist. Q-020 decides whether
+      the simulator can supply them. Until then every procedure page is text-only, which the
+      mission explicitly calls insufficient for a beginner audience.
+- [x] **Q-051** Done 2026-10-31. 29 of 31 suites, **899 tests, all passing**, at `8e3447a`.
+      `verify_test` now `verified` on 21 extension modules with per-file citations. The two
+      remaining suites need the pinned Klipper composed in; 9 modules have no test at all and
+      honestly stay `unknown`.
+- [ ] **Q-052** Run the two Klipper-dependent suites the way `scripts/ci-tests.sh` does, by
+      composing `extras/` into a scratch copy of the pinned Klipper (`58bd67d`). That would
+      finish test verification for `nebulaos_compat` and `nebulaos_temperature_mcu`.
+
+## From the foreground session
+
+- [x] **Q-059** Tim's two decisions of 2026-11-01 - install-route framing, and free rein to
+      restructure. Applied; see `DECISIONS.md` D-009 and D-010.
+- [~] **Q-060** **Re-verify against tonight's code changes.** Extensions part **done**;
+      the rest waits for pushed SHAs.
+      - [x] Power-loss resume fix, extensions `a2e7634` - **pushed and verified.** Worktree
+        moved to it, full suite re-run (29/29 suites pass; the PLR suite is now 169 tests),
+        all 21 test-verified modules re-pointed from `8e3447a` to `a2e7634`, and
+        `wiki/Power-Loss-Recovery.md` written from the new behaviour.
+      - [x] Screen `4883008` + `3194104` - **pushed and verified.** Rebuilt and re-captured
+        at `3194104`; 128/129 images byte-identical, the one difference proved to be
+        non-determinism rather than a code change (see `SCREENSHOTS.md`). All screenshot
+        citations re-pointed to `3194104`.
+      - [x] Storage **Free up space** documented in `wiki/Resetting.md` and
+        `wiki/Updating-NebulaOS.md`, kept **separate** from **Clean up Creality files** as
+        instructed - they do different jobs and the separation is what keeps going back to
+        stock working.
+      - [x] Firmware `c377230` - **pushed and documented.** Root password now `NebulaOS`
+        (`936c3d6`), unique per-printer hostname `nebulaos-<last 4 hex of stable Wi-Fi MAC>`
+        (`ed24767`), Free up space endpoints (`47e07af`), pins advanced to extensions
+        `a2e7634` + screen `3194104`. `Opening-Mainsail` and `Installing-NebulaOS` updated.
+      **Q-060 is closed.** The pins now match the tips exactly - no gap between documented and
+      shipped behaviour for the extensions or the screen.
+      - Storage **Free up space** button, NebulaOS leftovers only. **Clean up Creality files**
+        stays separate - do not merge the two in the docs; they do different things.
+      - Default root password `NebulaOS` (was `openke`), unique default hostname
+        `nebulaos-<last 4 MAC hex>`, clearer SSH prompt - affects any page mentioning SSH or
+        the printer's name, and `Opening-Mainsail` in particular.
+      Re-run `tools/capture_screenshots.sh` once the screen tip moves.
+- [ ] **Q-061** Restructure under D-010: retitle the component `Installation.md` to say what
+      it is, and reconcile the screen wiki's navigation with the central manual.
+- [x] **Q-062** **Statistics for 1.0.0** (Tim via the main session, 2026-11-02). Done:
+      `wiki/Screen-Reference.md` gained a full **Statistics panel** section with the real
+      capture `20a-statistics.png`, and the page is linked from `Home`, `Printing` and
+      `Resetting`. Storage text now says the Creality cleanup keeps the statistics files.
+      Evidence: screen `36490ed` (`statistics_panel.cpp`, `stats_text`), firmware `70ad0b0`
+      (`nebulaos_osconfig/stats.py`, `combine_stats`, `cleanup.STATISTICS_KEEP`).
+- [x] **Q-063** Re-point the release references from firmware `211d804` to the 1.0.0
+      release candidate `70ad0b0`: 44 inventory items, the `Recovery` trial-bounds citation
+      (constants re-read at `70ad0b0` and unchanged) and the readiness report.
+- [x] **Q-064** **Timelapse page written** (2026-11-03). `wiki/Timelapse.md`: switching it on in
+      Mainsail, the park-head trade-off, the NebulaOS layer watcher that removes the slicer
+      change, what a power loss does, storage, and the cancel-does-not-render trap. Linked from
+      the sidebar, `Home`, `Camera`, `Printing` and `Power-Loss-Recovery`. Evidence: firmware
+      `70ad0b0` (`camera.cfg`, `print.cfg`, `nebulaos-seed-timelapse`, `nebulaos.conf`,
+      `machine.cfg`) and upstream `moonraker-timelapse` at the pinned `c7fff11`. **No screenshot
+      yet** - the page is Mainsail's, which this agent cannot capture. Original entry:
+      **Timelapse was not in the user manual at all** - found while checking the
+      1.0.0 extensions pin. It ships (manifest pins `moonraker-timelapse`, seeded by
+      `S57nebulaos-timelapse-seed`, macros in `camera.cfg`/`print.cfg`), the mission lists it
+      as a manual section, and 1.0.0 adds frame-keeping across a power loss. The power-loss
+      side is now documented in `Power-Loss-Recovery`; a proper `Timelapse` page is the next
+      manual batch.
+- [x] **Q-065** **Extensions reference re-verified at the 1.0.0 pin** (2026-11-03,
+      `docs/extensions` `90c646e`). `main`, `production` and `KLIPPER_EXTENSIONS_PIN` in the
+      manifest at `70ad0b0` all confirmed equal to `f498796` before the "shipped by firmware"
+      claim was changed. Suite re-run: 29 of 31 standalone, **912 tests**, all passing.
+      Generated references unchanged apart from provenance (50 commands, 156 options), 235
+      inventory items re-pointed, 31 test-evidence lines rewritten with today's per-suite
+      counts. `ARCHITECTURE.md` gained the physical-resume ordering and the timelapse frame
+      handling. Original entry:
+      Re-verify the extensions developer reference against the 1.0.0 pin.
+      189 inventory items are still labelled *0.9.0 (manifest pins a2e7634)*, but 1.0.0 ships
+      `f498796`, and `a2e7634..f498796` is **not** cosmetic: `nebulaos_power_loss_recovery.py`
+      (+155 lines) and `nozzle_clear.py` changed. Developer docs only - not release-blocking,
+      and not startable until the component worktrees come back.
+
+## Done
+
+- **Q-001** G-code command constants resolved (2026-10-31).
+- **Q-002** Configuration key discovery (2026-10-31), after correcting an over-collecting
+  first attempt.
+- **Q-003** Moonraker API discovery (2026-10-31), after fixing an extractor that dropped an
+  endpoint whose path contains a digit. Klipper status objects remain as a follow-up.
+- **Q-020** Screenshot capture solved (2026-11-01): 129 images from the documented commit,
+  via the app's own headless tour.
+- **Q-051** Extensions test suite run and cited (2026-10-31): 899 tests passing, 21 modules
+  promoted to test-verified. Two detection bugs of my own caught on the way - see
+  `VERIFICATION.md`.
+- **Q-006** Reuse audit of the existing wiki (2026-10-31). The existing wiki is good and is
+  being reused rather than replaced; Phase 2 is more relocation than authoring, except for
+  sections 01, 03 and 06.
+- **Q-004, Q-005** Build pipeline, developer tooling and runtime helpers (2026-10-31).
+  Counts verified independently. Five system-named overlay shims were nearly filtered out
+  as vendor noise and turned out to be NebulaOS-authored - see `STATUS.md`.
+- [x] **Q-066** **The osconfig helper reference** (2026-11-03, `docs/firmware` `c58a260`).
+      `OSCONFIG.md`: 18 modules, 189 public functions, the `DOMAIN VERB` reaching each and
+      its return keys, generated by `tools/gen_firmware_osconfig_reference.py`. Closes the
+      18 `os-helper` items, which were all `missing`.
+- [x] **Q-067** **Two tooling bugs found by re-seeding** (2026-11-03). The seeder dropped
+      every `gaps` value on each run (not in `BLANK`, not in the keep list) - 22 gaps became
+      0 with nothing failing. And it enumerated files from the worktree while citing
+      `origin/<default>`, so a page *this agent wrote* was discovered as source to document.
+      Both fixed; a re-seed is now idempotent and was checked to be.
+- [x] **Q-068** **Runtime helpers and full boot-service detail** (2026-11-03,
+      `docs/firmware` `56fdc1e`). `RUNTIME-HELPERS.md` is new - 57 executables, each with what
+      calls it (searched, not inferred) and its own header; the five impostor names are
+      flagged. `BOOT-SERVICES.md` gains a section per service with the full header and the
+      init verbs read from its own `case "$1"`. Closes 57 `runtime-helper` items that were all
+      `missing` and 35 `service` items. **Coverage 65% -> 79%.**
+      The verb parser was silently wrong twice: `esac` anchored at column 0 missed nine
+      indented scripts, and four more dispatch with `if [ "$1" = "start" ]` and have no `case`
+      at all. Both reported "no verbs" rather than failing.
+- [x] **Q-069** **The NebulaScreen block** (2026-11-03). 20 config-option items and 13 panel
+      items promoted, after checking rather than assuming.
+      - `docs/screen` `fa7cde0`: the six config fields `Configuration.md` did not have. Two of
+        them (`primary_color`, `secondary_color`) are in the **theme** file, not
+        `nebulascreen.json` - the inventory had them mis-classified. Two more are one-shot
+        migration markers, not settings.
+      - `docs/agent`: `wiki/Screen-Reference.md` gains filament-runout and boot-logo sections,
+        and **two index entries that pointed at pages not covering their subject** are fixed.
+      - `init_panel` and `prompt_panel` stay draft with the reason recorded: they are internal
+        screens nobody navigates to.
+- [x] **Q-070** **Extensions modules and the existing-page audit** (2026-11-03).
+      `MODULES.md` on `docs/extensions` `41653f9` closes 19 module items; the 18 existing
+      NebulaScreen wiki pages were re-verified against `36490ed` and all hold. **Coverage 92%.**
+      Corrected a long-standing wrong number: five modules have no test referring to them, not
+      nine, and all five are vendored. Two false alarms recorded in `REUSE-AUDIT.md`.
+
+## From the foreground session (2026-11-04, second release freeze)
+
+- [x] **Q-071** `Going-Back.md`: *"your old system is still installed"* stops being true after
+      the first system-image install, because an install always writes the slot you are not
+      running - which on a stock-installed printer is Creality's. Added the warning, the fact
+      that the Updates page names both slots before you confirm, and the way back (Creality's
+      own `.img` through NebulaOS's image install, which classifies images by their kernel).
+      **Worded without any claim about testing, per D-011** - the main session's phrasing
+      suggested saying it had not been tested on hardware, which Tim's standing decision
+      forbids on user pages. The record is here and in `VERIFICATION.md`.
+- [x] **Q-072** **Done (2026-11-04).** The rebuilt 1.0.0 is `ba98eec`, verified here with
+      `git ls-remote --tags` rather than taken on report. Re-pointed: 8 user-page citations,
+      431 `release_applicability` labels, the readiness report and `VERIFICATION.md`.
+      **The scope turned out wider than planned, and for a good reason.** The original plan
+      left the manual's per-behaviour citations alone as still-true provenance. But
+      `scripts/build/overlay`, `manifests` and `scripts/build` are byte-identical between
+      `70ad0b0` and `ba98eec`, so re-pointing them is not just safe - it is better: a reader
+      following a citation reaches the tagged release instead of an untagged ancestor.
+      Original entry: re-point release references once the main session sends the final sha. **Scope is small by design:** no user page claims a
+      release build. The manual's `70ad0b0` citations are per-behaviour provenance and stay
+      correct. What needs changing is `RELEASE-1.0.0-READINESS.md`, `VERIFICATION.md` and the
+      `release_applicability` labels in `coverage.jsonl`.
+- [ ] **Q-073** Do not recreate the five component worktrees until the main session says the
+      freeze is over - which is now **after Tim's OTA retest on `ke-dev` passes**, not merely
+      after the rebuild. A failed retest would need the release identity gate again. Central worktree only; read source with `git show`.
+- [x] **Q-074** **The Discord questions** (2026-11-04, Tim via the main session). Nine claims
+      from Tim's chat replies checked against source before any was written down - six hold,
+      two needed correcting, one was right for the wrong reason. Full record:
+      `DISCORD-CLAIMS-CHECK.md`. New page `wiki/Two-System-Slots.md` explains the A/B
+      lifecycle once, which answers most of the thread; targeted additions to
+      `Screen-Reference` (statistics import trigger, Z-offset vs `printer.cfg`),
+      `Calibration-Explained` (the accelerometer), `Updating-NebulaOS` (Mainsail 2.18.2 and
+      independent updates) and `Going-Back`.
+- [x] **Q-075** **The false "permanent mainboard damage" claim** (2026-11-04, Tim). Removed from
+      `Home`, `Safety-First` and `Mainboard-Firmware` after checking what an interrupted flash
+      really does: the bootloader lives below the application (`0x08003000`) and is never
+      written, `mcu_flash_file.py` can enter it without a working application, and the screen
+      already offers *"Reinstall the built-in MCU firmware?"* for exactly this case. The
+      caution to wait is kept and sized to what happens. **Second false mainboard warning in
+      this manual** - both overstated the same component, both caught by someone with a printer.
+- [x] **Q-076** **`wiki/Under-the-Hood.md`** from Tim's mockup, every claim checked. Two
+      corrections (the RAM figure; the unverifiable vsync claim), seven sharpened, one addition
+      (GD32F303 vs the `stm32f103xe` a user will see). Full list for Tim:
+      `UNDER-THE-HOOD-CHANGES.md`. One discrepancy left open there: the source guarantees
+      Klipper's checkout is never `-dirty`, but a `-dirty` was reported - needs one look at a
+      real `klippy.log`.
+
+## From the foreground session (2026-11-05, inbox batch)
+
+Done on `docs/agent` this batch: OpenKE SSH section (Tim's correction), `Slicer-Setup.md` (new),
+stopped-install wording, Under-the-Hood `-dirty`, 17 screenshots embedded, next-step links.
+
+- **Q-074 (next): API example responses into the firmware reference.** From
+  `_scratch/run23/api-snapshot/redacted/` only (regenerated after an IP-replacement bug - re-read),
+  labelled "measured on a printer running 1.0.0". Lives on `docs/firmware`, whose worktree is not
+  recreated; deferred because this batch was limited to pushing `docs/agent`.
+- [x] **Q-075: storyline page order** - Tim approved 2026-11-05 ("agent can apply it"). Applied:
+  sidebar numbers the 13-step path, Home lists it, every path page ends with one "Next step" to the
+  following page; Under the hood, Glossary and Screen reference moved to a Reference group; Filament
+  before Printing; Slicer setup is step 10 with callouts in First-time setup, Calibration guide and
+  the walkthrough.
+- **Q-076: re-point `ba98eec` references** once the main session names the final 1.0.0 sha.

@@ -35,6 +35,32 @@ Every release is built on GitHub, from public source, twice on separate machines
 must be byte-identical. The `.img`, the `.ingenic` and the release record carry a GitHub build
 attestation: `gh attestation verify <file> -R NebulaOS-KE/NebulaOS`.
 
+## Documentation
+
+**[The NebulaOS manual](https://github.com/NebulaOS-KE/NebulaOS/wiki)** - for the person using
+the printer. It assumes no Linux, no SSH and not much 3D printing experience: installing,
+first-time setup, every screen on the touchscreen, calibration, printing, filament, the camera,
+timelapse, statistics, updates, troubleshooting and recovery. The source of those pages is
+[`wiki/`](wiki) in this repository.
+
+Start with [Safety first](https://github.com/NebulaOS-KE/NebulaOS/wiki/Safety-First),
+[Installing NebulaOS](https://github.com/NebulaOS-KE/NebulaOS/wiki/Installing-NebulaOS) and
+[First-time setup](https://github.com/NebulaOS-KE/NebulaOS/wiki/First-Time-Setup), in that order.
+
+**Developer references** live in each component repository, next to the code they describe:
+
+| Reference | Where |
+|---|---|
+| Firmware: boot, slots, updates, recovery, the Moonraker API, the osconfig helpers, boot services, runtime helpers, build scripts and host tooling | [`NebulaOS-firmware/docs/reference/`](https://github.com/NebulaOS-KE/NebulaOS-firmware/tree/main/docs/reference) |
+| Klipper extensions: architecture, every module, every command, every configuration option | [`NebulaOS-klipper-extensions/docs/reference/`](https://github.com/NebulaOS-KE/NebulaOS-klipper-extensions/tree/main/docs/reference) |
+| NebulaScreen: architecture, configuration, building, the simulator, testing | [`NebulaOS-nebulascreen/wiki/`](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/tree/main/wiki) |
+| Which parts of the kernel are NebulaOS | [`NebulaOS-kernel`](https://github.com/NebulaOS-KE/NebulaOS-kernel) |
+| MCU firmware lifecycle on a printer | [`NebulaOS-klipper-mcu`](https://github.com/NebulaOS-KE/NebulaOS-klipper-mcu) |
+| The Python package index | [`nebulaos-packages`](https://github.com/NebulaOS-KE/nebulaos-packages) |
+
+[`documentation/`](documentation) holds the coverage inventory behind those references: what has
+been documented, at which commit, and what has not.
+
 ## The project
 
 ```

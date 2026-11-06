@@ -1,0 +1,210 @@
+# Verification policy
+
+Documentation in this project is only as good as the evidence behind it. This file defines
+what each state in `coverage.jsonl` means, and what it takes to claim it. Nothing here is
+decorative: a status is a promise, and promoting one without the evidence is the single
+worst thing this agent could do.
+
+## The states
+
+| State | Meaning | Evidence required |
+|---|---|---|
+| `verified` | Confirmed against the applicable code, and against tests or runtime evidence | Source read at a recorded commit **and** a passing test or observed runtime behaviour |
+| `partial` | Some of the claim is proven, some is not | Recorded per item in `evidence`, with the gap named |
+| `unknown` | Not investigated yet | - |
+| `blocked` | Cannot be verified with the access available | A named missing dependency in `BLOCKERS.md` |
+| `n/a` | The check does not apply to this kind of item | A reason, when it is not obvious |
+
+Documentation status is tracked separately from verification:
+
+| `doc_status` | Meaning |
+|---|---|
+| `missing` | No page covers this item |
+| `draft` | A page exists but has not passed the quality checks in `MISSION.md` Part 10 |
+| `documented` | A page exists and covers the item completely |
+| `verified` | Documented, and every technical claim on the page is backed by recorded evidence |
+
+The mission also asks for these dispositions where they apply; they are recorded in
+`release_applicability` or in the page text itself:
+
+- **Development only** - implemented, but not part of the supported release.
+- **Historical** - was true once, or belongs to retired functionality.
+- **Planned** - proposed, not implemented.
+
+## What this agent can and cannot prove
+
+**Can prove:** that code exists, what it does, how it is registered, what its defaults
+are, which configuration keys it reads, which tests cover it, and which commit each claim
+comes from. The repositories' own test suites are available and can be run - and have been.
+
+### Test verification actually performed
+
+Re-run on 2026-11-03 at **`f498796`** - the pin NebulaOS 1.0.0 ships, confirmed equal on
+`main`, on `production` and in the firmware manifest at `70ad0b0`:
+
+```
+29 of 31 test suites run standalone, the way scripts/ci-tests.sh runs them
+912 individual tests, all passing
+```
+
+Previously 899 tests at `8e3447a` (2026-10-31). Thirteen more exist now; seven of them are in
+the power-loss suite, which went 169 -> 176 as the parked-nozzle resume, the current-object
+restart and the timelapse frame handling landed. The other six were not traced to a suite and
+that is not claimed here.
+
+The two excluded suites (`test_nebulaos_compat`, `test_nebulaos_temperature_mcu`) import real
+Klipper modules and need the pinned Klipper checkout composed in, exactly as the repository's
+own CI script documents. They are not failures; they are a different run.
+
+That result promoted `verify_test` to `verified` on **21 extension modules**, each citing the
+specific test file and the run date.
+
+**Corrected 2026-11-03.** This file previously listed nine modules as having no test, by the
+rule *no `test_<module>.py` exists*. That rule is wrong in both directions and the real answer
+is **five**:
+
+- `nebulaos_compat` and `nebulaos_temperature_mcu` **do** have test files. They are excluded
+  from the standalone run because they import real Klipper, which is a different thing from
+  being untested, and conflating the two understated coverage.
+- `nozzle_clear`, `z_compensate` and `nebulaos_z_offset_probe` are covered by tests named after
+  what they test rather than after the file - `test_nozzle_clear_native.py`,
+  `test_z_compensate_*.py`, `test_z_offset_probe_*.py`.
+- `autotune_tmc` is referred to by `test_nebulaos_tmc_autotune.py`.
+
+The five modules no test refers to are `bl24c16f`, `calibrate_shaper_config`,
+`gcode_shell_command`, `motor_constants` and `virtual_pins` - **all five vendored**. Every
+module NebulaOS wrote is referred to by at least one test. Coverage is now determined by
+reading the test files for references to the module, not by matching filenames.
+
+Two cautions, recorded because both nearly produced a wrong result:
+
+- **Do not detect pass/fail with `grep '^OK'`.** `unittest` colours that line when it has a
+  TTY, so the match fails and every suite looks broken. The first run here reported 29 of 29
+  failing, which was entirely an artifact. Strip ANSI first. The repository's CI script is
+  unaffected because CI has no TTY.
+- **Do not use `unittest discover` for this suite.** It reports 42 errors, which are
+  rootdir and import artifacts rather than real failures - `test_tmcstatus` passes perfectly
+  when run as `extras.test_tmcstatus`. Run per-module, the way the project's own CI does.
+
+**Cannot prove:** that any of it works on a real printer. This agent has no printer
+access by design - no SSH, no hardware launcher, no Moonraker calls to a machine. So
+`verify_hardware` stays `n/a` or `blocked`, and any page describing hardware behaviour
+says plainly that the behaviour is established from the implementation and has not been
+observed on hardware by the author of the page.
+
+Implementation is evidence of *intended and implemented* behaviour. It is not evidence of
+successful hardware operation, and this agent will not blur the two.
+
+## Recording evidence
+
+Every technical claim carries a reference in the item's `evidence` list, in the form
+`<repo>@<commit>:<path>#<symbol>`, for example:
+
+```
+NebulaOS-klipper-extensions@8e3447a:extras/nebulaos_beeper.py#cmd_NEBULAOS_BEEP
+```
+
+Pages cite the same references, pinned to the exact commit, so a reader can check any
+sentence against the source it came from.
+
+## Hardware verification still outstanding
+
+Kept here on Tim's instruction (2026-11-01, widened 2026-11-02 — see `DECISIONS.md` D-011),
+because the user-facing pages no longer carry it. **No page in the manual states whether
+anything has been tested.** This file and `coverage.jsonl` are the whole record.
+
+Not observed on a printer by this agent, and so recorded only here:
+
+| Behaviour | Where it is documented | Established from |
+|---|---|---|
+| Installing from stock Creality firmware via the touchscreen | `Installing-NebulaOS` | source only (see below) |
+| USB recovery, both the slot-marker rewrite and the full `.ingenic` rewrite | `Recovery` | source and the firmware's own recovery tooling |
+| The image trial and automatic rollback | `Recovery` | firmware `70ad0b0`, `nebulaos_osconfig/image.py` |
+| Power-loss resume ordering, and the cleanup after a failed resume | `Power-Loss-Recovery` | extensions `f498796` and the repository's own tests |
+| Statistics, including the one-time import of the pre-NebulaOS figures | `Screen-Reference` | screen `36490ed`, firmware `70ad0b0`; reported working on `ke-dev` by Tim |
+
+**Installing from stock Creality firmware using the printer's touchscreen has not been
+observed on a printer by this agent.** The existing wiki recorded on 2026-10-29 that only the
+OpenKE/SSH route had been tested. User pages now present the touchscreen route as the normal
+route (decision D-009); the route's `verify_hardware` stays unverified in `coverage.jsonl`.
+
+What *is* established from source: the checks run before anything is written, so a failure
+stops without changing the running system. What is not established: that the route completes
+successfully on real hardware.
+
+## The documented commits are the released ones (re-checked 2026-11-04)
+
+`NebulaOS-firmware` carries the tag **`v1.0.0`**, and it resolves to **`ba98eec`** - verified
+here with `git ls-remote --tags`, not taken on report. Its manifest pins:
+
+| Component | Pin at `ba98eec` |
+|---|---|
+| Extensions | `f498796`, branch `production` |
+| NebulaScreen | `36490ed` (`NEBULASCREEN_VERSION=v1.0.0`) |
+| Kernel | `d86790d` |
+| Host Klipper | `58bd67d` (upstream `Klipper3d/klipper`) |
+
+All four are unchanged from `70ad0b0`, the commit this documentation was written against.
+
+**And the documented behaviour is not merely similar at the release - it is identical.** Three
+checks, each one a `git diff --quiet` over the whole subtree:
+
+| Subtree | `70ad0b0` vs `ba98eec` |
+|---|---|
+| `scripts/build/overlay` - everything that lands on the printer | **byte-identical** |
+| `manifests` | identical |
+| `scripts/build` - the pipeline | identical |
+
+The release differs from the documented commit only in `scripts/package/build-img.py` and
+`validate-img.py`, which compress and check the already-built image, and in two host-only
+hardware capture profiles. So every page's citations were re-pointed from `70ad0b0` to
+`ba98eec`: a reader following one now lands on the **tagged release** rather than on an
+untagged ancestor, and finds exactly the code the page describes.
+
+Note the tag is **not** the tip of `main`. `d73dbe3` ("packaging check: compare the .img data
+streams, not the archive sizes") came after it. `REPOSITORY_HEAD != SHIPPING_PIN`, as ever.
+
+### Why it was rebuilt, kept as the record
+
+The first published 1.0.0 `.img` was compressed with a 192 MB LZMA dictionary, chosen by 7-Zip
+26 for `-mx=9`. Unpacking needs more memory than the printer's 248 MB, so an **online update**
+ran out of memory. `ba98eec` pins `-md=16m` - about 25 MB to unpack - and `validate-img.py`
+refuses a dictionary above 16 MB. Tim kept the version name and the tag was moved.
+
+**The stock-touchscreen route was not observed failing.** It plausibly would have - same file,
+same RAM, and Creality's updater also has to unpack it - but that is an inference. `BLOCKERS.md`
+B-003 stays unverified rather than becoming *observed failing*; see `STATUS-LOG.md` for the
+correction this agent needed on exactly that point.
+
+## The published wiki matches the branch (checked 2026-11-04)
+
+End-to-end, by cloning `NebulaOS-KE/NebulaOS.wiki` read-only and comparing it with `wiki/` at
+`docs/agent` `e38a3c3`:
+
+| | |
+|---|---|
+| Pages | **31, all byte-identical** |
+| Screenshots | **129 PNGs, all byte-identical** |
+| Pages on one side only | none, in either direction |
+
+Worth doing rather than assuming, because the branch and the published wiki are two artefacts
+and only one of them is what a reader sees. A screenshot that is stale **on the wiki** would be
+invisible from here - the inventory would say *captured* and the reader would see something
+else.
+
+The check also answered a smaller worry the right way round. The main session's summary of the
+last wiki push listed four pages, and two more had changed on the branch since the push before
+it. The clone shows an intermediate wiki commit (`1f7addd`) carrying exactly those two, so
+nothing was dropped - the summary described one commit, not the range.
+
+This is read-only verification. This agent does not push to the wiki and has never run a
+publish workflow.
+
+## Source revisions
+
+Documentation describes the **newest** code: the tip of each repository's default branch.
+The firmware's `manifests/dependencies.conf` says which commit of each component the
+firmware build actually ships. Where a default branch is ahead of its shipping pin, the
+page documents the newest code and names the pin, so nobody mistakes development work for
+released behaviour. `REPOSITORY_HEAD` is not `SHIPPING_PIN`, and the dashboard records
+both.
