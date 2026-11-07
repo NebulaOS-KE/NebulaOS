@@ -20,7 +20,7 @@ NebulaOS has one macro that prepares a print and one that ends it:
 
 | Slicer field | Put exactly this in it |
 |---|---|
-| Start G-code | `START_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single] RETRACT_LENGTH={retraction_length[0]} RETRACT_SPEED={retraction_speed[0]} UNRETRACT_SPEED={deretraction_speed[0]} UNRETRACT_EXTRA_LENGTH={retract_restart_extra[0]}` |
+| Start G-code | `START_PRINT BED_TEMP=[bed_temperature_initial_layer_single] EXTRUDER_TEMP=[nozzle_temperature_initial_layer] RETRACT_LENGTH={if is_nil(filament_retraction_length[0])}{retraction_length[0]}{else}{filament_retraction_length[0]}{endif} RETRACT_SPEED={if is_nil(filament_retraction_speed[0])}{retraction_speed[0]}{else}{filament_retraction_speed[0]}{endif} UNRETRACT_SPEED={if is_nil(filament_deretraction_speed[0])}{deretraction_speed[0]}{else}{filament_deretraction_speed[0]}{endif} UNRETRACT_EXTRA_LENGTH={if is_nil(filament_retract_restart_extra[0])}{retract_restart_extra[0]}{else}{filament_retract_restart_extra[0]}{endif}` |
 | End G-code | `END_PRINT` |
 
 The words in brackets are OrcaSlicer's own placeholders. When it slices, it replaces them with
@@ -40,7 +40,7 @@ names will not run NebulaOS's preparation.
 2. Replace everything in **Machine start G-code** with:
 
    ```gcode
-   START_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single] RETRACT_LENGTH={retraction_length[0]} RETRACT_SPEED={retraction_speed[0]} UNRETRACT_SPEED={deretraction_speed[0]} UNRETRACT_EXTRA_LENGTH={retract_restart_extra[0]}
+   START_PRINT BED_TEMP=[bed_temperature_initial_layer_single] EXTRUDER_TEMP=[nozzle_temperature_initial_layer] RETRACT_LENGTH={if is_nil(filament_retraction_length[0])}{retraction_length[0]}{else}{filament_retraction_length[0]}{endif} RETRACT_SPEED={if is_nil(filament_retraction_speed[0])}{retraction_speed[0]}{else}{filament_retraction_speed[0]}{endif} UNRETRACT_SPEED={if is_nil(filament_deretraction_speed[0])}{deretraction_speed[0]}{else}{filament_deretraction_speed[0]}{endif} UNRETRACT_EXTRA_LENGTH={if is_nil(filament_retract_restart_extra[0])}{retract_restart_extra[0]}{else}{filament_retract_restart_extra[0]}{endif}
    ```
 
 3. Replace everything in **Machine end G-code** with:
@@ -72,9 +72,14 @@ forward, so the print is presented to you.
 With the line above, every print starts with the retraction values from your slicer. They are
 only used when the slicer leaves the retraction to the printer:
 
-1. In the printer settings, tab **Extruder**, set the retraction length and speeds you want.
-2. Tick **Use firmware retraction** (in the same section).
+1. In the printer settings, tab **Extruder**, tick **Use firmware retraction**. OrcaSlicer then
+   greys out the retraction fields there; their values stay as the fallback.
+2. Put each material's retraction in its **filament** profile: **Setting Overrides**, tick and set
+   the retraction length, retraction speed, deretraction speed and extra length on restart.
 3. Slice and print.
+
+The start line takes the filament's values when it has them and the printer's otherwise. That is
+why it is so long: OrcaSlicer's short placeholders do not reliably pick up filament overrides.
 
 The slicer then writes short `G10`/`G11` commands instead of its own retraction moves, and the
 printer retracts with the values `START_PRINT` received. During the print you can fine-tune them
@@ -109,7 +114,7 @@ You can add these to the `START_PRINT` line:
 To soak the bed only for ABS and ASA, let OrcaSlicer decide:
 
 ```gcode
-START_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single] RETRACT_LENGTH={retraction_length[0]} RETRACT_SPEED={retraction_speed[0]} UNRETRACT_SPEED={deretraction_speed[0]} UNRETRACT_EXTRA_LENGTH={retract_restart_extra[0]} {if filament_type[0]=="ABS" or filament_type[0]=="ASA"}BED_SOAK=1{endif}
+START_PRINT BED_TEMP=[bed_temperature_initial_layer_single] EXTRUDER_TEMP=[nozzle_temperature_initial_layer] RETRACT_LENGTH={if is_nil(filament_retraction_length[0])}{retraction_length[0]}{else}{filament_retraction_length[0]}{endif} RETRACT_SPEED={if is_nil(filament_retraction_speed[0])}{retraction_speed[0]}{else}{filament_retraction_speed[0]}{endif} UNRETRACT_SPEED={if is_nil(filament_deretraction_speed[0])}{deretraction_speed[0]}{else}{filament_deretraction_speed[0]}{endif} UNRETRACT_EXTRA_LENGTH={if is_nil(filament_retract_restart_extra[0])}{retract_restart_extra[0]}{else}{filament_retract_restart_extra[0]}{endif} {if filament_type[0]=="ABS" or filament_type[0]=="ASA"}BED_SOAK=1{endif}
 ```
 
 If you leave the temperatures out, `START_PRINT` uses 65 °C for the bed and 230 °C for the
