@@ -41,18 +41,19 @@ it and let the rest keep printing.
 In OrcaSlicer: printer profile → **Machine G-code** → **Machine start G-code**:
 
 ```gcode
-START_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single]
+START_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single] RETRACT_LENGTH={retraction_length[0]} RETRACT_SPEED={retraction_speed[0]} UNRETRACT_SPEED={deretraction_speed[0]} UNRETRACT_EXTRA_LENGTH={retract_restart_extra[0]}
 ```
 
 To soak the bed only for filaments that warp (ABS, ASA), let the slicer add `BED_SOAK=1`:
 
 ```gcode
-START_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single] {if filament_type[0]=="ABS" or filament_type[0]=="ASA"}BED_SOAK=1{endif}
+START_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single] RETRACT_LENGTH={retraction_length[0]} RETRACT_SPEED={retraction_speed[0]} UNRETRACT_SPEED={deretraction_speed[0]} UNRETRACT_EXTRA_LENGTH={retract_restart_extra[0]} {if filament_type[0]=="ABS" or filament_type[0]=="ASA"}BED_SOAK=1{endif}
 ```
 
 `START_PRINT` then does, in order:
 
-1. Checks the filament sensor; with no filament it stops with a message.
+1. Checks the filament sensor; with no filament it stops with a message. Sets speed and flow back to
+   100 % and takes the slicer's [firmware retraction](#firmware-retraction) values.
 2. Starts heating the nozzle to 150 °C (below oozing) and the bed to `BED_TEMP`.
 3. Homes if needed, moves to Z 50 while the bed heats, and waits for the bed.
 4. Bed warp stabilisation (the [bed soak](#bed-soak)), **off by default**.
@@ -108,19 +109,27 @@ that need it. `END_PRINT` leaves the bed heated only when the switch is on **and
 offset is measured. To run it on its own, use the macro `NEBULAOS_NOZZLE_CLEAN` (Mainsail lists it
 with the NebulaOS macros).
 
-*`START_PRINT` is `print.cfg:158-278`; `NEBULAOS_NOZZLE_CLEAN` is `calibration.cfg:109-112`,
+*`START_PRINT` is `print.cfg:158-314`; `NEBULAOS_NOZZLE_CLEAN` is `calibration.cfg:109-112`,
 firmware `dc868e3`.*
 
 ## Firmware retraction
 
 NebulaOS configures Klipper's `[firmware_retraction]`: retract 0.6 mm at 35 mm/s, unretract at
-30 mm/s with no extra length (`machine.cfg:30-34`, firmware `dc868e3`). It is used **only** by files
-sliced with the slicer's retraction set to firmware retraction (`G10`/`G11`). Most slicer profiles
-retract in the G-code themselves, and then these values do nothing.
+30 mm/s with no extra length (`machine.cfg:30-34`). It is used **only** by files sliced with
+**Use firmware retraction** on (`G10`/`G11`). Without it the slicer retracts in the G-code itself,
+and these values do nothing.
 
-**Tune → Retraction** changes the values live while printing; the changes are not saved and a
-Klipper restart goes back to the configured ones. To change them for good, put a
-`[firmware_retraction]` section in `printer.cfg`. Details: [Tune → Retraction](Screen-Tune#retraction).
+With the start line from Step 2, `START_PRINT` sets the slicer's retraction values at the start of
+every print (`SET_RETRACTION`, logged in the console as "Firmware retraction from the slicer"). A
+value the start line does not pass keeps its current value. An unretract speed of 0, OrcaSlicer's
+"same as retraction", takes the retraction speed.
+
+**Tune → Retraction** changes the values live while printing; the changes are not saved, and the
+next print starts from the slicer's values again (after a Klipper restart, without values from the
+slicer, from the configured ones). To change the configured values, put a `[firmware_retraction]`
+section in `printer.cfg`. Details: [Tune → Retraction](Screen-Tune#retraction).
+
+*`print.cfg:205-237`, `machine.cfg:30-34`, firmware `bf8fb53`.*
 
 ## Settings
 

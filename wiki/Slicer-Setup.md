@@ -20,11 +20,15 @@ NebulaOS has one macro that prepares a print and one that ends it:
 
 | Slicer field | Put exactly this in it |
 |---|---|
-| Start G-code | `START_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single]` |
+| Start G-code | `START_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single] RETRACT_LENGTH={retraction_length[0]} RETRACT_SPEED={retraction_speed[0]} UNRETRACT_SPEED={deretraction_speed[0]} UNRETRACT_EXTRA_LENGTH={retract_restart_extra[0]}` |
 | End G-code | `END_PRINT` |
 
-The words in square brackets are OrcaSlicer's own placeholders. When it slices, it replaces them
-with the nozzle and bed temperatures of your filament's first layer.
+The words in brackets are OrcaSlicer's own placeholders. When it slices, it replaces them with
+the nozzle and bed temperatures of your filament's first layer and with the retraction values of
+your profile. Copy the line as it is, all on one line.
+
+`START_PRINT` also sets the speed and flow back to 100 %, so you don't need the
+`M220 S100` / `M221 S100` lines that many profiles start with.
 
 **The names matter.** The macros are called `START_PRINT` and `END_PRINT`. NebulaOS has no
 `PRINT_START` or `PRINT_END`, so a profile written for another Klipper printer that uses those
@@ -36,7 +40,7 @@ names will not run NebulaOS's preparation.
 2. Replace everything in **Machine start G-code** with:
 
    ```gcode
-   START_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single]
+   START_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single] RETRACT_LENGTH={retraction_length[0]} RETRACT_SPEED={retraction_speed[0]} UNRETRACT_SPEED={deretraction_speed[0]} UNRETRACT_EXTRA_LENGTH={retract_restart_extra[0]}
    ```
 
 3. Replace everything in **Machine end G-code** with:
@@ -63,6 +67,23 @@ and what each step costs in time, are in [Print setup NebulaOS adds](Adaptive-Pr
 `END_PRINT` turns the heaters off, retracts, and parks the nozzle at the back with the bed
 forward, so the print is presented to you.
 
+## Firmware retraction (optional)
+
+With the line above, every print starts with the retraction values from your slicer. They are
+only used when the slicer leaves the retraction to the printer:
+
+1. In the printer settings, tab **Extruder**, set the retraction length and speeds you want.
+2. Tick **Use firmware retraction** (in the same section).
+3. Slice and print.
+
+The slicer then writes short `G10`/`G11` commands instead of its own retraction moves, and the
+printer retracts with the values `START_PRINT` received. During the print you can fine-tune them
+on the screen under **Tune → Retraction**; the next print starts from the slicer's values again.
+
+Without **Use firmware retraction** the slicer retracts by itself, as before, and the values passed
+to `START_PRINT` change nothing. If the start G-code passes no retraction values, the printer keeps
+its own: 0.6 mm at 35 mm/s, unretract at 30 mm/s.
+
 ## Sending files from the slicer
 
 Moonraker, the printer's API, accepts uploads directly from the slicer, so you do not have to copy
@@ -88,7 +109,7 @@ You can add these to the `START_PRINT` line:
 To soak the bed only for ABS and ASA, let OrcaSlicer decide:
 
 ```gcode
-START_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single] {if filament_type[0]=="ABS" or filament_type[0]=="ASA"}BED_SOAK=1{endif}
+START_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single] RETRACT_LENGTH={retraction_length[0]} RETRACT_SPEED={retraction_speed[0]} UNRETRACT_SPEED={deretraction_speed[0]} UNRETRACT_EXTRA_LENGTH={retract_restart_extra[0]} {if filament_type[0]=="ABS" or filament_type[0]=="ASA"}BED_SOAK=1{endif}
 ```
 
 If you leave the temperatures out, `START_PRINT` uses 65 °C for the bed and 230 °C for the
@@ -107,9 +128,10 @@ heating the nozzle, the purge - and then the first layer begins.
 | A full-bed mesh every time, and the purge line at the front-left corner | **Label objects** is off. Turn it on and slice again. |
 | The fresh mesh is replaced by an old one | Remove any `BED_MESH_PROFILE LOAD=...` line after `START_PRINT`. |
 | No timelapse video, and timelapse is on | The print has to start with `START_PRINT`. See [Timelapse](Timelapse). |
+| The screen says the print isn't sliced for firmware retraction | **Use firmware retraction** is off in the slicer. Turn it on and slice again, or leave it off and let the slicer retract. |
 
 *From `START_PRINT`, `_START_PRINT_BED_MESH` and `END_PRINT` in `etc/nebulaos/klipper/print.cfg`,
-and the upload route from `etc/nebulaos/moonraker/nebulaos.conf:16-21`, firmware `dc868e3`. The OrcaSlicer field names and placeholders are OrcaSlicer's, not
+and the upload route from `etc/nebulaos/moonraker/nebulaos.conf:16-21`, firmware `bf8fb53`. The OrcaSlicer field names and placeholders are OrcaSlicer's, not
 NebulaOS's.*
 
 ## Next step

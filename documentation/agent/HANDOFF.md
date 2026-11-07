@@ -645,6 +645,14 @@ Three habits that the first batch proved out:
 - **Cite the commit.** Any claim about timing, defaults or behaviour names the file and the
   commit it came from, so a later reader can re-check it instead of trusting it.
 
+## Foreground session edit, 2026-11-07 (1.0.2)
+
+The foreground session committed on `docs/agent` while this session was not running (firmware
+bf8fb53, owner decision): `START_PRINT` now resets speed/flow and takes the slicer's firmware
+retraction values. Slicer-Setup (new start line, "Firmware retraction (optional)", one
+troubleshooting row), Adaptive-Print-Setup (Step 2 lines, step 1, Firmware retraction section)
+and Screen-Tune (Retraction note) were updated. The new start line is the one to use everywhere.
+
 ## Working rules that are easy to get wrong
 
 - Commit with `git -c user.name=Tim -c user.email=timdejaeger@gmail.com commit`, message

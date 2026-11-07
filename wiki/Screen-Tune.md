@@ -83,7 +83,9 @@ extra** (mm), **Unretract speed** (mm/s) — each with −/+ buttons, plus a **L
 (0.05/0.10/0.25) and a **Speed step (mm/s)** selector (1/5/10), and a single **Reset all** button.
 Changes apply **immediately** (live, via `SET_RETRACTION`) and are **runtime-only** — like the Limits
 panel, nothing here is saved to `printer.cfg`, so a Klipper restart reverts everything to your config
-file's values.
+file's values. If your slicer's start G-code passes the retraction values (see
+[Set up your slicer](Slicer-Setup#firmware-retraction-optional)), every new print starts from the
+slicer's values instead.
 
 ### Limits
 
