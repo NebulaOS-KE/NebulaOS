@@ -42,8 +42,8 @@
 - 🛡️ **Updates you don't have to be afraid of.** Two system slots: an update goes into the other
   one and starts on trial. If it doesn't come up healthy, the printer goes back by itself.
   One tap installs the next version from the touchscreen.
-- ⚡ **Prints that survive a power cut.** After an outage the printer offers to resume: bed first,
-  nozzle heated only when parked, mesh, excluded objects and timelapse kept.
+- ⚡ **Prints that survive a power cut.** After an outage the printer offers to resume: bed and
+  nozzle heated before anything moves, mesh, excluded objects and timelapse kept.
 - 🔓 **Standard, open, yours.** Unmodified upstream Klipper and Moonraker, so every Klipper guide,
   macro and tool works. OrcaSlicer upload, Spoolman, phone apps and home automation connect
   directly. No cloud.
