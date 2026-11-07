@@ -52,9 +52,10 @@ picture. On the 480x272 screen the end of the text runs on under the Later / Res
 
 After choosing **Resume**, the printer works through a deliberate order:
 
-1. **The bed heats first, with the nozzle off.**
+1. **The bed and the nozzle heat together**, both to the temperatures of the interrupted print,
+   before anything moves.
 2. **Z lifts and X and Y home**, so the toolhead is away from your part.
-3. **Only then does the nozzle heat**, at the park position.
+3. **The nozzle primes at the park position.**
 4. The bed mesh from the interrupted print is reloaded, the printer returns to the position it
    had reached, and printing continues from the same point in the file.
 
@@ -66,12 +67,13 @@ before the power cut are put back in front of the new ones when the print ends, 
 video covers the whole print instead of only the part after the resume. Nothing to switch on -
 it is set up in the shipped configuration (`machine.cfg`, `timelapse_frame_path`).
 
-**Why the order matters.** It would be simpler to heat everything at once, and a power-cut test
-on a real printer showed why that is wrong: the nozzle heated *while still sitting over the
-part*, which risks melting into the print you are trying to save. Heating the nozzle only once
-it has moved away costs a little time and removes that risk entirely.
+**Why the order matters.** After a power cut the nozzle has cooled down *inside* the top of your
+part. Lifting it cold can pull the part off the bed, so the nozzle is heated first and lets go
+of the plastic before anything moves. The bed and nozzle rarely reach their temperatures at the
+same moment, which is fine. Heating over the part can leave a small mark or a little ooze; the
+prime at the park position catches the ooze before printing continues.
 
-*The order comes from extensions `f498796`, the version NebulaOS 1.0.0 ships.*
+*From NebulaOS 1.0.2 (extensions `178a0c2`). Up to 1.0.1 the nozzle heated only after parking.*
 
 ## If a resume fails partway
 
