@@ -2,7 +2,7 @@
 
 <p align="center">
   <b>Your Ender-3 V3 KE has good hardware. NebulaOS gives it the software to match.</b><br>
-  A complete new system for the printer: a real-time Linux kernel, current upstream Klipper,
+  A complete new system for the printer: a new Linux 6.6 kernel, current upstream Klipper,
   a touchscreen app that guides you through calibration, and Mainsail in your browser.
 </p>
 
@@ -52,7 +52,7 @@
 
 | | Stock Creality | **NebulaOS** |
 |---|---|---|
-| Linux kernel | 4.4.94 (2017) | **6.6 real-time**, 120+ KE-specific changes |
+| Linux kernel | 4.4.94 (2017) | **6.6**, 120+ KE-specific changes |
 | Klipper | Creality's old fork | **Unmodified upstream** |
 | Calibration | A few routines | **Full guided suite with history** |
 | Live first-layer Z | – | ✅ in 0.001 mm steps |
