@@ -381,9 +381,8 @@ far too low would be unsafe, which is why only 1000-5000 g is accepted.
 
 **The accelerometer is the Creality one for this printer.** NebulaOS configures an ADXL345 on the
 KE's own SPI wiring - the same wiring the stock firmware uses - and drives it with **upstream
-Klipper's `[adxl345]` and `[resonance_tester]`**. The test runs to 80 Hz at 50 mm/s² per Hz,
-because this board produced *"Timer too close"* shutdowns near 80 Hz at a higher rate
-(`machine.cfg:56-75`, firmware `dc868e3`).
+Klipper's `[adxl345]` and `[resonance_tester]`**. The test runs to 90 Hz at 70 mm/s² per Hz,
+the same as Creality's stock firmware (`machine.cfg:62-74`, firmware 1.0.2).
 
 Everything happens on the page, with no popups:
 
