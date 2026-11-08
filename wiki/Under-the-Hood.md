@@ -39,16 +39,17 @@ on top of Creality's original firmware.
 **Why it matters:** the kernel, hardware drivers and applications can be maintained and improved
 together, rather than being limited by the original operating system.
 
-## Real-time scheduling — keeping important tasks on time
+## Scheduling — keeping important tasks on time
 
-NebulaOS uses a **PREEMPT_RT real-time Linux kernel**.
-
-A normal Linux kernel tries to share processing time fairly between running tasks. A real-time
-kernel allows time-sensitive work to interrupt less important work more predictably.
+NebulaOS uses a Linux 6.6 kernel with **preemption** (`CONFIG_PREEMPT`): a time-sensitive task can
+interrupt less important work instead of waiting for it to finish. Up to 1.0.1 it used the
+**PREEMPT_RT** real-time variant; 1.0.2 went back to standard preemption, the usual setup for a
+Klipper host.
 
 NebulaOS also gives priority to critical hardware communication and timing tasks over background
-activity. The printer's own MCU process runs at a real-time priority, above the threaded
-interrupt handlers; ordinary background work sits below both.
+activity. The link to the mainboard has the highest priority, the printer's Linux-side MCU
+process runs at a real-time priority just below it, and ordinary background work sits below
+both.
 
 For example, the printer might be running Klipper, showing a live camera feed, updating the
 touchscreen and talking over Wi-Fi at the same time.
@@ -58,11 +59,11 @@ Klipper reaches it through a second, Linux-side MCU process (`klipper_mcu`, Klip
 `MACH_LINUX` build, connected over a local socket) — which is why predictable scheduling matters
 during Input Shaper calibration in particular.
 
-**Why it matters:** more predictable host timing when several things happen at once. **The
-improvement over a conventional kernel has not been quantified.**
+**Why it matters:** the link to the mainboard and Klipper's Linux-side work stay ahead of the
+camera, the screen and Wi-Fi when several things happen at once.
 
 > **Does this make printing faster?** Not directly. The separate **GD32F303** microcontroller on
-> the mainboard still handles precise stepper timing. PREEMPT_RT improves scheduling on the
+> the mainboard still handles precise stepper timing. The kernel's scheduling only affects the
 > Linux side, not the accuracy of individual motor pulses.
 >
 > If you ever see the printer described as an `stm32f103xe`, that is not a mistake: the GD32F303
