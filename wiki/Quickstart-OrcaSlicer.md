@@ -40,7 +40,7 @@ materials at four layer heights.
 | End G-code | `END_PRINT` |
 | Retraction | Firmware retraction, with each filament's own values; fine-tune it on the screen under **Tune → Retraction** while printing |
 | Objects | Label objects on, so the printer meshes only where the part goes and you can cancel one object |
-| Left to the printer | Speed and acceleration limits, input shaper and square-corner velocity - Klipper keeps its own |
+| Left to the printer | The machine limits (maximum speed and acceleration), input shaper and square-corner velocity - Klipper keeps its own. Each process still sets its own accelerations per feature, within those limits |
 | Not used | Arc fitting (the printer has no arcs) and wipe (OrcaSlicer does not combine it with firmware retraction) |
 
 ## The filaments
@@ -53,9 +53,10 @@ materials at four layer heights.
 | Retraction (mm / retract mm/s / unretract mm/s) | 0.6 / 35 / 35 | 0.8 / 35 / 35 | 1.2 / 40 / 35 | 0.8 / 25 / 25 |
 | Pressure advance | 0.025 | 0.032 | 0.05 | not set |
 
-**Pressure advance:** PLA, PETG and PETG-CF set their own value at the start of every print,
-instead of the printer's (0.036). TPU leaves the printer's value. You can still change it during a
-print under **Tune**; to change it for good, change it in the filament profile.
+**Pressure advance:** PLA, PETG and PETG-CF set their own value at the start of every print. TPU
+sets none, so it prints with whatever value the printer has at that moment: 0.036 after a restart,
+otherwise the value the last print set. You can still change it during a print under **Tune**; to
+change it for good, change it in the filament profile.
 
 Using another slicer, or your own profiles? [Set up your slicer](Slicer-Setup) shows the two lines
 to add by hand.
