@@ -65,7 +65,11 @@
 1. **Download** the [latest release](https://github.com/NebulaOS-KE/NebulaOS/releases/latest).
 2. **Install** it: [Installing NebulaOS](https://github.com/NebulaOS-KE/NebulaOS/wiki/Installing-NebulaOS).
    Your old system stays in the other slot, so you can [go back](https://github.com/NebulaOS-KE/NebulaOS/wiki/Going-Back).
-3. **Print.** The [manual](https://github.com/NebulaOS-KE/NebulaOS/wiki) takes you from the first
+3. **Slice.** Using OrcaSlicer? Import our ready-made
+   [OrcaSlicer profiles](https://github.com/NebulaOS-KE/NebulaOS/wiki/Quickstart-OrcaSlicer)
+   (`NebulaOS-Ender3V3KE-OrcaSlicer.orca_printer` in the release) - a good starting point, not a
+   perfect tune.
+4. **Print.** The [manual](https://github.com/NebulaOS-KE/NebulaOS/wiki) takes you from the first
    start through calibration and your slicer to your first print.
 
 **Which file?**

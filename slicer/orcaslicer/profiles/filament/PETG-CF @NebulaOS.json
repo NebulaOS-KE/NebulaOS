@@ -1,0 +1,104 @@
+{
+    "close_fan_the_first_x_layers": [
+        "2"
+    ],
+    "compatible_printers": [
+        "Creality Ender-3 V3 KE 0.4 nozzle",
+        "Creality Ender-3 V3 KE 0.4 nozzle - NebulaOS"
+    ],
+    "cool_plate_temp": [
+        "80"
+    ],
+    "cool_plate_temp_initial_layer": [
+        "85"
+    ],
+    "default_filament_colour": [
+        "#2B0000"
+    ],
+    "enable_pressure_advance": [
+        "1"
+    ],
+    "eng_plate_temp": [
+        "80"
+    ],
+    "eng_plate_temp_initial_layer": [
+        "85"
+    ],
+    "fan_max_speed": [
+        "40"
+    ],
+    "fan_min_speed": [
+        "0"
+    ],
+    "filament_density": [
+        "1.24"
+    ],
+    "filament_deretraction_speed": [
+        "35"
+    ],
+    "filament_max_volumetric_speed": [
+        "4.5"
+    ],
+    "filament_retract_when_changing_layer": [
+        "1"
+    ],
+    "filament_retraction_length": [
+        "1.2"
+    ],
+    "filament_retraction_minimum_travel": [
+        "1"
+    ],
+    "filament_retraction_speed": [
+        "40"
+    ],
+    "filament_settings_id": [
+        "PETG-CF @NebulaOS"
+    ],
+    "filament_type": [
+        "PETG-CF"
+    ],
+    "filament_vendor": [
+        "Generic"
+    ],
+    "filament_wipe": [
+        "0"
+    ],
+    "filament_wipe_distance": [
+        "0.8"
+    ],
+    "filament_z_hop": [
+        "0"
+    ],
+    "filament_z_hop_types": [
+        "Slope Lift"
+    ],
+    "from": "User",
+    "hot_plate_temp_initial_layer": [
+        "85"
+    ],
+    "inherits": "Generic PETG @System",
+    "is_custom_defined": "0",
+    "name": "PETG-CF @NebulaOS",
+    "nozzle_temperature": [
+        "240"
+    ],
+    "nozzle_temperature_initial_layer": [
+        "245"
+    ],
+    "nozzle_temperature_range_high": [
+        "265"
+    ],
+    "nozzle_temperature_range_low": [
+        "240"
+    ],
+    "overhang_fan_speed": [
+        "50"
+    ],
+    "pressure_advance": [
+        "0.05"
+    ],
+    "textured_plate_temp_initial_layer": [
+        "85"
+    ],
+    "version": "2.3.1.10"
+}

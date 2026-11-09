@@ -1,0 +1,137 @@
+{
+    "compatible_printers": [
+        "Creality Ender-3 V3 KE 0.4 nozzle",
+        "Creality Ender-3 V3 KE 0.4 nozzle - NebulaOS"
+    ],
+    "filament_settings_id": [
+        "TPU @NebulaOS"
+    ],
+    "from": "User",
+    "inherits": "Generic TPU @System",
+    "is_custom_defined": "0",
+    "name": "TPU @NebulaOS",
+    "version": "2.3.1.10",
+    "filament_vendor": [
+        "Generic"
+    ],
+    "filament_type": [
+        "TPU"
+    ],
+    "default_filament_colour": [
+        "#000000"
+    ],
+    "filament_diameter": [
+        "1.75"
+    ],
+    "filament_density": [
+        "1.21"
+    ],
+    "nozzle_temperature_range_low": [
+        "190"
+    ],
+    "nozzle_temperature_range_high": [
+        "230"
+    ],
+    "nozzle_temperature_initial_layer": [
+        "220"
+    ],
+    "nozzle_temperature": [
+        "215"
+    ],
+    "textured_plate_temp_initial_layer": [
+        "55"
+    ],
+    "textured_plate_temp": [
+        "50"
+    ],
+    "hot_plate_temp_initial_layer": [
+        "55"
+    ],
+    "hot_plate_temp": [
+        "50"
+    ],
+    "eng_plate_temp_initial_layer": [
+        "55"
+    ],
+    "eng_plate_temp": [
+        "50"
+    ],
+    "cool_plate_temp_initial_layer": [
+        "55"
+    ],
+    "cool_plate_temp": [
+        "50"
+    ],
+    "bed_temperature_initial_layer": [
+        "55"
+    ],
+    "bed_temperature": [
+        "50"
+    ],
+    "close_fan_the_first_x_layers": [
+        "2"
+    ],
+    "fan_min_speed": [
+        "40"
+    ],
+    "fan_max_speed": [
+        "70"
+    ],
+    "overhang_fan_speed": [
+        "80"
+    ],
+    "bridge_fan_speed": [
+        "100"
+    ],
+    "enable_overhang_bridge_fan": [
+        "1"
+    ],
+    "reduce_fan_stop_start_freq": [
+        "1"
+    ],
+    "filament_flow_ratio": [
+        "1.00"
+    ],
+    "filament_max_volumetric_speed": [
+        "3.0"
+    ],
+    "enable_pressure_advance": [
+        "0"
+    ],
+    "pressure_advance": [
+        "0"
+    ],
+    "filament_pressure_advance": [
+        "0"
+    ],
+    "filament_retraction_length": [
+        "0.8"
+    ],
+    "filament_retraction_speed": [
+        "25"
+    ],
+    "filament_deretraction_speed": [
+        "25"
+    ],
+    "filament_retraction_minimum_travel": [
+        "3.0"
+    ],
+    "filament_retract_when_changing_layer": [
+        "1"
+    ],
+    "filament_wipe": [
+        "0"
+    ],
+    "filament_wipe_distance": [
+        "0.4"
+    ],
+    "filament_z_hop": [
+        "0.2"
+    ],
+    "filament_z_hop_types": [
+        "Slope Lift"
+    ],
+    "chamber_temperature": [
+        "0"
+    ]
+}
