@@ -168,6 +168,19 @@ hanging until you pull the power. The chip's timeout is 60 seconds and it is fed
 feeder deliberately runs at ordinary priority rather than a real-time one, so that it starves at
 exactly the moment ordinary software starves - which is when you want the reset to happen.
 
+From 1.0.2, a frozen system also explains itself. After 40 seconds without the watchdog being fed,
+the kernel writes down what both processor cores and the waiting programs were doing, keeps it in
+memory that survives the restart, and then restarts. A processor core that stops completely is
+noticed by the other one within about 20 seconds. See
+[After the printer restarted by itself](Report-A-Problem#after-the-printer-restarted-by-itself).
+
+The printer never sleeps either: from 1.0.2 the link to the Wi-Fi chip and the USB devices (the
+hub and the camera) stay awake when idle instead of powering down between uses. That costs a
+fraction of a watt and removes a set of wake-up paths that are hard to get right.
+
+*From `etc/udev/rules.d/60-nebulaos-no-sleep.rules` and `etc/sysctl.d/91-nebulaos-freeze.conf`,
+firmware `eec579c`, and kernel `95d0321e`.*
+
 The operating system itself is on a **read-only filesystem**. Your settings, calibration, G-code
 files and other personal data live separately, on writable storage, which is why replacing the
 operating system does not normally erase them.

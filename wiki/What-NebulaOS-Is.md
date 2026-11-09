@@ -52,7 +52,7 @@ Being straight about the costs:
 - **It is not Creality's software and Creality will not support it.** Installing it is your
   decision.
 - **You have to calibrate.** Your existing calibration does not carry over.
-- **This is version 1.0.1.** It is actively developed, so expect it to keep changing.
+- **This is version 1.0.2.** It is actively developed, so expect it to keep changing.
 
 ## Check you have the right printer
 

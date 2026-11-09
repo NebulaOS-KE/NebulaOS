@@ -43,10 +43,10 @@ you expected, what happened instead, and the zip.
 ## After the printer restarted by itself
 
 From NebulaOS 1.0.2 the printer keeps a small "black box" in memory that survives a restart. If
-its touchscreen computer ever freezes, the watchdog restarts it after about a minute, as before,
-and the black box still holds what happened just before:
+its touchscreen computer ever freezes, it restarts within about a minute, as before, and the black
+box still holds what happened just before:
 
-- the system's last messages, and a crash report if the system crashed;
+- the system's last messages, and a report of what the system was doing when it froze or crashed;
 - a line every 10 seconds with how busy the printer was and which programs used the processor.
 
 At the next start NebulaOS works out why the printer stopped - switched off, restarted, froze or
@@ -66,7 +66,7 @@ want to look yourself, it is on the printer under `/usr/data/nebulaos/logs/`:
 A real power cut erases the memory, so after one the printer can only say it was switched off.
 
 *From `usr/libexec/nebulaos-blackbox`, `etc/init.d/S03nebulaos-blackbox` and
-`nebulaos_osconfig/logs.py`, firmware `53c7e7d`.*
+`nebulaos_osconfig/logs.py`, firmware `53c7e7d`; freeze report from kernel `95d0321e`.*
 
 ## Next
 

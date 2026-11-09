@@ -1,7 +1,7 @@
 # The NebulaOS manual
 
 **NebulaOS is open firmware for the Creality Ender-3 V3 KE: guided printing on its own touchscreen
-app, with full Klipper control underneath.** This manual describes NebulaOS 1.0.1.
+app, with full Klipper control underneath.** This manual describes NebulaOS 1.0.2.
 
 ## New here? Start printing
 
