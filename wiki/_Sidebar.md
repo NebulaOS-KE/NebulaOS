@@ -40,6 +40,7 @@
 - [Beeps and songs](Beeps-And-Songs)
 - [How NebulaOS works](Under-the-Hood)
 - [Two system slots](Two-System-Slots)
+- [Other printers (experimental)](Other-Printers-Experimental)
 - [Words you will see](Glossary)
 
 **5. Help and recovery**
