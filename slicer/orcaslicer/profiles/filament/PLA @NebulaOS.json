@@ -1,7 +1,8 @@
 {
     "compatible_printers": [
         "Creality Ender-3 V3 KE 0.4 nozzle",
-        "Creality Ender-3 V3 KE 0.4 nozzle - NebulaOS"
+        "Creality Ender-3 V3 KE 0.4 nozzle - NebulaOS",
+        "Creality Ender-3 V3 KE 0.4 nozzle - NebulaOS (firmware retraction)"
     ],
     "cool_plate_temp": [
         "55"
@@ -56,9 +57,6 @@
     ],
     "filament_vendor": [
         "Generic"
-    ],
-    "filament_wipe": [
-        "0"
     ],
     "filament_wipe_distance": [
         "0.5"

@@ -7,7 +7,8 @@
     "version": "2.3.1.10",
     "compatible_printers": [
         "Creality Ender-3 V3 KE 0.4 nozzle",
-        "Creality Ender-3 V3 KE 0.4 nozzle - NebulaOS"
+        "Creality Ender-3 V3 KE 0.4 nozzle - NebulaOS",
+        "Creality Ender-3 V3 KE 0.4 nozzle - NebulaOS (firmware retraction)"
     ],
     "layer_height": "0.16",
     "initial_layer_print_height": "0.24",
@@ -80,6 +81,7 @@
     "reduce_infill_retraction": "1",
     "reduce_crossing_wall": "1",
     "avoid_crossing_perimeters": "1",
+    "role_based_wipe_speed": "1",
     "enable_arc_fitting": "disabled",
     "gcode_label_objects": "1",
     "exclude_object": "1",

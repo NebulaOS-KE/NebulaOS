@@ -1,7 +1,8 @@
 {
     "compatible_printers": [
         "Creality Ender-3 V3 KE 0.4 nozzle",
-        "Creality Ender-3 V3 KE 0.4 nozzle - NebulaOS"
+        "Creality Ender-3 V3 KE 0.4 nozzle - NebulaOS",
+        "Creality Ender-3 V3 KE 0.4 nozzle - NebulaOS (firmware retraction)"
     ],
     "filament_settings_id": [
         "TPU @NebulaOS"
@@ -118,9 +119,6 @@
     ],
     "filament_retract_when_changing_layer": [
         "1"
-    ],
-    "filament_wipe": [
-        "0"
     ],
     "filament_wipe_distance": [
         "0.4"

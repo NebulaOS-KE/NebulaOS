@@ -2,7 +2,8 @@
     "bridge_speed": "40",
     "compatible_printers": [
         "Creality Ender-3 V3 KE 0.4 nozzle",
-        "Creality Ender-3 V3 KE 0.4 nozzle - NebulaOS"
+        "Creality Ender-3 V3 KE 0.4 nozzle - NebulaOS",
+        "Creality Ender-3 V3 KE 0.4 nozzle - NebulaOS (firmware retraction)"
     ],
     "default_acceleration": "2000",
     "enable_extra_bridge_layer": "external_bridge_only",
