@@ -11,7 +11,8 @@ Seven short steps, in order. Each one ends with a link to the next.
 2. [Install NebulaOS](Installing-NebulaOS) - from stock Creality firmware or from OpenKE
 3. [First start](First-Time-Setup) - Wi-Fi, the printer's address, Mainsail
 4. [First calibration](First-Calibration) - one guided run, about 7 minutes
-5. [Set up your slicer](Slicer-Setup) - two lines of start and end G-code, **do not skip this**
+5. [Set up your slicer](Slicer-Setup) - two lines of start and end G-code, **do not skip this**.
+   Using OrcaSlicer? [Import our profiles](Quickstart-OrcaSlicer) and it is done for you
 6. [Your first print](Printing) - load filament, print a test, tune the first layer live
 7. [Keeping NebulaOS updated](Updating-NebulaOS)
 

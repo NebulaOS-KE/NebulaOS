@@ -6,12 +6,15 @@ Tell your slicer how to start and end a print on NebulaOS. You do this **once**,
 first print. Without it, the printer may skip its own preparation - the bed mesh, the purge
 line, timelapse - or heat up twice.
 
+**Using OrcaSlicer? The quick way:** import our ready-made profiles and skip this page -
+[Quickstart: OrcaSlicer profiles](Quickstart-OrcaSlicer). This page is for other slicers and for
+your own profiles.
+
 ## What you need
 
 - A slicer. Any slicer that lets you edit its start and end G-code works; the examples use
-  **OrcaSlicer**, which most KE owners use. **NebulaOS ships no slicer profile.** Start from the
-  printer profile your slicer offers for the Ender-3 V3 KE, if it has one, and change the two
-  fields below.
+  **OrcaSlicer**, which most KE owners use. Start from the printer profile your slicer offers for
+  the Ender-3 V3 KE, if it has one, and change the two fields below.
 - A calibrated printer - [4. First calibration](First-Calibration).
 
 ## The two lines

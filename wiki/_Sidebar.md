@@ -8,6 +8,7 @@
 - 3\. [First start](First-Time-Setup)
 - 4\. [First calibration](First-Calibration)
 - 5\. **[Set up your slicer](Slicer-Setup)**
+  - [Quickstart: OrcaSlicer profiles](Quickstart-OrcaSlicer)
 - 6\. [Your first print](Printing)
 - 7\. [Keeping NebulaOS updated](Updating-NebulaOS)
 
