@@ -67,27 +67,52 @@ and what each step costs in time, are in [Print setup NebulaOS adds](Adaptive-Pr
 `END_PRINT` turns the heaters off, retracts, and parks the nozzle at the back with the bed
 forward, so the print is presented to you.
 
-## Firmware retraction (optional)
+## Retraction: the slicer or the printer
 
-With the line above, every print starts with the retraction values from your slicer. They are
-only used when the slicer leaves the retraction to the printer:
+Retraction pulls the filament back a little before the nozzle travels, so it does not string or
+ooze. Either the slicer or the printer can do it. Choose one:
+
+| | **The printer retracts** (firmware retraction) | **The slicer retracts** |
+|---|---|---|
+| In OrcaSlicer | **Use firmware retraction** ticked | **Use firmware retraction** not ticked |
+| Values used | Your slicer's, passed by the start line above | Your slicer's, built into the file |
+| Change them while printing | Yes: **Tune → Retraction** | No: change them in the slicer and slice again |
+
+Both work. Firmware retraction lets you tune the retraction live on the screen.
+
+### Set up firmware retraction
 
 1. In the printer settings, tab **Extruder**, tick **Use firmware retraction**. OrcaSlicer then
    greys out the retraction fields there; their values stay as the fallback.
-2. Put each material's retraction in its **filament** profile: **Setting Overrides**, tick and set
-   the retraction length, retraction speed, deretraction speed and extra length on restart.
-3. Slice and print.
+2. Optional: give a material its own retraction in its **filament** profile: **Setting
+   Overrides**, tick and set the retraction length, retraction speed, deretraction speed and
+   extra length on restart.
+3. Make sure the start G-code is the full line above, then slice and print.
 
-The start line takes the filament's values when it has them and the printer's otherwise. That is
-why it is so long: OrcaSlicer's short placeholders do not reliably pick up filament overrides.
+The start line takes the filament's values when it has them and the printer profile's otherwise.
+That is why it is so long: OrcaSlicer's short placeholders do not pick up filament overrides.
 
 The slicer then writes short `G10`/`G11` commands instead of its own retraction moves, and the
-printer retracts with the values `START_PRINT` received. During the print you can fine-tune them
-on the screen under **Tune → Retraction**; the next print starts from the slicer's values again.
+printer retracts with the values `START_PRINT` received. Changes you make on the screen during a
+print last until the next print, which starts from the slicer's values again.
 
-Without **Use firmware retraction** the slicer retracts by itself, as before, and the values passed
-to `START_PRINT` change nothing. If the start G-code passes no retraction values, the printer keeps
-its own: 0.6 mm at 35 mm/s, unretract at 30 mm/s.
+**If your start line has no `RETRACT_...` values** (for example a profile from before 1.0.2),
+firmware retraction still works, but your slicer's values are ignored. The printer then uses its
+current values: after a restart 0.6 mm at 35 mm/s, unretract at 30 mm/s, otherwise whatever was
+last set on the screen. Use the full start line to avoid this.
+
+### Let the slicer retract
+
+Leave **Use firmware retraction** unticked. The slicer retracts by itself, as on most printers,
+and the retraction values in the start line change nothing. You can keep the full start line.
+
+During such a print, **Tune → Retraction** does not open. The screen says *"This print isn't
+sliced for firmware retraction. These settings won't apply."* It knows from the file: a file
+without `G10`/`G11` was sliced without firmware retraction.
+
+*From `etc/nebulaos/klipper/print.cfg` (`START_PRINT`) and `machine.cfg`
+(`[firmware_retraction]`), firmware `eec579c`, and NebulaScreen `src/printertune_panel.cpp` and
+`src/utils.cpp`, `fd47cb6`.*
 
 ## Sending files from the slicer
 
