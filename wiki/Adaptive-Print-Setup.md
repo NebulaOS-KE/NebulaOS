@@ -38,16 +38,19 @@ it and let the rest keep printing.
 
 ### Step 2 - Call `START_PRINT` from the start G-code
 
-In OrcaSlicer: printer profile → **Machine G-code** → **Machine start G-code**:
+In OrcaSlicer: printer profile → **Machine G-code** → **Machine start G-code**. The simple setup:
 
 ```gcode
-START_PRINT BED_TEMP=[bed_temperature_initial_layer_single] EXTRUDER_TEMP=[nozzle_temperature_initial_layer] RETRACT_LENGTH={if is_nil(filament_retraction_length[0])}{retraction_length[0]}{else}{filament_retraction_length[0]}{endif} RETRACT_SPEED={if is_nil(filament_retraction_speed[0])}{retraction_speed[0]}{else}{filament_retraction_speed[0]}{endif} UNRETRACT_SPEED={if is_nil(filament_deretraction_speed[0])}{deretraction_speed[0]}{else}{filament_deretraction_speed[0]}{endif} UNRETRACT_EXTRA_LENGTH={if is_nil(filament_retract_restart_extra[0])}{retract_restart_extra[0]}{else}{filament_retract_restart_extra[0]}{endif}
+START_PRINT BED_TEMP=[bed_temperature_initial_layer_single] EXTRUDER_TEMP=[nozzle_temperature_initial_layer]
 ```
 
-To soak the bed only for filaments that warp (ABS, ASA), let the slicer add `BED_SOAK=1`:
+With firmware retraction (the advanced setup), use the long line that also passes the retraction
+values. Both lines, and how to choose, are in
+[5. Set up your slicer](Slicer-Setup#by-hand-simple-or-advanced). To soak the bed only for filaments
+that warp (ABS, ASA), add this to the end of either line:
 
 ```gcode
-START_PRINT BED_TEMP=[bed_temperature_initial_layer_single] EXTRUDER_TEMP=[nozzle_temperature_initial_layer] RETRACT_LENGTH={if is_nil(filament_retraction_length[0])}{retraction_length[0]}{else}{filament_retraction_length[0]}{endif} RETRACT_SPEED={if is_nil(filament_retraction_speed[0])}{retraction_speed[0]}{else}{filament_retraction_speed[0]}{endif} UNRETRACT_SPEED={if is_nil(filament_deretraction_speed[0])}{deretraction_speed[0]}{else}{filament_deretraction_speed[0]}{endif} UNRETRACT_EXTRA_LENGTH={if is_nil(filament_retract_restart_extra[0])}{retract_restart_extra[0]}{else}{filament_retract_restart_extra[0]}{endif} {if filament_type[0]=="ABS" or filament_type[0]=="ASA"}BED_SOAK=1{endif}
+{if filament_type[0]=="ABS" or filament_type[0]=="ASA"}BED_SOAK=1{endif}
 ```
 
 `START_PRINT` then does, in order:
@@ -119,7 +122,7 @@ NebulaOS configures Klipper's `[firmware_retraction]`: retract 0.6 mm at 35 mm/s
 **Use firmware retraction** on (`G10`/`G11`). Without it the slicer retracts in the G-code itself,
 and these values do nothing.
 
-With the start line from Step 2, `START_PRINT` sets the slicer's retraction values at the start of
+With the advanced start line, `START_PRINT` sets the slicer's retraction values at the start of
 every print (`SET_RETRACTION`, logged in the console as "Firmware retraction from the slicer"). A
 value the start line does not pass keeps its current value. An unretract speed of 0, OrcaSlicer's
 "same as retraction", takes the retraction speed.

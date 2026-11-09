@@ -31,7 +31,7 @@ There are two printer profiles. The filaments and processes are the same for bot
 
 Not sure? Take **simple**. You can import both and switch printer in OrcaSlicer at any time; what
 the two choices mean is explained in
-[Set up your slicer](Slicer-Setup#retraction-the-slicer-or-the-printer).
+[Set up your slicer](Slicer-Setup#by-hand-simple-or-advanced).
 
 ## Steps
 
