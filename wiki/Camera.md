@@ -34,15 +34,15 @@ The three questions the page asks:
 
 ![The Manual exposure question](images/camera-manual-exposure-confirm.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 ![The Restart camera question](images/camera-restart-confirm.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 ![The Defaults question](images/camera-defaults-confirm.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 ## The same from Mainsail: Camera macros
 

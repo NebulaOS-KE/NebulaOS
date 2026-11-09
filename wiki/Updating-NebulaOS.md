@@ -58,7 +58,7 @@ screen update that does not come up healthy is put back to the last working vers
 2. If a newer version exists, it shows the version and the exact download size. Tap
    **Download**.
 
-   ![NebulaOS 1.0.0 is available - Download?](images/online-available.png)
+   ![A new NebulaOS version is available - Download?](images/online-available.png)
 
    *The real screen app, showing a real check made by a printer that was running a 0.9.9 test
    build at the time.*
@@ -67,18 +67,18 @@ screen update that does not come up healthy is put back to the last working vers
 
    ![NebulaOS is up to date](images/online-up-to-date.png)
 
-   *The real screen app. The same release check, as a printer on 1.0.0 answers it.*
+   *The real screen app. The same release check, as a printer answers it.*
 
    While it downloads, the screen shows how far it is:
 
-   ![Downloading NebulaOS 1.0.0: 37 %](images/download-progress.png)
+   ![Downloading a new NebulaOS version: 37 %](images/download-progress.png)
 
    *The real screen app and its own text. An example state, fed in for the picture.*
 
 3. When it finishes, the download appears in the list as **Downloaded**. Tap **Install** next
    to it.
 
-   ![NebulaOS 1.0.0 is downloaded and checked](images/download-done.png)
+   ![The new NebulaOS version is downloaded and checked](images/download-done.png)
 
    *The real screen app and its own text. An example state, fed in for the picture.*
 
@@ -96,7 +96,7 @@ screen update that does not come up healthy is put back to the last working vers
 Once the new system has started properly, the screen says so once, and the downloaded file is
 deleted automatically:
 
-![System image installed - now running NebulaOS 1.0.0 from slot B](images/image-update-confirmed.png)
+![System image installed - now running the new version from slot B](images/image-update-confirmed.png)
 
 *The real screen app, showing a real result record from a printer that went through an online
 update.*
@@ -127,15 +127,15 @@ component's version and state.
 
 ![The Update Klipper question](images/update-klipper-confirm.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 ![The Update all question](images/update-all-confirm.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 ![The Updates page on a printer](images/p-updates.png)
 
-*The printer's own display, running NebulaOS 1.0.0.*
+*The printer's own display, running NebulaOS.*
 
 While a check or an update is running the buttons are greyed out and a line of text says what
 is happening. Klipper stops while Klipper or the NebulaOS extensions update - that is expected.
@@ -149,7 +149,7 @@ Worth knowing how these track upstream:
   and stop with a clear message if it does not.** A mismatch announces itself instead of
   failing mid-print. The system image keeps its own matched versions as a fallback.
 - **Mainsail** updates itself from its own repository (`mainsail-crew/mainsail`, channel
-  `stable`). NebulaOS 1.0.0 ships **2.18.2**; that is the version in the image, not a ceiling -
+  `stable`). NebulaOS 1.0.2 ships **2.18.2**; that is the version in the image, not a ceiling -
   Moonraker's update manager moves it on without a system image.
 - The screen app updates from its own releases. A system image brings its own copy of the
   screen app, and after a system image install that copy is used again.

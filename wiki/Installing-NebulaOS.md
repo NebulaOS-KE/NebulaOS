@@ -22,9 +22,7 @@ NebulaOS, and your old system is still there in the other slot in case you want 
   | `NebulaOS-Ender3V3KE-1.0.2.ingenic.sha256` | Its checksum |
   | `nebulaos-release.json` | Machine-readable release details; the printer uses it for online updates |
 
-  The file with `ota_img` in its name exists from 1.0.1 on. 1.0.0 has only the normal `.img`,
-  so for the touchscreen route use 1.0.1 or newer. The examples on this page use 1.0.2; if you
-  downloaded a different version, use its number.
+  The examples on this page use 1.0.2; if you downloaded a newer version, use its number.
 - **If you are coming from stock Creality firmware:** a USB stick formatted as FAT32.
 - **If you are coming from OpenKE:** your usual SFTP and SSH tools, and OpenKE's root
   password.
@@ -120,7 +118,7 @@ the printer can reset the mainboard except its power.
 3. On this start NebulaOS installs its mainboard firmware by itself. **Do not switch off while
    it runs** - the screen tells you when it is happening. Klipper then connects.
 
-From 1.0.1 the screen shows a notice telling you to do this: *"The mainboard firmware could not
+The screen shows a notice telling you to do this: *"The mainboard firmware could not
 be installed. Switch the printer off, wait 10 seconds and switch it on again - NebulaOS installs it
 when it starts."*
 

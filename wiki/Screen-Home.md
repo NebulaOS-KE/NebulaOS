@@ -55,7 +55,7 @@ Opens from the Home tab **Homing** button.
 
 ![Homing panel](images/move.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 ### Jog controls
 
@@ -81,7 +81,7 @@ There is no button to home a single axis (X, Y, or Z) by itself — only the two
 
 ![The emergency stop question over the Move page](images/emergency-stop-confirm.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 When something needs the printer homed - the Z offset buttons, or a command Klipper refuses with
 *Must home axis first* - the screen asks to home. **Home** runs `G28`; **Cancel** closes the
@@ -89,7 +89,7 @@ question (`src/utils.cpp`, `src/notification_manager.cpp` at screen `fd47cb6`):
 
 ![The Homing required question](images/homing-required.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0 (not homed at the time).*
+*The real screen app, showing data from a printer running NebulaOS (not homed at the time).*
 
 ### Motors off
 
@@ -307,7 +307,7 @@ tap.
 
 ![The Spoolman spool list: ID, name, material, colour, remaining weight and length, with a select and an archive button per spool](images/p-spoolman-spools.png)
 
-*The real screen on a printer running NebulaOS 1.0.1.*
+*The real screen on a printer running NebulaOS.*
 
 Opens from the Filament panel. Requires a [Spoolman](https://github.com/Donkie/Spoolman) server,
 set in Settings → Connections → **Spoolman** (or by hand in `moonraker.conf`).

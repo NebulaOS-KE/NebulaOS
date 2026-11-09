@@ -96,7 +96,7 @@ The slicer then writes short `G10`/`G11` commands instead of its own retraction 
 printer retracts with the values `START_PRINT` received. Changes you make on the screen during a
 print last until the next print, which starts from the slicer's values again.
 
-**If your start line has no `RETRACT_...` values** (for example a profile from before 1.0.2),
+**If your start line has no `RETRACT_...` values** (for example an older profile),
 firmware retraction still works, but your slicer's values are ignored. The printer then uses its
 current values: after a restart 0.6 mm at 35 mm/s, unretract at 30 mm/s, otherwise whatever was
 last set on the screen. Use the full start line to avoid this.

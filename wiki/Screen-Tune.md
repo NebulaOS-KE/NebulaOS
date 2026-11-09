@@ -135,7 +135,7 @@ actually works.
 
 ![The Bed Mesh panel with a real saved mesh](images/bedmesh.png)
 
-*The real screen app, showing a saved mesh measured on a printer running NebulaOS 1.0.0.*
+*The real screen app, showing a saved mesh measured on a printer running NebulaOS.*
 
 **Save Profile** asks for a name. At 480x272 the keyboard covers the name field, so what you type is not visible while you type it:
 
@@ -147,7 +147,7 @@ actually works.
 
 ![The 3D view of a real bed mesh](images/bedmesh-3d.png)
 
-*The real screen app, showing a mesh measured on a printer running NebulaOS 1.0.0. The "Z: ... to ..." label runs into the axis numbers at this size.*
+*The real screen app, showing a mesh measured on a printer running NebulaOS. The "Z: ... to ..." label runs into the axis numbers at this size.*
 
 - **Drag anywhere on the mesh** to rotate it — the angle readout in the top-left (`View: X=... Y=...
   Z=...`) updates live as you drag.

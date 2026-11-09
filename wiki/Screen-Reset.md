@@ -5,7 +5,7 @@ it does. The clean reset and the slot swap are refused while a print runs.
 
 ![The Reset page with its four tiles](images/r-reset.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 | Button | What it does | What it erases |
 |---|---|---|

@@ -142,7 +142,7 @@ update replaces - override a variable from `printer.cfg` instead).
 
 At the end of a print (`END_PRINT`), after a cancel (`CANCEL_PRINT`) and at the end of the cooldown,
 the nozzle parks at the rear left (X2 Y218) with the bed forward, so the print is presented to you.
-A pause or filament change parks as before.
+A pause or filament change parks at the usual pause position.
 
 ## Credits
 

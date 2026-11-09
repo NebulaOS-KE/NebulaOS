@@ -73,7 +73,7 @@ of the plastic before anything moves. The bed and nozzle rarely reach their temp
 same moment, which is fine. Heating over the part can leave a small mark or a little ooze; the
 prime at the park position catches the ooze before printing continues.
 
-*From NebulaOS 1.0.2 (extensions `178a0c2`). Up to 1.0.1 the nozzle heated only after parking.*
+*From extensions `178a0c2`.*
 
 ## If a resume fails partway
 
@@ -93,7 +93,7 @@ done:
 So a failed resume leaves you able to retry, with the part still attached. If you would rather
 not retry, choose **Discard** and turn the bed off yourself.
 
-*From extensions `f498796`, the 1.0.0 release pin (`nebulaos_power_loss_recovery.py`,
+*From extensions `f498796` (`nebulaos_power_loss_recovery.py`,
 `_undo_failed_resume`).*
 
 ## Troubleshooting

@@ -9,7 +9,7 @@ storage. Buttons:
 
 ![The System page: version, build, boot slot, kernel, host name and storage](images/r-system.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 | Button | What it does |
 |---|---|
@@ -23,21 +23,21 @@ storage. Buttons:
 
 ![The Logs page: the list of log files, with boot-timing.log open](images/p-logs.png)
 
-*The real screen on a printer running NebulaOS 1.0.1. The open log is `boot-timing.log`.*
+*The real screen on a printer running NebulaOS. The open log is `boot-timing.log`.*
 
 ![The Reboot question](images/reboot-confirm.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 ![The Shut down question](images/shutdown-confirm.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 **Save logs to USB** (in Report a problem) also asks first:
 
 ![The Save logs to USB question](images/report-save-confirm.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 ---
 

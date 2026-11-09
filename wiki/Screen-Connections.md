@@ -10,7 +10,7 @@ has no Spoolman). Buttons:
 
 ![The Connections page](images/r-connections.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0. Addresses are examples.*
+*The real screen app, showing data from a printer running NebulaOS. Addresses are examples.*
 
 
 - **Wi-Fi networks** — see [Wi-Fi panel](#wi-fi-panel).
@@ -24,7 +24,7 @@ has no Spoolman). Buttons:
 
 ![The Spoolman server page with a server in use](images/spoolman-server.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0. Addresses are examples.*
+*The real screen app, showing data from a printer running NebulaOS. Addresses are examples.*
 
 Both changes ask first, because Moonraker restarts:
 
@@ -34,7 +34,7 @@ Both changes ask first, because Moonraker restarts:
 
 ![The Stop using Spoolman question](images/spoolman-remove-confirm.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 **Change** (printer name) sets the network name: the printer is then reachable as `<name>.local`.
 Invalid names are flagged while you type; saving asks to confirm first.
@@ -101,7 +101,7 @@ take a couple of minutes, so a slow result is not a failure.
 
 ![The Static IP panel with a static address set](images/r-static-ip.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0. Addresses are examples.*
+*The real screen app, showing data from a printer running NebulaOS. Addresses are examples.*
 
 **DHCP** / **Manual** switches the view. **Manual** has four address rows — **IP**, **Netmask**,
 **Gateway**, **DNS** — each as four octet boxes; a value outside 0–255 is flagged red at once.
@@ -112,7 +112,7 @@ Tapping an octet box opens a number keypad:
 
 ![The Static IP panel with the keypad](images/static-ip-keypad.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0. Addresses are examples.*
+*The real screen app, showing data from a printer running NebulaOS. Addresses are examples.*
 
 A value outside 0-255 is marked and nothing is sent:
 
@@ -133,7 +133,7 @@ Opens from Settings → Connections → **Printers**. Manages Moonraker connecti
 
 ![The Printers panel with the one built-in entry](images/r-printer-select.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 Each configured printer is a card with its name, IP and port, plus:
 
@@ -145,7 +145,7 @@ Each configured printer is a card with its name, IP and port, plus:
 
 ![Adding a printer, with the keyboard](images/printer-add-keyboard.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 ---
 

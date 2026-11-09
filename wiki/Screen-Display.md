@@ -6,7 +6,7 @@ Brightness, sleep, theme colour, the touch beep, the boot logo and the Nebula Ca
 
 ![The Display page](images/r-display.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 | Setting | What it does |
 |---|---|
@@ -24,7 +24,7 @@ and the power-on logo, for **the slot you are running**.
 
 ![The Boot logo page with the logo in use and its preview](images/boot-logo.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.* The preview is worked out by NebulaOS's own boot-display code from the shipped logo.
+*The real screen app, showing data from a printer running NebulaOS.* The preview is worked out by NebulaOS's own boot-display code from the shipped logo.
 
 | Control | What it does |
 |---|---|
@@ -39,29 +39,29 @@ uploaded to it:
 
 ![The logo dropdown open](images/boot-logo-list.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 Picking another logo shows its preview and *Not applied yet - tap Apply*:
 
 ![Another logo selected, not applied yet](images/boot-logo-other-selected.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 **Apply** asks first, for an image and for the NebulaOS logo; it shows from the next start:
 
 ![The Apply question for an image](images/boot-logo-apply-confirm.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 ![The Apply question for the NebulaOS logo](images/boot-logo-apply-nebulaos-confirm.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 **Restore Creality logo** and **Delete** ask too:
 
 ![The Restore Creality logo question](images/boot-logo-restore-confirm.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 ![The Delete image question](images/boot-logo-delete-confirm.png)
 
@@ -71,7 +71,7 @@ Picking another logo shows its preview and *Not applied yet - tap Apply*:
 
 ![No USB stick found](images/boot-logo-add-from-usb.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 There is no picture yet of the list of images on a stick, or of the result after adding one -
 that needs a stick in the printer.

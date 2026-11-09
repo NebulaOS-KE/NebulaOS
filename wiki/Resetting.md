@@ -20,7 +20,7 @@ blocked while a print is running.
 
 ![The Reset page](images/r-reset.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 | Button | What it does | What it erases |
 |---|---|---|
@@ -33,11 +33,11 @@ Every button asks first and says what it does:
 
 ![The Reset GUI settings question](images/reset-gui-confirm.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 ![The Reset touch calibration question](images/reset-touch-confirm.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 ### What a clean reset does *not* touch
 
@@ -71,7 +71,7 @@ test build:
 
 ![The Swap boot slot question naming the build in slot A](images/swap-slot-confirm.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 **The one-way warning.** If the other slot runs NebulaOS, you can come straight back the same
 way. If it runs Creality's system or OpenKE, those have **no NebulaOS swap button**, so getting
@@ -90,7 +90,7 @@ not do what you wanted.
 
 ![The Storage page: the space breakdown and the two buttons](images/r-storage.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 Removes **NebulaOS's own leftovers**: old logs, old update backups, unfinished downloads,
 uploaded system images and the download cache.
@@ -99,7 +99,7 @@ It shows you what it would free, grouped by kind, before removing anything.
 
 ![The Free up space confirmation](images/r-storage-free-up-space.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 **Your print files, settings and calibration are never touched.** Neither is Creality's data.
 
@@ -113,7 +113,7 @@ timelapse videos. It shows what it would free first.
 
 ![The Clean up Creality files confirmation](images/r-storage-clean-creality.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 NebulaOS, your print files and your settings are not affected. But note: if the other slot
 still holds the Creality system, that system will start as though factory reset afterwards.

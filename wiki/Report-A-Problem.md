@@ -7,7 +7,7 @@ printer's logs is far more likely to be solvable. The screen does most of it for
 
 ![The Report a problem page: log level, QR code and Save logs to USB](images/r-report.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 The page says *"Something not working? Help us fix it in three steps."*:
 
@@ -19,7 +19,7 @@ The page says *"Something not working? Help us fix it in three steps."*:
 
    ![The Save logs to USB question](images/report-save-confirm.png)
 
-   *The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+   *The real screen app, showing data from a printer running NebulaOS.*
 3. **Report it on GitHub** - scan the code on the screen, or open
    [github.com/NebulaOS-KE/NebulaOS/issues](https://github.com/NebulaOS-KE/NebulaOS/issues).
    Attach the zip and say what you did and what happened.
@@ -42,9 +42,8 @@ you expected, what happened instead, and the zip.
 
 ## After the printer restarted by itself
 
-From NebulaOS 1.0.2 the printer keeps a small "black box" in memory that survives a restart. If
-its touchscreen computer ever freezes, it restarts within about a minute, as before, and the black
-box still holds what happened just before:
+The printer keeps a small "black box" in memory that survives a restart. If
+its touchscreen computer ever freezes, it restarts within about a minute, and the black box still holds what happened just before:
 
 - the system's last messages, and a report of what the system was doing when it froze or crashed;
 - a line every 10 seconds with how busy the printer was and which programs used the processor.

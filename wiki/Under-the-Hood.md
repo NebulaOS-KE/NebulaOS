@@ -42,9 +42,8 @@ together, rather than being limited by the original operating system.
 ## Scheduling — keeping important tasks on time
 
 NebulaOS uses a Linux 6.6 kernel with **preemption** (`CONFIG_PREEMPT`): a time-sensitive task can
-interrupt less important work instead of waiting for it to finish. Up to 1.0.1 it used the
-**PREEMPT_RT** real-time variant; 1.0.2 went back to standard preemption, the usual setup for a
-Klipper host.
+interrupt less important work instead of waiting for it to finish. This is standard preemption,
+the usual setup for a Klipper host.
 
 NebulaOS also gives priority to critical hardware communication and timing tasks over background
 activity. The link to the mainboard has the highest priority, the printer's Linux-side MCU
@@ -168,13 +167,13 @@ hanging until you pull the power. The chip's timeout is 60 seconds and it is fed
 feeder deliberately runs at ordinary priority rather than a real-time one, so that it starves at
 exactly the moment ordinary software starves - which is when you want the reset to happen.
 
-From 1.0.2, a frozen system also explains itself. After 40 seconds without the watchdog being fed,
+A frozen system also explains itself. After 40 seconds without the watchdog being fed,
 the kernel writes down what both processor cores and the waiting programs were doing, keeps it in
 memory that survives the restart, and then restarts. A processor core that stops completely is
 noticed by the other one within about 20 seconds. See
 [After the printer restarted by itself](Report-A-Problem#after-the-printer-restarted-by-itself).
 
-The printer never sleeps either: from 1.0.2 the link to the Wi-Fi chip and the USB devices (the
+The printer never sleeps either: the link to the Wi-Fi chip and the USB devices (the
 hub and the camera) stay awake when idle instead of powering down between uses. That costs a
 fraction of a watt and removes a set of wake-up paths that are hard to get right.
 

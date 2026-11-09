@@ -95,13 +95,13 @@ what to do, **one corner at a time**.
 
 ![Bed tramming, before it starts](images/p-bed-tram-start.png)
 
-*The real screen on a printer running NebulaOS 1.0.1. Bed tramming, before it starts.*
+*The real screen on a printer running NebulaOS. Bed tramming, before it starts.*
 
 **Start** asks first:
 
 ![The Start question: the printer will home and measure the four bed corners](images/p-bed-tram-start-confirm.png)
 
-*The real screen on a printer running NebulaOS 1.0.1.*
+*The real screen on a printer running NebulaOS.*
 
 **Your bed mount (asked once).**
 
@@ -289,7 +289,7 @@ and sets the NebulaOS adjustment to 0, so nothing is counted twice.
 
 ![The Bed Mesh page with a saved mesh](images/bedmesh.png)
 
-*The real screen app, showing a saved mesh measured on a printer running NebulaOS 1.0.0.*
+*The real screen app, showing a saved mesh measured on a printer running NebulaOS.*
 
 Klipper does not load a saved mesh by itself after a restart, so after Auto Calibration the page
 shows the saved one instead, with *Saved mesh 'default' - each print measures its own mesh at the

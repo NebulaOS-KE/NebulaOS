@@ -113,7 +113,7 @@ NebulaOS from stock - the mainboard does not accept new firmware until its power
 NebulaOS's mainboard install then fails and Klipper shows an MCU error. Switch the printer off,
 wait 10 seconds and switch it on: NebulaOS then installs its mainboard firmware by itself. There
 is no software way round this - nothing in the printer can reset the mainboard except its power.
-From 1.0.1 the screen shows a notice telling you to do this.
+The screen shows a notice telling you to do this.
 
 Apart from that one power cycle, moving between the two is recoverable in both directions, and
 the power switch is fine.

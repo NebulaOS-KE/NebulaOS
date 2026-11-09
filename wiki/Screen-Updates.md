@@ -11,17 +11,17 @@ update.
 
 ![The Updates page on a printer](images/p-updates.png)
 
-*The printer's own display, running NebulaOS 1.0.0.*
+*The printer's own display, running NebulaOS.*
 
 Each update asks first:
 
 ![The Update Klipper question](images/update-klipper-confirm.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 ![The Update all question](images/update-all-confirm.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 **System image** installs a NebulaOS (or Creality) `.img` from a USB stick or from
 `config/uploads/system-image` into the boot slot that is not running, then restarts into it.

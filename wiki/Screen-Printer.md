@@ -6,7 +6,7 @@ Printer defaults, the statistics, Klipper and MCU restarts, and the mainboard fi
 
 ![The Printer settings page](images/r-printer.png)
 
-*The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+*The real screen app, showing data from a printer running NebulaOS.*
 
 | Setting | What it does |
 |---|---|
@@ -26,7 +26,7 @@ printer; it only reads.
 
 ![The Statistics page: total print time, the NebulaOS figures, what came before, and the recent prints](images/p-statistics.png)
 
-*The real screen on a printer running NebulaOS 1.0.1.*
+*The real screen on a printer running NebulaOS.*
 
 ### The left column
 

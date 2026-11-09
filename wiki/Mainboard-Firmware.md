@@ -28,8 +28,8 @@ when you install NebulaOS from the stock touchscreen - the mainboard does not ac
 firmware until its power has been cut. NebulaOS's install of its mainboard firmware fails, and
 Klipper shows an MCU error. Switch the printer off, wait 10 seconds, switch it on: NebulaOS then
 installs its firmware by itself. Do not switch off while that runs. There is no software way to
-do this, because nothing in the printer can reset the mainboard except its power. From 1.0.1
-the screen shows a notice telling you to do this.
+do this, because nothing in the printer can reset the mainboard except its power. The screen
+shows a notice telling you to do this.
 
 **Firmware you installed yourself is left alone.** NebulaOS only replaces what it recognises as
 a known Creality version. If you deliberately installed something else, it stays.
@@ -71,7 +71,7 @@ config → uploads → mainboard-firmware**. The screen lists what it finds.
 
 ![The MCU firmware page on a printer](images/p-mcu-firmware.png)
 
-*The printer's own display, running NebulaOS 1.0.0. The* Last install *line shows that printer's own history.*
+*The printer's own display, running NebulaOS. The* Last install *line shows that printer's own history.*
 
 ## Step-by-step: reinstalling the built-in firmware
 
@@ -84,7 +84,7 @@ another system.
 
    ![The Reinstall built-in MCU firmware question](images/mcu-reinstall-confirm.png)
 
-   *The real screen app, showing data from a printer running NebulaOS 1.0.0.*
+   *The real screen app, showing data from a printer running NebulaOS.*
 
 4. **Wait.** Klipper stops, the board is reflashed, and Klipper restarts. The screen says not to
    switch off while this runs.
