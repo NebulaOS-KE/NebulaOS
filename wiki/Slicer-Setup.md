@@ -6,8 +6,8 @@ Tell your slicer how to start and end a print on NebulaOS. You do this **once**,
 first print. Without it, the printer may skip its own preparation - the bed mesh, the purge
 line, timelapse - or heat up twice.
 
-**Using OrcaSlicer? The quick way:** import our ready-made profiles and skip this page -
-[Quickstart: OrcaSlicer profiles](Quickstart-OrcaSlicer). This page is for other slicers and for
+**Using OrcaSlicer? The quick way:** import our ready-made profiles (simple, or with firmware
+retraction) and skip this page - [Quickstart: OrcaSlicer profiles](Quickstart-OrcaSlicer). This page is for other slicers and for
 your own profiles.
 
 ## What you need
