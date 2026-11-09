@@ -6,6 +6,3 @@ each one names the NebulaOS-firmware commit it was built from and carries its
 
 How a release is built: [README](README.md#how-a-release-is-made) and
 [`.github/workflows/release.yml`](.github/workflows/release.yml).
-
-The `releases/` folder holds notes from before the first numbered release (2026-08); they are
-history, not the current state.
