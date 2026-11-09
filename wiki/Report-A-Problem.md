@@ -65,7 +65,7 @@ want to look yourself, it is on the printer under `/usr/data/nebulaos/logs/`:
 A real power cut erases the memory, so after one the printer can only say it was switched off.
 
 *From `usr/libexec/nebulaos-blackbox`, `etc/init.d/S03nebulaos-blackbox` and
-`nebulaos_osconfig/logs.py`, firmware `53c7e7d`; freeze report from kernel `95d0321e`.*
+`nebulaos_osconfig/logs.py`, firmware `7dbf5ca`; freeze report from kernel `95d0321e`.*
 
 ## Next
 

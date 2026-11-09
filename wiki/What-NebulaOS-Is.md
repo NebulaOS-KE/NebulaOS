@@ -120,10 +120,6 @@ or by going back. Three things to know:
 - **Your print files and settings survive** going back and forth. Only a full USB recovery, the
   last resort, erases them, and it says so first.
 
-*An earlier version of this manual said switching systems could permanently damage the printer.
-That was wrong: the mainboard's own loader is never written by a firmware install
-([Mainboard firmware](Mainboard-Firmware)).*
-
 ## Built on
 
 NebulaOS runs **unmodified upstream Klipper** and adds its own features as separate modules that
