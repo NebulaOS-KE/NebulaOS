@@ -1,6 +1,6 @@
 # Settings → Display
 
-Brightness, sleep, theme colour, the touch beep, the boot logo and the Nebula Camera settings.
+Brightness, sleep, theme colour, the touch beep, the boot logo, the Nebula Camera settings, and turning the picture for a screen mounted upside down.
 
 ## Display
 
@@ -16,6 +16,26 @@ Brightness, sleep, theme colour, the touch beep, the boot logo and the Nebula Ca
 | **Touch beep** | A short click through the buzzer on every tap. A test beep plays when you turn it on. |
 | **Boot logo** | Choose the boot screen and power-on logo of this boot slot: the NebulaOS logo, an image added from a USB stick or uploaded in Mainsail (PNG, BMP or JPEG, max 4 MB), or **Restore Creality logo**. |
 | **Camera** | Creality Nebula Camera settings: night mode, anti-flicker, white balance, exposure, picture sliders, **Defaults**, **Restart camera**. See [Camera](Camera). |
+
+## Screen mounted the other way round
+
+If your screen is mounted upside down, you can turn the picture 180°. There is no button for this
+yet; it is a line in the screen's settings file.
+
+1. In Mainsail, open **Machine** and the file `nebulascreen/nebulascreen.json`.
+2. Find the line `"display_rotate": 2,` and change the `2` to `0`:
+
+   ```json
+   "display_rotate": 0,
+   ```
+
+   `2` is the normal KE mounting, `0` is turned 180°. Leave the comma at the end.
+3. **Save & Close**, then restart the printer.
+4. Touch calibration belongs to one orientation. If taps land in the wrong place, run
+   **Settings → Reset → Reset touch calibration** and tap the targets.
+
+To go back, set it to `2` again. Do not use `1` or `3`: those turn the picture 90°, and the screen
+layout is not made for that.
 
 ## Boot logo panel
 

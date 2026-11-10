@@ -92,7 +92,7 @@ Starting from what the print looks like is often quicker: [Improve your prints](
 
 | Symptom | Fix |
 |---|---|
-| Screen upside down or rotated | Set `display_rotate` to `2` in `nebulascreen.json` (the KE default). See [Configuration](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/blob/main/wiki/Configuration.md). |
+| Screen upside down or rotated | `display_rotate` in `nebulascreen.json`: `2` for the normal KE mounting, `0` for a screen mounted the other way round. See [Screen mounted the other way round](Screen-Display#screen-mounted-the-other-way-round). |
 | Taps land in the wrong place, e.g. after changing `display_rotate` | Calibration is rotation-specific. Redo it: **Settings → Reset → Reset touch calibration**. |
 | Touch calibration came out wrong and you cannot reach the button | Edit `config/nebulascreen/nebulascreen.json` in Mainsail: set `"touch_calibrated": true` and remove `touch_calibration_coeff`, then restart the screen. The wizard runs again. See [Configuration](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/blob/main/wiki/Configuration.md). |
 | Sensors shown with raw names like `Heater Bed` | None of the `id`s in `monitored_sensors` matches a Klipper object, so the screen shows every heater and sensor under its Klipper name. Fix the `id`s (an empty or missing list is replaced by Extruder, Bed and MCU Temp at start). See [Configuration](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/blob/main/wiki/Configuration.md). |
