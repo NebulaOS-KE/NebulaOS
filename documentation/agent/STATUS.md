@@ -6,8 +6,8 @@
 | | |
 |---|---|
 | Discovered items | **560** |
-| Documented | **551** (98%) |
-| Draft | 9 |
+| Documented | **552** (98%) |
+| Draft | 8 |
 | Missing | 0 |
 | Code verified | 560 |
 | Test verified | 47 |
@@ -50,10 +50,13 @@ this session; the owner publishes.
 
 ## What is still open
 
-1. **Nine drafts**, all the same shape: `machine.nebulaos.*` endpoints whose response keys cannot
-   be resolved from source, because the handler composes its answer in the Moonraker component or
-   the helper returns something not statically knowable. Each says so on the page rather than
-   carrying a plausible example. Closing them needs recorded responses from a printer.
+1. **Eight drafts**, all the same shape: `machine.nebulaos.*` endpoints whose response keys
+   cannot be resolved from source, because the handler composes its answer in the Moonraker
+   component or the helper returns something not statically knowable. Each says so on the page
+   rather than carrying a plausible example. Closing them needs recorded responses from a
+   printer - which is exactly how the ninth closed: `updates.readiness` now shows the response
+   recorded on ke-dev on 2026-11-04, with its provenance and the check that the helper has not
+   changed since. The other eight are POST actions and the snapshot has none of them.
 2. **Four blockers** in `BLOCKERS.md`, three of them one fact: no printer access, so
    `verify_hardware` is 0 and stays 0.
 3. **Screenshots.** 44 of 60 required items captured, 15 missing, 1 blocked. Separately, eleven

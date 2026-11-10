@@ -23,6 +23,12 @@ import ast, json, os, sys
 import _srccommit
 
 COMPONENT = "scripts/build/overlay/usr/lib/nebulaos/moonraker/nebulaos.py"
+# Responses recorded from a real printer, for endpoints this extractor cannot
+# resolve. Observation is weaker evidence than source - a sample shows what one
+# printer sent once, not what the code can send - so it is attached only where
+# the static answer is missing, and never allowed to overwrite one.
+OBSERVED = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                        "..", "data", "api_observed_responses.json")
 OSCONFIG = "scripts/build/overlay/usr/lib/nebulaos/python/nebulaos_osconfig"
 TESTS = "tests/nebulaos-osconfig-tests.py"
 
@@ -428,9 +434,17 @@ def resolve(root, routes, calls, disp):
     return {r["path"]: r for r in _rows(root, routes, calls, disp)[0]}
 
 
+def observed():
+    """{http path: entry} from data/api_observed_responses.json, or {}."""
+    if not os.path.exists(OBSERVED):
+        return {}
+    return json.load(open(OBSERVED)).get("endpoints", {})
+
+
 def _rows(root, routes, calls, disp):
     cache = {}
     exs = examples(os.path.join(root, TESTS))
+    obs = observed()
     rows, resolved, unresolved = [], 0, 0
     for path, method, handler in sorted(routes):
         cv = calls.get(handler, [])
@@ -463,6 +477,9 @@ def _rows(root, routes, calls, disp):
         ex = exs.get(path)
         if ex:
             row["examples"] = ex
+        o = obs.get(path)
+        if o and not row["result_keys"]:
+            row["observed"] = o
         rows.append(row)
     return rows, resolved, unresolved
 

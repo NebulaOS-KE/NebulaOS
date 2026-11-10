@@ -201,6 +201,14 @@ def main():
          "",
          "The alternative - composing plausible example responses from the key names - was",
          "available and was not taken. It would have read better and been unfalsifiable.", "",
+         "### Recorded from a printer", "",
+         "Where static analysis cannot resolve an endpoint, a response **recorded from a**",
+         "**real printer** is shown instead, with the capture's date, source file and the",
+         "firmware it ran - and with the reason it is still current, which is always a",
+         "checked statement about the helper's source rather than an assumption. Such a",
+         "sample is weaker evidence than the code: it shows one answer this endpoint gave",
+         "once, not every answer it can give. It is therefore never attached to an endpoint",
+         "whose keys the source already settles.", "",
          "## Endpoints", "",
          "A parameter with no default is **required**; the request fails without it.", ""]
 
@@ -236,6 +244,21 @@ def main():
         elif r is not None:
             L.append("*Result keys not resolved from source - see "
                      "[Responses](#responses).*")
+            L.append("")
+        if r and r.get("observed"):
+            o = r["observed"]
+            L.append(f"**Recorded from a printer** on {o['captured']} by "
+                     f"{o['captured_by']} (`{o['source']}`, firmware "
+                     f"`{o['firmware_at_capture']}`). One sample, not a schema: "
+                     f"it shows what this printer sent once. It is current because "
+                     f"{o['still_current_because']}.")
+            L.append("")
+            L.append("Keys in that response: " +
+                     ", ".join(f"`{k}`" for k in sorted(o["result"])) + ".")
+            L.append("")
+            L.append("```json")
+            L.append(json.dumps({"result": o["result"]}, indent=2, sort_keys=True))
+            L.append("```")
             L.append("")
         if r and r.get("examples"):
             L.append("From the repository's own tests:")

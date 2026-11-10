@@ -11,8 +11,8 @@ Verification is reported in four separate columns because they prove different t
 | Measure | Items | Share |
 |---|---|---|
 | Discovered documentation items | 560 | 100% |
-| Documented (page exists and covers the item) | 551 | 98% |
-| Draft | 9 | 1% |
+| Documented (page exists and covers the item) | 552 | 98% |
+| Draft | 8 | 1% |
 | Missing | 0 | 0% |
 | Blocked (cannot proceed without hardware, access or a decision) | 4 | 0% |
 | Has a recorded completeness gap (work not done, not stuck) | 9 | 1% |
@@ -44,7 +44,7 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | Repository | Items | Documented | Draft | Missing | Code verified | Documented % |
 |---|---|---|---|---|---|---|
 | NebulaOS | 13 | 13 | 0 | 0 | 13 | 100% |
-| NebulaOS-firmware | 200 | 191 | 9 | 0 | 200 | 95% |
+| NebulaOS-firmware | 200 | 192 | 8 | 0 | 200 | 96% |
 | NebulaOS-kernel | 1 | 1 | 0 | 0 | 1 | 100% |
 | NebulaOS-klipper-extensions | 238 | 238 | 0 | 0 | 238 | 100% |
 | NebulaOS-klipper-mcu | 1 | 1 | 0 | 0 | 1 | 100% |
@@ -56,7 +56,7 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 
 | Category | Items | Documented | Draft | Missing | Documented % |
 |---|---|---|---|---|---|
-| api | 60 | 51 | 9 | 0 | 85% |
+| api | 60 | 52 | 8 | 0 | 86% |
 | build-command | 14 | 14 | 0 | 0 | 100% |
 | command | 51 | 51 | 0 | 0 | 100% |
 | config-option | 176 | 176 | 0 | 0 | 100% |
