@@ -42,6 +42,7 @@
 - [Two system slots](Two-System-Slots)
 - [Other printers (experimental)](Other-Printers-Experimental)
 - [Words you will see](Glossary)
+- [Thank you](Thank-You)
 
 **5. Help and recovery**
 - [Troubleshooting](Troubleshooting)

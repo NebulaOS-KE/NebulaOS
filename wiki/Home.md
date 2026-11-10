@@ -47,6 +47,8 @@ Seven short steps, in order. Each one ends with a link to the next.
 - **[Help and recovery](Troubleshooting)** - start from the symptom.
   [Going back to stock](Going-Back), [Resetting](Resetting), [Recovery](Recovery).
 
+NebulaOS stands on the work of many others: [Thank you](Thank-You).
+
 NebulaOS is not Creality's software and is not supported by Creality. If a page tells you to do
 something and you cannot find the button it names, that is a bug in this manual - please report
 it: [github.com/NebulaOS-KE/NebulaOS/issues](https://github.com/NebulaOS-KE/NebulaOS/issues).
