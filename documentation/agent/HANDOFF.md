@@ -46,9 +46,26 @@ Done in this batch (inbox note `2026-11-10-RELEASE-1.0.2-REFRESH.md`):
 - **`STATUS.md` rewritten to one page.** It had grown to 703 lines again, with its stale parts
   on top; see `STATUS-LOG.md` for what that cost and the rule that follows from it.
 
-Still open: the nine API drafts (response keys that need a printer), four blockers, 15 missing
-screenshots, and two decisions for the owner - Q-083 (do the GuppyScreen-inherited screen
-settings belong in the inventory?) and Q-084 (the two diverged copies of `creality_flash.py`).
+Then two gaps closed with evidence rather than with words, both on 2026-11-11:
+
+- **`updates.readiness` is no longer a draft.** Static analysis still cannot resolve its keys -
+  the count in *Responses* is still 9 of 59 - but the page now shows the response recorded from
+  ke-dev on 2026-11-04, with its source file, the firmware it ran, and the checked reason it is
+  current (`updates.py` is byte-identical between that build and `b95b156`). The mechanism is
+  `data/api_observed_responses.json` plus a guard in `gen_firmware_api_responses.py`: an
+  observed response attaches **only** where `result_keys` is `None`, so a sample can never
+  overwrite an answer the source settles. Drafts 9 -> 8.
+- **`gcode:NEBULAOS_BED_TRAM` is no longer blocked.** It needed another repository's file, not a
+  printer: `[gcode_macro NEBULAOS_BED_TRAM]` in the firmware's `etc/nebulaos/klipper/calibration.cfg`,
+  forwarding `{rawparams}`, byte-identical at the 1.0.2 pin. Blockers 4 -> 3.
+
+The merge list for the owner is `FOR-THE-OWNER-1.0.2.md`: six PRs ready, three decisions waiting
+on him, and what stays open with the reason.
+
+Still open: the eight API drafts (POST endpoints; their responses need a printer), three
+blockers that are all "no printer here", 15 missing screenshots, Q-083 (do the
+GuppyScreen-inherited screen settings belong in the inventory?) and Q-084 (the two diverged
+copies of `creality_flash.py`).
 
 ## Earlier batch (2026-11-05, resumed after a power cut)
 
