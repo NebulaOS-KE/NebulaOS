@@ -172,6 +172,23 @@ documented instead.**
   the status line still claims no hardware qualification - that is the owner's call and
   `compatibility.json` is untouched - but it now reads as *no claim* instead of *never run*.
 
+### Closed 2026-11-11: NEBULAOS_BED_TRAM needed a file, not a printer
+
+The inventory carried `gcode:NEBULAOS_BED_TRAM` as blocked: *"defined as a `gcode_macro` in the
+firmware's `calibration.cfg`, not registered by the extensions; verify the macro file before
+documenting."*
+
+Verified: `scripts/build/overlay/etc/nebulaos/klipper/calibration.cfg` at firmware `b95b156`
+defines `[gcode_macro NEBULAOS_BED_TRAM]`, *Guided bed tramming - says which corner to adjust,
+one at a time*, whose body is `_NEBULAOS_BED_TRAM {rawparams}`. The file is byte-identical at
+`3bdf3ff`, the 1.0.2 pin. Three sibling macros use the same wrapper pattern -
+`NEBULAOS_ESTEPS_CALIBRATE`, `NEBULAOS_LOAD_CELL_CALIBRATE`, `NEBULAOS_NOZZLE_CLEAN` - and the
+extensions command reference now names them instead of saying "several".
+
+Worth noting what kind of blocker this was: it had been sitting with the three hardware ones,
+and it was the only one of the four that a cross-repository read could close. A blocker list is
+only useful if the items that merely *look* blocked get re-read occasionally.
+
 ## Cleared
 
 *(none yet)*

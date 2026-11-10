@@ -1,7 +1,7 @@
 # Status
 
 <!-- BEGIN GENERATED STATUS -->
-*Figures generated 2026-11-10 from `coverage.jsonl` by `tools/render_dashboard.py`. Do not edit this block by hand.*
+*Figures generated 2026-11-11 from `coverage.jsonl` by `tools/render_dashboard.py`. Do not edit this block by hand.*
 
 | | |
 |---|---|
@@ -13,7 +13,7 @@
 | Test verified | 47 |
 | Hardware verified | 0 |
 | Screenshots required / captured | 60 / 44 |
-| Blocked (cannot proceed) | 4 |
+| Blocked (cannot proceed) | 3 |
 | Completeness gaps (work not done) | 9 |
 
 Per-repository and per-category breakdowns are in `COVERAGE.md`.
@@ -57,8 +57,12 @@ this session; the owner publishes.
    printer - which is exactly how the ninth closed: `updates.readiness` now shows the response
    recorded on ke-dev on 2026-11-04, with its provenance and the check that the helper has not
    changed since. The other eight are POST actions and the snapshot has none of them.
-2. **Four blockers** in `BLOCKERS.md`, three of them one fact: no printer access, so
-   `verify_hardware` is 0 and stays 0.
+2. **Three blockers**, and they are one fact: no printer access, so `verify_hardware` is 0 and
+   stays 0 - the untested stock-touchscreen install route, and two screens the headless tour
+   cannot capture honestly (`storage_panel` needs an extra tour step, `updates_panel`'s busy
+   state varies between runs). The fourth closed on 2026-11-11: `NEBULAOS_BED_TRAM` needed a
+   file read, not a printer - it is `[gcode_macro NEBULAOS_BED_TRAM]` in the firmware's
+   `calibration.cfg`, forwarding `{rawparams}` to the extensions' private command.
 3. **Screenshots.** 44 of 60 required items captured, 15 missing, 1 blocked. Separately, eleven
    embedded images show a pre-1.0.2 version *inside the picture* - the retake list, with what
    each one says today, is at the end of `SCREENSHOTS.md`. `r-system.png` is the one to take

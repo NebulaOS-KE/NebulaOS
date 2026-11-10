@@ -1,6 +1,6 @@
 # NebulaOS documentation coverage dashboard
 
-Generated 2026-11-10 by `documentation/agent/tools/render_dashboard.py` from `documentation/agent/coverage.jsonl`.
+Generated 2026-11-11 by `documentation/agent/tools/render_dashboard.py` from `documentation/agent/coverage.jsonl`.
 
 **Read this first.** Coverage is relative to the *discovered* inventory, not to some imagined complete list of everything NebulaOS does. Each entry records the exact source commit it was discovered at. A rise in the total item count is normal and healthy: it means discovery found more real functionality, not that documentation regressed.
 
@@ -14,7 +14,7 @@ Verification is reported in four separate columns because they prove different t
 | Documented (page exists and covers the item) | 552 | 98% |
 | Draft | 8 | 1% |
 | Missing | 0 | 0% |
-| Blocked (cannot proceed without hardware, access or a decision) | 4 | 0% |
+| Blocked (cannot proceed without hardware, access or a decision) | 3 | 0% |
 | Has a recorded completeness gap (work not done, not stuck) | 9 | 1% |
 
 ## Verification (counted separately, never combined)
@@ -110,5 +110,4 @@ Only genuine blockers: something that cannot proceed without hardware, access or
 | manual:02-installation | NebulaOS | verify_hardware outstanding: the stock-touchscreen route has not been observed on a printer (D-009: user pages document it as the normal route; record kept in VERIFICATION.md) |
 | screen:storage_panel | NebulaOS-nebulascreen | the Free up space / Clean up Creality buttons (screen 36490ed) are not in the screenshot tour; needs an extra tour step or a real printer |
 | screen:updates_panel | NebulaOS-nebulascreen | capture is timing-dependent without a live Moonraker: the busy/idle state varies between runs, so a published image would contradict the page. Needs a real printer. |
-| gcode:NEBULAOS_BED_TRAM | NebulaOS-klipper-extensions | defined as a gcode_macro in the firmware's calibration.cfg, not registered by the extensions; verify the macro file before documenting |
 
