@@ -1,6 +1,6 @@
 # NebulaOS documentation coverage dashboard
 
-Generated 2026-11-04 by `documentation/agent/tools/render_dashboard.py` from `documentation/agent/coverage.jsonl`.
+Generated 2026-11-10 by `documentation/agent/tools/render_dashboard.py` from `documentation/agent/coverage.jsonl`.
 
 **Read this first.** Coverage is relative to the *discovered* inventory, not to some imagined complete list of everything NebulaOS does. Each entry records the exact source commit it was discovered at. A rise in the total item count is normal and healthy: it means discovery found more real functionality, not that documentation regressed.
 
@@ -10,8 +10,8 @@ Verification is reported in four separate columns because they prove different t
 
 | Measure | Items | Share |
 |---|---|---|
-| Discovered documentation items | 553 | 100% |
-| Documented (page exists and covers the item) | 544 | 98% |
+| Discovered documentation items | 560 | 100% |
+| Documented (page exists and covers the item) | 551 | 98% |
 | Draft | 9 | 1% |
 | Missing | 0 | 0% |
 | Blocked (cannot proceed without hardware, access or a decision) | 4 | 0% |
@@ -21,9 +21,9 @@ Verification is reported in four separate columns because they prove different t
 
 | Kind | Verified | Partial | Unknown | Blocked | N/A |
 |---|---|---|---|---|---|
-| Code verified | 553 | 0 | 0 | 0 | 0 |
-| Test verified | 47 | 0 | 505 | 0 | 1 |
-| Hardware verified | 0 | 0 | 0 | 2 | 548 |
+| Code verified | 560 | 0 | 0 | 0 | 0 |
+| Test verified | 47 | 0 | 512 | 0 | 1 |
+| Hardware verified | 0 | 0 | 0 | 2 | 555 |
 
 ## Screenshots
 
@@ -44,9 +44,9 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | Repository | Items | Documented | Draft | Missing | Code verified | Documented % |
 |---|---|---|---|---|---|---|
 | NebulaOS | 13 | 13 | 0 | 0 | 13 | 100% |
-| NebulaOS-firmware | 196 | 187 | 9 | 0 | 196 | 95% |
+| NebulaOS-firmware | 200 | 191 | 9 | 0 | 200 | 95% |
 | NebulaOS-kernel | 1 | 1 | 0 | 0 | 1 | 100% |
-| NebulaOS-klipper-extensions | 235 | 235 | 0 | 0 | 235 | 100% |
+| NebulaOS-klipper-extensions | 238 | 238 | 0 | 0 | 238 | 100% |
 | NebulaOS-klipper-mcu | 1 | 1 | 0 | 0 | 1 | 100% |
 | NebulaOS-nebulascreen | 105 | 105 | 0 | 0 | 105 | 100% |
 | lv_drivers | 1 | 1 | 0 | 0 | 1 | 100% |
@@ -59,15 +59,16 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | api | 60 | 51 | 9 | 0 | 85% |
 | build-command | 14 | 14 | 0 | 0 | 100% |
 | command | 51 | 51 | 0 | 0 | 100% |
-| config-option | 173 | 173 | 0 | 0 | 100% |
+| config-option | 176 | 176 | 0 | 0 | 100% |
 | developer-tool | 11 | 11 | 0 | 0 | 100% |
 | existing-page | 34 | 34 | 0 | 0 | 100% |
 | extension | 30 | 30 | 0 | 0 | 100% |
 | os-helper | 18 | 18 | 0 | 0 | 100% |
+| overlay-config | 2 | 2 | 0 | 0 | 100% |
 | repo-overview | 8 | 8 | 0 | 0 | 100% |
-| runtime-helper | 57 | 57 | 0 | 0 | 100% |
+| runtime-helper | 58 | 58 | 0 | 0 | 100% |
 | screen | 50 | 50 | 0 | 0 | 100% |
-| service | 35 | 35 | 0 | 0 | 100% |
+| service | 36 | 36 | 0 | 0 | 100% |
 | user-manual-section | 12 | 12 | 0 | 0 | 100% |
 
 ## Source revisions this inventory was discovered at
@@ -77,12 +78,28 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | NebulaOS | main | ba98eecbba13 | 2 |
 | NebulaOS | main | bef8693fb1f4 | 11 |
 | NebulaOS-firmware | main | a53e129bf1b0 | 196 |
+| NebulaOS-firmware | main | b95b1566d11a | 4 |
 | NebulaOS-kernel | openke | d86790d2e231 | 1 |
+| NebulaOS-klipper-extensions | main | 178a0c2559de | 3 |
 | NebulaOS-klipper-extensions | main | f498796fcaa2 | 235 |
 | NebulaOS-klipper-mcu | main | 33f5d16daccd | 1 |
 | NebulaOS-nebulascreen | main | 36490ed0b60d | 105 |
 | lv_drivers | master | not cloned l | 1 |
 | nebulaos-packages | main | not cloned l | 1 |
+
+## Re-verified against a later commit
+
+`source_commit` above is where an item was discovered. An item is listed here when its page was re-read or regenerated against a newer commit since - so the two columns answer different questions, and neither overwrites the other.
+
+| Repository | Re-verified at | Items | Items in repository |
+|---|---|---|---|
+| NebulaOS-firmware | b95b156 | 200 | 200 |
+| NebulaOS-kernel | 95d0321e | 1 | 1 |
+| NebulaOS-klipper-extensions | 178a0c2 | 221 | 238 |
+| NebulaOS-klipper-mcu | 6648b97 | 1 | 1 |
+| NebulaOS-nebulascreen | fd47cb6 | 1 | 105 |
+
+**424 of 560 items** carry a re-verification stamp. The rest still record only their discovery commit: a page whose own header names a newer commit is the authority for that page, not this column.
 
 ## Blocked items
 

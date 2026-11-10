@@ -151,6 +151,27 @@ extensions `f498796`). Reported to the main session; none changed.**
   the single `KNOWN_STOCK` identity (`mcu_known_identities.py:45-47`); so whether NebulaOS
   re-flashes after an OpenKE install. The manual gives the screen's notices as the trigger.
 
+**2026-11-10, found while refreshing the MCU documentation at the 1.0.2 pins. Not changed -
+documented instead.**
+
+- **Two copies of `creality_flash.py`, and the shipped one is not the repository's.**
+  `NebulaOS-klipper-mcu/tools/creality_flash.py` still hashes to the value its provenance sidecar
+  in `NebulaOS-firmware` records (`57a9bf4...`, copied at mcu commit `c793e77`), while the copy
+  the image deploys to `/opt/nebulaos/tools/` is `3727622...`. The difference is two fixes that
+  only real hardware surfaced: opening the serial port with DTR and RTS low in the form pyserial
+  3.5 supports (the keyword form raises `ValueError`; the guard could not open the port at all on
+  ke-dev on 2026-10-03), and closing the transport before the post-flash identify (without it
+  every successful restore was reported `FLASH_FAILED`, ke-dev 2026-11-05). A developer using the
+  mcu repository's copy against a printer gets the old behaviour. The mcu README on `docs/mcu`
+  now says so; back-porting the fixes, or making the deployed copy a checked copy rather than a
+  manual one, is a code decision for the owner.
+- **`NebulaOS-klipper-mcu`'s README said no firmware built there had ever been flashed to a real
+  printer.** The firmware repository's own records contradict it (the 2026-08-28 live
+  qualification of candidate-001, built from this patch queue; the restore path exercised again
+  on 2026-11-05). This is documentation, so it was corrected on `docs/mcu` rather than reported:
+  the status line still claims no hardware qualification - that is the owner's call and
+  `compatibility.json` is untouched - but it now reads as *no claim* instead of *never run*.
+
 ## Cleared
 
 *(none yet)*

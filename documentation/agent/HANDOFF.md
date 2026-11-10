@@ -13,7 +13,44 @@ coverage dashboard, delivered as `docs/*` branches and pull requests. Not a plan
 outline: the pages themselves. The full assignment is in `MISSION.md`; `RULES.md` holds the
 workspace rules and the owner's decisions and wins wherever the two differ.
 
-## Latest batch (2026-11-05, resumed after a power cut)
+## Latest batch (2026-11-10): everything refreshed against the 1.0.2 release
+
+**Read `STATUS.md` next - it is one page and it is current.** The batch sections below this one
+are history, kept because they explain decisions; where one of them disagrees with `STATUS.md`,
+`STATUS.md` wins.
+
+NebulaOS **1.0.2** (published 2026-11-09) is the first and only end-user release. 1.0.0, 1.0.1
+and their tags were deleted, so there is no version history to write anywhere. Pins at `v1.0.2`,
+firmware `3bdf3ff`: kernel `95d0321e`, extensions `178a0c2`, screen `fd47cb6` (NebulaScreen
+v1.0.1), host Klipper `58bd67db`.
+
+Done in this batch (inbox note `2026-11-10-RELEASE-1.0.2-REFRESH.md`):
+
+- **All five developer-doc PRs refreshed and rebased** on their repositories' current main -
+  kernel `95d0321e`, firmware `b95b156`, extensions `178a0c2`, screen `84db432` (describing the
+  pin `fd47cb6`), mcu `6648b97`. Each PR body now carries a dated refresh section; the firmware
+  body's counts were stale (35/57/189) and are corrected to the page's own (36/58/190).
+- **The mcu pages** gained the second identity (hardware ID `mcu0_001_G32`, and that a board
+  answering differently **blocks the Klipper start**), the corrected restore bounds, the state
+  file after a restore, the power-cycle failure, and the KE-only boundary pointing at the wiki's
+  *Other printers (experimental, untested)*. Two corrections from source: the Mainsail upload
+  folder is `config/uploads/mainboard-firmware`, and the README's "never flashed to a real
+  printer" is not true any more.
+- **The inventory and dashboard** regenerated against the 1.0.2 pins: seven items added that
+  were genuinely missing, `release_applicability` re-expressed on 522 items, and a new
+  `reverified_at` field (with its own dashboard table) so re-verification never overwrites the
+  commit an item was discovered at.
+- **The screenshot retake list** is at the end of `SCREENSHOTS.md`: eleven images print a
+  pre-1.0.2 version inside the picture. `r-system.png` first - it also shows `Kernel
+  6.6.157-rt79`, and 1.0.2 removed `localversion-rt`.
+- **`STATUS.md` rewritten to one page.** It had grown to 703 lines again, with its stale parts
+  on top; see `STATUS-LOG.md` for what that cost and the rule that follows from it.
+
+Still open: the nine API drafts (response keys that need a printer), four blockers, 15 missing
+screenshots, and two decisions for the owner - Q-083 (do the GuppyScreen-inherited screen
+settings belong in the inventory?) and Q-084 (the two diverged copies of `creality_flash.py`).
+
+## Earlier batch (2026-11-05, resumed after a power cut)
 
 Inbox notes processed: FREEZE-OVER, API-SNAPSHOT, CORRECTION-OPENKE-SSH, FLOW-AND-SLICER-MACROS,
 PRINTER-SCREENSHOTS, SIM-SCREENSHOTS-AND-STOPPED-INSTALL. Sources: firmware `e523e8c`, screen
@@ -269,7 +306,13 @@ affected inventory items for re-verification rather than assuming the pages stil
 `BLOCKERS.md`: B-001 no printer access (by design; simulator is the mitigation), B-002 two
 repositories not yet cloned locally.
 
-## RELEASE 1.0.0 (read this block first)
+## RELEASE 1.0.0 (history only - superseded, do not act on it)
+
+**1.0.0 and 1.0.1 no longer exist.** Both releases and their tags were deleted on 2026-11-09 when
+1.0.2 was published as the first end-user release. Everything in this block describes release
+work on an artefact that is gone; it is kept because it records how things were checked, not
+because any of it is still true. The current release and pins are at the top of this file and in
+`STATUS.md`.
 
 ### Second pass, 2026-11-02 evening: re-verified against the release candidate `70ad0b0`
 
@@ -545,18 +588,23 @@ paths.
 
 ## Next actions, in order
 
-1. `git fetch` every repository and compare tips against the table above. If a tip moved,
-   mark the affected items for re-verification instead of assuming the pages still hold.
-2. **Q-017:** replace stubs with real pages, highest-traffic first - `First-Time-Setup`,
-   `Connecting-To-WiFi`, `Opening-Mainsail`, then `Resetting` and `Updating-NebulaOS`. The
-   existing NebulaScreen wiki already covers the last two well; reconcile rather than rewrite.
-3. **Q-020, continued:** fetch the four submodules into
-   `_worktrees/docs/NebulaOS-nebulascreen`, build with `GUPPY_SMALL_SCREEN=1`, and try to
-   drive one panel and capture one image. Record the answer in `SCREENSHOTS.md` either way.
-4. **Q-052:** run the two Klipper-dependent test suites the way `scripts/ci-tests.sh` does,
+1. `git fetch` every repository and compare tips against the pins in `STATUS.md`. If a tip
+   moved, set `reverified_at` on the affected items only after actually re-reading them -
+   never assume a page still holds because its repository looks quiet.
+2. **Q-083** (needs the owner): do the GuppyScreen-inherited NebulaScreen settings -
+   `moonraker_host`, `moonraker_api_key`, `log_level`, `fans`, `monitored_sensors`,
+   `default_macros`, `nebulascreen_init_script` - belong in the inventory, or is the page
+   deliberately wider than the inventory? Until that is settled, quote no settings count.
+3. **Q-084** (owner, code): the two diverged copies of `creality_flash.py`. Documented in the
+   mcu README and `BLOCKERS.md`; this session does not fix code.
+4. The nine API drafts stay drafts until a printer's real responses are recorded - they are the
+   one remaining documentation gap that no amount of reading can close.
+5. **Q-052:** run the two Klipper-dependent test suites the way `scripts/ci-tests.sh` does,
    by composing `extras/` into a scratch copy of the pinned Klipper at `58bd67d`.
-5. Keep running `tools/check_links.py` before every commit that touches `wiki/`.
-5. Follow-ups, when their sections come up and not before: Klipper status objects (find the
+6. Keep running `tools/check_links.py` before every commit that touches `wiki/`. Note what it
+   cannot do: an unpublished GitHub **wiki** URL answers 200, so a curl check of wiki links
+   proves nothing. Repository and blob URLs do 404 properly.
+7. Follow-ups, when their sections come up and not before: Klipper status objects (find the
    `printer.objects.subscribe` call sites; the ~85 rejected pointers are candidates, but tie
    each to a real subscription first), and cloning `nebulaos-packages` and `lv_drivers`.
 

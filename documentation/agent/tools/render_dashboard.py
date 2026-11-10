@@ -170,6 +170,43 @@ def main():
     A(table(["Repository", "Branch", "Commit", "Items"], rows))
     A("")
 
+    # ---- re-verification against the shipped release -----------------------
+    #
+    # `source_commit` is where an item was *discovered*; it must keep that
+    # meaning, because a rise in the inventory has to stay traceable to the
+    # sweep that found it. Re-reading a page against a newer commit is a
+    # different fact, so it gets its own field (`reverified_at`) and its own
+    # table. Overwriting the discovery commit would have quietly destroyed the
+    # only record of when each item entered the inventory.
+    A("## Re-verified against a later commit")
+    A("")
+    A("`source_commit` above is where an item was discovered. An item is listed "
+      "here when its page was re-read or regenerated against a newer commit "
+      "since - so the two columns answer different questions, and neither "
+      "overwrites the other.")
+    A("")
+    rev = [i for i in items if i.get("reverified_at")]
+    if not rev:
+        A("None recorded.")
+    else:
+        seen = {}
+        for i in rev:
+            k = (i["repo"], i["reverified_at"])
+            seen[k] = seen.get(k, 0) + 1
+        per_repo = {}
+        for i in items:
+            per_repo[i["repo"]] = per_repo.get(i["repo"], 0) + 1
+        rows = [[repo, c, cnt, per_repo.get(repo, 0)]
+                for (repo, c), cnt in sorted(seen.items())]
+        A(table(["Repository", "Re-verified at", "Items", "Items in repository"],
+                rows))
+        A("")
+        A(f"**{len(rev)} of {len(items)} items** carry a re-verification stamp. "
+          "The rest still record only their discovery commit: a page whose own "
+          "header names a newer commit is the authority for that page, not this "
+          "column.")
+    A("")
+
     # ---- blockers ----------------------------------------------------------
     bl = [i for i in items if i.get("blockers")]
     A("## Blocked items")

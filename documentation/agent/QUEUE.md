@@ -361,3 +361,29 @@ stopped-install wording, Under-the-Hood `-dirty`, 17 screenshots embedded, next-
   before Printing; Slicer setup is step 10 with callouts in First-time setup, Calibration guide and
   the walkthrough.
 - **Q-076: re-point `ba98eec` references** once the main session names the final 1.0.0 sha.
+
+## From the foreground session (2026-11-10, release 1.0.2 refresh)
+
+Inbox note `_scratch/docs-agent/inbox/2026-11-10-RELEASE-1.0.2-REFRESH.md`.
+
+- **Q-080 - DONE.** Refresh the five developer-doc PRs against the 1.0.2 pins and rebase them on
+  their repositories' current main: kernel `95d0321e`, firmware `b95b156`, extensions `178a0c2`,
+  screen `84db432` (describing the pin `fd47cb6`), mcu `6648b97`. All five pushed; every PR body
+  carries a dated refresh section.
+- **Q-081 - DONE.** Central dashboard regenerated against the 1.0.2 pins: seven items the
+  inventory did not have (`S03nebulaos-blackbox`, `nebulaos-blackbox`, the two overlay
+  configuration files, three `z_compensate` options), `release_applicability` re-expressed from
+  1.0.0/0.9.0 to the 1.0.2 pins on 522 items, and a new `reverified_at` field with its own table
+  so re-verification never overwrites the discovery commit. Link checker clean, 53 pages.
+- **Q-082 - DONE.** The screenshot retake list is at the end of `SCREENSHOTS.md`: eleven images
+  show a pre-1.0.2 version in the picture. Tim or the main session takes them.
+- **Q-083 - OPEN, needs a decision.** `wiki/Configuration.md` (NebulaScreen) documents about 25
+  settings; the inventory tracks 20 (`nsconfig:*`). The difference is GuppyScreen-inherited
+  fields - `moonraker_host`, `moonraker_api_key`, `log_level`, `fans`, `monitored_sensors`,
+  `default_macros`, `nebulascreen_init_script`. Either they belong in the inventory (and the
+  config-option count rises) or they are deliberately out of scope and the page should say so.
+  Do not quote a settings count anywhere until this is settled.
+- **Q-084 - OPEN, for the owner.** `NebulaOS-klipper-mcu`'s `tools/creality_flash.py` and the
+  copy the firmware deploys at `/opt/nebulaos/tools/` have diverged: two hardware-found fixes
+  live only in the firmware. Documented in the mcu README on `docs/mcu`; the code fix is not
+  this session's to make. See `BLOCKERS.md`.

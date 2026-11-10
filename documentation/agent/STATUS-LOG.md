@@ -252,3 +252,25 @@ links along the new-owner path. Link checker: 34 pages, no broken links or missi
   doc fixes found on the way: PLR start-up offer is Later/Resume (Discard only on Tune > Power
   Settings, power_panel.cpp offer_resume), Logs is under Settings > System not Display, the
   Cancel-print question text, mcu/logs rows no longer say "detail below".
+
+## 2026-11-10: STATUS.md had become a changelog again, 703 lines
+
+The rule written on 2026-10-31 - *STATUS.md answers "where does this stand now", in about a
+page* - held for about a week and then failed the same way as the first time: a section appended
+per batch, newest at the bottom, until the file was 703 lines.
+
+The damage is not the length. It is that the **stale parts sit above the current ones**. By
+today the file still listed "Seven open blockers" (there are four), a source-revisions table
+pinned at firmware `832314d` (the release is `3bdf3ff`, `main` is `b95b156`), a "Next" list whose
+first three items had been done for a week, and PR descriptions with counts that the refresh had
+already moved - 35 boot services where the page says 36, 155 configuration options where it says
+156. Every one of those read as current, because nothing in a status file says *this paragraph
+is from last Tuesday*.
+
+Rewritten to 80 lines: the generated block, the release, the six PRs, what is still open, and
+pointers. The history is not lost - it is the commit log of this branch, which is where a
+narrative belongs.
+
+**What to do differently:** when a batch finishes, *replace* the relevant sentence in STATUS.md
+rather than adding a section under it. If the batch deserves a story, the commit message is the
+place for it.

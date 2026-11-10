@@ -261,3 +261,53 @@ printer's serial.** Names seen: HomeWiFi, HomeWiFi2, OtherNetwork, ke-workshop, 
 default_printer; addresses 192.168.1.x and 127.0.0.1; build ids and a firmware SHA-256 prefix,
 which are not private.
 
+
+## What 1.0.2 makes out of date (2026-11-10)
+
+The captions were made version-neutral on 2026-11-09, but **a caption cannot fix a number
+printed inside the picture**. Every embedded image was looked at; these are the ones whose
+*pixels* name a version that 1.0.2 no longer matches. Tim or the main session takes them, on a
+printer running 1.0.2 (firmware `3bdf3ff`, NebulaScreen v1.0.1) - this session has no printer.
+
+**Must be retaken: the version is readable in the picture.**
+
+| Image | Used on | What it says now | What 1.0.2 should show |
+|---|---|---|---|
+| `online-available.png` | Updating NebulaOS | *"NebulaOS 1.0.0 is available (this printer runs 0.9.9)"* | the current release offered to a printer on an older one |
+| `online-up-to-date.png` | Updating NebulaOS | *"NebulaOS is up to date (1.0.0)"* | up to date on 1.0.2 |
+| `download-progress.png` | Updating NebulaOS | *"Downloading NebulaOS 1.0.0: 37%"* | the same dialog for the current release |
+| `download-done.png` | Updating NebulaOS | *"NebulaOS 1.0.0 is downloaded and checked"* | as above |
+| `image-update-confirmed.png` | Updating NebulaOS | *"Now running NebulaOS 1.0.0 from slot B"* | as above |
+| `23-image-confirm-nebulaos.png` | Updating NebulaOS | *"Installs NebulaOS, version 2026.10.15"* - the old date-style name | a `1.0.x` image name |
+| `29-image-rolled-back.png` | Updating, Recovery | *"NebulaOS 2026.10.15 in slot A did not start properly"* | a `1.0.x` image name |
+| `p-updates.png` | Updating, Screen - Updates | *"nebulascreen v1.0.0"* and *"NebulaOS itself (v1.0.0, build ba98eec, 2026-11-03)"* | NebulaScreen v1.0.1, NebulaOS v1.0.2, build `3bdf3ff` |
+| `update-klipper-confirm.png` | Updating, Screen - Updates | the same `v1.0.0 / ba98eec` line, dimmed behind the dialog but legible | as above |
+| `update-all-confirm.png` | Updating, Screen - Updates | as above | as above |
+| `r-system.png` | Screen - System | *"NebulaOS v1.0.0 (ba98eec, 2026-11-03), slot B"*, *"NebulaScreen v1.0.0"*, **and "Kernel 6.6.157-rt79"** | v1.0.2 / `3bdf3ff`, NebulaScreen v1.0.1, and a kernel string **without** `-rt79` |
+
+`r-system.png` is the one to take first. It is wrong twice over: `localversion-rt` was removed in
+kernel `11f0f0c87`, which **is** in the 1.0.2 pin (`95d0321e`), so a 1.0.2 printer does not print
+`-rt79` at all. A reader comparing their own System page against this picture would find two
+differences and have no way to tell which is the stale document. No wiki page states the kernel
+string in text - checked - so the picture is the only place it appears.
+
+**Lower priority: no version string, but the background is a pre-1.0.2 printer.**
+
+- `download-stopped.png` - the dialog itself is version-free; the slot list behind it shows
+  builds `9577d39` and `ba98eec`. A build id is not a version claim, and the dialog is the
+  subject, so this can wait for the next full capture round.
+- `p-logs.png` - a real boot-timing log from 1.0.1. It is a picture of *a* boot, not of this
+  release's boot, but it predates `S03nebulaos-blackbox`, so a sharp-eyed reader on 1.0.2 will
+  see one service the picture does not have.
+
+**Opened and still correct on 1.0.2:** `p-mcu-firmware.png` (the MCU application identity
+`v0.13.0-742-g01a9c2f92` is unchanged at the 1.0.2 pin), `r-report.png`,
+`30-swap-confirm-nebulaos.png` and `09-clean-reset-confirm.png` - each read, each naming no
+version. The remaining dialog captures were **not** opened one by one: their pages and names
+gave no reason to expect a version, which is a weaker statement than the table above and is
+meant to read that way.
+
+**Method, so it can be repeated:** every image referenced by a wiki page was listed
+(`grep -oE 'images/[^)]+'`), the ones whose page or name could plausibly carry a version were
+opened and read, and the claim above is what was legible in the image - not what the panel
+*should* show. Nothing here was inferred from a file name.
