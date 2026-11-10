@@ -1,104 +1,101 @@
-# NebulaOS
+<h1 align="center">NebulaOS</h1>
 
-NebulaOS is open firmware for the **Creality Ender-3 V3 KE**: a Linux 6.6 kernel,
-upstream Klipper and Moonraker, Mainsail, and its own touchscreen app (NebulaScreen), with A/B
-system slots, on-printer updates and USB recovery.
+<p align="center">
+  <b>Your Ender-3 V3 KE has good hardware. NebulaOS gives it the software to match.</b><br>
+  A complete new system for the printer: a new Linux 6.6 kernel, current upstream Klipper,
+  a touchscreen app that guides you through calibration, and Mainsail in your browser.
+</p>
 
-This repository is the front door: **releases are published here**
-([Releases](https://github.com/NebulaOS-KE/NebulaOS/releases)), and this page shows how the
-project's repositories fit together. The source lives in the repositories below.
+<p align="center">
+  <a href="https://github.com/NebulaOS-KE/NebulaOS/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/NebulaOS-KE/NebulaOS?label=download&color=2196f3"></a>
+  <a href="https://github.com/NebulaOS-KE/NebulaOS/wiki"><img alt="Manual" src="https://img.shields.io/badge/manual-wiki-2196f3"></a>
+  <img alt="Ender-3 V3 KE only" src="https://img.shields.io/badge/printer-Ender--3%20V3%20KE-555">
+</p>
 
-## Download
+<table>
+  <tr>
+    <td><img src="assets/screen-home.png" alt="NebulaScreen home: temperatures, graph, homing, extrude, fans, LED, print"></td>
+    <td><img src="assets/screen-calibration.png" alt="The guided calibration menu, in order: bed tramming, PID, axis twist, auto calibration"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>NebulaScreen, built for the KE's 4.3" display</sub></td>
+    <td align="center"><sub>Guided calibration, in the order a new printer needs it</sub></td>
+  </tr>
+  <tr>
+    <td><img src="assets/screen-bedmesh.png" alt="Your bed mesh in 3D on the touchscreen"></td>
+    <td><img src="assets/screen-statistics.png" alt="Print statistics including the printer's history from before NebulaOS"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>Your bed mesh in 3D, right on the printer</sub></td>
+    <td align="center"><sub>Print statistics, history from stock and OpenKE included</sub></td>
+  </tr>
+</table>
 
-Each release carries:
+## Why NebulaOS
 
-| File | Use it for |
+- 🎯 **Better first layers, less fiddling.** Load-cell probing on upstream Klipper, an
+  **Auto Calibration** that checks the load cell, cleans the nozzle and measures Z offset and
+  bed mesh, and live Z adjustment while the first layer goes down.
+- 📐 **Every calibration guided on the screen.** Bed tramming that tells you which screw to turn,
+  PID, input shaper with graphs, E-steps, skew, axis twist, TMC autotune. The menu remembers
+  what you did and tells you when something needs redoing.
+- 🛡️ **Updates you don't have to be afraid of.** Two system slots: an update goes into the other
+  one and starts on trial. If it doesn't come up healthy, the printer goes back by itself.
+  One tap installs the next version from the touchscreen.
+- ⚡ **Prints that survive a power cut.** After an outage the printer offers to resume: bed and
+  nozzle heated before anything moves, mesh, excluded objects and timelapse kept.
+- 🔓 **Standard, open, yours.** Unmodified upstream Klipper and Moonraker, so every Klipper guide,
+  macro and tool works. OrcaSlicer upload, Spoolman, phone apps and home automation connect
+  directly. No cloud.
+- 📷 **Camera and timelapse built in.** Creality's Nebula camera with its own settings page, USB
+  webcams, and a timelapse that needs no slicer setup.
+
+| | Stock Creality | **NebulaOS** |
+|---|---|---|
+| Linux kernel | 4.4.94 (2017) | **6.6**, 120+ KE-specific changes |
+| Klipper | Creality's old fork | **Unmodified upstream** |
+| Calibration | A few routines | **Full guided suite with history** |
+| Live first-layer Z | – | ✅ in 0.001 mm steps |
+| Updates | Creality's updater, no rollback | **One tap, automatic rollback** |
+| Power-loss resume | Basic | **Safe order, mesh and objects kept** |
+| Web interface | Creality's | **Mainsail + full Moonraker API** |
+
+## Get started
+
+1. **Download** the [latest release](https://github.com/NebulaOS-KE/NebulaOS/releases/latest).
+2. **Install** it: [Installing NebulaOS](https://github.com/NebulaOS-KE/NebulaOS/wiki/Installing-NebulaOS).
+   Your old system stays in the other slot, so you can [go back](https://github.com/NebulaOS-KE/NebulaOS/wiki/Going-Back).
+3. **Slice.** Using OrcaSlicer? Import our ready-made
+   [OrcaSlicer profiles](https://github.com/NebulaOS-KE/NebulaOS/wiki/Quickstart-OrcaSlicer)
+   (`NebulaOS-Ender3V3KE-OrcaSlicer.orca_printer` in the release) - a good starting point, not a
+   perfect tune.
+4. **Print.** The [manual](https://github.com/NebulaOS-KE/NebulaOS/wiki) takes you from the first
+   start through calibration and your slicer to your first print.
+
+**Which file?**
+
+| You are on | Download |
 |---|---|
-| `NebulaOS-Ender3V3KE-<version>.img` | Installing or updating: on NebulaOS from the touchscreen (Settings > Updates > System image), on the stock firmware with Creality's own updater |
-| `NebulaOS-Ender3V3KE-<version>.ingenic` | USB recovery of a printer that does not start (rewrites the whole printer, erases its data) |
-| `SHA256SUMS`, `*.sha256` | Checking a download: `sha256sum -c SHA256SUMS` |
-| `release-manifest.txt`, `build-manifest.txt` | The exact source of every component in the release |
-| `nebulaos-release.json` | The record a NebulaOS printer reads to update itself over the internet |
-| `xImage`, `rootfs.squashfs` | The kernel and root filesystem inside both packages (developers) |
+| Creality's stock firmware | `NebulaOS-Ender3V3KE-F005_ota_img_V9.<version>.img`. Put it on a USB stick **without renaming it** and install it from the stock touchscreen. When NebulaOS is up, switch the printer off and on once. |
+| OpenKE | `NebulaOS-Ender3V3KE-<version>.img`, installed with Creality's updater over SSH |
+| NebulaOS already | Nothing: **Settings → Updates** finds new versions by itself |
+| A printer that no longer starts | `NebulaOS-Ender3V3KE-<version>.ingenic`, the USB recovery image. It **erases the whole printer**, so use it only when nothing else works: [Recovery](https://github.com/NebulaOS-KE/NebulaOS/wiki/Recovery) |
 
-**First install** (from stock Creality firmware or OpenKE): copy the `.img` to the printer **without
-renaming it** and run Creality's updater on it - over SSH from OpenKE, or from a USB stick on the
-stock touchscreen. Steps: [Installing NebulaOS from stock or OpenKE](https://github.com/NebulaOS-KE/NebulaOS-firmware/blob/main/docs/INSTALL_FROM_STOCK.md).
-Your old system stays in the other slot.
+**Supported: the Ender-3 V3 KE only** (not the V3 SE). NebulaOS is community software, not made
+or supported by Creality.
 
-A NebulaOS printer finds new releases itself (Settings > Updates > System image > Online). It
-downloads only over HTTPS from github.com and keeps the image only when its size and sha256 match
-the release record; installing it uses the same A/B install as a USB stick, with an automatic way
-back if the new system does not start.
+## Help
 
-Every release is built on GitHub, from public source, twice on separate machines; the two builds
-must be byte-identical. The `.img`, the `.ingenic` and the release record carry a GitHub build
-attestation: `gh attestation verify <file> -R NebulaOS-KE/NebulaOS`.
+- [Troubleshooting](https://github.com/NebulaOS-KE/NebulaOS/wiki/Troubleshooting)
+- Found a bug? [Open an issue](https://github.com/NebulaOS-KE/NebulaOS/issues). The touchscreen's
+  **Settings → System → Report a problem** collects the logs to attach.
 
-## Documentation
+## For developers
 
-**[The NebulaOS manual](https://github.com/NebulaOS-KE/NebulaOS/wiki)** - for the person using
-the printer. It assumes no Linux, no SSH and not much 3D printing experience: installing,
-first-time setup, every screen on the touchscreen, calibration, printing, filament, the camera,
-timelapse, statistics, updates, troubleshooting and recovery. The source of those pages is
-[`wiki/`](wiki) in this repository.
-
-Start with [Safety first](https://github.com/NebulaOS-KE/NebulaOS/wiki/Safety-First),
-[Installing NebulaOS](https://github.com/NebulaOS-KE/NebulaOS/wiki/Installing-NebulaOS) and
-[First-time setup](https://github.com/NebulaOS-KE/NebulaOS/wiki/First-Time-Setup), in that order.
-
-**Developer references** live in each component repository, next to the code they describe:
-
-| Reference | Where |
-|---|---|
-| Firmware: boot, slots, updates, recovery, the Moonraker API, the osconfig helpers, boot services, runtime helpers, build scripts and host tooling | [`NebulaOS-firmware/docs/reference/`](https://github.com/NebulaOS-KE/NebulaOS-firmware/tree/main/docs/reference) |
-| Klipper extensions: architecture, every module, every command, every configuration option | [`NebulaOS-klipper-extensions/docs/reference/`](https://github.com/NebulaOS-KE/NebulaOS-klipper-extensions/tree/main/docs/reference) |
-| NebulaScreen: architecture, configuration, building, the simulator, testing | [`NebulaOS-nebulascreen/wiki/`](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/tree/main/wiki) |
-| Which parts of the kernel are NebulaOS | [`NebulaOS-kernel`](https://github.com/NebulaOS-KE/NebulaOS-kernel) |
-| MCU firmware lifecycle on a printer | [`NebulaOS-klipper-mcu`](https://github.com/NebulaOS-KE/NebulaOS-klipper-mcu) |
-| The Python package index | [`nebulaos-packages`](https://github.com/NebulaOS-KE/nebulaos-packages) |
-
-[`documentation/`](documentation) holds the coverage inventory behind those references: what has
-been documented, at which commit, and what has not.
-
-## The project
-
-```
-                    NebulaOS-kernel ──────────┐
-       Klipper3d/klipper (upstream, pinned) ──┤
-NebulaOS-klipper-extensions (production) ─────┤
-        Arksine/moonraker, Mainsail ──────────┼──► NebulaOS-firmware ──► NebulaOS (releases)
-             NebulaOS-nebulascreen ───────────┤     pins + builds         .img / .ingenic
-      NebulaOS-klipper-mcu (MCU binary) ──────┘
-                                                    nebulaos-packages: Python wheels for
-                                                    Moonraker/Klipper updates on the printer
-```
-
-| Repository | What it is |
-|---|---|
-| [NebulaOS-firmware](https://github.com/NebulaOS-KE/NebulaOS-firmware) | The integration repository: pins every input by commit or digest (`manifests/dependencies.conf`), builds the image in one pinned container, packages `.img` and `.ingenic`. Start here for building, the architecture and the docs |
-| [NebulaOS-kernel](https://github.com/NebulaOS-KE/NebulaOS-kernel) | Linux 6.6 (PREEMPT) for the Ingenic X2000 (branch `openke`) |
-| [NebulaOS-klipper-extensions](https://github.com/NebulaOS-KE/NebulaOS-klipper-extensions) | NebulaOS's Klipper extras (calibration, load-cell probing, power-loss recovery, ...), composed into upstream Klipper at boot - no Klipper fork |
-| [NebulaOS-nebulascreen](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen) | NebulaScreen, the touchscreen app (based on GuppyScreen); also updatable on its own from its releases |
-| [NebulaOS-klipper-mcu](https://github.com/NebulaOS-KE/NebulaOS-klipper-mcu) | Klipper firmware for the mainboard's GD32F303: upstream Klipper plus an explicit patch series |
-| [nebulaos-packages](https://github.com/NebulaOS-KE/nebulaos-packages) | Pre-built Python packages, so Moonraker and Klipper updates on the printer need no compiler |
-| [lv_drivers](https://github.com/NebulaOS-KE/lv_drivers) | LVGL display/touch drivers used by NebulaScreen |
-
-What ships is what `NebulaOS-firmware/manifests/dependencies.conf` pins - not the latest commit
-of each repository.
-
-## How a release is made
-
-[`.github/workflows/release.yml`](.github/workflows/release.yml), started by hand with a
-NebulaOS-firmware commit, on GitHub's free runners:
-
-1. **build A** and **build B**: two independent release builds of that commit
-2. **compare**: kernel and root filesystem must be byte-identical
-3. **package**: `.img`, `.ingenic`, checksums, manifests, the release record and the attestation,
-   as a **draft** release
-
-The draft is published after the build has been tested on a printer. Printers only see
-published releases.
+Everything is open source, and reproducible: two independent builds of a release come out
+byte-identical. The image is built and put together in
+**[NebulaOS-firmware](https://github.com/NebulaOS-KE/NebulaOS-firmware)**: the architecture,
+the other repositories, how to build an image and how a release is made all start there.
 
 ## License
 
