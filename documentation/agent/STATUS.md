@@ -34,7 +34,7 @@ them: there is no version history to write. Pins at tag `v1.0.2`, firmware `3bdf
 Firmware `main` has moved past the release (`dc4d9d6`, `b95b156`). `REPOSITORY_HEAD` is not
 `SHIPPING_PIN`, and the developer pages say which one they describe.
 
-## Open pull requests - all six refreshed against 1.0.2 on 2026-11-10
+## Open pull requests - all eight refreshed against 1.0.2 (six on 2026-11-10, the two older ones on 2026-11-11)
 
 | Repository | PR | Branch | Describes |
 |---|---|---|---|
@@ -44,6 +44,8 @@ Firmware `main` has moved past the release (`dc4d9d6`, `b95b156`). `REPOSITORY_H
 | `NebulaOS-kernel` | [#2](https://github.com/NebulaOS-KE/NebulaOS-kernel/pull/2) | `docs/kernel` | Which parts of the kernel are NebulaOS, the freeze-diagnosis layer, and `CONFIG_PREEMPT` rather than `PREEMPT_RT` - at `95d0321e`, which is the 1.0.2 pin |
 | `NebulaOS-nebulascreen` | [#6](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/pull/6) | `docs/screen` | Contributor guide, the screenshot tour, configuration - describing `fd47cb6`, with the gap to `main` read from the diff |
 | `NebulaOS-klipper-mcu` | [#1](https://github.com/NebulaOS-KE/NebulaOS-klipper-mcu/pull/1) | `docs/mcu` | MCU firmware lifecycle on a printer: both identities, the restore and its bounds, the power-cycle failure, and the KE-only boundary |
+| `nebulaos-packages` | [#2](https://github.com/NebulaOS-KE/nebulaos-packages/pull/2) | `docs/packages` | The package index: the ABI fingerprint, the seven scripts, four invariants - at `9d0d264`, plus the image side of the contract from firmware `3bdf3ff` |
+| `lv_drivers` | [#1](https://github.com/NebulaOS-KE/lv_drivers/pull/1) | `docs/lv-drivers` | Which parts of the fork are NebulaOS: two commits on `master` `ea2e4cc`, one live - consumed by NebulaScreen `fd47cb6` (1.0.2) and `84db432`, both pinning `0406ccb` |
 
 **Nothing is merged and nothing is published.** No wiki publish workflow has ever been run from
 this session; the owner publishes.

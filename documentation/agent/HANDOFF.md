@@ -13,9 +13,36 @@ coverage dashboard, delivered as `docs/*` branches and pull requests. Not a plan
 outline: the pages themselves. The full assignment is in `MISSION.md`; `RULES.md` holds the
 workspace rules and the owner's decisions and wins wherever the two differ.
 
-## Latest batch (2026-11-10): everything refreshed against the 1.0.2 release
+## Latest batch (2026-11-11): the two older PRs refreshed
 
-**Read `STATUS.md` next - it is one page and it is current.** The batch sections below this one
+Inbox note `2026-11-11-OLDER-PRS.md`. The two PRs left out of the 1.0.2 refresh got the same
+treatment, and neither needed a rebase - each docs branch is one commit sitting directly on the
+current tip of its default branch, and neither default branch has moved since the page was
+written (`nebulaos-packages/main` `9d0d264`, `lv_drivers/master` `ea2e4cc`).
+
+- **packages #2** (`docs/packages`, commit `cd5e10a`): the page is re-verified, not rewritten -
+  `tests/run-tests.sh` re-run at `9d0d264`, 10 passed, 0 failed. New section: the image side of
+  the contract, from firmware `3bdf3ff`. The index is a **runtime-only** dependency (the manifest
+  says the build never uses it), `02-configure-buildroot.sh` fails without the URLs,
+  `nebulaos-post-build.sh` derives the fingerprint once and writes `/etc/pip.conf`, and
+  `06-verify.sh` refuses an image whose `pip.conf` carries an `extra-index-url` - which is the
+  hard form of "the printer never talks to PyPI" and was missing from the page.
+- **lv_drivers #1** (`docs/lv-drivers`, commit `f4573b2`): the fork did not move, but the page
+  named NebulaScreen `36490ed` - the deleted 1.0.0 screen. It now names `fd47cb6` (the 1.0.2 pin,
+  tag `v1.0.1`, `NEBULASCREEN_PIN` in firmware `3bdf3ff`) and `84db432` (tip of `main`), which pin
+  the same submodule commit `0406ccb`. One nuance added from source: NebulaScreen registers
+  `evdev_read_smoothed`, not the fork's `evdev_read` directly - the fork still decides every press
+  and release, only the coordinates are filtered.
+- Both repo-overview inventory rows had `source_commit: null` ("not cloned" in the dashboard) and
+  now carry their real commit, a `reverified_at` stamp and the firmware/screen evidence;
+  re-verification stamps 424 -> 426 of 560. `FOR-THE-OWNER-1.0.2.md` and `STATUS.md` list eight
+  PRs, not six.
+- The main session's commit `9893095` (Screen-Display "Screen mounted the other way round",
+  `display_rotate`, already published) is untouched on this branch.
+
+## Earlier batch (2026-11-10): everything refreshed against the 1.0.2 release
+
+**Read `STATUS.md` next - it is one page and it is current.** The batch sections from here down
 are history, kept because they explain decisions; where one of them disagrees with `STATUS.md`,
 `STATUS.md` wins.
 

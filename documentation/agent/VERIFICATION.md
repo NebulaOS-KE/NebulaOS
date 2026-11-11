@@ -86,6 +86,23 @@ Two cautions, recorded because both nearly produced a wrong result:
   rootdir and import artifacts rather than real failures - `test_tmcstatus` passes perfectly
   when run as `extras.test_tmcstatus`. Run per-module, the way the project's own CI does.
 
+### The package index's own tests, re-run 2026-11-11
+
+`nebulaos-packages` has an offline suite that needs nothing but Python and a shell (no GitHub, no
+Docker, no SDK). Run at `9d0d264` - the current tip of `main`, unchanged since 2026-11-03:
+
+```
+sh tests/run-tests.sh   ->   index-tests: 10 passed, 0 failed
+```
+
+Same ten tests, same result as the first run, so the four invariants that page describes still
+hold as written: helpers outside `simple/`, append-only for helpers and for wheels, one ABI
+failing without stopping the rest, and only `sdk-*` releases being used. That is the whole of
+`verify_test: verified` for that repository - a **full** index pass is not run here, because it
+needs an authenticated `gh`, Docker and the firmware build image pinned by digest.
+
+`lv_drivers` has no tests at all, which is why its `verify_test` is `n/a` rather than `unknown`.
+
 **Cannot prove:** that any of it works on a real printer. This agent has no printer
 access by design - no SSH, no hardware launcher, no Moonraker calls to a machine. So
 `verify_hardware` stays `n/a` or `blocked`, and any page describing hardware behaviour

@@ -387,3 +387,21 @@ Inbox note `_scratch/docs-agent/inbox/2026-11-10-RELEASE-1.0.2-REFRESH.md`.
   copy the firmware deploys at `/opt/nebulaos/tools/` have diverged: two hardware-found fixes
   live only in the firmware. Documented in the mcu README on `docs/mcu`; the code fix is not
   this session's to make. See `BLOCKERS.md`.
+
+## From the foreground session (2026-11-11, the two older PRs)
+
+Inbox note `_scratch/docs-agent/inbox/2026-11-11-OLDER-PRS.md`.
+
+- **Q-085 - DONE.** `packages #2` and `lv_drivers #1` refreshed the same way as the other six.
+  Neither needed a rebase: each docs branch is one commit directly on the current tip of its
+  default branch (`main` `9d0d264`, `master` `ea2e4cc`), and neither default branch has moved.
+  packages: re-verified at `9d0d264` (`tests/run-tests.sh` re-run, 10 passed, 0 failed) plus a new
+  section on the image side of the contract from firmware `3bdf3ff` - runtime-only dependency, the
+  build failing without the index URLs, the fingerprint derived once in post-build, and
+  `06-verify.sh` rejecting a `pip.conf` with an `extra-index-url`. lv_drivers: the fork is
+  unchanged, but the page named the deleted 1.0.0 screen `36490ed` and now names `fd47cb6` (the
+  1.0.2 pin) and `84db432` (tip of `main`), which pin the same submodule commit `0406ccb`; plus
+  the `evdev_read_smoothed` wrapper read from `main.cpp`. Both PR bodies carry a dated refresh
+  section; both repo-overview inventory rows now carry a real `source_commit` and a
+  `reverified_at` stamp instead of the dashboard's "not cloned". `FOR-THE-OWNER-1.0.2.md` lists
+  eight PRs.

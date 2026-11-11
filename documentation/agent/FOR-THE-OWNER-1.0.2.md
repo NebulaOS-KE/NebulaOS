@@ -1,9 +1,10 @@
 # For Tim: what is ready to merge, and what is still open
 
-Written 2026-11-11, after the 1.0.2 refresh (inbox note `2026-11-10-RELEASE-1.0.2-REFRESH.md`).
+Written 2026-11-11, after the 1.0.2 refresh (inbox note `2026-11-10-RELEASE-1.0.2-REFRESH.md`),
+and extended the same day with the two older PRs (inbox note `2026-11-11-OLDER-PRS.md`).
 Nothing here has been merged or published - that is yours.
 
-## The six pull requests
+## The eight pull requests
 
 | PR | Branch | State | Read this before merging |
 |---|---|---|---|
@@ -14,10 +15,19 @@ Nothing here has been merged or published - that is yours.
 | [nebulascreen #6](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/pull/6) | `docs/screen` | **Ready** | Describes the pin `fd47cb6`; the gap to `main` (two wiki commits, one comment-only pass) was read from the diff, not assumed. |
 | [klipper-mcu #1](https://github.com/NebulaOS-KE/NebulaOS-klipper-mcu/pull/1) | `docs/mcu` | **Ready, but it changes a claim you may want to read first** | The README's *"no firmware built here has been flashed to a real printer"* is no longer true, so it now reads as *no qualification claim* instead of *never run*. `compatibility.json` is untouched: `hardware_qualified` stays `false`, because that is your call. |
 
-Two older PRs are still open and were **not** part of this refresh, so they describe what they
-described when they were written: [packages #2](https://github.com/NebulaOS-KE/nebulaos-packages/pull/2)
-and [lv_drivers #1](https://github.com/NebulaOS-KE/lv_drivers/pull/1). Neither repository is
-cloned here, which is why they were left out - say the word and they get the same treatment.
+Both older PRs now have the same treatment (2026-11-11). Neither repository needed a rebase:
+each docs branch is one commit sitting directly on the current tip of its default branch
+(`nebulaos-packages/main` `9d0d264`, `lv_drivers/master` `ea2e4cc`), and neither default branch
+has moved since the pages were written.
+
+| PR | Branch | State | Read this before merging |
+|---|---|---|---|
+| [packages #2](https://github.com/NebulaOS-KE/nebulaos-packages/pull/2) | `docs/packages` | **Ready** | Re-verified at `9d0d264`; `tests/run-tests.sh` re-run 2026-11-11, 10 passed, 0 failed. New: the image side of the contract from firmware `3bdf3ff` - runtime-only dependency, and `06-verify.sh` refusing an image whose `pip.conf` carries an `extra-index-url`, which is the hard version of "the printer never talks to PyPI". |
+| [lv_drivers #1](https://github.com/NebulaOS-KE/lv_drivers/pull/1) | `docs/lv-drivers` | **Ready** | The fork did not move (`master` `ea2e4cc`, `guppyscreen-ke-next` `0406ccb`). The page named NebulaScreen `36490ed` - the 1.0.0 screen - and now names `fd47cb6` (1.0.2) and `84db432` (tip of `main`), which pin the same submodule commit. |
+
+One correction worth knowing from the lv_drivers page: NebulaScreen does not register the fork's
+`evdev_read` directly any more, it registers `evdev_read_smoothed` around it. The fork still
+decides every press and release; only the coordinates are filtered afterwards.
 
 ## Three things that want a decision from you
 

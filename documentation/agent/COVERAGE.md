@@ -84,8 +84,8 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | NebulaOS-klipper-extensions | main | f498796fcaa2 | 235 |
 | NebulaOS-klipper-mcu | main | 33f5d16daccd | 1 |
 | NebulaOS-nebulascreen | main | 36490ed0b60d | 105 |
-| lv_drivers | master | not cloned l | 1 |
-| nebulaos-packages | main | not cloned l | 1 |
+| lv_drivers | master | ea2e4cc00d02 | 1 |
+| nebulaos-packages | main | 9d0d264ad60d | 1 |
 
 ## Re-verified against a later commit
 
@@ -98,8 +98,10 @@ A *candidate* is not coverage. It means a real image exists but has not been con
 | NebulaOS-klipper-extensions | 178a0c2 | 221 | 238 |
 | NebulaOS-klipper-mcu | 6648b97 | 1 | 1 |
 | NebulaOS-nebulascreen | fd47cb6 | 1 | 105 |
+| lv_drivers | ea2e4cc | 1 | 1 |
+| nebulaos-packages | 9d0d264 | 1 | 1 |
 
-**424 of 560 items** carry a re-verification stamp. The rest still record only their discovery commit: a page whose own header names a newer commit is the authority for that page, not this column.
+**426 of 560 items** carry a re-verification stamp. The rest still record only their discovery commit: a page whose own header names a newer commit is the authority for that page, not this column.
 
 ## Blocked items
 
