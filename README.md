@@ -10,6 +10,7 @@
   <a href="https://github.com/NebulaOS-KE/NebulaOS/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/NebulaOS-KE/NebulaOS?label=download&color=2196f3"></a>
   <a href="https://github.com/NebulaOS-KE/NebulaOS/wiki"><img alt="Manual" src="https://img.shields.io/badge/manual-wiki-2196f3"></a>
   <img alt="Ender-3 V3 KE only" src="https://img.shields.io/badge/printer-Ender--3%20V3%20KE-555">
+  <a href="https://discord.com/invite/k3HdqpdB"><img alt="Join our Discord" src="https://img.shields.io/discord/1521621287284379739?logo=discord&logoColor=white&color=5865F2"></a>
 </p>
 
 <table>
@@ -30,6 +31,7 @@
     <td align="center"><sub>Print statistics, history from stock and OpenKE included</sub></td>
   </tr>
 </table>
+
 
 ## Why NebulaOS
 
