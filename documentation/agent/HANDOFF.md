@@ -70,7 +70,12 @@ stage 01 actually verifies. Writing them found five discrepancies, all in `BLOCK
   checked; the firmware wiki separates what the tooling enforces from what this release can
   prove about itself. The `.img` cannot be byte-identical at all (encrypted 7z, random AES IV).
   **The lesson: a second-hand answer about process - even from the main session - is not
-  evidence.** Both intermediate versions were wrong in the same way the original was.
+  evidence.** Both intermediate versions were wrong in the same way the original was. The fourth
+  and final version came from `d464b46`, read here rather than taken from its summary: 1.0.2
+  built twice on one host, same container digest, identical `xImage` `14a47aa8…` and
+  `rootfs.squashfs` `df65c724…` - and those are the hashes in the release's own published
+  manifest, which is what makes the claim checkable by a stranger. Across hosts: never measured,
+  and every page says so.
 
 **One generator change with a real consequence:** the runtime-helper generator no longer counts
 documentation as a caller. A page naming a helper is not a caller - and with `docs/` and `wiki/`
@@ -723,9 +728,10 @@ paths.
    the two lines". It names the version already; `production` was still `178a0c2` on 2026-11-12,
    and `production` is the branch Moonraker's update manager follows. The main session will say
    when it moves - do not infer it from `main`.
-2. **When the main session's firmware commit correcting `docs/BUILD_PROVENANCE.md` and
-   `docs/REPRODUCIBILITY.md` lands**, the firmware wiki's warning paragraph in `Build-Provenance`
-   can shrink to a pointer at the corrected documents.
+2. *(done the same day)* The main session's `d464b46` corrected both firmware documents, the
+   wiki warning is gone, and the pages now carry the measurement - 1.0.2 built twice on one host
+   gives identical `xImage` and `rootfs.squashfs`, which are the hashes the release publishes -
+   with its four limits. The two `BLOCKERS.md` entries are closed.
 3. `git fetch` every repository and compare tips against the pins in `STATUS.md`. If a tip
    moved, set `reverified_at` on the affected items only after actually re-reading them -
    never assume a page still holds because its repository looks quiet.

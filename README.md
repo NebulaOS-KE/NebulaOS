@@ -92,9 +92,9 @@ or supported by Creality.
 
 ## For developers
 
-Everything is open source, and the build is reproducible: a release is built twice from the
-same source and the two builds compared - kernel and root filesystem byte for byte, the
-download by its contents. The image is built and put together in
+Everything is open source, and the build is reproducible - measured, not asserted: 1.0.2 built
+twice from the same source gave the same kernel and the same root filesystem, byte for byte.
+The image is built and put together in
 **[NebulaOS-firmware](https://github.com/NebulaOS-KE/NebulaOS-firmware)**: the architecture,
 the other repositories, how to build an image and how a release is made all start there.
 

@@ -83,15 +83,16 @@ work around it today. The fix itself is extensions `a63964a`, which is on **neit
    embedded images show a pre-1.0.2 version *inside the picture* - the retake list, with what
    each one says today, is at the end of `SCREENSHOTS.md`. `r-system.png` is the one to take
    first: it also shows `Kernel 6.6.157-rt79`, and 1.0.2 does not print `-rt79` at all.
-4. **One claim this session had to retract**, and it took three passes. The manual said
-   releases are "built twice on separate machines with the two results required to be
-   byte-identical". There is no *separate machines* anywhere; there **is** a release workflow in
-   the central repository that builds twice and compares, but the published 1.0.2 was not built
-   by it - its `release-manifest.txt` names a local `BUILD_RUN` and publishes no comparison. And
-   the `.img` cannot be byte-identical at all (encrypted 7z, random AES IV:
-   `IMG_BYTE_IDENTICAL=NO`, `IMG_CONTENT_IDENTICAL=YES`). The user pages now say what is checked
-   and nothing about where; the firmware wiki separates what the tooling enforces from what this
-   release can prove about itself. Full entry in `BLOCKERS.md`.
+4. **One claim this session had to retract**, and it took three passes - the lesson is in
+   `STATUS-LOG.md`. The manual said releases are "built twice on separate machines with the two
+   results required to be byte-identical". There is no *separate machines* anywhere, and the
+   published 1.0.2 was built with the local launcher rather than by the release workflow that
+   exists. What **is** now measured, after the main session corrected the firmware's own records
+   (`d464b46`): 1.0.2 built twice on one host with the same container digest gives identical
+   `xImage` and `rootfs.squashfs`, and those are the hashes the release publishes. The user
+   pages say what is checked and nothing about where; the `.img` cannot be byte-identical at all
+   (encrypted 7z, random AES IV). Full entry in `BLOCKERS.md`, which also records the two
+   discrepancies that closed at the source the same day.
 5. **One inventory question.** `wiki/Configuration.md` (NebulaScreen) documents about 25 settings
    while the inventory tracks 20; the difference is GuppyScreen-inherited fields. Decide whether
    they belong in the inventory before the count is quoted anywhere - see `QUEUE.md`.

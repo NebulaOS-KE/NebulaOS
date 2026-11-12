@@ -242,6 +242,24 @@ Not verified here: that the workaround succeeds on an affected printer. No print
 the two reports are the main session's, not this session's observation. The page does not say
 *tested*.
 
+## The reproducibility claim, third version (2026-11-12)
+
+The sentence "releases are built twice on separate machines with the two results required to be
+byte-identical" was wrong, and the two corrections that followed were wrong in the same way -
+each took a statement about *process* from a person rather than from an artifact
+(`STATUS-LOG.md` has the lesson). This is what the third version rests on, all read here:
+
+| Claim on the pages | Evidence |
+|---|---|
+| 1.0.2 built twice, identical kernel and root filesystem | `docs/REPRODUCIBILITY.md` at firmware `d464b46`: Build A and Build B of `3bdf3ff` on 2026-11-09, one host, container digest `sha256:a6ba57c6…`, `xImage` `14a47aa8…`, `rootfs.squashfs` `df65c724…` |
+| Those are the files in the release | the published `release-manifest.txt` for v1.0.2 carries the same `XIMAGE_SHA256` and `ROOTFS_SQUASHFS_SHA256` (downloaded from the release, not quoted from the record) |
+| The download cannot be compared byte for byte | `docs/RELEASE_ARTIFACTS.md`: encrypted 7z with a fresh random AES IV; the check records `IMG_BYTE_IDENTICAL=NO` with `IMG_CONTENT_IDENTICAL=YES` |
+| No location is claimed | 1.0.2's `release-manifest.txt` names `BUILD_MODE=candidate` and one local `BUILD_RUN`; the release workflow (`.github/workflows/release.yml`, 2026-10-29) exists and has run once, but not for this release |
+| The kernel's part of it | `NebulaOS-kernel` `b31be02d9`, one line (`gzip -v9f` to `gzip -nv9f`), an ancestor of the 1.0.2 pin, checked by `scripts/build/01-apply-kernel-patches.sh` |
+
+Not established, and said so wherever the claim appears: the same bytes from a **different
+host** or a different container digest. Nobody has measured that.
+
 ## Source revisions
 
 Documentation describes the **newest** code: the tip of each repository's default branch.

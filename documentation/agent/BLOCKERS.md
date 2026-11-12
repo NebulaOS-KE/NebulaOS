@@ -136,23 +136,28 @@ does not edit production code, tests or configuration to make documentation look
 
 ### 2026-11-12, found while writing the developer wikis (firmware `b95b156`, 1.0.2 `3bdf3ff`)
 
+**Two of the four closed the same day**, at the source, by the main session's firmware commit
+`d464b46` on `main`. They are kept below with their outcome rather than deleted.
+
 Three of these are documentation against documentation, which is the easiest kind to leave
 unresolved because nothing breaks. None of them was fixed in a tracked document by this session:
 the wiki pages follow the evidence and name the disagreement.
 
-- **The firmware's two reproducibility documents disagree.** `docs/REPRODUCIBILITY.md` says it
-  is the canonical record and reports all 15 causes of image non-determinism as measured and
-  fixed. `docs/BUILD_PROVENANCE.md`'s "Working backward" step 4 still says the root cause is
-  **not** established and quotes the 1,454,891-byte measurement, which that same canonical
-  record describes as pre-`SOURCE_DATE_EPOCH`. The wiki's `Build-Provenance` follows the
-  canonical record and says so in a paragraph of its own. *The main session is correcting both
-  tracked documents at the source (2026-11-12, a firmware commit on `main`); when it lands, the
-  wiki paragraph can shrink to a pointer.*
-- **`docs/REPRODUCIBILITY.md` credits the kernel gzip fix to a script that does not exist.** Its
-  fix list says `kernel-gzip-determinism-variant.sh` adds `-n` to the zboot rule. At 1.0.2 there
-  is no such file anywhere in the firmware repository; `gzip -nv9f` is a commit in the kernel
-  repository (present at `95d0321e`), and `scripts/build/01-apply-kernel-patches.sh` verifies the
-  literal line. The kernel wiki's `Build-And-Integration` records this.
+- **CLOSED (`d464b46`): the firmware's two reproducibility documents disagreed.**
+  `docs/REPRODUCIBILITY.md` reported all 15 causes as measured and fixed while
+  `docs/BUILD_PROVENANCE.md`'s step 4 still said the root cause was not established and quoted
+  the 1,454,891-byte measurement. Both are corrected, and the record is now stronger than the
+  gap was: `IMAGE_REPRODUCIBLE` is **measured** - release 1.0.2 built twice on one host, same
+  container digest, identical `xImage` `14a47aa8…` and `rootfs.squashfs` `df65c724…`, which are
+  also the hashes the published release carries. Verified here by reading `d464b46`, not from
+  the report of it. The wiki's warning paragraph is replaced by the measurement and its four
+  limits (across hosts never measured; a different commit always differs; `rootfs.ext2` not
+  reproducible and not shipped; the screen reproduces for a fixed pin and digest only).
+- **CLOSED (`d464b46`): `docs/REPRODUCIBILITY.md` credited the kernel gzip fix to a script that
+  does not exist.** It is `b31be02d9` in `NebulaOS-kernel` - one line, `gzip -v9f` to
+  `gzip -nv9f` in `arch/mips/boot/zcompressed/Makefile`, an ancestor of the 1.0.2 pin, verified
+  in that repository - and `scripts/build/01-apply-kernel-patches.sh` checks the literal line.
+  Both wikis now name the commit.
 - **`docs/BUILD_FROM_SOURCE.md` names the wrong artifact directory.** It says the screen binary
   lands in `artifacts/guppyscreen-mips/`; `04-cross-compile-app-stack.sh` writes
   `artifacts/nebulascreen-mips/` (`nebulascreen`, `nebulabeep`). The `build-manifest.txt` *field*
