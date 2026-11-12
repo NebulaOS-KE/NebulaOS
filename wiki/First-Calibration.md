@@ -61,6 +61,11 @@ Start.
 If it says **Failed: <step>**, the page also says *Why*, *What to do* and *Nothing was saved.* Fix
 what it names and tap Start again.
 
+If it fails at **Measuring the Z offset** and the reason is that the nozzle never touched the bed
+(or `No trigger on probe after full movement`), that is a known one, so far only on printers with
+a softer bed mount such as silicone spacers: see
+[The nozzle does not reach the bed](Troubleshooting#the-nozzle-does-not-reach-the-bed-z-offset-calibration).
+
 ## What it does not do
 
 Auto Calibration measures the **Z offset and the bed mesh**, and checks the load cell. These stay

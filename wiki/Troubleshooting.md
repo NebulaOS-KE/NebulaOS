@@ -58,6 +58,82 @@ Starting from what the print looks like is often quicker: [Improve your prints](
 | Auto Calibration says **Failed: <step>** | The page says *Why* and *What to do*; nothing was saved. Fix it and run it again. Load cell steps: **Tune → Calibration → Load Cell Calibration** shows the reason. See [Calibration explained](Calibration-Explained#load-cell-calibration). |
 | A calibration row says **Redo:** | Something you changed since made it stale - run that row again. See [Calibration explained](Calibration-Explained#the-status-line-under-every-row). |
 | A calibration refuses to start | A print is running, or something else is: calibration rows are locked while printing. |
+| **The nozzle did not touch the bed** (new wording), or `No trigger on probe after full movement` (before the update) | The Z-offset calibration could not reach the bed. See [The nozzle does not reach the bed](#the-nozzle-does-not-reach-the-bed-z-offset-calibration) below. |
+| `measurement rejected - no_accepted_samples (samples: 3 taken, 0 accepted)` | The same cause, one step later: the touches were measured but rejected as implausible. Same fix: [The nozzle does not reach the bed](#the-nozzle-does-not-reach-the-bed-z-offset-calibration). |
+
+---
+
+### The nozzle does not reach the bed (Z-offset calibration)
+
+**Who this is for.** A small number of printers - so far the ones with **silicone bed spacers**
+instead of the stock mount - fail every Auto Calibration or Z-offset calibration on NebulaOS
+1.0.2, in one of two ways:
+
+1. Right after installing, with the CR-Touch Z offset still at `0.000`, the console says
+   `No trigger on probe after full movement` three times and the nozzle stops a fraction of a
+   millimetre above the bed.
+2. After setting a Z offset by hand:
+   `NEBULAOS_Z_OFFSET_CALIBRATE: measurement rejected - no_accepted_samples (samples: 3 taken, 0 accepted)`.
+
+If your printer calibrates normally, this does not affect you and there is nothing to change.
+
+**Why it happens.** Two limits in the calibration were set from measurements on one printer. A
+softer bed mount needs the nozzle to travel a little further down, and to press a little longer,
+before the load cell reports contact - so the search stopped above the bed, and the touches that
+did happen looked too far from the expected plane to be trusted.
+
+**The fix is an update.** It is already written and will arrive through **Settings → Updates**;
+ask in the issue thread if you want to know when. The two steps below are what to do in the
+meantime, and they are safe to leave in place afterwards.
+
+#### Until then: two lines in `printer.cfg`
+
+Open Mainsail → **Machine** → `printer.cfg`.
+
+1. Near the bottom, in the block the printer writes for itself, change
+
+   ```
+   #*# z_offset = 0.000
+   ```
+
+   to
+
+   ```
+   #*# z_offset = 3.000
+   ```
+
+   A `0.000` there means *not calibrated yet*, and that is the case where the search floor is
+   too shallow. Any credible value sends the calibration down the normal route, which reaches
+   about a millimetre past where it expects the bed to be.
+
+2. **Above** the line
+
+   ```
+   #*# <---------------------- SAVE_CONFIG ---------------------->
+   ```
+
+   add
+
+   ```
+   [nebulaos_calibration]
+   max_abs_fit_delta: 0.5
+   ```
+
+   This widens the plausibility check on a touch from 0.3 mm to 0.5 mm. It must be below the
+   `[include ...]` lines, which is what putting it here achieves.
+
+3. **Save & Restart**, then run the calibration again: **Tune → Calibration → Auto Calibration**,
+   or **Z Offset** on its own.
+
+It measures the real offset and saves it over the `3.000`. **Do not print until it succeeds** -
+until then the printer believes the nozzle sits 3 mm further from the bed than it does.
+
+After the update both lines are harmless; you can remove them whenever you like.
+
+**If you would rather not touch `printer.cfg`**, the old-fashioned route still works and does not
+use the load cell at all: the paper test with `PROBE_CALIBRATE`, then `SAVE_CONFIG`. See
+[Calibration explained](Calibration-Explained#load-cell-calibration) for where the load cell fits
+in, and [Report a problem](Report-A-Problem) if neither route gets you a first layer.
 
 ---
 

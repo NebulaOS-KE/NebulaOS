@@ -79,6 +79,17 @@ items, 552 documented, 8 draft, 0 missing.
 
 `check_links.py` passes in all seven `wiki/` directories.
 
+**And one user-facing entry after them** (inbox note `2026-11-12-ZOFFSET-NO-TRIGGER.md`, Q-087):
+the Z-offset calibration failure from issue #9 - the nozzle not reaching the bed on printers with
+a softer bed mount, so far two of about 45. `wiki/Troubleshooting.md` carries both message
+wordings in the Calibrating table (the old `No trigger on probe after full movement` as well, so
+an un-updated user finds the row) and a section with the two `printer.cfg` lines, why each works,
+the warning not to print until the calibration succeeds, and the `PROBE_CALIBRATE` fallback.
+**No version number**: the fix is extensions `a63964a`, which is on neither `main` nor
+`production`. The four things read for it - including why a hand-set `z_offset` changes the search
+floor, and why a second `[nebulaos_calibration]` section overrides the firmware's
+(`RawConfigParser(strict=False)` in Klipper `58bd67db`) - are in `VERIFICATION.md`.
+
 ## Earlier batch (2026-11-11): the two older PRs refreshed
 
 Inbox note `2026-11-11-OLDER-PRS.md`. The two PRs left out of the 1.0.2 refresh got the same
@@ -698,10 +709,10 @@ paths.
 
 ## Next actions, in order
 
-1. **Q-087** (queued, small): the Troubleshooting entry for the Z-offset calibration failure in
-   issue #9, with the workaround steps - inbox note `2026-11-12-ZOFFSET-NO-TRIGGER.md` from the
-   main session. It arrived while the developer wikis were being written and was queued behind
-   them, as the note asked.
+1. **When extensions `a63964a` reaches `production`** (the issue #9 Z-offset fix), the
+   Troubleshooting section *The nozzle does not reach the bed* can name a version and shrink to
+   "update, and remove the two lines". Today it deliberately names none: the commit is on neither
+   `main` nor `production`. Ask the main session rather than inferring a version number.
 2. `git fetch` every repository and compare tips against the pins in `STATUS.md`. If a tip
    moved, set `reverified_at` on the affected items only after actually re-reading them -
    never assume a page still holds because its repository looks quiet.

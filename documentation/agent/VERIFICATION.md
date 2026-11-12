@@ -217,6 +217,27 @@ nothing was dropped - the summary described one commit, not the range.
 This is read-only verification. This agent does not push to the wiki and has never run a
 publish workflow.
 
+## The Z-offset troubleshooting entry, and what was read for it (2026-11-12)
+
+The entry in `wiki/Troubleshooting.md` describes a failure two users reported (issue #9) and a
+fix that is **not shipped**: it exists as extensions commit `a63964a`, which is not on `main` or
+`production` and is not in any release. The page therefore says what to do today and that the
+real fix arrives through **Settings → Updates**, with **no version number**, because none can be
+promised from here.
+
+What was read, rather than taken from the report:
+
+| Claim | Evidence |
+|---|---|
+| Both knobs the workaround uses exist on 1.0.2 | `extras/nebulaos_calibration.py` at `178a0c2`: `bootstrap_contact_envelope_mm` default **8.0**, `max_abs_fit_delta` default **0.3**, both `[nebulaos_calibration]` options |
+| What the fix changes | `a63964a`: envelope default 8.0 → **5.0** *and* measured from the fresh CR-Touch reading instead of the nozzle's hover height; `max_abs_fit_delta` 0.3 → **0.5**; the bare upstream `No trigger on probe after full movement` wrapped in `_no_contact_message()` |
+| Why a hand-set `z_offset` helps | `extras/nebulaos_probe_pair.py` at `178a0c2`: a credible saved offset takes the *established* path, whose floor is `raw_probe_trigger_z - probe_z_offset - established_contact_margin_mm` with that margin defaulting to **1.0 mm** - deeper than the bootstrap floor the affected units could not reach. `0.000` is explicitly a "not yet calibrated" marker (`_CREDIBLE_Z_OFFSET_EPSILON_MM`) |
+| Why a second `[nebulaos_calibration]` section in `printer.cfg` overrides the firmware's | Klipper at the pinned `58bd67db`: `klippy/configfile.py` builds `configparser.RawConfigParser(strict=False, ...)`, so a later duplicate section's options win - which is why the page says the block must sit below the `[include ...]` lines |
+
+Not verified here: that the workaround succeeds on an affected printer. No printer access, and
+the two reports are the main session's, not this session's observation. The page does not say
+*tested*.
+
 ## Source revisions
 
 Documentation describes the **newest** code: the tip of each repository's default branch.

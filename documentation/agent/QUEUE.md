@@ -423,7 +423,13 @@ Inbox note `_scratch/docs-agent/inbox/2026-11-11-DEV-WIKIS.md`.
   reduced to a pointer everywhere the moved pages were the only content.
   Generators updated so a regeneration lands in `wiki/` with wiki links; the inventory's 425
   `doc_page` values remapped. `FOR-THE-OWNER-1.0.2.md` has a new *developer wikis* section.
-- **Q-087 - OPEN, small, next.** Inbox note `2026-11-12-ZOFFSET-NO-TRIGGER.md` from the main
-  session (relayed while the wikis were being written): a Troubleshooting entry in the user
-  wiki for the Z-offset calibration failure in issue #9, with the workaround steps. Queued
-  after the wikis, as the note asked.
+- **Q-087 - DONE.** Inbox note `2026-11-12-ZOFFSET-NO-TRIGGER.md`: the Z-offset calibration
+  failure from issue #9. `wiki/Troubleshooting.md` has two rows in the Calibrating table (both
+  the old `No trigger on probe after full movement` wording and the new one, so an un-updated
+  user finds it too) and a section *The nozzle does not reach the bed* with the two `printer.cfg`
+  lines, why each one works, the warning not to print until the calibration succeeds, and the
+  `PROBE_CALIBRATE` fallback. `wiki/First-Calibration.md` points at it from the *Failed* line.
+  No version number: the fix is extensions `a63964a`, which is on neither `main` nor
+  `production`, so the page says the update arrives through Settings -> Updates and nothing more.
+  What was read for it, including why a hand-set `z_offset` changes the search floor and why a
+  second `[nebulaos_calibration]` section overrides the firmware's, is in `VERIFICATION.md`.

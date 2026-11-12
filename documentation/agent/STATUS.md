@@ -56,6 +56,14 @@ touched and no publish workflow was run.
 **Nothing is merged and nothing is published.** No wiki publish workflow has ever been run from
 this session; the owner publishes.
 
+## One user-facing entry added after the wikis (2026-11-12)
+
+`wiki/Troubleshooting.md` now covers the Z-offset calibration failure from issue #9 - the nozzle
+not reaching the bed on printers with a softer bed mount - with the two `printer.cfg` lines that
+work around it today. The fix itself is extensions `a63964a`, which is on **neither `main` nor
+`production`**, so the page promises no version: it says the real fix arrives through
+**Settings -> Updates**. Evidence in `VERIFICATION.md`.
+
 ## What is still open
 
 1. **Eight drafts**, all the same shape: `machine.nebulaos.*` endpoints whose response keys
