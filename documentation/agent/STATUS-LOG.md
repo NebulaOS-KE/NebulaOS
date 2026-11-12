@@ -305,3 +305,26 @@ when the sentence is already being rewritten because it was wrong once.
 The user-facing pages now carry the smallest claim the evidence supports; the firmware wiki
 carries the long version, including the distinction that caused all three rounds: *what the
 tooling enforces* and *what an artifact can prove about itself* are different questions.
+
+## 2026-11-12: publishing stopped being a separate step
+
+Until today the safety model had two gates: this session pushes a `docs/*` branch, a human
+merges it, and *then* the owner runs a publish script. A half-finished page could sit on a
+branch for a week and hurt nobody.
+
+Every repository now has `wiki.yml` on its default branch - `on: push`, `paths: ['wiki/**']` -
+so the merge is the publication. The eight pull requests merged this evening went live in
+seconds, which is exactly what it should do.
+
+**What it costs:** the second gate is gone, and it was the one that forgave a mistake made in a
+hurry. Nothing about this session's permissions changed - still branches and pull requests, never
+a merge, never a `.wiki.git`, never a workflow run - but "I will tidy that sentence before it
+goes out" is no longer a plan, because there is no step left between the commit and the reader.
+
+**What to do differently:** treat every commit that touches `wiki/` as publication. Link check
+first. If a page is not ready, do not commit it - or commit it with the gap written on its face,
+the way the eight API drafts are written, so a reader who finds it is not misled by it.
+
+And one thing that did not change: a green workflow run means the job exited 0. It does not mean
+the reader sees those bytes. The published wikis were cloned and diffed against their branches
+afterwards - eight repositories, 0 differences - because that is the claim worth making.

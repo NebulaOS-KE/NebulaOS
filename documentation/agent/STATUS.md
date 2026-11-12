@@ -34,27 +34,40 @@ them: there is no version history to write. Pins at tag `v1.0.2`, firmware `3bdf
 Firmware `main` has moved past the release (`dc4d9d6`, `b95b156`). `REPOSITORY_HEAD` is not
 `SHIPPING_PIN`, and the developer pages say which one they describe.
 
-## Open pull requests - all eight refreshed against 1.0.2, and all seven component wikis delivered
+## Everything is merged and published (2026-11-12)
 
-Refreshed 2026-11-10 (six) and 2026-11-11 (the two older ones). On **2026-11-12** every
-component repository got its developer documentation as a top-level `wiki/` directory on its
-docs branch - `Home.md`, `_Sidebar.md`, one page per topic, wiki-style links - the shape the
-central manual and the NebulaScreen wiki already use. Nothing is published: no `.wiki.git` was
-touched and no publish workflow was run.
+All eight pull requests were merged at the heads this session reported, and every repository's
+`wiki/` is now **published to its GitHub wiki** by a `wiki.yml` workflow on the default branch
+(`on: push`, `paths: ['wiki/**']`). The owner decided to publish; the main session merged.
 
-| Repository | PR | Branch | Describes |
+Verified here afterwards, by cloning all eight `.wiki.git` repositories read-only and diffing
+each against `wiki/` on its default branch: **0 differences in all eight** - NebulaOS 53 pages,
+firmware 16, kernel 8, extensions 8, mcu 7, packages 6, lv_drivers 6, screen 35. The firmware's
+and kernel's old August pages are gone.
+
+| Repository | Branch merged | Merge commit | Wiki |
 |---|---|---|---|
-| `NebulaOS` | [#3](https://github.com/NebulaOS-KE/NebulaOS/pull/3) | `docs/agent` | The end-user manual: 53 wiki pages (11 moved-page stubs), 202 images, plus this agent's inventory, dashboard and tooling |
-| `NebulaOS-firmware` | [#5](https://github.com/NebulaOS-KE/NebulaOS-firmware/pull/5) | `docs/firmware` | **16 wiki pages**: architecture (boot, slots, image install and the trial, recovery, the black box, the printer configuration), 59 API endpoints, 36 boot services, 58 runtime helpers, 190 osconfig functions, 21 build scripts and 62 host tools, plus building from source, build provenance, installing a developer build and the repository map - at `b95b156`, with the 1.0.2 boundary recorded where it bites |
-| `NebulaOS-klipper-extensions` | [#3](https://github.com/NebulaOS-KE/NebulaOS-klipper-extensions/pull/3) | `docs/extensions` | **8 wiki pages**: architecture, 50 commands with per-command detail, 156 configuration options, 30 modules, testing - at `178a0c2`, the 1.0.2 pin and the tip of `main` and `production` at once |
-| `NebulaOS-kernel` | [#2](https://github.com/NebulaOS-KE/NebulaOS-kernel/pull/2) | `docs/kernel` | **8 wiki pages**: which parts of the kernel are NebulaOS, the freeze-diagnosis layer, `CONFIG_PREEMPT` rather than `PREEMPT_RT`, the branch model, what the build verifies - at `95d0321e`, which is the 1.0.2 pin |
-| `NebulaOS-nebulascreen` | [#6](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/pull/6) | `docs/screen` | 35 wiki pages, already published from `wiki/` by its own workflow: contributor guide, the screenshot tour, configuration - describing `fd47cb6`, with the gap to `main` read from the diff. Checked this batch; two moved-page stubs marked and a link-checker false positive fixed |
-| `NebulaOS-klipper-mcu` | [#1](https://github.com/NebulaOS-KE/NebulaOS-klipper-mcu/pull/1) | `docs/mcu` | **7 wiki pages**: the firmware's lifecycle on a printer (both identities, the restore and its bounds, the power-cycle failure, the KE-only boundary), building your own, architecture, reproducibility, toolchain |
-| `nebulaos-packages` | [#2](https://github.com/NebulaOS-KE/nebulaos-packages/pull/2) | `docs/packages` | **6 wiki pages**: the ABI fingerprint, the pipeline, four invariants, and the image side of the contract - at `9d0d264` (`gh-pages` `9bef4d4`), with the firmware end read at `3bdf3ff` |
-| `lv_drivers` | [#1](https://github.com/NebulaOS-KE/lv_drivers/pull/1) | `docs/lv-drivers` | **6 wiki pages**: which parts of the fork are NebulaOS - two commits on `master` `ea2e4cc`, one live - consumed by NebulaScreen `fd47cb6` (1.0.2) and `84db432`, both pinning `0406ccb` |
+| `NebulaOS` | `docs/agent` | `a296fe1` | the end-user manual, 53 pages |
+| `NebulaOS-firmware` | `docs/firmware` | `0c712b2` | 16 pages |
+| `NebulaOS-kernel` | `docs/kernel` | `1dbe846` | 8 pages |
+| `NebulaOS-klipper-extensions` | `docs/extensions` | `55a0d11` | 8 pages |
+| `NebulaOS-klipper-mcu` | `docs/mcu` | `c9cebf7` | 7 pages |
+| `nebulaos-packages` | `docs/packages` | `670a0d4` | 6 pages |
+| `lv_drivers` | `docs/lv-drivers` | `fcdda5f` | 6 pages |
+| `NebulaOS-nebulascreen` | `docs/screen` | `a61fd51` | 35 pages |
 
-**Nothing is merged and nothing is published.** No wiki publish workflow has ever been run from
-this session; the owner publishes.
+### What this changes for this session
+
+**A merged docs PR now publishes.** There is no separate publish step left to hold the line, so
+the line moves to the pull request: a page is published the moment someone merges it, in every
+repository, not only NebulaScreen. Three habits follow.
+
+- **Run `tools/check_links.py` before every commit that touches `wiki/`** - it was already the
+  rule; now a broken link reaches readers rather than a branch.
+- **Never push a half-finished page to a `docs/*` branch "to fix later"**, because the fix and
+  the mistake are one merge apart.
+- **Still never push to a `.wiki.git` and never run a publish workflow.** Publishing happens
+  because a human merged, which is the same consent as before, expressed once instead of twice.
 
 ## One user-facing entry added after the wikis (2026-11-12)
 
@@ -84,17 +97,7 @@ three states the page passed through, in `VERIFICATION.md`.
    embedded images show a pre-1.0.2 version *inside the picture* - the retake list, with what
    each one says today, is at the end of `SCREENSHOTS.md`. `r-system.png` is the one to take
    first: it also shows `Kernel 6.6.157-rt79`, and 1.0.2 does not print `-rt79` at all.
-4. **One claim this session had to retract**, and it took three passes - the lesson is in
-   `STATUS-LOG.md`. The manual said releases are "built twice on separate machines with the two
-   results required to be byte-identical". There is no *separate machines* anywhere, and the
-   published 1.0.2 was built with the local launcher rather than by the release workflow that
-   exists. What **is** now measured, after the main session corrected the firmware's own records
-   (`d464b46`): 1.0.2 built twice on one host with the same container digest gives identical
-   `xImage` and `rootfs.squashfs`, and those are the hashes the release publishes. The user
-   pages say what is checked and nothing about where; the `.img` cannot be byte-identical at all
-   (encrypted 7z, random AES IV). Full entry in `BLOCKERS.md`, which also records the two
-   discrepancies that closed at the source the same day.
-5. **One inventory question.** `wiki/Configuration.md` (NebulaScreen) documents about 25 settings
+4. **One inventory question.** `wiki/Configuration.md` (NebulaScreen) documents about 25 settings
    while the inventory tracks 20; the difference is GuppyScreen-inherited fields. Decide whether
    they belong in the inventory before the count is quoted anywhere - see `QUEUE.md`.
 
@@ -102,8 +105,15 @@ three states the page passed through, in `VERIFICATION.md`.
 
 Read evidence from the worktrees under `_worktrees/docs/`, never from the checkouts at the
 workspace root - those belong to the foreground session and move without warning. Push only
-`docs/*`; never merge, never force-push, never publish. Never edit production code, tests or
-configuration to make a document right: that goes in `BLOCKERS.md`.
+`docs/*`; never merge, never force-push, never push to a `.wiki.git` and never run a publish
+workflow. Never edit production code, tests or configuration to make a document right: that goes
+in `BLOCKERS.md`.
+
+**Since 2026-11-12 a merged `docs/*` PR publishes itself** in every repository, through each
+default branch's `wiki.yml`. Nothing about what this session may do has changed - it still only
+pushes branches and opens pull requests - but the margin for a half-finished page is gone:
+whatever is in `wiki/` when someone merges is what readers see. Check links before every commit
+that touches `wiki/`.
 
 ## Where the rest lives
 
