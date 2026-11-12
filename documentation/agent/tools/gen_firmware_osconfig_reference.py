@@ -76,7 +76,7 @@ def main():
          f"Do not edit by hand. -->", "",
          "# `nebulaos-osconfig` helper reference", "",
          "Every OS setting a printer has is read and written here. The "
-         "[API reference](MOONRAKER-API.md) stops at the endpoint; this page picks up where "
+         "[Moonraker API reference](Moonraker-API) stops at the endpoint; this page picks up where "
          "it stops.", "",
          f"Source: `NebulaOS-firmware` at `{sha[:7]}`, `{OSCONFIG}/`. "
          f"**{len(mods)} modules.**", "",

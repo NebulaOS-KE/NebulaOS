@@ -405,3 +405,25 @@ Inbox note `_scratch/docs-agent/inbox/2026-11-11-OLDER-PRS.md`.
   section; both repo-overview inventory rows now carry a real `source_commit` and a
   `reverified_at` stamp instead of the dashboard's "not cloned". `FOR-THE-OWNER-1.0.2.md` lists
   eight PRs.
+
+## From the foreground session (2026-11-12, the developer wikis)
+
+Inbox note `_scratch/docs-agent/inbox/2026-11-11-DEV-WIKIS.md`.
+
+- **Q-086 - DONE.** Each component repository's developer documentation is now a top-level
+  `wiki/` directory on its docs branch, in the shape of the central manual and the NebulaScreen
+  wiki (`Home.md`, `_Sidebar.md`, one page per topic, wiki-style links): firmware 16 pages,
+  kernel 8, extensions 8, mcu 7, packages 6, lv_drivers 6; nebulascreen checked only (35 pages,
+  already published from `wiki/` by its own workflow - two moved-page stubs marked and one
+  link-checker false positive fixed). Every PR body carries a dated *Developer wiki* section,
+  and firmware and kernel also list the fate of each old published page: firmware 6 replaced /
+  3 merged, kernel 3 replaced / 3 merged / **1 dropped** (`Qualified-Variants` - the eight
+  build-time kernel variants and `apply-qualified-baseline.sh` do not exist at 1.0.2).
+  `docs/` decision per repo is in the PR body: kept in firmware (its ~120 design documents),
+  reduced to a pointer everywhere the moved pages were the only content.
+  Generators updated so a regeneration lands in `wiki/` with wiki links; the inventory's 425
+  `doc_page` values remapped. `FOR-THE-OWNER-1.0.2.md` has a new *developer wikis* section.
+- **Q-087 - OPEN, small, next.** Inbox note `2026-11-12-ZOFFSET-NO-TRIGGER.md` from the main
+  session (relayed while the wikis were being written): a Troubleshooting entry in the user
+  wiki for the Z-offset calibration failure in issue #9, with the workaround steps. Queued
+  after the wikis, as the note asked.

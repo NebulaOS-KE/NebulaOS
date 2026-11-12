@@ -78,8 +78,8 @@ def main():
          f"{datetime.date.today().isoformat()}. Do not edit by hand. -->", "",
          "# Module reference", "",
          "One section per file in `extras/`. "
-         "[COMMANDS.md](COMMANDS.md) answers *what can I run*, "
-         "[CONFIG.md](CONFIG.md) answers *what can I set*; this answers "
+         "[Commands](Commands) answers *what can I run*, "
+         "[Configuration](Configuration) answers *what can I set*; this answers "
          "*what is this file, and do I need to care about it*.", "",
          f"Source: `NebulaOS-klipper-extensions` at `{sha[:7]}`. "
          f"**{len(mods)} modules.**", "",
@@ -92,12 +92,12 @@ def main():
          "de-registering Klipper's own - it does **not** behave as stock Klipper, and anyone "
          "arriving from stock needs to know before debugging it.", "",
          "**Reads** counts the configuration options; the options themselves are in "
-         "[CONFIG.md](CONFIG.md).", "",
+         "[Configuration](Configuration).", "",
          "**Tested by** lists every test file that names the module - not just a file called "
          "`test_<module>.py`, which misses the ones named after what they test rather "
          "than after the file. A module no test refers to is marked as such.", "",
          "**Author** appears only for vendored modules and is read from "
-         "[VENDORED.md](../../VENDORED.md), not inferred. Community-authored code is never "
+         "[VENDORED.md](https://github.com/NebulaOS-KE/NebulaOS-klipper-extensions/blob/main/VENDORED.md), not inferred. Community-authored code is never "
          "presented here as NebulaOS's own work.", "",
          "**Nothing here is hardware-verified.** Everything is read from source.", "",
          "## The five modules no test refers to", "",

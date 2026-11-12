@@ -1,8 +1,10 @@
 # For Tim: what is ready to merge, and what is still open
 
 Written 2026-11-11, after the 1.0.2 refresh (inbox note `2026-11-10-RELEASE-1.0.2-REFRESH.md`),
-and extended the same day with the two older PRs (inbox note `2026-11-11-OLDER-PRS.md`).
-Nothing here has been merged or published - that is yours.
+extended the same day with the two older PRs (inbox note `2026-11-11-OLDER-PRS.md`), and again
+on 2026-11-12 with the developer wikis (inbox note `2026-11-11-DEV-WIKIS.md`) - the section
+*The developer wikis* below is the new part. Nothing here has been merged or published - that is
+yours.
 
 ## The eight pull requests
 
@@ -28,6 +30,54 @@ has moved since the pages were written.
 One correction worth knowing from the lv_drivers page: NebulaScreen does not register the fork's
 `evdev_read` directly any more, it registers `evdev_read_smoothed` around it. The fork still
 decides every press and release; only the coordinates are filtered afterwards.
+
+## The developer wikis (2026-11-12)
+
+Your note: *"the idea was to have dev wikis on the sub githubs"*. Every component repository now
+carries its developer documentation as a top-level `wiki/` directory on its existing docs
+branch - `Home.md`, `_Sidebar.md`, one page per topic, wiki-style links - the same shape as this
+repository's manual and the NebulaScreen wiki. **Nothing is published.** No `.wiki.git` was
+touched and no publish workflow was run; `wiki/` is Markdown in the docs branches, and
+publishing is your one script from the main session after merging.
+
+| Repo | PR | Pages | `docs/` |
+|---|---|---|---|
+| firmware | [#5](https://github.com/NebulaOS-KE/NebulaOS-firmware/pull/5) | **16** | **kept** - its ~120 design documents stay; only `docs/reference/` became a pointer |
+| kernel | [#2](https://github.com/NebulaOS-KE/NebulaOS-kernel/pull/2) | 8 | pointer for the one NebulaOS page; the vendor SDK's `docs/doc/` untouched |
+| extensions | [#3](https://github.com/NebulaOS-KE/NebulaOS-klipper-extensions/pull/3) | 8 | pointer; `docs/COMPATIBILITY.md` stays where it is |
+| mcu | [#1](https://github.com/NebulaOS-KE/NebulaOS-klipper-mcu/pull/1) | 7 | pointer - all five pages moved |
+| packages | [#2](https://github.com/NebulaOS-KE/nebulaos-packages/pull/2) | 6 | pointer |
+| lv_drivers | [#1](https://github.com/NebulaOS-KE/lv_drivers/pull/1) | 6 | pointer |
+| nebulascreen | [#6](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/pull/6) | 35 (already there) | checked only, three small fixes |
+
+**Two wikis have old pages to replace, and each PR body says what happens to every one of
+them.** Firmware: 10 pages from 2026-08-16 - six replaced, three merged, the sidebar replaced.
+Kernel: 7 pages from 2026-08-15 - three replaced, three merged, and **`Qualified-Variants`
+dropped**, because the eight build-time kernel variants and `apply-qualified-baseline.sh` do not
+exist at 1.0.2; kernel changes are commits on `openke` and stage 01 applies nothing. The old
+pages also still name the `coreflake1` organisation, the retired `NebulaOS-klipper` fork and
+"the five NebulaOS repos", which is the other reason not to keep them.
+
+Two things you may want to read before merging, both found by writing the pages rather than by
+copying them:
+
+- **The firmware's two reproducibility documents disagree**, and the wiki follows the one that
+  says it is canonical. `docs/REPRODUCIBILITY.md` records all 15 causes as measured and fixed;
+  `docs/BUILD_PROVENANCE.md` still says the root cause is not established and quotes the old
+  1,454,891-byte measurement. The wiki page names the discrepancy instead of silently picking a
+  side, and separates the release gate (`xImage` and `rootfs.squashfs` byte-identical between
+  two build runs) from the `.img`, which cannot be byte-identical at all - encrypted 7z, random
+  AES IV, recorded as `IMG_BYTE_IDENTICAL=NO` with its reason.
+- **`docs/REPRODUCIBILITY.md` credits the kernel gzip fix to a build-time variant script**
+  (`kernel-gzip-determinism-variant.sh`) that does not exist at 1.0.2. The `-n` flag is a commit
+  in the kernel repository, and `01-apply-kernel-patches.sh` verifies the literal line. The
+  kernel wiki says so. Both of these are documentation-only discrepancies; no code was touched.
+
+Three smaller corrections went into the firmware pages, all read at `3bdf3ff`: the boot-service
+count (35 in one sentence, 36 everywhere else - there are 36), "14 numbered build scripts" (there
+are seven), and the screen artifact path (`artifacts/nebulascreen-mips/`, while the manifest
+*field* names are still `guppyscreen_sha256` / `guppybeep_sha256` - both now stated, because
+`docs/BUILD_FROM_SOURCE.md` has it the other way round).
 
 ## Three things that want a decision from you
 

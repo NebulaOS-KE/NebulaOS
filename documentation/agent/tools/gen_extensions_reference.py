@@ -361,7 +361,7 @@ def main():
         L.append("")
     if not any_params:
         L.append("*(none found)*\n")
-    open(os.path.join(out, "COMMANDS.md"), "w").write("\n".join(L) + "\n")
+    open(os.path.join(out, "Commands.md"), "w").write("\n".join(L) + "\n")
 
     # ---- configuration --------------------------------------------------
     L = [head, "# Configuration reference\n",
@@ -469,9 +469,9 @@ def main():
                      f"{o['constraints']} |")
         L.append("")
     L.insert(5, f"{total} options across {sum(1 for f in data if data[f][0])} modules.\n")
-    open(os.path.join(out, "CONFIG.md"), "w").write("\n".join(L) + "\n")
-    print(f"COMMANDS.md: {len(by_name)} commands")
-    print(f"CONFIG.md:   {total} options, {documented_purpose} with a purpose")
+    open(os.path.join(out, "Configuration.md"), "w").write("\n".join(L) + "\n")
+    print(f"Commands.md: {len(by_name)} commands")
+    print(f"Configuration.md: {total} options, {documented_purpose} with a purpose")
 
 
 if __name__ == "__main__":

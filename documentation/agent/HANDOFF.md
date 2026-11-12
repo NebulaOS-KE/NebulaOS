@@ -13,7 +13,73 @@ coverage dashboard, delivered as `docs/*` branches and pull requests. Not a plan
 outline: the pages themselves. The full assignment is in `MISSION.md`; `RULES.md` holds the
 workspace rules and the owner's decisions and wins wherever the two differ.
 
-## Latest batch (2026-11-11): the two older PRs refreshed
+## Latest batch (2026-11-12): the developer wikis
+
+Inbox note `2026-11-11-DEV-WIKIS.md`. Tim: *"the idea was to have dev wikis on the sub
+githubs"*. The developer documentation had gone into `docs/` folders inside the repositories; it
+is now a top-level `wiki/` directory on each docs branch, the shape this repository's manual and
+the NebulaScreen wiki already use - `Home.md`, `_Sidebar.md`, one page per topic, wiki-style
+links. **Nothing published**: no `.wiki.git` was touched, no publish workflow was run.
+
+| Repo | Pages | `docs/` decision | Commit |
+|---|---|---|---|
+| firmware | 16 | **kept** (~120 design docs stay); `docs/reference/` is a pointer | `e1e3255` |
+| kernel | 8 | pointer for the one NebulaOS page; vendor `docs/doc/` untouched | `04349e8` |
+| extensions | 8 | pointer; `docs/COMPATIBILITY.md` stays | `0991ffa` |
+| mcu | 7 | pointer - all five pages moved | `393dc62` |
+| packages | 6 | pointer | `d492be9` |
+| lv_drivers | 6 | pointer | `423ab87` |
+| nebulascreen | 35 (already) | unchanged - checked only | `57ff374` |
+
+Each PR body has a dated *Developer wiki* section; firmware and kernel also carry a fate table
+for every old published page (replaced / merged / dropped), as Tim asked.
+
+**What the old wikis cost to replace.** Firmware's 10 pages (2026-08-16) and kernel's 7
+(2026-08-15) name the `coreflake1` organisation, the retired `NebulaOS-klipper` fork,
+GuppyScreen, PREEMPT_RT and "the five NebulaOS repos". One page was **dropped** rather than
+rewritten: kernel `Qualified-Variants`, because the eight build-time variants and
+`apply-qualified-baseline.sh` do not exist at 1.0.2 - kernel changes are commits on `openke` and
+stage 01 applies nothing.
+
+**The pages are not a copy-paste.** The firmware's hand-written `ARCHITECTURE.md` was split
+along its own seams (Architecture / Image-Install-And-Trial / Recovery / Black-Box /
+Printer-Configuration), four pages are new (Building-From-Source, Build-Provenance,
+Installing-A-Developer-Build, Repository-Map), and the kernel page gained a section on what
+stage 01 actually verifies. Writing them found five discrepancies, all in `BLOCKERS.md`:
+
+- the firmware's two reproducibility documents disagree, and the wiki follows the one that calls
+  itself canonical (all 15 causes measured and fixed) while naming the disagreement;
+- `docs/REPRODUCIBILITY.md` credits the kernel `gzip -n` fix to a variant script that does not
+  exist at 1.0.2 - it is a commit in the kernel repository, verified by stage 01 as a literal
+  line;
+- `docs/BUILD_FROM_SOURCE.md` names `artifacts/guppyscreen-mips/`; the build writes
+  `artifacts/nebulascreen-mips/`, while the manifest *field* names really are still
+  `guppyscreen_sha256` / `guppybeep_sha256`;
+- the boot-service count (35 in one sentence, 36 everywhere else) and "14 numbered build
+  scripts" (there are seven);
+- **and one of this session's own claims had to be retracted**: the manual said releases are
+  "built twice on separate machines with the two results required to be byte-identical".
+  *Separate machines* is nowhere in the firmware repository, and the `.img` cannot be
+  byte-identical at all (encrypted 7z, random AES IV; the check records
+  `IMG_BYTE_IDENTICAL=NO` / `IMG_CONTENT_IDENTICAL=YES`). `wiki/Under-the-Hood.md` and
+  `README.md` now say what the check requires. A retraction of our own text belongs in the same
+  list as one found in someone else's file.
+
+**One generator change with a real consequence:** the runtime-helper generator no longer counts
+documentation as a caller. A page naming a helper is not a caller - and with `docs/` and `wiki/`
+excluded, `/etc/profile.d/nebulaos-prompt.sh` shows up honestly as referenced by nothing in the
+repository (it is sourced by a login shell). The extensions generators now emit wiki page names
+and wiki links, so a regeneration produces wiki pages rather than `COMMANDS.md` / `CONFIG.md`.
+
+**The inventory followed the pages**: 425 `doc_page` values and seven evidence strings remapped
+from `docs/reference/...` to `wiki/...`, with the extensions' `Configuration.md` disambiguated
+the way the screen's already was. The firmware's five `ARCHITECTURE.md` rows went to the split
+page each item actually belongs to (the two overlay files to `Black-Box`). Counts unchanged: 560
+items, 552 documented, 8 draft, 0 missing.
+
+`check_links.py` passes in all seven `wiki/` directories.
+
+## Earlier batch (2026-11-11): the two older PRs refreshed
 
 Inbox note `2026-11-11-OLDER-PRS.md`. The two PRs left out of the 1.0.2 refresh got the same
 treatment, and neither needed a rebase - each docs branch is one commit sitting directly on the
@@ -632,25 +698,31 @@ paths.
 
 ## Next actions, in order
 
-1. `git fetch` every repository and compare tips against the pins in `STATUS.md`. If a tip
+1. **Q-087** (queued, small): the Troubleshooting entry for the Z-offset calibration failure in
+   issue #9, with the workaround steps - inbox note `2026-11-12-ZOFFSET-NO-TRIGGER.md` from the
+   main session. It arrived while the developer wikis were being written and was queued behind
+   them, as the note asked.
+2. `git fetch` every repository and compare tips against the pins in `STATUS.md`. If a tip
    moved, set `reverified_at` on the affected items only after actually re-reading them -
    never assume a page still holds because its repository looks quiet.
-2. **Q-083** (needs the owner): do the GuppyScreen-inherited NebulaScreen settings -
+3. **Q-083** (needs the owner): do the GuppyScreen-inherited NebulaScreen settings -
    `moonraker_host`, `moonraker_api_key`, `log_level`, `fans`, `monitored_sensors`,
    `default_macros`, `nebulascreen_init_script` - belong in the inventory, or is the page
    deliberately wider than the inventory? Until that is settled, quote no settings count.
-3. **Q-084** (owner, code): the two diverged copies of `creality_flash.py`. Documented in the
+4. **Q-084** (owner, code): the two diverged copies of `creality_flash.py`. Documented in the
    mcu README and `BLOCKERS.md`; this session does not fix code.
-4. The nine API drafts stay drafts until a printer's real responses are recorded - they are the
-   one remaining documentation gap that no amount of reading can close.
-5. **Q-052:** run the two Klipper-dependent test suites the way `scripts/ci-tests.sh` does,
+5. The **eight** API drafts stay drafts until a printer's real responses are recorded - they are
+   the one remaining documentation gap that no amount of reading can close. (The ninth closed on
+   2026-11-11 from a recorded response, which is the pattern for the rest.)
+6. **Q-052:** run the two Klipper-dependent test suites the way `scripts/ci-tests.sh` does,
    by composing `extras/` into a scratch copy of the pinned Klipper at `58bd67d`.
-6. Keep running `tools/check_links.py` before every commit that touches `wiki/`. Note what it
+7. Keep running `tools/check_links.py` before every commit that touches `wiki/`. Note what it
    cannot do: an unpublished GitHub **wiki** URL answers 200, so a curl check of wiki links
    proves nothing. Repository and blob URLs do 404 properly.
-7. Follow-ups, when their sections come up and not before: Klipper status objects (find the
+8. One follow-up, when its section comes up and not before: the Klipper status objects. Find the
    `printer.objects.subscribe` call sites; the ~85 rejected pointers are candidates, but tie
-   each to a real subscription first), and cloning `nebulaos-packages` and `lv_drivers`.
+   each one to a real subscription before it enters the inventory. (`nebulaos-packages` and
+   `lv_drivers` are cloned, documented and now have wikis, so that half of this item is done.)
 
 Each batch ends the same way: update `coverage.jsonl`, regenerate `COVERAGE.md`, update
 `STATUS.md` and `QUEUE.md`, commit, push, update this file.

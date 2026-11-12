@@ -134,6 +134,41 @@ alone.
 Discrepancies between code and documentation go here, never into a code change. This agent
 does not edit production code, tests or configuration to make documentation look right.
 
+### 2026-11-12, found while writing the developer wikis (firmware `b95b156`, 1.0.2 `3bdf3ff`)
+
+Three of these are documentation against documentation, which is the easiest kind to leave
+unresolved because nothing breaks. None of them was fixed in a tracked document by this session:
+the wiki pages follow the evidence and name the disagreement.
+
+- **The firmware's two reproducibility documents disagree.** `docs/REPRODUCIBILITY.md` says it
+  is the canonical record and reports all 15 causes of image non-determinism as measured and
+  fixed. `docs/BUILD_PROVENANCE.md`'s "Working backward" step 4 still says the root cause is
+  **not** established and quotes the 1,454,891-byte measurement, which that same canonical
+  record describes as pre-`SOURCE_DATE_EPOCH`. The wiki's `Build-Provenance` follows the
+  canonical record and says so in a paragraph of its own. *Fix: one paragraph in
+  `docs/BUILD_PROVENANCE.md`, the main session's to make.*
+- **`docs/REPRODUCIBILITY.md` credits the kernel gzip fix to a script that does not exist.** Its
+  fix list says `kernel-gzip-determinism-variant.sh` adds `-n` to the zboot rule. At 1.0.2 there
+  is no such file anywhere in the firmware repository; `gzip -nv9f` is a commit in the kernel
+  repository (present at `95d0321e`), and `scripts/build/01-apply-kernel-patches.sh` verifies the
+  literal line. The kernel wiki's `Build-And-Integration` records this.
+- **`docs/BUILD_FROM_SOURCE.md` names the wrong artifact directory.** It says the screen binary
+  lands in `artifacts/guppyscreen-mips/`; `04-cross-compile-app-stack.sh` writes
+  `artifacts/nebulascreen-mips/` (`nebulascreen`, `nebulabeep`). The `build-manifest.txt` *field*
+  names really are still `guppyscreen_sha256` / `guppybeep_sha256`, so both halves are stated on
+  the wiki page rather than one being "corrected" into the other.
+- **The manual overstated reproducibility, and that was this session's own text.** The
+  end-user page said releases "are built twice on separate machines with the two results
+  required to be byte-identical". *Separate machines* is not established anywhere in the
+  firmware repository, and the downloadable `.img` **cannot** be byte-identical - Creality's
+  envelope is an encrypted 7z with a fresh random AES IV, which
+  `scripts/package/check-packaging-reproducibility.sh` records as `IMG_BYTE_IDENTICAL=NO` with
+  `IMG_CONTENT_IDENTICAL=YES`. `wiki/Under-the-Hood.md` and the repository `README.md` now say
+  what the check actually requires: two builds, kernel and root filesystem byte for byte, and
+  the download compared by contents. **Corrected on 2026-11-12 in this branch** - recorded here
+  because a claim this session wrote and had to retract is worth the same honesty as one it
+  found in someone else's file.
+
 **2026-11-06, found during the wiki restructure (firmware `dc868e3`, screen `fd47cb6`,
 extensions `f498796`). Reported to the main session; none changed.**
 

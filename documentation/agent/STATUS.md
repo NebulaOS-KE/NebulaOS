@@ -1,7 +1,7 @@
 # Status
 
 <!-- BEGIN GENERATED STATUS -->
-*Figures generated 2026-11-11 from `coverage.jsonl` by `tools/render_dashboard.py`. Do not edit this block by hand.*
+*Figures generated 2026-11-12 from `coverage.jsonl` by `tools/render_dashboard.py`. Do not edit this block by hand.*
 
 | | |
 |---|---|
@@ -34,18 +34,24 @@ them: there is no version history to write. Pins at tag `v1.0.2`, firmware `3bdf
 Firmware `main` has moved past the release (`dc4d9d6`, `b95b156`). `REPOSITORY_HEAD` is not
 `SHIPPING_PIN`, and the developer pages say which one they describe.
 
-## Open pull requests - all eight refreshed against 1.0.2 (six on 2026-11-10, the two older ones on 2026-11-11)
+## Open pull requests - all eight refreshed against 1.0.2, and all seven component wikis delivered
+
+Refreshed 2026-11-10 (six) and 2026-11-11 (the two older ones). On **2026-11-12** every
+component repository got its developer documentation as a top-level `wiki/` directory on its
+docs branch - `Home.md`, `_Sidebar.md`, one page per topic, wiki-style links - the shape the
+central manual and the NebulaScreen wiki already use. Nothing is published: no `.wiki.git` was
+touched and no publish workflow was run.
 
 | Repository | PR | Branch | Describes |
 |---|---|---|---|
 | `NebulaOS` | [#3](https://github.com/NebulaOS-KE/NebulaOS/pull/3) | `docs/agent` | The end-user manual: 53 wiki pages (11 moved-page stubs), 202 images, plus this agent's inventory, dashboard and tooling |
-| `NebulaOS-firmware` | [#5](https://github.com/NebulaOS-KE/NebulaOS-firmware/pull/5) | `docs/firmware` | Architecture (boot, slots, updates, recovery, the black box), 59 API endpoints, 36 boot services, 58 runtime helpers, 190 osconfig functions, 21 build scripts and 62 host tools - at `b95b156`, with the 1.0.2 boundary recorded where it bites |
-| `NebulaOS-klipper-extensions` | [#3](https://github.com/NebulaOS-KE/NebulaOS-klipper-extensions/pull/3) | `docs/extensions` | Architecture, 50 commands with per-command detail, 156 configuration options, 30 modules - at `178a0c2`, the 1.0.2 pin and the tip of `main` and `production` at once |
-| `NebulaOS-kernel` | [#2](https://github.com/NebulaOS-KE/NebulaOS-kernel/pull/2) | `docs/kernel` | Which parts of the kernel are NebulaOS, the freeze-diagnosis layer, and `CONFIG_PREEMPT` rather than `PREEMPT_RT` - at `95d0321e`, which is the 1.0.2 pin |
-| `NebulaOS-nebulascreen` | [#6](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/pull/6) | `docs/screen` | Contributor guide, the screenshot tour, configuration - describing `fd47cb6`, with the gap to `main` read from the diff |
-| `NebulaOS-klipper-mcu` | [#1](https://github.com/NebulaOS-KE/NebulaOS-klipper-mcu/pull/1) | `docs/mcu` | MCU firmware lifecycle on a printer: both identities, the restore and its bounds, the power-cycle failure, and the KE-only boundary |
-| `nebulaos-packages` | [#2](https://github.com/NebulaOS-KE/nebulaos-packages/pull/2) | `docs/packages` | The package index: the ABI fingerprint, the seven scripts, four invariants - at `9d0d264`, plus the image side of the contract from firmware `3bdf3ff` |
-| `lv_drivers` | [#1](https://github.com/NebulaOS-KE/lv_drivers/pull/1) | `docs/lv-drivers` | Which parts of the fork are NebulaOS: two commits on `master` `ea2e4cc`, one live - consumed by NebulaScreen `fd47cb6` (1.0.2) and `84db432`, both pinning `0406ccb` |
+| `NebulaOS-firmware` | [#5](https://github.com/NebulaOS-KE/NebulaOS-firmware/pull/5) | `docs/firmware` | **16 wiki pages**: architecture (boot, slots, image install and the trial, recovery, the black box, the printer configuration), 59 API endpoints, 36 boot services, 58 runtime helpers, 190 osconfig functions, 21 build scripts and 62 host tools, plus building from source, build provenance, installing a developer build and the repository map - at `b95b156`, with the 1.0.2 boundary recorded where it bites |
+| `NebulaOS-klipper-extensions` | [#3](https://github.com/NebulaOS-KE/NebulaOS-klipper-extensions/pull/3) | `docs/extensions` | **8 wiki pages**: architecture, 50 commands with per-command detail, 156 configuration options, 30 modules, testing - at `178a0c2`, the 1.0.2 pin and the tip of `main` and `production` at once |
+| `NebulaOS-kernel` | [#2](https://github.com/NebulaOS-KE/NebulaOS-kernel/pull/2) | `docs/kernel` | **8 wiki pages**: which parts of the kernel are NebulaOS, the freeze-diagnosis layer, `CONFIG_PREEMPT` rather than `PREEMPT_RT`, the branch model, what the build verifies - at `95d0321e`, which is the 1.0.2 pin |
+| `NebulaOS-nebulascreen` | [#6](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/pull/6) | `docs/screen` | 35 wiki pages, already published from `wiki/` by its own workflow: contributor guide, the screenshot tour, configuration - describing `fd47cb6`, with the gap to `main` read from the diff. Checked this batch; two moved-page stubs marked and a link-checker false positive fixed |
+| `NebulaOS-klipper-mcu` | [#1](https://github.com/NebulaOS-KE/NebulaOS-klipper-mcu/pull/1) | `docs/mcu` | **7 wiki pages**: the firmware's lifecycle on a printer (both identities, the restore and its bounds, the power-cycle failure, the KE-only boundary), building your own, architecture, reproducibility, toolchain |
+| `nebulaos-packages` | [#2](https://github.com/NebulaOS-KE/nebulaos-packages/pull/2) | `docs/packages` | **6 wiki pages**: the ABI fingerprint, the pipeline, four invariants, and the image side of the contract - at `9d0d264` (`gh-pages` `9bef4d4`), with the firmware end read at `3bdf3ff` |
+| `lv_drivers` | [#1](https://github.com/NebulaOS-KE/lv_drivers/pull/1) | `docs/lv-drivers` | **6 wiki pages**: which parts of the fork are NebulaOS - two commits on `master` `ea2e4cc`, one live - consumed by NebulaScreen `fd47cb6` (1.0.2) and `84db432`, both pinning `0406ccb` |
 
 **Nothing is merged and nothing is published.** No wiki publish workflow has ever been run from
 this session; the owner publishes.
@@ -69,7 +75,14 @@ this session; the owner publishes.
    embedded images show a pre-1.0.2 version *inside the picture* - the retake list, with what
    each one says today, is at the end of `SCREENSHOTS.md`. `r-system.png` is the one to take
    first: it also shows `Kernel 6.6.157-rt79`, and 1.0.2 does not print `-rt79` at all.
-4. **One inventory question.** `wiki/Configuration.md` (NebulaScreen) documents about 25 settings
+4. **One claim this session had to retract.** The manual said releases are "built twice on
+   separate machines with the two results required to be byte-identical". *Separate machines* is
+   not established anywhere in the firmware repository, and the downloadable `.img` cannot be
+   byte-identical at all - Creality's envelope is an encrypted 7z with a random AES IV, and the
+   packaging check records `IMG_BYTE_IDENTICAL=NO` with `IMG_CONTENT_IDENTICAL=YES`.
+   `wiki/Under-the-Hood.md` and `README.md` now say what the check actually requires. The entry
+   is in `BLOCKERS.md` with the other discrepancies found while writing the developer wikis.
+5. **One inventory question.** `wiki/Configuration.md` (NebulaScreen) documents about 25 settings
    while the inventory tracks 20; the difference is GuppyScreen-inherited fields. Decide whether
    they belong in the inventory before the count is quoted anywhere - see `QUEUE.md`.
 

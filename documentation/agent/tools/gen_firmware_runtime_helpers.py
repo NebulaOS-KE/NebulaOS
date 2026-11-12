@@ -82,8 +82,14 @@ def helpers(root):
     return sorted(out)
 
 
+# Documentation naming a helper is not a caller. Excluded so that "Called by"
+# means code (or a test, or a manifest), which is the only reading that makes an
+# empty list meaningful.
+DOC_PREFIXES = ("docs/", "wiki/", "README.md", "CHANGELOG.md")
+
+
 def callers(root, name, own_rel):
-    """Files in the firmware repository that name this helper."""
+    """Files in the firmware repository that name this helper, documentation aside."""
     try:
         res = subprocess.run(
             ["git", "-C", root, "grep", "-l", "--", name],
@@ -94,6 +100,8 @@ def callers(root, name, own_rel):
     for line in res.stdout.split("\n"):
         line = line.strip()
         if not line or line.endswith(own_rel):
+            continue
+        if line.startswith(DOC_PREFIXES):
             continue
         out.append(line)
     return out
@@ -136,9 +144,11 @@ def main():
           "the root filesystem, so the path below the overlay directory is the path on the "
           "machine.", "",
           "**Called by** is found by searching the whole repository for the helper's name, "
-          "not inferred from it. A helper with nothing listed is not referenced anywhere in "
-          "this repository: it is invoked by something outside it, or it is dead weight. "
-          "Either way that is a fact worth seeing, so it is stated rather than left blank.",
+          "not inferred from it - documentation aside, because a page naming a helper is "
+          "not a caller. A helper with nothing listed is not referenced by any code, test "
+          "or manifest in this repository: it is invoked by something outside it, or it is "
+          "dead weight. Either way that is a fact worth seeing, so it is stated rather "
+          "than left blank.",
           "",
           "**Purpose** is the file's own header comment, kept whole. These headers carry the "
           "reasoning behind decisions that look arbitrary from outside, and summarising them "

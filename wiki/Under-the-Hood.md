@@ -228,8 +228,11 @@ NebulaOS is developed in public repositories. The kernel, the operating system b
 Klipper extensions, the touchscreen application and the update tooling can all be read.
 
 Each system image records the exact source revision of every component it was built from.
-Releases carry checksums and build information, and are built twice on separate machines with
-the two results required to be byte-identical.
+Releases carry checksums and build information, and a release is built twice and the two builds
+compared: the kernel and the root filesystem have to come out byte for byte identical. The
+download itself cannot be compared that way - it is packed into Creality's own encrypted
+container, which uses a fresh random key for every file - so for that file the check is that its
+contents are identical instead.
 
 NebulaOS does **not** replace every binary in the printer. Creality's boot components stay as
 they are - the SPL and U-Boot, the partition table, the per-SoC firmware and memory
