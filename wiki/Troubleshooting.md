@@ -82,9 +82,10 @@ softer bed mount needs the nozzle to travel a little further down, and to press 
 before the load cell reports contact - so the search stopped above the bed, and the touches that
 did happen looked too far from the expected plane to be trusted.
 
-**The fix is an update.** It is already written and will arrive through **Settings → Updates**;
-ask in the issue thread if you want to know when. The two steps below are what to do in the
-meantime, and they are safe to leave in place afterwards.
+**The fix is an update.** It is released as **Klipper extensions 1.0.1** and reaches printers
+through **Settings → Updates** once it is published to the branch printers follow - ask in the
+issue thread if you want to know when. The two steps below are what to do in the meantime, and
+they are safe to leave in place afterwards.
 
 #### Until then: two lines in `printer.cfg`
 

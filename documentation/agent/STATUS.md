@@ -83,13 +83,15 @@ work around it today. The fix itself is extensions `a63964a`, which is on **neit
    embedded images show a pre-1.0.2 version *inside the picture* - the retake list, with what
    each one says today, is at the end of `SCREENSHOTS.md`. `r-system.png` is the one to take
    first: it also shows `Kernel 6.6.157-rt79`, and 1.0.2 does not print `-rt79` at all.
-4. **One claim this session had to retract.** The manual said releases are "built twice on
-   separate machines with the two results required to be byte-identical". *Separate machines* is
-   not established anywhere in the firmware repository, and the downloadable `.img` cannot be
-   byte-identical at all - Creality's envelope is an encrypted 7z with a random AES IV, and the
-   packaging check records `IMG_BYTE_IDENTICAL=NO` with `IMG_CONTENT_IDENTICAL=YES`.
-   `wiki/Under-the-Hood.md` and `README.md` now say what the check actually requires. The entry
-   is in `BLOCKERS.md` with the other discrepancies found while writing the developer wikis.
+4. **One claim this session had to retract**, and it took three passes. The manual said
+   releases are "built twice on separate machines with the two results required to be
+   byte-identical". There is no *separate machines* anywhere; there **is** a release workflow in
+   the central repository that builds twice and compares, but the published 1.0.2 was not built
+   by it - its `release-manifest.txt` names a local `BUILD_RUN` and publishes no comparison. And
+   the `.img` cannot be byte-identical at all (encrypted 7z, random AES IV:
+   `IMG_BYTE_IDENTICAL=NO`, `IMG_CONTENT_IDENTICAL=YES`). The user pages now say what is checked
+   and nothing about where; the firmware wiki separates what the tooling enforces from what this
+   release can prove about itself. Full entry in `BLOCKERS.md`.
 5. **One inventory question.** `wiki/Configuration.md` (NebulaScreen) documents about 25 settings
    while the inventory tracks 20; the difference is GuppyScreen-inherited fields. Decide whether
    they belong in the inventory before the count is quoted anywhere - see `QUEUE.md`.

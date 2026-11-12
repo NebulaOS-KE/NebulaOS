@@ -57,13 +57,20 @@ stage 01 actually verifies. Writing them found five discrepancies, all in `BLOCK
   `guppyscreen_sha256` / `guppybeep_sha256`;
 - the boot-service count (35 in one sentence, 36 everywhere else) and "14 numbered build
   scripts" (there are seven);
-- **and one of this session's own claims had to be retracted**: the manual said releases are
-  "built twice on separate machines with the two results required to be byte-identical".
-  *Separate machines* is nowhere in the firmware repository, and the `.img` cannot be
-  byte-identical at all (encrypted 7z, random AES IV; the check records
-  `IMG_BYTE_IDENTICAL=NO` / `IMG_CONTENT_IDENTICAL=YES`). `wiki/Under-the-Hood.md` and
-  `README.md` now say what the check requires. A retraction of our own text belongs in the same
-  list as one found in someone else's file.
+- **and one of this session's own claims had to be retracted** - three times, which is the part
+  worth remembering. The manual said releases are "built twice on separate machines with the two
+  results required to be byte-identical". First correction: drop *separate machines*. Second:
+  the main session said the builds run on GitHub Actions, so the pages said "on GitHub". Third,
+  after actually reading the artifacts: there **is** a release workflow
+  (`.github/workflows/release.yml` in this repository, 2026-10-29: two builds plus
+  `scripts/release/compare-builds.sh`), it has run once, and the published 1.0.2 was **not**
+  built by it - `release-manifest.txt` carries `BUILD_MODE=candidate` and a local
+  `BUILD_RUN=/var/tmp/nebulaos-build/3bdf3ff.../run-20261109T131214Z-224824`, with no comparison
+  record anywhere in the release. The user pages now name **no location** and say only what is
+  checked; the firmware wiki separates what the tooling enforces from what this release can
+  prove about itself. The `.img` cannot be byte-identical at all (encrypted 7z, random AES IV).
+  **The lesson: a second-hand answer about process - even from the main session - is not
+  evidence.** Both intermediate versions were wrong in the same way the original was.
 
 **One generator change with a real consequence:** the runtime-helper generator no longer counts
 documentation as a caller. A page naming a helper is not a caller - and with `docs/` and `wiki/`
@@ -85,8 +92,10 @@ a softer bed mount, so far two of about 45. `wiki/Troubleshooting.md` carries bo
 wordings in the Calibrating table (the old `No trigger on probe after full movement` as well, so
 an un-updated user finds the row) and a section with the two `printer.cfg` lines, why each works,
 the warning not to print until the calibration succeeds, and the `PROBE_CALIBRATE` fallback.
-**No version number**: the fix is extensions `a63964a`, which is on neither `main` nor
-`production`. The four things read for it - including why a hand-set `z_offset` changes the search
+**The version arrived the same day**: `6532091` on `main` sets `extensions_version` to
+**1.0.1**, so the page names it - but `production` is still `178a0c2`, and `production` is what
+Moonraker's update manager follows, so the page says the update reaches printers *once it is on
+the branch printers follow* and promises no date. The four things read for it - including why a hand-set `z_offset` changes the search
 floor, and why a second `[nebulaos_calibration]` section overrides the firmware's
 (`RawConfigParser(strict=False)` in Klipper `58bd67db`) - are in `VERIFICATION.md`.
 
@@ -709,28 +718,32 @@ paths.
 
 ## Next actions, in order
 
-1. **When extensions `a63964a` reaches `production`** (the issue #9 Z-offset fix), the
-   Troubleshooting section *The nozzle does not reach the bed* can name a version and shrink to
-   "update, and remove the two lines". Today it deliberately names none: the commit is on neither
-   `main` nor `production`. Ask the main session rather than inferring a version number.
-2. `git fetch` every repository and compare tips against the pins in `STATUS.md`. If a tip
+1. **When extensions 1.0.1 (`6532091`) reaches `production`** (the issue #9 Z-offset fix), the
+   Troubleshooting section *The nozzle does not reach the bed* can shrink to "update, then remove
+   the two lines". It names the version already; `production` was still `178a0c2` on 2026-11-12,
+   and `production` is the branch Moonraker's update manager follows. The main session will say
+   when it moves - do not infer it from `main`.
+2. **When the main session's firmware commit correcting `docs/BUILD_PROVENANCE.md` and
+   `docs/REPRODUCIBILITY.md` lands**, the firmware wiki's warning paragraph in `Build-Provenance`
+   can shrink to a pointer at the corrected documents.
+3. `git fetch` every repository and compare tips against the pins in `STATUS.md`. If a tip
    moved, set `reverified_at` on the affected items only after actually re-reading them -
    never assume a page still holds because its repository looks quiet.
-3. **Q-083** (needs the owner): do the GuppyScreen-inherited NebulaScreen settings -
+4. **Q-083** (needs the owner): do the GuppyScreen-inherited NebulaScreen settings -
    `moonraker_host`, `moonraker_api_key`, `log_level`, `fans`, `monitored_sensors`,
    `default_macros`, `nebulascreen_init_script` - belong in the inventory, or is the page
    deliberately wider than the inventory? Until that is settled, quote no settings count.
-4. **Q-084** (owner, code): the two diverged copies of `creality_flash.py`. Documented in the
+5. **Q-084** (owner, code): the two diverged copies of `creality_flash.py`. Documented in the
    mcu README and `BLOCKERS.md`; this session does not fix code.
-5. The **eight** API drafts stay drafts until a printer's real responses are recorded - they are
+6. The **eight** API drafts stay drafts until a printer's real responses are recorded - they are
    the one remaining documentation gap that no amount of reading can close. (The ninth closed on
    2026-11-11 from a recorded response, which is the pattern for the rest.)
-6. **Q-052:** run the two Klipper-dependent test suites the way `scripts/ci-tests.sh` does,
+7. **Q-052:** run the two Klipper-dependent test suites the way `scripts/ci-tests.sh` does,
    by composing `extras/` into a scratch copy of the pinned Klipper at `58bd67d`.
-7. Keep running `tools/check_links.py` before every commit that touches `wiki/`. Note what it
+8. Keep running `tools/check_links.py` before every commit that touches `wiki/`. Note what it
    cannot do: an unpublished GitHub **wiki** URL answers 200, so a curl check of wiki links
    proves nothing. Repository and blob URLs do 404 properly.
-8. One follow-up, when its section comes up and not before: the Klipper status objects. Find the
+9. One follow-up, when its section comes up and not before: the Klipper status objects. Find the
    `printer.objects.subscribe` call sites; the ~85 rejected pointers are candidates, but tie
    each one to a real subscription before it enters the inventory. (`nebulaos-packages` and
    `lv_drivers` are cloned, documented and now have wikis, so that half of this item is done.)

@@ -274,3 +274,34 @@ narrative belongs.
 **What to do differently:** when a batch finishes, *replace* the relevant sentence in STATUS.md
 rather than adding a section under it. If the batch deserves a story, the commit message is the
 place for it.
+
+## 2026-11-12: a second-hand answer about process is not evidence
+
+One sentence in the manual - "releases are built twice on separate machines with the two results
+required to be byte-identical" - took **three** corrections, and the first two were wrong in
+exactly the way the original was.
+
+1. Writing the developer wikis showed that *separate machines* is not established anywhere in
+   the firmware repository. Corrected, and flagged to the main session.
+2. The answer came back: the builds run on GitHub Actions. The pages were changed to say "built
+   twice on GitHub" - on that answer, without reading anything.
+3. A correction followed: no workflow builds a release; the builds come from the local launcher.
+   Reading the sources settled it properly. A release **workflow does exist**
+   (`.github/workflows/release.yml` in this repository, added 2026-10-29: a two-build matrix and
+   `scripts/release/compare-builds.sh`), and it has run once. But the published 1.0.2 was not
+   built by it: its `release-manifest.txt` carries `BUILD_MODE=candidate` and
+   `BUILD_RUN=/var/tmp/nebulaos-build/3bdf3ff.../run-20261109T131214Z-224824`, and the release
+   publishes no comparison record at all.
+
+So both the "separate machines" claim and the "on GitHub" claim were the same mistake: a
+statement about *process* accepted from a person instead of read from the artifacts. The third
+version says what the tooling enforces, what this particular release can prove about itself, and
+nothing about where a build ran.
+
+**What to do differently:** a correction from the main session is a *lead*, not a source. Read
+the workflow, the script and the published artifact before rewriting the sentence - especially
+when the sentence is already being rewritten because it was wrong once.
+
+The user-facing pages now carry the smallest claim the evidence supports; the firmware wiki
+carries the long version, including the distinction that caused all three rounds: *what the
+tooling enforces* and *what an artifact can prove about itself* are different questions.

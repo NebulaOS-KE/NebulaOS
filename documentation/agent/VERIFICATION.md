@@ -220,10 +220,14 @@ publish workflow.
 ## The Z-offset troubleshooting entry, and what was read for it (2026-11-12)
 
 The entry in `wiki/Troubleshooting.md` describes a failure two users reported (issue #9) and a
-fix that is **not shipped**: it exists as extensions commit `a63964a`, which is not on `main` or
-`production` and is not in any release. The page therefore says what to do today and that the
-real fix arrives through **Settings → Updates**, with **no version number**, because none can be
-promised from here.
+fix that is **not on a printer yet**. Written first against extensions `a63964a`, which was then
+on no branch at all; updated the same day, after the main session reported it, to **extensions
+1.0.1** - `6532091`, which sets `extensions_version` to `1.0.1` in `nebulaos-extensions.json`
+and sits on `main` with `a63964a` as its parent. **`production` is still `178a0c2`**, and
+`production` is the branch Moonraker's update manager follows
+(`[update_manager nebulaos_klipper_extensions]`, `primary_branch: production`), so no printer
+can have the fix yet. The page says the version and says it arrives through
+**Settings → Updates** once it is on the branch printers follow - it promises no date.
 
 What was read, rather than taken from the report:
 

@@ -145,8 +145,9 @@ the wiki pages follow the evidence and name the disagreement.
   fixed. `docs/BUILD_PROVENANCE.md`'s "Working backward" step 4 still says the root cause is
   **not** established and quotes the 1,454,891-byte measurement, which that same canonical
   record describes as pre-`SOURCE_DATE_EPOCH`. The wiki's `Build-Provenance` follows the
-  canonical record and says so in a paragraph of its own. *Fix: one paragraph in
-  `docs/BUILD_PROVENANCE.md`, the main session's to make.*
+  canonical record and says so in a paragraph of its own. *The main session is correcting both
+  tracked documents at the source (2026-11-12, a firmware commit on `main`); when it lands, the
+  wiki paragraph can shrink to a pointer.*
 - **`docs/REPRODUCIBILITY.md` credits the kernel gzip fix to a script that does not exist.** Its
   fix list says `kernel-gzip-determinism-variant.sh` adds `-n` to the zboot rule. At 1.0.2 there
   is no such file anywhere in the firmware repository; `gzip -nv9f` is a commit in the kernel
@@ -159,15 +160,25 @@ the wiki pages follow the evidence and name the disagreement.
   the wiki page rather than one being "corrected" into the other.
 - **The manual overstated reproducibility, and that was this session's own text.** The
   end-user page said releases "are built twice on separate machines with the two results
-  required to be byte-identical". *Separate machines* is not established anywhere in the
-  firmware repository, and the downloadable `.img` **cannot** be byte-identical - Creality's
-  envelope is an encrypted 7z with a fresh random AES IV, which
-  `scripts/package/check-packaging-reproducibility.sh` records as `IMG_BYTE_IDENTICAL=NO` with
-  `IMG_CONTENT_IDENTICAL=YES`. `wiki/Under-the-Hood.md` and the repository `README.md` now say
-  what the check actually requires: two builds, kernel and root filesystem byte for byte, and
-  the download compared by contents. **Corrected on 2026-11-12 in this branch** - recorded here
-  because a claim this session wrote and had to retract is worth the same honesty as one it
-  found in someone else's file.
+  required to be byte-identical". Two things were wrong with it, and the second one took three
+  passes to get right:
+  - *Separate machines* is not established anywhere. The owner confirms both builds come from
+    `tools/run-nebulaos-build.sh`, which runs wherever it is started; a release **workflow** does
+    exist (`.github/workflows/release.yml` in the central repository, 2026-10-29, two builds plus
+    `scripts/release/compare-builds.sh`), but the published 1.0.2 was not built by it - its
+    `release-manifest.txt` carries `BUILD_MODE=candidate` and a local
+    `BUILD_RUN=/var/tmp/nebulaos-build/3bdf3ff.../run-20261109T131214Z-224824`, and the release
+    publishes **no comparison record at all**. So the pages name no location, and the firmware
+    wiki separates *what the tooling enforces* from *what this release can prove about itself*.
+  - The downloadable `.img` **cannot** be byte-identical: Creality's envelope is an encrypted 7z
+    with a fresh random AES IV, which `scripts/package/check-packaging-reproducibility.sh`
+    records as `IMG_BYTE_IDENTICAL=NO` with `IMG_CONTENT_IDENTICAL=YES`.
+
+  `wiki/Under-the-Hood.md` and the repository `README.md` now say what is checked - two builds,
+  kernel and root filesystem byte for byte, the download compared by contents - and nothing
+  about where. **Corrected on 2026-11-12 in this branch**, recorded here because a claim this
+  session wrote and had to retract deserves the same honesty as one it found in someone else's
+  file.
 
 **2026-11-06, found during the wiki restructure (firmware `dc868e3`, screen `fd47cb6`,
 extensions `f498796`). Reported to the main session; none changed.**
