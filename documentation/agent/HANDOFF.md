@@ -97,10 +97,11 @@ a softer bed mount, so far two of about 45. `wiki/Troubleshooting.md` carries bo
 wordings in the Calibrating table (the old `No trigger on probe after full movement` as well, so
 an un-updated user finds the row) and a section with the two `printer.cfg` lines, why each works,
 the warning not to print until the calibration succeeds, and the `PROBE_CALIBRATE` fallback.
-**The version arrived the same day**: `6532091` on `main` sets `extensions_version` to
-**1.0.1**, so the page names it - but `production` is still `178a0c2`, and `production` is what
-Moonraker's update manager follows, so the page says the update reaches printers *once it is on
-the branch printers follow* and promises no date. The four things read for it - including why a hand-set `z_offset` changes the search
+**The fix shipped the same day, in two steps**: `6532091` on `main` set `extensions_version` to
+**1.0.1**, and `production` - the branch Moonraker's update manager follows - moved to the same
+commit that evening. The page was rewritten at each step, each time after checking the branch
+rather than taking the report: it now leads with **Settings → Updates → NebulaOS extensions**
+and keeps the two `printer.cfg` lines as the fallback for a printer that cannot update. The four things read for it - including why a hand-set `z_offset` changes the search
 floor, and why a second `[nebulaos_calibration]` section overrides the firmware's
 (`RawConfigParser(strict=False)` in Klipper `58bd67db`) - are in `VERIFICATION.md`.
 
@@ -723,11 +724,10 @@ paths.
 
 ## Next actions, in order
 
-1. **When extensions 1.0.1 (`6532091`) reaches `production`** (the issue #9 Z-offset fix), the
-   Troubleshooting section *The nozzle does not reach the bed* can shrink to "update, then remove
-   the two lines". It names the version already; `production` was still `178a0c2` on 2026-11-12,
-   and `production` is the branch Moonraker's update manager follows. The main session will say
-   when it moves - do not infer it from `main`.
+1. *(done, 2026-11-12)* Extensions 1.0.1 (`6532091`) reached `production` the same evening -
+   verified with `git ls-remote`, not from the report - so the Troubleshooting section leads with
+   **Settings → Updates → NebulaOS extensions** and keeps the two `printer.cfg` lines as the
+   fallback for a printer that cannot update.
 2. *(done the same day)* The main session's `d464b46` corrected both firmware documents, the
    wiki warning is gone, and the pages now carry the measurement - 1.0.2 built twice on one host
    gives identical `xImage` and `rootfs.squashfs`, which are the hashes the release publishes -

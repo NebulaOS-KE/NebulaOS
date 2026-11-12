@@ -429,7 +429,8 @@ Inbox note `_scratch/docs-agent/inbox/2026-11-11-DEV-WIKIS.md`.
   user finds it too) and a section *The nozzle does not reach the bed* with the two `printer.cfg`
   lines, why each one works, the warning not to print until the calibration succeeds, and the
   `PROBE_CALIBRATE` fallback. `wiki/First-Calibration.md` points at it from the *Failed* line.
-  No version number: the fix is extensions `a63964a`, which is on neither `main` nor
-  `production`, so the page says the update arrives through Settings -> Updates and nothing more.
+  The fix shipped the same day: extensions **1.0.1** (`6532091`) on `main` and then on
+  `production`, both verified with `git ls-remote`, so the page now leads with
+  Settings -> Updates -> NebulaOS extensions and keeps the `printer.cfg` lines as the fallback.
   What was read for it, including why a hand-set `z_offset` changes the search floor and why a
   second `[nebulaos_calibration]` section overrides the firmware's, is in `VERIFICATION.md`.

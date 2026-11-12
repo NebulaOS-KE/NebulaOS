@@ -220,14 +220,18 @@ publish workflow.
 ## The Z-offset troubleshooting entry, and what was read for it (2026-11-12)
 
 The entry in `wiki/Troubleshooting.md` describes a failure two users reported (issue #9) and a
-fix that is **not on a printer yet**. Written first against extensions `a63964a`, which was then
-on no branch at all; updated the same day, after the main session reported it, to **extensions
-1.0.1** - `6532091`, which sets `extensions_version` to `1.0.1` in `nebulaos-extensions.json`
-and sits on `main` with `a63964a` as its parent. **`production` is still `178a0c2`**, and
-`production` is the branch Moonraker's update manager follows
-(`[update_manager nebulaos_klipper_extensions]`, `primary_branch: production`), so no printer
-can have the fix yet. The page says the version and says it arrives through
-**Settings → Updates** once it is on the branch printers follow - it promises no date.
+fix that reached printers the same day. The page was written three times as the fix moved, and
+each move was checked here rather than taken on report:
+
+| When | State | Checked |
+|---|---|---|
+| First | `a63964a`, on no branch | the commit itself; the page named no version |
+| Then | **1.0.1** = `6532091` on `main`, `production` still `178a0c2` | `extensions_version` in `nebulaos-extensions.json`; the page named the version and said *once it is on the branch printers follow* |
+| Now | `production` **is** `6532091` | `git ls-remote`: `main` and `production` are the same commit, and `production` is what `[update_manager nebulaos_klipper_extensions]` follows (`primary_branch: production`) |
+
+So the page leads with **Settings → Updates → NebulaOS extensions** and keeps the two
+`printer.cfg` lines as the fallback for a printer that cannot update. The screen labels come
+from `wiki/Screen-Updates.md`, which was written from the panel itself.
 
 What was read, rather than taken from the report:
 

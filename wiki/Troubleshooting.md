@@ -58,8 +58,8 @@ Starting from what the print looks like is often quicker: [Improve your prints](
 | Auto Calibration says **Failed: <step>** | The page says *Why* and *What to do*; nothing was saved. Fix it and run it again. Load cell steps: **Tune → Calibration → Load Cell Calibration** shows the reason. See [Calibration explained](Calibration-Explained#load-cell-calibration). |
 | A calibration row says **Redo:** | Something you changed since made it stale - run that row again. See [Calibration explained](Calibration-Explained#the-status-line-under-every-row). |
 | A calibration refuses to start | A print is running, or something else is: calibration rows are locked while printing. |
-| **The nozzle did not touch the bed** (new wording), or `No trigger on probe after full movement` (before the update) | The Z-offset calibration could not reach the bed. See [The nozzle does not reach the bed](#the-nozzle-does-not-reach-the-bed-z-offset-calibration) below. |
-| `measurement rejected - no_accepted_samples (samples: 3 taken, 0 accepted)` | The same cause, one step later: the touches were measured but rejected as implausible. Same fix: [The nozzle does not reach the bed](#the-nozzle-does-not-reach-the-bed-z-offset-calibration). |
+| **The nozzle did not touch the bed** (new wording), or `No trigger on probe after full movement` (before the update) | The Z-offset calibration could not reach the bed. Fixed in Klipper extensions 1.0.1: **Settings → Updates**. Details, and what to do on a printer that cannot update: [The nozzle does not reach the bed](#the-nozzle-does-not-reach-the-bed-z-offset-calibration). |
+| `measurement rejected - no_accepted_samples (samples: 3 taken, 0 accepted)` | The same cause, one step later: the touches were measured but rejected as implausible. Same fix, same update: [The nozzle does not reach the bed](#the-nozzle-does-not-reach-the-bed-z-offset-calibration). |
 
 ---
 
@@ -82,12 +82,20 @@ softer bed mount needs the nozzle to travel a little further down, and to press 
 before the load cell reports contact - so the search stopped above the bed, and the touches that
 did happen looked too far from the expected plane to be trusted.
 
-**The fix is an update.** It is released as **Klipper extensions 1.0.1** and reaches printers
-through **Settings → Updates** once it is published to the branch printers follow - ask in the
-issue thread if you want to know when. The two steps below are what to do in the meantime, and
-they are safe to leave in place afterwards.
+**The fix is an update, and it is out.** Klipper extensions **1.0.1** carries it.
 
-#### Until then: two lines in `printer.cfg`
+1. **Settings → Updates** on the printer, then **NebulaOS extensions → Update** (or **Update
+   all**). Klipper stops while it installs and comes back by itself.
+2. Run the calibration again: **Tune → Calibration → Auto Calibration**, or **Z Offset** on its
+   own.
+3. If you already added the two `printer.cfg` lines below, you can now remove the
+   `[nebulaos_calibration]` block. Leave the `z_offset` line alone - a successful calibration
+   overwrites it with the real value.
+
+That is all most printers need. The rest of this section is for a printer that cannot update
+yet - no network, or an update that will not install.
+
+#### Without the update: two lines in `printer.cfg`
 
 Open Mainsail → **Machine** → `printer.cfg`.
 
@@ -129,7 +137,7 @@ Open Mainsail → **Machine** → `printer.cfg`.
 It measures the real offset and saves it over the `3.000`. **Do not print until it succeeds** -
 until then the printer believes the nozzle sits 3 mm further from the bed than it does.
 
-After the update both lines are harmless; you can remove them whenever you like.
+Both lines stay harmless after the update, so there is no hurry to remove them.
 
 **If you would rather not touch `printer.cfg`**, the old-fashioned route still works and does not
 use the load cell at all: the paper test with `PROBE_CALIBRATE`, then `SAVE_CONFIG`. See

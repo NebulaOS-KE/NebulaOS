@@ -58,11 +58,12 @@ this session; the owner publishes.
 
 ## One user-facing entry added after the wikis (2026-11-12)
 
-`wiki/Troubleshooting.md` now covers the Z-offset calibration failure from issue #9 - the nozzle
-not reaching the bed on printers with a softer bed mount - with the two `printer.cfg` lines that
-work around it today. The fix itself is extensions `a63964a`, which is on **neither `main` nor
-`production`**, so the page promises no version: it says the real fix arrives through
-**Settings -> Updates**. Evidence in `VERIFICATION.md`.
+`wiki/Troubleshooting.md` covers the Z-offset calibration failure from issue #9 - the nozzle not
+reaching the bed on printers with a softer bed mount. The fix shipped the same day as Klipper
+extensions **1.0.1** (`6532091`, now on `production`, which is the branch Moonraker's update
+manager follows), so the page leads with **Settings -> Updates -> NebulaOS extensions** and keeps
+the two `printer.cfg` lines as the fallback for a printer that cannot update. Evidence, and the
+three states the page passed through, in `VERIFICATION.md`.
 
 ## What is still open
 

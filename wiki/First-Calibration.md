@@ -63,7 +63,8 @@ what it names and tap Start again.
 
 If it fails at **Measuring the Z offset** and the reason is that the nozzle never touched the bed
 (or `No trigger on probe after full movement`), that is a known one, so far only on printers with
-a softer bed mount such as silicone spacers: see
+a softer bed mount such as silicone spacers. It is fixed in Klipper extensions 1.0.1: install it
+under **Settings → Updates** and run the calibration again. See
 [The nozzle does not reach the bed](Troubleshooting#the-nozzle-does-not-reach-the-bed-z-offset-calibration).
 
 ## What it does not do
