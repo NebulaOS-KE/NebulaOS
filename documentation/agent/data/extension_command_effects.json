@@ -1,0 +1,216 @@
+{
+  "AUTOTUNE_TMC": [
+    "hardware"
+  ],
+  "EEPROM_DEBUG_READ": [
+    "readonly"
+  ],
+  "EEPROM_DEBUG_WRITE_BYTE": [
+    "hardware",
+    "persistent"
+  ],
+  "EEPROM_DEBUG_WRITE_FLOAT": [
+    "hardware",
+    "persistent"
+  ],
+  "EEPROM_DEBUG_WRITE_INT": [
+    "hardware",
+    "persistent"
+  ],
+  "EEPROM_IS_FIRST_USED": [
+    "readonly"
+  ],
+  "EEPROM_POS": [
+    "readonly"
+  ],
+  "EEPROM_PRINTER_INFO": [
+    "readonly"
+  ],
+  "EEPROM_READ": [
+    "readonly"
+  ],
+  "EEPROM_WRITE_BYTE": [
+    "hardware",
+    "persistent"
+  ],
+  "EEPROM_WRITE_FLOAT": [
+    "hardware",
+    "persistent"
+  ],
+  "EEPROM_WRITE_INT": [
+    "hardware",
+    "persistent"
+  ],
+  "NEBULAOS_BEEP": [
+    "hardware"
+  ],
+  "NEBULAOS_BEEPER_STOP": [
+    "hardware"
+  ],
+  "NEBULAOS_CALIBRATION_RECORD": [
+    "files",
+    "persistent"
+  ],
+  "NEBULAOS_CALIBRATION_STATUS": [
+    "readonly"
+  ],
+  "NEBULAOS_LOAD_CELL_AUTO_CHECK": [
+    "gcode",
+    "hardware"
+  ],
+  "NEBULAOS_LOAD_CELL_MODE": [
+    "files",
+    "persistent"
+  ],
+  "NEBULAOS_LOAD_CELL_READ": [
+    "readonly"
+  ],
+  "NEBULAOS_PLAY_TUNE": [
+    "hardware"
+  ],
+  "NEBULAOS_PLR_DISCARD": [
+    "files",
+    "persistent"
+  ],
+  "NEBULAOS_PLR_RESUME": [
+    "gcode",
+    "files",
+    "persistent"
+  ],
+  "NEBULAOS_PLR_STATUS": [
+    "readonly"
+  ],
+  "NEBULAOS_RAW_CONTACT_COMPARE": [
+    "readonly"
+  ],
+  "NEBULAOS_RAW_CONTACT_DIAGNOSTIC": [
+    "gcode",
+    "hardware"
+  ],
+  "NEBULAOS_RAW_CONTACT_REFERENCE": [
+    "gcode",
+    "hardware",
+    "files",
+    "persistent"
+  ],
+  "NEBULAOS_TMC_AUTOTUNE": [
+    "hardware"
+  ],
+  "NEBULAOS_Z_ADJUST": [
+    "gcode",
+    "files",
+    "persistent"
+  ],
+  "RUN_SHELL_COMMAND": [
+    "gcode",
+    "files",
+    "hardware"
+  ],
+  "SAVE_INPUT_SHAPER": [
+    "config",
+    "persistent"
+  ],
+  "SET_PIN": [
+    "hardware",
+    "files",
+    "persistent"
+  ],
+  "SET_VIRTUAL_PIN": [
+    "hardware"
+  ],
+  "TMCSTATUS": [
+    "readonly"
+  ],
+  "Z_OFFSET_APPLY_PROBE": [
+    "files",
+    "persistent"
+  ],
+  "_NEBULAOS_AUTO_CALIBRATE": [
+    "gcode",
+    "hardware",
+    "files",
+    "config",
+    "persistent"
+  ],
+  "_NEBULAOS_BED_TRAM": [
+    "gcode",
+    "hardware",
+    "files",
+    "persistent"
+  ],
+  "_NEBULAOS_BED_TRAM_CANCEL": [
+    "files"
+  ],
+  "_NEBULAOS_CALIBRATION_CANCEL": [
+    "files"
+  ],
+  "_NEBULAOS_ESTEPS_CALIBRATE": [
+    "gcode",
+    "hardware"
+  ],
+  "_NEBULAOS_ESTEPS_CANCEL": [
+    "files"
+  ],
+  "_NEBULAOS_ESTEPS_CONFIRM": [
+    "config",
+    "persistent"
+  ],
+  "_NEBULAOS_INPUT_SHAPER_CALIBRATE": [
+    "gcode",
+    "hardware",
+    "files"
+  ],
+  "_NEBULAOS_INPUT_SHAPER_CANCEL": [
+    "files"
+  ],
+  "_NEBULAOS_LOAD_CELL_CALIBRATE": [
+    "gcode",
+    "hardware",
+    "files",
+    "persistent"
+  ],
+  "_NEBULAOS_LOAD_CELL_CANCEL": [
+    "files"
+  ],
+  "_NEBULAOS_NOZZLE_CLEAN": [
+    "gcode",
+    "hardware"
+  ],
+  "_NEBULAOS_PLR_LOAD_MESH": [
+    "gcode"
+  ],
+  "_NEBULAOS_PLR_SET_Z": [
+    "gcode"
+  ],
+  "_NEBULAOS_PLR_TIMELAPSE_MERGE": [
+    "files"
+  ],
+  "_NEBULAOS_Z_OFFSET_CALIBRATE": [
+    "gcode",
+    "hardware",
+    "files",
+    "persistent"
+  ],
+  "_comment": [
+    "Hand-curated side effects per command, read out of the handlers and the",
+    "collaborators they call.",
+    "",
+    "Why this is not generated: effects are reached through objects held on self",
+    "- self.pwm.off(), self.gcode.run_script(), self.journal.write() - and",
+    "following those object graphs soundly is real static analysis. A detector",
+    "that walks only the handler, or only self._methods, reports 'none detected'",
+    "for NEBULAOS_BEEP (which drives the buzzer's PWM through a SysfsPwm object)",
+    "and for SAVE_INPUT_SHAPER (which rewrites printer.cfg). That output is",
+    "worse than no output: it reads as a safety assurance.",
+    "",
+    "So the generator no longer claims 'none detected'. A command with no entry",
+    "here shows 'not determined', which is honest. Entries use these classes:",
+    "  gcode      - runs G-code; can move the machine or change temperatures",
+    "  hardware   - writes hardware directly (sysfs, PWM, I2C, EEPROM)",
+    "  files      - writes or deletes files on the printer",
+    "  config     - changes the saved Klipper configuration",
+    "  persistent - changes state that survives a restart",
+    "  readonly   - reports only; no effect found when the handler and its",
+    "               collaborators were read"
+  ]
+}

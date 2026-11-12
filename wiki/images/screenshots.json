@@ -1,0 +1,918 @@
+{
+  "caveat": "real UI from the real application at this commit; not hardware. machine.nebulaos.* panels need a live printer and are not truthful here.",
+  "commit": "36490ed",
+  "commit_note": "captured from NebulaOS-nebulascreen main at 36490ed on 2026-11-02",
+  "count": 129,
+  "excluded": {
+    "07-updates.png": "timing-dependent: the Updates page waits on a Moonraker reply that never arrives without a printer, so the buttons are captured enabled or disabled depending on timing. Would show a reader greyed-out buttons that are not greyed out on a real printer."
+  },
+  "history": "re-captured when the screen tip moved 94869f7 -> 3194104 -> dee0f6f -> 36490ed. At 36490ed the new Statistics page (20a-statistics) was added and 4 images changed: 05-printer and 15-printer (the Printer settings page gained the Statistics button), 35-restart-klipper-refused (that page is the dialog's background) and 37-spoolman-typing (the Use button's pressed shade, not a code change).",
+  "images": [
+    {
+      "image": "01-settings.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "02-connections.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "03-wifi.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "04-display.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "05-printer.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "06-system.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "08-reset.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "09-clean-reset-confirm.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "10-swap-confirm.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "11-reboot-confirm.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "12-hostname.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "13-hostname-invalid.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "14-hostname-confirm.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "15-printer.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "16-mcu.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "17-mcu-confirm.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "18-mcu-busy.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "19-mcu-done.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "20-mcu-failed.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "20a-statistics.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "21-updates.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "22-image.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "23-image-confirm-nebulaos.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "24-image-confirm-creality.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "25-image-refused.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "26-image-writing.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "27-image-restarting.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "28-image-failed.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "29-image-rolled-back.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "30-swap-confirm-nebulaos.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "31-refusal-active.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "32-refusal-updating.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "33-image-stopped-print.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "34-image-next-power-on.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "35-restart-klipper-refused.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "36-spoolman.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "37-spoolman-typing.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "38-spoolman-none.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "39-display-no-nebula-camera.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "40-display-nebula-camera.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "41-camera.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "42-camera-unsaved.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "43-camera-back-unsaved.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m01-home.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m02-macros.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m03-console.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m04-tune.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m05-move.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m06-extruder.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m07-fans.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m08-leds.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m09-files.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m10-bedmesh.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m10b-bedmesh-saved.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m11-finetune.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m12-limits.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m13-tmc-metrics.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m14-power.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m15-retraction.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m16-zoffset-saved.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m17-zoffset-save-error.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m18-zoffset-older-extensions.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m19-calibration.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m19b-calibration-status.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m19c-calibration-status-middle.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m19d-calibration-status-other.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m20-axis-twist.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m21-skew.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m22a-pid.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m22b-pid-running.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m22c-pid-done.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m29a-loadcell-auto-never.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m29b-loadcell-auto-checking.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m29c-loadcell-auto-ok.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m29d-loadcell-auto-failed.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m29e-loadcell-manual.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m29f-loadcell-manual-step.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m30-loadcell-idle.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m31-loadcell-empty.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m32-loadcell-weight.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m33-loadcell-weight-keypad.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m33b-loadcell-weight-typed.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m33c-loadcell-weight-ok.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m33d-loadcell-weigh-problem.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m34-loadcell-weight-problem.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m35-loadcell-replace.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m36-loadcell-remove.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m37-loadcell-finger.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m38-loadcell-confirm.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m39-loadcell-complete.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m40-tram-idle.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m41-tram-mount.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m42-tram-adjust-rigid.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m43-tram-adjust-adjustable.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m44-tram-adjust-older-extensions.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m45-tram-complete.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m46-tram-stopped.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m50-auto-calibrate.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m51-auto-calibrate-running.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m51a-auto-step1-load-cell.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m51b-auto-step4-heating.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m51c-auto-step7-touch.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m51d-auto-step8-mesh.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m51e-auto-step9-restart.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m51f-auto-reconnecting.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m51g-auto-done.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m51h-auto-failed.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m51i-auto-idle-older-extensions.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m52-esteps.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m52a-esteps-step1-heating.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m52b-esteps-start-extrusion.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m52c-esteps-confirm.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m53-esteps-measure-keypad.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m54-input-shaper.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m54a-input-shaper-step2.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m54b-input-shaper-measuring-x.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m54c-input-shaper-calculating-x.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m54d-input-shaper-x-result-graph.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m54e-input-shaper-done-graphs.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m54f-input-shaper-graph-full-screen.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m54g-input-shaper-graphs-off.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m54h-input-shaper-measuring-y.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m60-print-status.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m61-finetune-printing.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m62-home-printing.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m63-print-start-heating.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m64-print-start-soak.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m65-print-start-pause.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m66-print-start-done.png",
+      "size": [
+        480,
+        272
+      ]
+    }
+  ],
+  "reproducibility": "129 of 130 captures are byte-identical across runs of the same build",
+  "resolution": "480x272 (GUPPY_SMALL_SCREEN=1, the KE's real panel)",
+  "source": "NebulaScreen SDL simulator, GUPPY_SIM_SHOTS tour"
+}

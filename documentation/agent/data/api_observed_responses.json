@@ -1,0 +1,38 @@
+{
+  "_comment": "Responses recorded from a real printer (ke-dev), for endpoints whose result keys static analysis cannot resolve. Provenance per entry. Never edited to look tidier: a value here is what the printer sent, redacted for privacy by the session that captured it. An endpoint belongs here ONLY if gen_firmware_api_responses.py reports it unresolved - an observed sample is weaker evidence than the source, so it never overrides a resolved answer.",
+  "endpoints": {
+    "/machine/nebulaos/updates/readiness": {
+      "source": "_scratch/run23/api-snapshot/redacted/machine_nebulaos_updates_readiness.json",
+      "captured": "2026-11-04",
+      "captured_by": "the foreground session, on ke-dev",
+      "firmware_at_capture": "ba98eec",
+      "still_current_because": "scripts/build/overlay/usr/lib/nebulaos/python/nebulaos_osconfig/updates.py is byte-identical between ba98eec and b95b156 (git diff --quiet), so the helper that produced this response is the one documented here",
+      "result": {
+        "apps": {
+          "klipper": {
+            "detail": "",
+            "helper": "cached",
+            "helper_source_hash": "ba5d16812a19bbf9725860c1c841c496bfc8cca6d1b234c2073773a27d0c003c",
+            "packages": "ok",
+            "ready": true,
+            "target": "0cee841e31d701595b3e509a0b502f6e320f52a8"
+          },
+          "moonraker": {
+            "detail": "",
+            "packages": "ok",
+            "ready": true,
+            "target": "985c1d0bbeb90bc057d34a232c9dc3b05e0c6c8d"
+          }
+        },
+        "checked_at": "2026-11-04T19:26:17Z",
+        "checked_epoch": 1793820377,
+        "message": "The pending update can be installed.",
+        "result": "READY",
+        "targets": {
+          "klipper": "0cee841e31d701595b3e509a0b502f6e320f52a8",
+          "moonraker": "985c1d0bbeb90bc057d34a232c9dc3b05e0c6c8d"
+        }
+      }
+    }
+  }
+}
