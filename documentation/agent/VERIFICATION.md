@@ -264,6 +264,31 @@ each took a statement about *process* from a person rather than from an artifact
 Not established, and said so wherever the claim appears: the same bytes from a **different
 host** or a different container digest. Nobody has measured that.
 
+## The published wikis match their branches (checked 2026-11-12, after the merges)
+
+Eight `.wiki.git` repositories cloned read-only and diffed, file by file, against `wiki/` on each
+repository's default branch after the merges:
+
+| Repository | Default branch | Pages | Differences |
+|---|---|---|---|
+| `NebulaOS` | `main` | 53 | **0** |
+| `NebulaOS-firmware` | `main` | 16 | **0** |
+| `NebulaOS-kernel` | `openke` | 8 | **0** |
+| `NebulaOS-klipper-extensions` | `main` | 8 | **0** |
+| `NebulaOS-klipper-mcu` | `main` | 7 | **0** |
+| `nebulaos-packages` | `main` | 6 | **0** |
+| `lv_drivers` | `master` | 6 | **0** |
+| `NebulaOS-nebulascreen` | `main` | 35 | **0** |
+
+The comparison covers every file in the tree, images included, and it is what makes "published"
+a checked statement rather than a report of a successful workflow run: a green run says the job
+exited 0, not that readers see these bytes. The firmware's ten August pages and the kernel's
+seven are gone from the published wikis, which the same diff establishes - anything left behind
+would appear as a file the branch does not have.
+
+This is read-only verification. This session does not push to a `.wiki.git` and has never run a
+publish workflow; the publication happened because a human merged eight pull requests.
+
 ## Source revisions
 
 Documentation describes the **newest** code: the tip of each repository's default branch.

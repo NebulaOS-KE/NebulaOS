@@ -1,4 +1,9 @@
-# For Tim: what is ready to merge, and what is still open
+# For Tim: what was merged, and what is still open
+
+> **All eight pull requests were merged on 2026-11-12 and every wiki is published.** The list
+> below is kept as the record of what went in, with what each one changed; the merge commits are
+> in `STATUS.md`. A read-only diff of all eight published wikis against their branches found no
+> differences. The three decisions near the end are still yours.
 
 Written 2026-11-11, after the 1.0.2 refresh (inbox note `2026-11-10-RELEASE-1.0.2-REFRESH.md`),
 extended the same day with the two older PRs (inbox note `2026-11-11-OLDER-PRS.md`), and again
