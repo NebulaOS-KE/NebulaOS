@@ -121,6 +121,10 @@ jobs:
           name: build-a
           path: run/artifacts/buildroot-halley5-v30-image
 
+      - uses: actions/checkout@v6
+        with:
+          path: nos
+          sparse-checkout: slicer/orcaslicer
       - name: Packaging tools
         run: sudo apt-get update -q && sudo apt-get install -y -q p7zip-full whois
 
@@ -176,10 +180,19 @@ jobs:
             cat release/release-manifest.txt
             echo '```'
           } > notes.md
+          # The same asset set as 1.0.2: the stock-updater copy (F005_ota_img,
+          # the file Installing-NebulaOS tells stock users to use), every
+          # .manifest.txt and the OrcaSlicer profiles from this repository.
+          stock="NebulaOS-Ender3V3KE-F005_ota_img_V9.$VERSION.img"
+          test -f "release/$stock"
           gh release create "$tag" -R "$GITHUB_REPOSITORY" --draft --title "NebulaOS $VERSION" \
             --notes-file notes.md \
             "release/NebulaOS-Ender3V3KE-$VERSION.img" "release/NebulaOS-Ender3V3KE-$VERSION.img.sha256" \
+            "release/NebulaOS-Ender3V3KE-$VERSION.img.manifest.txt" \
+            "release/$stock" "release/$stock.sha256" "release/$stock.manifest.txt" \
             "release/NebulaOS-Ender3V3KE-$VERSION.ingenic" "release/NebulaOS-Ender3V3KE-$VERSION.ingenic.sha256" \
+            "release/NebulaOS-Ender3V3KE-$VERSION.ingenic.manifest.txt" \
             release/nebulaos-release.json release/release-manifest.txt release/SHA256SUMS \
-            release/build-manifest.txt release/xImage release/rootfs.squashfs
+            release/build-manifest.txt release/xImage release/rootfs.squashfs \
+            nos/slicer/orcaslicer/*.orca_printer
           echo "Draft release $tag created" >> "$GITHUB_STEP_SUMMARY"
