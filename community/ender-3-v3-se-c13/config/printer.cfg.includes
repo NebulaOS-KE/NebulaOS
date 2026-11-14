@@ -1,0 +1,15 @@
+[include nebulaos/platform.cfg]
+# [include nebulaos/machine.cfg]   # replaced by Ender3V3SE/machine.cfg below
+[include nebulaos/prtouch.cfg]
+[include nebulaos/z_offset_probe.cfg]
+[include nebulaos/calibration.cfg]
+[include nebulaos/homing.cfg]
+[include nebulaos/print.cfg]
+[include nebulaos/filament.cfg]
+[include nebulaos/camera.cfg]
+[include nebulaos/beeper.cfg]
+
+[include Ender3V3SE/machine.cfg]
+[include Ender3V3SE/overrides.cfg]
+
+[include macros/*.cfg]

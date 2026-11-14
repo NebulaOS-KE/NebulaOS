@@ -149,7 +149,7 @@ Worth knowing how these track upstream:
   and stop with a clear message if it does not.** A mismatch announces itself instead of
   failing mid-print. The system image keeps its own matched versions as a fallback.
 - **Mainsail** updates itself from its own repository (`mainsail-crew/mainsail`, channel
-  `stable`). NebulaOS 1.0.2 ships **2.18.2**; that is the version in the image, not a ceiling -
+  `stable`). NebulaOS 1.0.3 ships **2.18.2**; that is the version in the image, not a ceiling -
   Moonraker's update manager moves it on without a system image.
 - The screen app updates from its own releases. A system image brings its own copy of the
   screen app, and after a system image install that copy is used again.

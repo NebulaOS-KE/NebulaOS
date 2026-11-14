@@ -170,6 +170,8 @@ in, and [Report a problem](Report-A-Problem) if neither route gets you a first l
 | A download fails with "does not match the release record" | The file arrived damaged. It was deleted; start the download again. |
 | An update says "not possible while a print is active" | Expected: updates wait until the printer is idle (no print, heaters off). |
 | The new system went back to the old one by itself | The new system did not start properly (trial start). The screen showed why; the old system runs as before. See [Recovery](Recovery#1-automatic-the-trial-start). |
+| After updating Klipper or the NebulaOS extensions: *"Printer is halted"* with `nebulaos_compat: compatibility manifest declares 1 module(s) with no source file present ... extras/motor_database.cfg` - and a restart or even reinstalling does not help | The update failed its check, going back to the previous version failed too, and NebulaOS 1.0.2 fell back to its built-in copy of Klipper, which lacks that file. A lock holds the printer there on purpose until someone looks at it; it lives in `/usr/data/nebulaos`, so it survives restarts and reinstalls. Over SSH, `rm -f /usr/data/nebulaos/updates/locks/klipper-stack.lock && /etc/init.d/S05nebulaos-activate start` brings it back. Then please [report it](Report-A-Problem) with the logs. From **NebulaOS 1.0.3** the built-in copy is complete: the printer comes back on it by itself, and the lock still keeps further updates on hold until it is cleared. |
+| Mainsail shows `file_manager: Error adding inotify watch to root 'config', path: .../config/backups/.settings-<time>-changed.part` | Harmless. NebulaOS's settings backup (every 30 minutes when your settings changed) renamed its temporary folder before Moonraker looked at it. The backup is fine and there is nothing to delete. To clear the message, restart Moonraker (`/etc/init.d/S56moonraker restart` over SSH) or the printer. It no longer appears from **NebulaOS 1.0.3**. |
 
 ---
 
@@ -177,8 +179,9 @@ in, and [Report a problem](Report-A-Problem) if neither route gets you a first l
 
 | Symptom | Fix |
 |---|---|
-| Screen upside down or rotated | `display_rotate` in `nebulascreen.json`: `2` for the normal KE mounting, `0` for a screen mounted the other way round. See [Screen mounted the other way round](Screen-Display#screen-mounted-the-other-way-round). |
-| Taps land in the wrong place, e.g. after changing `display_rotate` | Calibration is rotation-specific. Redo it: **Settings → Reset → Reset touch calibration**. |
+| Screen upside down | **Settings → Display → Rotate screen** (NebulaOS 1.0.3). See [Screen mounted the other way round](Screen-Display#screen-mounted-the-other-way-round). |
+| Taps land in the wrong place, e.g. after turning the screen | Calibration belongs to one orientation. Rotate screen asks for a new one by itself; otherwise redo it: **Settings → Reset → Reset touch calibration**. |
+| A popup covers the touch calibration, and tapping it goes to the calibration | Do not tap it. Over SSH run `rm /usr/data/nebulaos/nebulascreen/nebulascreen.json`, then `reboot`: popups appear only once, so the next start shows the calibration alone. Fixed in NebulaScreen v1.0.2 and NebulaOS 1.0.3. |
 | Touch calibration came out wrong and you cannot reach the button | Edit `config/nebulascreen/nebulascreen.json` in Mainsail: set `"touch_calibrated": true` and remove `touch_calibration_coeff`, then restart the screen. The wizard runs again. See [Configuration](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/blob/main/wiki/Configuration.md). |
 | Sensors shown with raw names like `Heater Bed` | None of the `id`s in `monitored_sensors` matches a Klipper object, so the screen shows every heater and sensor under its Klipper name. Fix the `id`s (an empty or missing list is replaced by Extruder, Bed and MCU Temp at start). See [Configuration](https://github.com/NebulaOS-KE/NebulaOS-nebulascreen/blob/main/wiki/Configuration.md). |
 | Screen seems stuck | **Settings → System → Restart GUI**, or over SSH `/etc/init.d/S58nebulascreen restart`. |

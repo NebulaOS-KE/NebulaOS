@@ -75,6 +75,17 @@ NebulaOS uses the same mechanism for its camera macros (`[gcode_shell_command se
 and `[gcode_shell_command nebula_camera]` in `camera.cfg`). The command runs as root - only put
 commands there that you would type in the shell yourself.
 
+## A second Klipper board over USB
+
+From **NebulaOS 1.0.3** the touchscreen computer has USB serial support (USB CDC ACM), so a
+Klipper board or a USB probe connected to its USB port appears as `/dev/ttyACM0` and, with a name
+that stays the same, under `/dev/serial/by-id/` - for example a BTT EBB42 driving an MMU. Use the
+`by-id` path in its `[mcu ...]` section, in `printer.cfg` or a file of your own, and build the
+board's firmware from the same Klipper version the printer runs.
+
+The second board, and software such as Happy Hare, run inside Klipper on a computer with 256 MB of
+memory. NebulaOS does not test MMU setups; keep an eye on memory and responsiveness.
+
 ## Spoolman
 
 [Spoolman](https://github.com/Donkie/Spoolman) keeps track of your spools. It runs on another

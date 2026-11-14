@@ -14,28 +14,29 @@ Brightness, sleep, theme colour, the touch beep, the boot logo, the Nebula Camer
 | **Sleep after** | Never / 30 seconds / 1 minute / 5 minutes / 10 minutes / 30 minutes / 1 hour. Touch to wake. |
 | **Theme colour** | Blue, Red, Green, Purple, Pink, Yellow. Applies immediately. |
 | **Touch beep** | A short click through the buzzer on every tap. A test beep plays when you turn it on. |
+| **Rotate screen** | Turns the picture 180° for a screen mounted the other way round, then asks for a new touch calibration. See [below](#screen-mounted-the-other-way-round). NebulaOS 1.0.3 and later. |
 | **Boot logo** | Choose the boot screen and power-on logo of this boot slot: the NebulaOS logo, an image added from a USB stick or uploaded in Mainsail (PNG, BMP or JPEG, max 4 MB), or **Restore Creality logo**. |
 | **Camera** | Creality Nebula Camera settings: night mode, anti-flicker, white balance, exposure, picture sliders, **Defaults**, **Restart camera**. See [Camera](Camera). |
 
 ## Screen mounted the other way round
 
-If your screen is mounted upside down, you can turn the picture 180°. There is no button for this
-yet; it is a line in the screen's settings file.
+If your screen is mounted upside down, turn the picture 180°:
+
+1. **Settings → Display**, switch **Rotate screen** on.
+2. The screen restarts upside down and asks you to calibrate touch: tap the centre of each
+   crosshair. The calibration belongs to one orientation, so it is done again each time.
+
+To go back, switch **Rotate screen** off; the screen asks for a calibration once more. The boot
+screen follows the same setting.
+
+**Before NebulaOS 1.0.3** there is no switch; the setting is a line in the screen's settings file:
 
 1. In Mainsail, open **Machine** and the file `nebulascreen/nebulascreen.json`.
-2. Find the line `"display_rotate": 2,` and change the `2` to `0`:
-
-   ```json
-   "display_rotate": 0,
-   ```
-
-   `2` is the normal KE mounting, `0` is turned 180°. Leave the comma at the end.
+2. Find the line `"display_rotate": 2,` and change the `2` to `0` (`2` is the normal KE mounting,
+   `0` is turned 180°). Leave the comma at the end.
 3. **Save & Close**, then restart the printer.
-4. Touch calibration belongs to one orientation. If taps land in the wrong place, run
-   **Settings → Reset → Reset touch calibration** and tap the targets.
-
-To go back, set it to `2` again. Do not use `1` or `3`: those turn the picture 90°, and the screen
-layout is not made for that.
+4. If taps land in the wrong place, run **Settings → Reset → Reset touch calibration** and tap the
+   targets.
 
 ## Boot logo panel
 

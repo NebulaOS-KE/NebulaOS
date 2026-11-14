@@ -15,8 +15,10 @@ want to try.
 Four separate things all have to work. A firmware that builds and flashes is only the first:
 
 1. **NebulaOS has to run on your Nebula Pad.** NebulaOS installs on the touchscreen computer built
-   into the KE. Whether it installs and runs on a separately sold (retail) Nebula Pad is **not
-   known** - nobody has tried it yet.
+   into the KE. On a separately sold (retail) Nebula Pad it runs once Creality's **KE** firmware
+   has been put on the pad first (see the [Ender-3 V3 SE community build](#community-build-ender-3-v3-se-c13)).
+   Installing NebulaOS's `.ingenic` directly on a retail pad currently stops at the boot screen;
+   we are looking into it.
 2. **Your mainboard needs a Klipper firmware built for it** - the rest of this page.
 3. **Klipper needs a configuration for your printer.** NebulaOS's own configuration describes the
    KE: its pins, motors, bed size and load-cell probe. You have to replace that with your printer's
@@ -43,7 +45,7 @@ board marked C14 can carry either an STM32F401 or a GD32F303.
 
 | Printer / board | Chip on the board | Processor in `make menuconfig` | Bootloader offset | Serial to the Nebula Pad | Baud | How sure |
 |---|---|---|---|---|---|---|
-| Ender-3 V3 SE, C13 | GD32F303 | STM32F103 | 28 KiB | USART2 (PA3/PA2) | 230400 | Community-reproduced (with a Sonic Pad) [S5] |
+| Ender-3 V3 SE, C13 | GD32F303 | STM32F103 | 28 KiB | USART2 (PA3/PA2) | 230400 | **Runs NebulaOS** - [community build](#community-build-ender-3-v3-se-c13); also reproduced with a Sonic Pad [S5] |
 | Ender-3 V3 SE, C14 | STM32F401 | STM32F401 | 64 KiB | USART2 (PA3/PA2) | 230400 | **Candidate only** - the serial setting is not confirmed [S8][S9] |
 | Ender-3 V3 SE, marked C14 | GD32F303 | STM32F103 | 28 KiB | USART2 (PA3/PA2) | 230400 | **Candidate only** [S11][S12][S13] |
 | Creality 4.2.2 | STM32F103 | STM32F103 | 28 KiB | USART3 (PB11/PB10) | 230400 | Upstream Klipper settings; baud from SimpleAF's Nebula Pad setup [S6][S4] |
@@ -71,13 +73,13 @@ On a Linux PC (or WSL), with Klipper's build tools installed ([Klipper's install
 ```bash
 git clone https://github.com/Klipper3d/klipper.git
 cd klipper
-git checkout 58bd67db3ce1be1951c3e4a6d1156a79903d4edc   # the Klipper NebulaOS 1.0.2 runs
+git checkout 58bd67db3ce1be1951c3e4a6d1156a79903d4edc   # the Klipper NebulaOS 1.0.3 runs (same as 1.0.2)
 make menuconfig
 make
 ```
 
 The firmware is `out/klipper.bin`. Build from the **same Klipper version as the printer runs**
-(the commit above is NebulaOS 1.0.2's); a firmware from a very different Klipper version may refuse
+(the commit above is the one NebulaOS 1.0.2 and 1.0.3 run); a firmware from a very different Klipper version may refuse
 to connect. Before building for a different board, run `make clean` and check every setting again.
 
 ### Example: Ender-3 V3 SE with a C13 board (GD32F303)
@@ -150,6 +152,39 @@ printer [S18][S19].
 5. Each motor moves the right way, a small step at a time.
 6. Heaters heat and the safety limits are right.
 7. Only then home, and only then calibrate.
+
+## Community build: Ender-3 V3 SE (C13)
+
+**Hazok652** runs NebulaOS on a stock Ender-3 V3 SE with a C13 mainboard (GD32F303) and a retail
+Nebula Pad ([issue #8](https://github.com/NebulaOS-KE/NebulaOS/issues/8)), and shared the setup -
+thank you! Everything is in
+[`community/ender-3-v3-se-c13`](https://github.com/NebulaOS-KE/NebulaOS/tree/main/community/ender-3-v3-se-c13),
+with a README that has every step:
+
+| File | What it is |
+|---|---|
+| `config/Ender3V3SE/machine.cfg` | The SE's hardware configuration, replacing NebulaOS's KE `machine.cfg` |
+| `config/Ender3V3SE/overrides.cfg` | Only the values that differ from NebulaOS's other KE files (purge line, homing point, bed screws, probe offset) - everything else, including later fixes, still comes from NebulaOS |
+| `config/printer.cfg.includes` | The include block for your `printer.cfg` |
+| `mcu/ender3v3se-c13-klipper-58bd67d.bin` | The mainboard firmware, built from upstream Klipper `58bd67d` with the [C13 settings above](#example-ender-3-v3-se-with-a-c13-board-gd32f303) |
+| `orcaslicer/...orca_printer` | OrcaSlicer printer, filament and process profiles |
+
+In short:
+
+1. **Retail pad:** put Creality's **Ender-3 V3 KE** firmware on it first, with Creality's cloner
+   over the pad's micro-USB port -
+   [KE firmware V1.1.0.12](https://github.com/CrealityOfficial/Ender-3_V3_KE_Klipper/releases/tag/V1.1.0.12),
+   [cloner](https://github.com/CrealityOfficial/Ender-3_V3_KE_Annex/tree/main/firmware%20recovery%20tool).
+2. [Install NebulaOS](Installing-NebulaOS) as on a KE.
+3. Flash the mainboard: the `.bin` in the root of an SD card, with a **new, short name** each time.
+4. Upload the two config files to `config/Ender3V3SE/` and replace the include block in
+   `printer.cfg`. Your files and `printer.cfg` are yours: NebulaOS updates do not change them.
+5. Check in the order of [First start](#first-start-check-in-this-order) before you home.
+
+**Good to know:** keep the load cell on **Automatic** (the default) - it works on the SE, and the
+water-bottle calibration is not needed. Way back to stock: `NEBULA_1.1.0.26.ingenic` with the
+cloner (a [community copy](https://www.openk1.org/cfw/NEBULA_1.1.0.26.ingenic), not from
+Creality), then Creality's latest [Nebula Pad firmware](https://www.crealitycloud.com/pl/downloads/box/nebula-pad).
 
 ## Tell us what worked
 
