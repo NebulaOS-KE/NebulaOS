@@ -149,6 +149,7 @@ jobs:
         with:
           subject-path: |
             release/NebulaOS-Ender3V3KE-*.img
+            release/NebulaOS-NebulaPad-*.img
             release/NebulaOS-Ender3V3KE-*.ingenic
             release/nebulaos-release.json
 
@@ -171,6 +172,7 @@ jobs:
             echo "([run]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)); two independent builds were byte-identical."
             echo
             echo "- \`NebulaOS-Ender3V3KE-$VERSION.img\`: install from the touchscreen (Settings > Updates > System image) or with the stock updater."
+            echo "- \`NebulaOS-NebulaPad-NEBULA_ota_img_V9.$VERSION.img\`: the same system for a Nebula Pad bought separately (stock pad software, board NEBULA): install it from that pad's touchscreen with a USB stick, without renaming it."
             echo "- \`NebulaOS-Ender3V3KE-$VERSION.ingenic\`: USB recovery."
             echo "- \`xImage\`, \`rootfs.squashfs\`: the kernel and root filesystem inside both (developers)."
             echo
@@ -185,11 +187,16 @@ jobs:
           # .manifest.txt and the OrcaSlicer profiles from this repository.
           stock="NebulaOS-Ender3V3KE-F005_ota_img_V9.$VERSION.img"
           test -f "release/$stock"
+          # 1.0.4: the same payloads in the separately sold Nebula Pad's
+          # envelope (board NEBULA; package-release.sh, build-img.py --board).
+          retail="NebulaOS-NebulaPad-NEBULA_ota_img_V9.$VERSION.img"
+          test -f "release/$retail"
           gh release create "$tag" -R "$GITHUB_REPOSITORY" --draft --title "NebulaOS $VERSION" \
             --notes-file notes.md \
             "release/NebulaOS-Ender3V3KE-$VERSION.img" "release/NebulaOS-Ender3V3KE-$VERSION.img.sha256" \
             "release/NebulaOS-Ender3V3KE-$VERSION.img.manifest.txt" \
             "release/$stock" "release/$stock.sha256" "release/$stock.manifest.txt" \
+            "release/$retail" "release/$retail.sha256" "release/$retail.manifest.txt" \
             "release/NebulaOS-Ender3V3KE-$VERSION.ingenic" "release/NebulaOS-Ender3V3KE-$VERSION.ingenic.sha256" \
             "release/NebulaOS-Ender3V3KE-$VERSION.ingenic.manifest.txt" \
             release/nebulaos-release.json release/release-manifest.txt release/SHA256SUMS \
