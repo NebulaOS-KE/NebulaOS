@@ -1,0 +1,11 @@
+board=ender-3-v3-se
+chip=stm32f401
+klipper_repo=https://github.com/Klipper3d/klipper.git
+klipper_sha=58bd67db3ce1be1951c3e4a6d1156a79903d4edc
+klipper_version=v0.13.0-741-g58bd67db3
+nebulaos_klipper_mcu_commit=52dc033e54572589f096eb7ada4d4b2fb69cdfc3
+toolchain=arm-none-eabi-gcc (Arm GNU Toolchain 15.2.Rel1 (Build arm-15.86)) 15.2.1 20251203
+python=Python 3.12.14
+sha256=021d8057039541b8d7d48255fb1dae590c273f78d8dee1a55b9e96947f9f606e
+reproducible=two clean builds byte-identical
+status=COMMUNITY BOARD - not supported by NebulaOS

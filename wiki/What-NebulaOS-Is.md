@@ -73,9 +73,9 @@ The model name is printed on the box and usually on a label on the machine. If y
 stock screen says anything other than "Ender-3 V3 KE", stop here: NebulaOS is built for this
 machine's display, mainboard and probe, and **only the KE is supported**.
 
-Experienced Klipper users with another Creality printer driven by a Nebula Pad (for example an
-Ender-3 V3 SE) can read [Other printers (experimental)](Other-Printers-Experimental): what is known,
-untested by us, at your own risk.
+Owners of another Ender-3 V3 family printer (the Ender-3 V3 SE) can try NebulaOS on a Nebula Pad:
+[Other printers (community boards)](Other-Printers-Experimental) - ready-made files and a
+step-by-step guide, not supported by NebulaOS.
 
 ## What you need
 

@@ -1,0 +1,46 @@
+name: "Community board: I found a fix"
+description: Something in a community board's recipe or how-to is wrong, or you made it work by changing something.
+title: "Fix: "
+labels: ["community-board", "fix"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks! Tell us what was wrong and what you changed - in your own words is fine.
+        We turn it into the actual change, so everyone else gets the fix. No logs needed.
+  - type: dropdown
+    id: printer
+    attributes:
+      label: Printer
+      options:
+        - Ender-3 V3 SE
+        - Other (write it below)
+    validations:
+      required: true
+  - type: dropdown
+    id: chip
+    attributes:
+      label: Chip on the mainboard
+      options:
+        - GD32F303
+        - STM32F401
+        - Something else (write it below)
+    validations:
+      required: true
+  - type: input
+    id: step
+    attributes:
+      label: Which step or test? (optional)
+      description: For example "Step 3 - flashing" or "test 6 - heaters".
+  - type: textarea
+    id: problem
+    attributes:
+      label: What was wrong?
+    validations:
+      required: true
+  - type: textarea
+    id: fix
+    attributes:
+      label: What did you change?
+      description: If you changed a config file, paste the changed lines here.
+      render: ini
