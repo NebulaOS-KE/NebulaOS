@@ -5,9 +5,9 @@
 > working, or find something wrong in a recipe, tell us so everyone else gets the fix.
 
 NebulaOS is made for the Creality Ender-3 V3 KE. These folders let owners of other printers in the
-**Ender-3 V3 family** run NebulaOS on a Nebula Pad. Each has the recipe (the firmware build
-settings and the printer configuration), a step-by-step how-to, and the ready-made mainboard
-firmware.
+**Ender-3 V3 family** run NebulaOS on a Nebula Pad. Each has the printer configuration and a
+step-by-step how-to. The ready-made mainboard firmwares are in every
+[NebulaOS release](https://github.com/NebulaOS-KE/NebulaOS/releases/latest).
 
 | Printer | Mainboard chip | Status | Folder |
 |---|---|---|---|
@@ -20,6 +20,6 @@ two independent "It works on my printer" reports (or one, while we wait for more
 **Tell us:** [It works on my printer](https://github.com/NebulaOS-KE/NebulaOS/issues/new?template=community-works.yml) ·
 [I found a fix](https://github.com/NebulaOS-KE/NebulaOS/issues/new?template=community-fix.yml)
 
-The mainboard firmwares are built by
-[NebulaOS-klipper-mcu](https://github.com/NebulaOS-KE/NebulaOS-klipper-mcu/tree/main/community)
-from official Klipper, the same version NebulaOS runs.
+Every NebulaOS release builds the mainboard firmwares from the recipes in
+[NebulaOS-klipper-mcu](https://github.com/NebulaOS-KE/NebulaOS-klipper-mcu/tree/main/community),
+with exactly the official Klipper that release runs.

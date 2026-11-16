@@ -19,8 +19,10 @@ their mainboard. We call these **community boards**.
 built from a recipe that works with another Nebula Pad system, but nobody has told us yet that it
 works with NebulaOS.
 
-Each board's folder has a step-by-step how-to, the ready-made mainboard firmware, the printer
-configuration, a slicer profile, a test list and where every setting comes from.
+Each board's folder has a step-by-step how-to, the printer configuration, a slicer profile, a
+test list and where every setting comes from. The ready-made mainboard firmwares are in every
+[NebulaOS release](https://github.com/NebulaOS-KE/NebulaOS/releases/latest), built from the
+Klipper that release runs.
 
 ## C13 or C14: look at the chip
 
@@ -42,7 +44,7 @@ has every detail):
    `NebulaOS-NebulaPad-NEBULA_ota_img_V9.<version>.img` from the
    [latest release](https://github.com/NebulaOS-KE/NebulaOS/releases/latest) (from NebulaOS 1.0.4),
    on a USB stick, not renamed. A pad that has Creality's KE software takes the `F005` file.
-3. **Mainboard firmware:** the file for your chip on the SD card - top level for GD32F303, folder
+3. **Mainboard firmware:** the file for your chip from the same release, on the SD card - top level for GD32F303, folder
    `STM32F4_UPDATE` for STM32F401 - with a new short name.
 4. **Printer configuration:** two files into Mainsail, one include block in `printer.cfg`. The
    same for both chips.
@@ -79,9 +81,10 @@ If you have an Ender-3 V3 family printer with a mainboard that is not listed and
   the SE boards that is USART2 (PA3/PA2). Guides written for a Raspberry Pi on USB use **USART1**:
   that firmware flashes fine but cannot talk to a Nebula Pad.
 - Do **not** copy the KE's settings: the KE needs a special header no other board has.
-- The SE folder's [`firmware/`](https://github.com/NebulaOS-KE/NebulaOS/tree/main/community/ender-3-v3-se/firmware)
-  shows what a complete recipe looks like; the recipes are built by
-  [NebulaOS-klipper-mcu](https://github.com/NebulaOS-KE/NebulaOS-klipper-mcu/tree/main/community).
+- The SE recipes in
+  [NebulaOS-klipper-mcu](https://github.com/NebulaOS-KE/NebulaOS-klipper-mcu/tree/main/community)
+  show what a complete recipe looks like. A recipe added there is built into every NebulaOS
+  release from then on.
 
 Got one working? Use [I found a fix](https://github.com/NebulaOS-KE/NebulaOS/issues/new?template=community-fix.yml)
 and tell us what you did - then it can become a community board for everyone.

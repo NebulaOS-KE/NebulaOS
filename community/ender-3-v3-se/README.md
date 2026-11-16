@@ -6,7 +6,8 @@
 
 NebulaOS is made for the Creality Ender-3 V3 KE. The Ender-3 V3 SE has no touchscreen computer of
 its own, so here NebulaOS runs on a **Nebula Pad** connected to the SE's mainboard. This folder has
-everything for that: the mainboard firmware, the printer configuration and a slicer profile.
+everything for that: the printer configuration, a slicer profile and the steps. The mainboard
+firmware is in every [NebulaOS release](https://github.com/NebulaOS-KE/NebulaOS/releases/latest).
 
 Thank you **Hazok652**, who made the first SE setup and runs it every day
 ([issue #8](https://github.com/NebulaOS-KE/NebulaOS/issues/8)).
@@ -64,12 +65,13 @@ then use the `F005` file.
 
 ## Step 3 - Flash the mainboard
 
-Take the file for **your chip** from the `firmware/` folder:
+Download the file for **your chip** from the same
+[NebulaOS release](https://github.com/NebulaOS-KE/NebulaOS/releases/latest) as your pad file:
 
 | Chip | File | Where on the SD card |
 |---|---|---|
-| **GD32F303** | `firmware/gd32f303/nebulaos-ender-3-v3-se-gd32f303.bin` | the **top level** of the card |
-| **STM32F401** | `firmware/stm32f401/nebulaos-ender-3-v3-se-stm32f401.bin` | a folder named **`STM32F4_UPDATE`** |
+| **GD32F303** | `nebulaos-ender-3-v3-se-gd32f303.bin` | the **top level** of the card |
+| **STM32F401** | `nebulaos-ender-3-v3-se-stm32f401.bin` | a folder named **`STM32F4_UPDATE`** |
 
 1. Rename the file to a **new, short name**: letters and numbers only, under 12 characters,
    ending in `.bin` - for example `fw1116.bin`. The board ignores a name it has seen before, so
@@ -132,6 +134,10 @@ Both need a free GitHub account. No logs needed.
 
 ## Good to know
 
+- **Updating NebulaOS:** the mainboard firmware has to match the NebulaOS on the pad. When a
+  release's notes say the community firmwares changed, flash the new `.bin` from that release as
+  in step 3 (with a new short name). If Mainsail does not show **Ready** after an update, this
+  is the first thing to do. NebulaOS never flashes the SE board itself.
 - **Load cell:** keep it on **Automatic** (Tune → Calibration → Load Cell Calibration). It works on the SE; the
   water-bottle calibration is not needed. On Hazok652's printer the bed does not come back exactly
   to its zero after a load, so the bottle calibration's "back to zero" check may complain. The
@@ -145,16 +151,17 @@ Both need a free GitHub account. No logs needed.
 
 ## For tinkerers
 
-Each `firmware/<chip>/` folder has the exact build: `recipe.defconfig` (the settings),
+Every NebulaOS release builds the firmwares from the recipes in
+[NebulaOS-klipper-mcu](https://github.com/NebulaOS-KE/NebulaOS-klipper-mcu/tree/main/community),
+with exactly the official Klipper that release runs (`58bd67d` today). The release's
+`NebulaOS-community-firmware-details.zip` has, per chip, `recipe.defconfig` (the settings),
 `klipper.config` (the full Klipper configuration), `build-info.txt` (Klipper commit, compiler) and
-`SHA256SUMS`. They are built by
-[NebulaOS-klipper-mcu](https://github.com/NebulaOS-KE/NebulaOS-klipper-mcu/tree/main/community)
-from official Klipper `58bd67d` - the Klipper NebulaOS runs. To build one yourself:
+`SHA256SUMS`. To build one yourself:
 
 ```bash
 git clone https://github.com/Klipper3d/klipper.git && cd klipper
 git checkout 58bd67db3ce1be1951c3e4a6d1156a79903d4edc
-grep -v '^#' /path/to/firmware/<chip>/recipe.defconfig > .config
+grep -v '^#' /path/to/<chip>/recipe.defconfig > .config
 make olddefconfig && make          # -> out/klipper.bin
 ```
 
