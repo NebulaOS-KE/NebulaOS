@@ -101,8 +101,56 @@ jobs:
           set -o pipefail
           firmware/scripts/release/compare-builds.sh a b | tee -a "$GITHUB_STEP_SUMMARY"
 
+  # Community mainboard firmwares (Ender-3 V3 family, NOT supported): built
+  # here from NebulaOS-klipper-mcu's recipes and the exact Klipper this
+  # release runs (the firmware manifest's KLIPPER_PIN), attached to the
+  # release. Every release carries matching ones; nobody copies files.
+  community:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          repository: NebulaOS-KE/NebulaOS-firmware
+          ref: ${{ inputs.firmware_sha }}
+          path: firmware
+          sparse-checkout: manifests
+      - uses: actions/checkout@v6
+        with:
+          repository: NebulaOS-KE/NebulaOS-klipper-mcu
+          ref: main
+          path: mcu
+      # Same exact Python as NebulaOS-klipper-mcu's CI: the firmware embeds zlib output.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.14'
+      - name: Build the community firmwares
+        run: |
+          set -euo pipefail
+          pin=$(sed -n 's/^KLIPPER_PIN=//p' firmware/manifests/dependencies.conf)
+          echo "$pin" | grep -Eqx '[0-9a-f]{40}'
+          PATH="$(mcu/scripts/install-toolchain.sh "$RUNNER_TEMP/arm-gnu-toolchain"):$PATH"
+          KLIPPER_SHA="$pin" mcu/scripts/build-community.sh "$PWD/community"
+          mkdir -p out
+          for info in community/*/*/build-info.txt; do
+            got=$(sed -n 's/^klipper_sha=//p' "$info")
+            [ "$got" = "$pin" ] || { echo "FAIL $info: klipper $got, release runs $pin"; exit 1; }
+            dir=$(dirname "$info")
+            bin=$(sed -n 's/^\([0-9a-f]\{64\}\)  \(.*\)$/\2/p' "$dir/SHA256SUMS")
+            cp "$dir/$bin" out/
+            (cd "$dir" && sha256sum "$bin") > "out/$bin.sha256"
+          done
+          ls out/*.bin >/dev/null
+          (cd community && zip -qr ../out/NebulaOS-community-firmware-details.zip .)
+          { echo '### Community firmwares (not supported)'; echo '```'; cat out/*.sha256; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: community
+          path: out/
+          if-no-files-found: error
+          retention-days: 7
+
   package:
-    needs: compare
+    needs: [compare, community]
     runs-on: ubuntu-24.04
     permissions:
       contents: write
@@ -124,32 +172,11 @@ jobs:
       - uses: actions/checkout@v6
         with:
           path: nos
-          sparse-checkout: |
-            slicer/orcaslicer
-            community
-
-      # Community mainboard firmwares are Klipper's mainboard half: they must be
-      # built from the Klipper this release runs, or those printers stop
-      # connecting after the update. Refuse the release until the community
-      # firmware/ folders are rebuilt (NebulaOS-klipper-mcu build-community).
-      - name: Community firmwares match this release's Klipper
-        run: |
-          set -euo pipefail
-          pin=$(sed -n 's/^KLIPPER_PIN=//p' firmware/manifests/dependencies.conf)
-          echo "$pin" | grep -Eqx '[0-9a-f]{40}'
-          bad=0
-          for info in nos/community/*/firmware/*/build-info.txt; do
-            [ -e "$info" ] || continue
-            got=$(sed -n 's/^klipper_sha=//p' "$info")
-            if [ "$got" = "$pin" ]; then
-              echo "OK   ${info#nos/} klipper $pin"
-            else
-              echo "FAIL ${info#nos/} built from klipper '${got:-none}', this release runs $pin - rebuild it"
-              bad=1
-            fi
-          done
-          exit $bad
-
+          sparse-checkout: slicer/orcaslicer
+      - uses: actions/download-artifact@v4
+        with:
+          name: community
+          path: community
       - name: Packaging tools
         run: sudo apt-get update -q && sudo apt-get install -y -q p7zip-full whois
 
@@ -177,6 +204,7 @@ jobs:
             release/NebulaOS-NebulaPad-*.img
             release/NebulaOS-Ender3V3KE-*.ingenic
             release/nebulaos-release.json
+            community/*.bin
 
       - name: Draft release
         env:
@@ -200,6 +228,7 @@ jobs:
             echo "- \`NebulaOS-NebulaPad-NEBULA_ota_img_V9.$VERSION.img\`: the same system for a Nebula Pad bought separately (stock pad software, board NEBULA): install it from that pad's touchscreen with a USB stick, without renaming it."
             echo "- \`NebulaOS-Ender3V3KE-$VERSION.ingenic\`: USB recovery."
             echo "- \`xImage\`, \`rootfs.squashfs\`: the kernel and root filesystem inside both (developers)."
+            echo "- \`nebulaos-<printer>-<chip>.bin\`: community mainboard firmwares for other Ender-3 V3 family printers - **not supported**, built from this release's Klipper. How to use them: [community boards](https://github.com/NebulaOS-KE/NebulaOS/tree/main/community). \`NebulaOS-community-firmware-details.zip\`: their exact build settings."
             echo
             echo "Verify: \`sha256sum -c SHA256SUMS\` or \`gh attestation verify <file> -R $GITHUB_REPOSITORY\`."
             echo
@@ -226,5 +255,6 @@ jobs:
             "release/NebulaOS-Ender3V3KE-$VERSION.ingenic.manifest.txt" \
             release/nebulaos-release.json release/release-manifest.txt release/SHA256SUMS \
             release/build-manifest.txt release/xImage release/rootfs.squashfs \
-            nos/slicer/orcaslicer/*.orca_printer
+            nos/slicer/orcaslicer/*.orca_printer \
+            community/*.bin community/*.bin.sha256 community/NebulaOS-community-firmware-details.zip
           echo "Draft release $tag created" >> "$GITHUB_STEP_SUMMARY"
