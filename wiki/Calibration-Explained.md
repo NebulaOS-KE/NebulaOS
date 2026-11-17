@@ -109,33 +109,54 @@ what to do, **one corner at a time**.
   adding a thin **printed shim** under it.
 - **Rubber or springs.** A common upgrade. You correct a corner by turning its screw.
 
-The answer is remembered; **Switch to rubber/springs** on the page changes it.
+The answer is remembered, and the screen confirms it (*"Bed mount set to rubber or springs."*).
+**Switch to rubber/springs** (or **Switch to rigid spacers**) on the page changes it.
 
 **How it works.**
 
-1. The printer homes and measures all four corners (3 samples each).
-2. Each corner is shown compared with a reference corner, with a sign: **minus is lower, plus is
-   higher**. A corner within **0.10 mm** is **OK** and is never selected again. Example (rigid
-   spacers, compared with the highest corner):
-
-   ```
-   Rear:   left -0.05 OK    right  0.00 highest
-   Front:  left -0.23 ADJUST    right -0.12 later
-   ```
-3. You get **one instruction** for the worst corner, for example *"Front left: -0.23 mm. Add a
+1. The printer homes and measures all four corners (3 samples each). The screen shows
+   *"Measuring the four corners..."* the moment you tap - keep your hands off the bed. If one
+   probe touch is off, the printer measures that corner again by itself.
+2. When it is done, the head goes **up to 100 mm** at the middle of the rear edge, so you can lift
+   the bed plate and reach every screw.
+3. The four corners are shown as a picture of the bed, **front (the screen side) at the bottom**.
+   Each corner is compared with a reference corner, with a sign: **minus is lower, plus is
+   higher**.
+   - **orange ADJUST** - the corner to correct now;
+   - **green OK** - within **0.10 mm**; never selected again;
+   - **blue** - the reference corner (rigid spacers: the **highest** corner; rubber or springs:
+     the **front-left** corner, called **base**);
+   - **grey later** - not yet; it comes after the current one.
+4. You get **one instruction** for the worst corner, for example *"Front left: -0.23 mm. Add a
    0.20 mm shim to raise it. Turn the printer off first, lift the bed plate at that corner and put
-   the shim on the spacer."* With rubber or springs it says which screw to turn and how far.
-4. Correct the corner, tap **Done - measure again**, and repeat until *"Bed tramming complete"*.
+   the shim on the spacer."* With rubber or springs it says which screw to turn, which way and how
+   far (for example *"Turn the screw an eighth of a turn counter-clockwise"*).
+5. Correct the corner, tap **Done - measure again**, and repeat until *"Bed tramming complete"*.
 
-Front is the side with the screen. The bed screws are M4x25.
+The bed screws are M4x25.
 
-![The printer tells you which corner to adjust, and by how much](images/m42-tram-adjust-rigid.png)
+![Measuring the four corners](images/m41a-tram-measuring.png)
 
-*The printer tells you which corner to adjust, and by how much.*
+*Measuring. The screen shows this as soon as you tap.*
+
+![Rigid spacers: add a shim under the orange corner](images/m42-tram-adjust-rigid.png)
+
+*Rigid spacers: the front-left corner is 0.23 mm below the highest corner - add a 0.20 mm shim.*
+
+![Rubber or springs: turn the screw of the orange corner](images/m43-tram-adjust-adjustable.png)
+
+*Rubber or springs: every corner is compared with the front-left corner (base).*
 
 ![Tramming complete](images/m45-tram-complete.png)
 
-*Tramming complete.*
+*Tramming complete: all four corners OK.*
+
+> **Tip from JDavid (community): rubber mounts, but keep the load-cell corner solid.**
+> Use the silicone (rubber) spacers on three corners, and keep the **solid spacer on the
+> front-left corner** - the one with the load cell. Choose **Rubber or springs**: NebulaOS uses
+> the front-left corner as the reference and never asks you to turn it, so you tram the bed with
+> the other three screws. The load cell stays rigidly mounted, and automatic Z offset keeps
+> working well.
 
 **Printed shims.** Print a few thin washers that fit around the M4 bed screw (hole about 4.5 mm).
 Two each of **0.10, 0.20 and 0.30 mm** cover most beds. The advice is rounded **down** to whole
