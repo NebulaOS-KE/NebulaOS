@@ -1,0 +1,69 @@
+name: "Community board: it works on my printer"
+description: You got NebulaOS running on a community board (for example an Ender-3 V3 SE). Thank you!
+title: "Works: "
+labels: ["community-board", "it-works"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for testing! This takes a minute. No logs needed.
+        Community boards are not supported by NebulaOS - this report helps the next person.
+  - type: dropdown
+    id: printer
+    attributes:
+      label: Printer
+      options:
+        - Ender-3 V3 SE
+        - Other (write it below)
+    validations:
+      required: true
+  - type: input
+    id: board
+    attributes:
+      label: Label on the mainboard
+      description: For example CR4NS200320C14. Leave empty if you don't know.
+  - type: dropdown
+    id: chip
+    attributes:
+      label: Chip on the mainboard
+      options:
+        - GD32F303
+        - STM32F401
+        - Something else (write it below)
+    validations:
+      required: true
+  - type: dropdown
+    id: pad
+    attributes:
+      label: Which NebulaOS file you put on the pad
+      options:
+        - NEBULA_ota_img (retail Nebula Pad)
+        - F005_ota_img (pad with KE software)
+        - Updated from Settings → Updates
+        - .ingenic (USB recovery)
+        - Not sure
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: NebulaOS version
+      description: Settings → System on the screen. For example 1.0.4.
+  - type: dropdown
+    id: reached
+    attributes:
+      label: How far did you get in the test list?
+      options:
+        - "10 - a full print"
+        - "9 - calibration done"
+        - "8 - homing works"
+        - "7 - motors move"
+        - "6 - heaters work"
+        - "1-5 - the first checks"
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else? (optional)
+      description: What you had to change, what surprised you.
