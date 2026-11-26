@@ -21,7 +21,8 @@ Creality's original firmware, NebulaOS or another operating system.
 - Most printers run fine. If yours does, there is nothing to change.
 - If yours **freezes or restarts in the middle of a print**, especially with a **camera** (and a
   USB stick) connected: first try a print **without the camera**. If that runs fine, give the
-  pad or the camera more power - [your options](#your-options-for-additional-power).
+  camera its own power. The easiest way is a **powered USB hub** for the camera and USB stick -
+  [your options](#your-options-for-additional-power).
 - Keep NebulaOS up to date (1.0.5 or newer) and send logs if it still happens -
   [If you experience a freeze](#if-you-experience-a-freeze).
 
@@ -88,6 +89,9 @@ There are different ways to give the Nebula Pad more room in its power budget. Y
 can supply the pad directly through Creality's independent 5 V input, or supply the
 USB accessories separately so that they no longer draw their power from the pad.
 Neither approach requires opening the printer.
+
+**Easiest to start with: option 3, a powered USB hub.** It needs no special cable, nothing
+has to be swapped for Input Shaper, and it takes the camera's load off the pad completely.
 
 | Option | What you need | What it does |
 |---|---|---|
@@ -180,6 +184,13 @@ for the sensor's SPI signals, rather than ordinary USB data. A standard cable, c
 or generic USB-C splitter may connect those pins differently. Until a specific cable,
 charger and power arrangement have been confirmed, use option 1 or 3 instead. Never
 apply more than 5 V to this connector.
+
+What we know so far: one owner ran the pad from this socket **alone**, with the printer's 5 V
+wire to the pad disconnected (a modification we do not recommend). So the socket can power
+the pad. With the printer's own 5 V still connected, as in the diagram above, both supplies
+feed the pad at the same time, and the extra adapter may take over only a small part of the
+load. Another owner still had a freeze with a charger in this socket. That is why a powered
+USB hub (option 3) is the easier first step.
 
 ### Option 3: a powered USB hub
 
@@ -275,8 +286,8 @@ memory's time the USB devices use: less than 1 %, so a camera does not overload 
 or its memory. That leaves the power supply as the most likely link, although the precise
 electrical mechanism is not yet proven, and **whether extra power stops the freezes is not
 confirmed yet**: one owner still had a freeze with a charger in the rear socket (option 2,
-whose cable arrangement is not validated), another had none with extra power and a freeze
-right after removing it.
+whose arrangement is not validated), another had none with extra power and a freeze right
+after removing it.
 
 Restoring the hardware configuration is our responsibility as an operating system.
 It helps the pad operate within its original design limits without deliberately
