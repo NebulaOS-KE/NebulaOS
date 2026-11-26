@@ -99,7 +99,7 @@ setup, and everyone who tested and shared fixes.
 |---|---|---|
 | KE | Creality's stock firmware | `NebulaOS-Ender3V3KE-F005_ota_img_V9.<version>.img`. Put it on a USB stick **without renaming it** and install it from the stock touchscreen. When NebulaOS is up, switch the printer off and on once. |
 | KE | OpenKE | `NebulaOS-Ender3V3KE-<version>.img`, installed with Creality's updater over SSH |
-| SE | A Nebula Pad on Creality's software | `NebulaOS-NebulaPad-NEBULA_ota_img_V9.<version>.img` for the pad, plus the `nebulaos-ender-3-v3-se-….bin` for your mainboard's chip. The [SE guide](https://github.com/NebulaOS-KE/NebulaOS/wiki/Ender-3-V3-SE) shows how to find your chip. The wrong `.bin` won't harm the board but won't work either: flash the right one with a new name. |
+| SE | An aftermarket Nebula Pad on stock Creality's software | `NebulaOS-NebulaPad-NEBULA_ota_img_V9.<version>.img` for the pad, plus the `nebulaos-ender-3-v3-se-….bin` for your mainboard's chip. The [SE guide](https://github.com/NebulaOS-KE/NebulaOS/wiki/Ender-3-V3-SE) shows how to find your chip. The wrong `.bin` won't harm the board but won't work either: flash the right one with a new name. |
 | Any | NebulaOS already | Nothing: **Settings → Updates** finds new versions by itself |
 | Any | A pad that no longer starts | `NebulaOS-Ender3V3KE-<version>.ingenic`, the USB recovery image. It **erases the whole pad**, so use it only when nothing else works: [Recovery](https://github.com/NebulaOS-KE/NebulaOS/wiki/Recovery). On the SE, set up the SE configuration again afterwards (step 4 of the SE guide); the mainboard firmware is not touched. |
 
