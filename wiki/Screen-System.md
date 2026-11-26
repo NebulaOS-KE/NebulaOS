@@ -13,7 +13,7 @@ storage. Buttons:
 
 | Button | What it does |
 |---|---|
-| **Report a problem** | Three steps: set the **Log level** (Info / Warning / Debug; Debug switches back to Info after 24 hours), **Save logs to USB**, and report on GitHub (QR code and address on screen). |
+| **Report a problem** | Three steps: set the **Log level** (Info / Warning / Debug / Verbose; Debug and Verbose switch back to Info after 24 hours), **Save logs to USB**, and report on GitHub (QR code and address on screen). |
 | **Storage** | Disk usage, **Free up space** and **Clean up Creality files** — see [Resetting](Resetting#freeing-up-space). Neither removes the figures behind [Statistics](Screen-Printer#statistics-panel). |
 | **Logs** | Read log files on the screen, including the Wi-Fi lines of `system.log`. |
 | **Restart GUI** | Restarts NebulaScreen only. Klipper keeps running. |

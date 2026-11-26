@@ -1,6 +1,6 @@
 ### 🖨️ NebulaOS manual
 
-[Home](Home)
+[Home](Home) · [FAQ](FAQ)
 
 **1. Get printing**
 - 1\. [What is NebulaOS](What-NebulaOS-Is)
@@ -11,6 +11,9 @@
   - [Quickstart: OrcaSlicer profiles](Quickstart-OrcaSlicer)
 - 6\. [Your first print](Printing)
 - 7\. [Keeping NebulaOS updated](Updating-NebulaOS)
+
+**Ender-3 V3 SE**
+- [NebulaOS on the SE](Ender-3-V3-SE) (community port)
 
 **2. Improve your prints**
 - [First-layer problems](Improve-Your-Prints)
@@ -40,12 +43,14 @@
 - [Beeps and songs](Beeps-And-Songs)
 - [How NebulaOS works](Under-the-Hood)
 - [Two system slots](Two-System-Slots)
-- [Other printers (community boards)](Other-Printers-Experimental)
+- [Other printers (community ports)](Other-Printers-Experimental)
 - [Words you will see](Glossary)
 - [Thank you](Thank-You)
 
 **5. Help and recovery**
+- [Frequently asked questions](FAQ)
 - [Troubleshooting](Troubleshooting)
+- [Freezes and the Nebula Pad's power](Nebula-Pad-Power-And-Freezes)
 - [Report a problem](Report-A-Problem)
 - [Going back to stock](Going-Back)
 - [Resetting](Resetting)
@@ -53,5 +58,7 @@
 - [Recovery (when it will not start)](Recovery)
 
 ---
+💬 [Discord](https://discord.com/invite/k3HdqpdB) - questions, tips, other owners
+
 Developer documentation lives in each component repository. Start from the
 [project README](https://github.com/NebulaOS-KE/NebulaOS).

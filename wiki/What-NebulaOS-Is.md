@@ -52,30 +52,24 @@ Being straight about the costs:
 - **It is not Creality's software and Creality will not support it.** Installing it is your
   decision.
 - **You have to calibrate.** Your existing calibration does not carry over.
-- **This is version 1.0.2.** It is actively developed, so expect it to keep changing.
+- **It is actively developed** (this manual describes 1.0.5), so expect it to keep changing.
 
 ## Check you have the right printer
 
-NebulaOS supports the **Creality Ender-3 V3 KE** and nothing else. Its siblings are different
-machines:
+NebulaOS is made for the **Creality Ender-3 V3 KE**. Some siblings can run it too, on a Nebula Pad:
 
-| Printer | Supported? |
+| Printer | NebulaOS? |
 |---|---|
-| Ender-3 V3 **KE** | **Yes** |
-| Ender-3 V3 | No |
-| Ender-3 V3 SE | No |
-| Ender-3 V3 Plus | No |
+| Ender-3 V3 **KE** | **Yes** - this whole manual |
+| Ender-3 V3 **SE** + a Nebula Pad | **Yes, as a community port** - start at [NebulaOS on the Ender-3 V3 SE](Ender-3-V3-SE) |
+| A **Nebula Pad** bought separately, on a KE | **Yes** - [Install NebulaOS → 2c](Installing-NebulaOS) |
+| Ender-3 V3, Ender-3 V3 Plus | No - a different design |
 | Ender-3 S1 / S1 Pro / V2 / Neo | No |
 | K1, K1C, K1 Max, K2 | No |
-| Anything not a Creality Ender-3 V3 KE | No |
 
-The model name is printed on the box and usually on a label on the machine. If your printer's
-stock screen says anything other than "Ender-3 V3 KE", stop here: NebulaOS is built for this
-machine's display, mainboard and probe, and **only the KE is supported**.
-
-Owners of another Ender-3 V3 family printer (the Ender-3 V3 SE) can try NebulaOS on a Nebula Pad:
-[Other printers (community boards)](Other-Printers-Experimental) - ready-made files and a
-step-by-step guide, not supported by NebulaOS.
+The model name is printed on the box and usually on a label on the machine. For a KE, the stock
+screen says "Ender-3 V3 KE". If you have something else that is not in the table, NebulaOS is not
+for your printer.
 
 ## What you need
 

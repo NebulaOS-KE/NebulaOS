@@ -11,8 +11,18 @@ printer's logs is far more likely to be solvable. The screen does most of it for
 
 The page says *"Something not working? Help us fix it in three steps."*:
 
-1. **Log level.** Info, Warning or Debug. For a problem you can make happen again, choose
-   **Debug**, then make it happen. *"Debug switches back to Info by itself after 24 hours."*
+1. **Log level.** The screen says *"Set the log level to Debug, then do what went wrong once
+   more."* The four levels:
+
+   | Level | When |
+   |---|---|
+   | **Info** | Normal use (the default) |
+   | **Warning** | Only problems are written down |
+   | **Debug** | For a report: much more detail, including the black box's detail for freezes |
+   | **Verbose** | Debug plus Moonraker's very large log. Only when we ask for it |
+
+   *"Debug and Verbose switch back to Info by themselves after 24 hours."* While one of them is
+   on, the page says exactly when (in UTC).
 2. **Save logs to USB.** Put a FAT32 USB stick in the printer and tap the button. It asks first:
    *"All logs, the printer's state and its config files go into one zip file on the USB stick
    (passwords are left out). Takes up to a minute."*

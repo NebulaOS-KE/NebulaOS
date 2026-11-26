@@ -1,8 +1,9 @@
 # Ender-3 V3 SE on NebulaOS - community board
 
-> **Community boards are not supported by NebulaOS.** They're built from published, working
-> recipes so you can try them easily. There is no guarantee and no support. If you get one
-> working, or find something wrong in a recipe, tell us so everyone else gets the fix.
+> **A community port.** NebulaOS is made and tested for the Ender-3 V3 KE. The SE runs it thanks to
+> owners who use it every day and share what they find. That also means: no guarantee, and the
+> community helps each other here. Got it working, found a fix, or stuck? Tell us - on
+> [Discord](https://discord.com/invite/k3HdqpdB) or in an issue - so everyone else gets it too.
 
 NebulaOS is made for the Creality Ender-3 V3 KE. The Ender-3 V3 SE has no touchscreen computer of
 its own, so here NebulaOS runs on a **Nebula Pad** connected to the SE's mainboard. This folder has
@@ -154,7 +155,8 @@ Both need a free GitHub account. No logs needed.
 Every NebulaOS release builds the firmwares from the recipes in
 [NebulaOS-klipper-mcu](https://github.com/NebulaOS-KE/NebulaOS-klipper-mcu/tree/main/community),
 with exactly the official Klipper that release runs (`58bd67d` today). The release's
-`NebulaOS-community-firmware-details.zip` has, per chip, `recipe.defconfig` (the settings),
+`nebulaos-ender-3-v3-se-community-build-details.zip` (named `NebulaOS-community-firmware-details.zip`
+up to 1.0.4) has, per chip, `recipe.defconfig` (the settings),
 `klipper.config` (the full Klipper configuration), `build-info.txt` (Klipper commit, compiler) and
 `SHA256SUMS`. To build one yourself:
 

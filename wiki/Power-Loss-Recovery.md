@@ -50,14 +50,33 @@ picture. On the 480x272 screen the end of the text runs on under the Later / Res
 
 ## Expected result
 
-After choosing **Resume**, the printer works through a deliberate order:
+After choosing **Resume**, the printer works through a deliberate order. Since NebulaOS 1.0.5 it
+stops halfway and **waits for you**, so loose filament never ends up in your part:
 
-1. **The bed and the nozzle heat together**, both to the temperatures of the interrupted print,
-   before anything moves.
-2. **Z lifts and X and Y home**, so the toolhead is away from your part.
-3. **The nozzle primes at the park position.**
-4. The bed mesh from the interrupted print is reloaded, the printer returns to the position it
-   had reached, and printing continues from the same point in the file.
+1. **The bed heats** to the temperature of the interrupted print. The nozzle stays off, so it
+   cannot ooze into the part while the bed warms up.
+2. **The nozzle warms just enough to soften the plastic around it** (170 °C, or the print
+   temperature if that is lower), then **lifts slowly out of the part**: the first millimetre
+   very slowly, then 5 mm in total.
+3. **X and Y home**, so the head parks at the side, off the bed.
+4. There **the nozzle heats to the print temperature and primes** a little filament.
+5. **The printer waits for you.** The screen (and Mainsail) shows: *"Nozzle purged. Remove the
+   loose filament from the nozzle (careful, it is hot), then press Continue."* Pull the strand
+   off with tweezers, then choose:
+   - **Continue** - the nozzle goes back to the part and the print carries on where it stopped,
+     at the speed the file was using.
+   - **Purge more** - primes a little more, if the nozzle is not clean yet. Then it waits again.
+   - **Stop** - turns the nozzle off and keeps the bed warm. The recovery is **kept**: tap
+     *Resume* again whenever you are ready.
+6. After **Continue**, the bed mesh from the interrupted print is reloaded, the printer returns
+   to the position it had reached, and printing continues from the same point in the file.
+
+Closed the dialog by accident? The same three buttons are on **Tune → Power Settings** while
+the printer waits.
+
+**Do not leave it waiting for more than an hour.** After an hour without anything happening the
+printer switches its motors off. The nozzle height is then no longer known, so the recovery can
+only be discarded.
 
 Objects you had cancelled stay cancelled, and if you were part-way through one, that object is
 started again rather than skipped.
@@ -68,12 +87,12 @@ video covers the whole print instead of only the part after the resume. Nothing 
 it is set up in the shipped configuration (`machine.cfg`, `timelapse_frame_path`).
 
 **Why the order matters.** After a power cut the nozzle has cooled down *inside* the top of your
-part. Lifting it cold can pull the part off the bed, so the nozzle is heated first and lets go
-of the plastic before anything moves. The bed and nozzle rarely reach their temperatures at the
-same moment, which is fine. Heating over the part can leave a small mark or a little ooze; the
-prime at the park position catches the ooze before printing continues.
+part. Lifting it cold can pull the part off the bed, and heating it fully over the part makes it
+ooze into the print. So it is only softened, lifted, and heated and primed away from the part.
+The wait is there because a primed nozzle always has a little strand hanging from it; if that
+went back with the nozzle, it would end up in your print.
 
-*From extensions `178a0c2`.*
+*From extensions `96a9002` (`nebulaos_power_loss_recovery.py`, `build_physical_prepare_lines`).*
 
 ## If a resume fails partway
 
@@ -103,6 +122,9 @@ not retry, choose **Discard** and turn the bed off yourself.
 | No recovery is offered after a power cut | No complete checkpoint landed, so there is nothing to recover. Start the print again. |
 | Recovery is offered but the part came loose | Choose **Discard**. Resuming onto a moved part will fail, or drive the nozzle into it. |
 | Resume heats up, then stops | A step was refused. The nozzle is turned off, the bed left on, and **Resume** is offered again. |
+| The printer waits with a hot nozzle and nothing happens | It is waiting for you: remove the loose filament, then **Continue** (or **Stop**). The buttons are also on **Tune → Power Settings**. |
+| "The nozzle was lifted during an interrupted resume" | The power went off (or Klipper restarted) *after* the nozzle had lifted. Its height is no longer known, so this recovery can only be discarded. Start the print again. |
+| Continue is refused after a long wait | The motors switched off after an hour of waiting, so Z is unknown. Discard and start again. |
 | The print resumes in the wrong place | Report it with the logs: **Settings → System → Report a problem**. |
 | You want the offer to go away | Choose **Discard**. |
 
@@ -116,6 +138,10 @@ The screen uses macros that call these. You can also run them from the console
 | `NEBULAOS_PLR_STATUS` | Reports the current power-loss-recovery status |
 | `NEBULAOS_PLR_RESUME` | Resumes from the checkpoint |
 | `NEBULAOS_PLR_DISCARD` | Discards any checkpoint |
+| `NEBULAOS_PLR_CONTINUE` | While it waits: continue the print (**Continue**) |
+| `NEBULAOS_PLR_PURGE` | While it waits: prime once more (**Purge more**) |
+| `NEBULAOS_PLR_ABORT` | While it waits: stop, nozzle off, keep the recovery (**Stop**) |
+| `NEBULAOS_PLR_PROMPT` | Shows the "remove the loose filament" dialog again |
 
 Two further commands exist, `_NEBULAOS_PLR_LOAD_MESH` and `_NEBULAOS_PLR_SET_Z`. The leading
 underscore marks them internal: they are steps of `NEBULAOS_PLR_RESUME` and are not meant to
