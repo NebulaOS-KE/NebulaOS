@@ -369,7 +369,7 @@ freeze looks the same whether power is the cause or not, so it can't tell us any
 your printer still freezes **with** extra power, that is exactly the report we need.
 
 After it restarts, go to **Settings → System → Report a problem → Save logs to USB**.
-Post the zip in [the freeze issue](https://github.com/NebulaOS-KE/NebulaOS/issues/FREEZE_ISSUE)
+Post the zip in [the freeze issue](https://github.com/NebulaOS-KE/NebulaOS/issues/41)
 with the short form there: your NebulaOS version, what is connected, and how the pad and the
 USB devices are powered. Setting **Log level** to **Debug** on the day you print gives us more
 detail (it returns to Info by itself after 24 hours). Results **without** a freeze are welcome
