@@ -3,13 +3,15 @@
 <p align="center">
   <b>Your Ender-3 V3 KE has good hardware. NebulaOS gives it the software to match.</b><br>
   A complete new system for the printer: a new Linux 6.6 kernel, current upstream Klipper,
-  a touchscreen app that guides you through calibration, and Mainsail in your browser.
+  a touchscreen app that guides you through calibration, and Mainsail in your browser.<br>
+  <i>Ender-3 V3 SE with a Nebula Pad? It runs NebulaOS too, as a <a href="https://github.com/NebulaOS-KE/NebulaOS/wiki/Ender-3-V3-SE">community port</a>.</i>
 </p>
 
 <p align="center">
   <a href="https://github.com/NebulaOS-KE/NebulaOS/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/NebulaOS-KE/NebulaOS?label=download&color=2196f3"></a>
   <a href="https://github.com/NebulaOS-KE/NebulaOS/wiki"><img alt="Manual" src="https://img.shields.io/badge/manual-wiki-2196f3"></a>
-  <img alt="Ender-3 V3 KE only" src="https://img.shields.io/badge/printer-Ender--3%20V3%20KE-555">
+  <img alt="Made for the Ender-3 V3 KE" src="https://img.shields.io/badge/printer-Ender--3%20V3%20KE-555">
+  <a href="https://github.com/NebulaOS-KE/NebulaOS/wiki/Ender-3-V3-SE"><img alt="Ender-3 V3 SE: community port" src="https://img.shields.io/badge/Ender--3%20V3%20SE-community%20port-4caf50"></a>
   <a href="https://discord.com/invite/k3HdqpdB"><img alt="Join our Discord" src="https://img.shields.io/discord/1521621287284379739?logo=discord&logoColor=white&color=5865F2"></a>
 </p>
 
@@ -81,16 +83,33 @@
 | Creality's stock firmware | `NebulaOS-Ender3V3KE-F005_ota_img_V9.<version>.img`. Put it on a USB stick **without renaming it** and install it from the stock touchscreen. When NebulaOS is up, switch the printer off and on once. |
 | OpenKE | `NebulaOS-Ender3V3KE-<version>.img`, installed with Creality's updater over SSH |
 | NebulaOS already | Nothing: **Settings → Updates** finds new versions by itself |
+| An Ender-3 V3 SE with a Nebula Pad | `NebulaOS-NebulaPad-NEBULA_ota_img_V9.<version>.img` for the pad, plus the `nebulaos-ender-3-v3-se-….bin` for your mainboard's chip. Follow the [SE guide](https://github.com/NebulaOS-KE/NebulaOS/wiki/Ender-3-V3-SE) to find your chip. The wrong `.bin` won't harm the board but won't work either: flash the right one with a new name. |
 | A printer that no longer starts | `NebulaOS-Ender3V3KE-<version>.ingenic`, the USB recovery image. It **erases the whole printer**, so use it only when nothing else works: [Recovery](https://github.com/NebulaOS-KE/NebulaOS/wiki/Recovery) |
 
-**Supported: the Ender-3 V3 KE only** (not the V3 SE). NebulaOS is community software, not made
-or supported by Creality.
+**Made and tested for the Ender-3 V3 KE.** The Ender-3 V3 SE is a community port, see below.
+NebulaOS is community software, not made or supported by Creality.
+
+## Got an Ender-3 V3 SE?
+
+NebulaOS runs on the SE too, on a **Nebula Pad** connected to the SE's mainboard. It's a
+**community port**: built and used every day by SE owners, with the mainboard firmware ready-made
+in every release. Thank you **Hazok652**, who made the first SE setup and runs it every day, and
+everyone who tested and shared fixes. There's no guarantee, and SE owners help each other on
+[Discord](https://discord.com/invite/k3HdqpdB).
+
+➡️ **[NebulaOS on the Ender-3 V3 SE](https://github.com/NebulaOS-KE/NebulaOS/wiki/Ender-3-V3-SE)**: which mainboard you have, the files,
+the steps, and how to go back to stock.
+
+**Another printer?** Bring it as a community port, like the SE: you build and maintain it, and
+it ships in every NebulaOS release. Start with [Other printers](https://github.com/NebulaOS-KE/NebulaOS/wiki/Other-Printers-Experimental)
+and the [community folder](community), then open an issue or ask on Discord.
 
 ## Help
 
 - [Troubleshooting](https://github.com/NebulaOS-KE/NebulaOS/wiki/Troubleshooting)
 - Found a bug? [Open an issue](https://github.com/NebulaOS-KE/NebulaOS/issues). The touchscreen's
   **Settings → System → Report a problem** collects the logs to attach.
+- Ender-3 V3 SE owners: ask and share on [Discord](https://discord.com/invite/k3HdqpdB).
 
 ## For developers
 

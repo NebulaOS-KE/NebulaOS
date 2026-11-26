@@ -20,8 +20,8 @@ tested and shared fixes.
 ## Which SE mainboard do I have?
 
 The SE was sold with **two different mainboard chips**, and each needs its own firmware.
-**The wrong firmware can brick the board**, so check first: switch off and unplug the printer,
-open the cover underneath, and look at the mainboard.
+Check first: switch off and unplug the printer, open the cover underneath, and look at the
+mainboard. The wrong firmware won't harm the board, but it won't work either: the printer stays *not ready*. Flash the right file again, with a new name.
 
 | Label on the board ends in | Chip | Firmware file | Status |
 |---|---|---|---|
