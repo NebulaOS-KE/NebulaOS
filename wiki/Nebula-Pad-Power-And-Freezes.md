@@ -85,27 +85,28 @@ another owner needs one.
 
 ## Your options for additional power
 
-There are different ways to give the Nebula Pad more room in its power budget. You
-can supply the pad directly through Creality's independent 5 V input, or supply the
-USB accessories separately so that they no longer draw their power from the pad.
-Neither approach requires opening the printer.
+There are different ways to give the Nebula Pad more room in its power budget. You can take
+the camera and USB stick off the pad's supply, or power the pad itself from a separate 5 V
+supply. Options 1 and 2 need no tools and no changes to the printer; options 3 and 4 are
+modifications; option 5 is not confirmed yet.
 
-**Easiest to start with: option 3, a powered USB hub.** It needs no special cable, nothing
+**Easiest to start with: option 2, a powered USB hub.** It needs no special cable, nothing
 has to be swapped for Input Shaper, and it takes the camera's load off the pad completely.
 
-| Option | What you need | What it does |
-|---|---|---|
-| **1. Original Creality G-Sensor Y-cable** | The three-ended Creality cable and a regulated 5 V USB power adapter | Adds power directly to the pad and leaves the G-Sensor connection available. This is Creality's documented solution. |
-| **2. USB-A to USB-C power cable** | A compatible cable and a regulated 5 V USB power adapter | Adds power directly to the pad without the Y-cable. Swap the cable for the G-Sensor when calibrating. This alternative is awaiting compatibility confirmation. |
-| **3. Powered USB hub** | A USB hub with its own power adapter and no upstream power backfeed | Powers the camera and USB stick separately, leaving more of the original supply available for the pad. |
-| **4. Advanced: replace the printer's 5 V** | Jumper wires, and a 5 V USB adapter or a 24 V → 5 V buck converter | The pad no longer takes its 5 V from the mainboard at all. A modification, for people comfortable with wiring - see below. |
+| Option | What you need | What it does | Status |
+|---|---|---|---|
+| **1. Creality G-Sensor Y-cable** | The three-ended Creality cable and a regulated 5 V USB adapter | Adds power to the pad through Creality's documented input; the G-Sensor stays connectable | Creality's own solution |
+| **2. Powered USB hub** | A USB hub with its own power adapter | The camera and USB stick get their power from the hub instead of the pad | **Easiest**, no changes to the printer |
+| **3. USB power in the rear socket, printer's 5 V disconnected** | Jumper wires, a USB-A-to-USB-C cable and a 5 V USB adapter | The pad runs only on the USB adapter | Modification, in daily use by a community member |
+| **4. Buck converter, printer's 5 V disconnected** | Jumper wires and a 24 V → 5 V buck converter (3 A or more) | The pad runs on its own 5 V, made from the printer's 24 V supply | Modification |
+| **5. Plain USB cable in the rear socket** | A USB-A-to-USB-C cable and a 5 V USB adapter | Adds a second supply next to the printer's 5 V | **Not confirmed** - see the warnings |
 
-Look at the **back of the Nebula Pad**, next to the large rectangular connector that
-connects it to the printer. The small USB-C-shaped socket is the G-Sensor socket and
-also Creality's documented independent power input. The two USB-A sockets on the side
-are where you normally connect your camera and USB stick.
+Look at the **back of the Nebula Pad**: next to the large rectangular connector that connects
+it to the printer is a small USB-C-shaped socket. That is the G-Sensor socket, and also
+Creality's documented independent power input. The two USB-A sockets on the side are where you
+normally connect your camera and USB stick.
 
-### Option 1: the original Creality G-Sensor Y-cable
+### Option 1: the Creality G-Sensor Y-cable
 
 This is the manufacturer's intended way to add power. The cable has three ends: a
 USB-C-shaped plug for the pad, a USB-A plug for the separate 5 V supply, and a small
@@ -151,73 +152,14 @@ mentions part number `3103110575`, but the exact standalone replacement cable an
 power-branch variant have not been independently confirmed. Do not buy a cable solely
 on the basis of that number.
 
-### Option 2: a USB-A to USB-C power cable
+We don't know how this cable is wired inside: whether its power branch connects only 5 V, or
+5 V and ground. That is why option 5 below is not confirmed.
 
-The G-Sensor is only needed when measuring Input Shaper, not during everyday printing.
-For most of the time, its socket is empty. A compatible USB-A-to-USB-C power cable
-would therefore be a simple alternative to the original Y-cable: a separate 5 V
-adapter connected straight to the rear of the pad.
+### Option 2: a powered USB hub
 
-```text
-       Regulated 5 V USB power adapter
-                       |
-              USB-A to USB-C cable
-                       |
-                Rear G-Sensor socket
-                   [ Nebula Pad ]
-                       |
-               Original printer cable
-                       |
-                 KE mainboard
-```
-
-*Proposed direct-power arrangement, pending compatibility testing.*
-
-With a validated cable and power supply, the idea is to leave the extra power connected
-for everyday printing. When it is time to run Input Shaper, shut down and switch off
-both supplies, swap the power cable for the original sensor cable, and power up the
-printer normally for calibration. Once finished, shut down again and restore the power
-cable. You do not need to repeat Input Shaper simply because the sensor is unplugged.
-
-**Compatibility status:** powering the pad through this socket is documented by Creality,
-but the ordinary cable arrangement is not yet validated. The socket uses some USB-C pins
-for the sensor's SPI signals, rather than ordinary USB data. A standard cable, charger
-or generic USB-C splitter may connect those pins differently. Until a specific cable,
-charger and power arrangement have been confirmed, use option 1 or 3 instead. Never
-apply more than 5 V to this connector.
-
-What we know so far: one owner ran the pad from this socket **alone**, with the printer's 5 V
-wire to the pad disconnected ([option 4](#option-4-advanced-replace-the-printers-5-v)). So the
-socket can power the pad. With the printer's own 5 V still connected, as in the diagram above,
-both supplies feed the pad at the same time, and the extra adapter may take over only a small
-part of the load. Another owner still had a freeze with a charger in this socket. That is why a
-powered USB hub (option 3) is the easier first step.
-
-#### Inside the rear socket
-
-The rear socket has a USB-C shape, but only its power pins are used as USB. The other pins
-carry the G-Sensor's (ADXL345) signals:
-
-| USB-C pin | ADXL345 G-Sensor | Nebula Pad board |
-|---|---|---|
-| VCC | VCC | 2× voltage regulator |
-| GND | GND | GND |
-| D- (1/2) | SDA | DT |
-| D+ (1/2) | SDO | DR |
-| CC (1/2) | SCL | CLK |
-| SBU (1/2) | CS | CE |
-
-The **CC** pins are what a USB-C charger uses to detect a device before it switches its 5 V
-on. In this socket they carry the sensor's clock instead. So a charger with a **USB-C-to-USB-C**
-cable will usually not switch on at all; use a USB-A adapter with a **USB-A-to-USB-C** cable,
-which always supplies 5 V.
-
-### Option 3: a powered USB hub
-
-If the camera and USB stick are what push the printer's power supply to its limits,
-you can give those accessories their own supply instead. A powered USB hub is a hub
-that comes with its own power adapter. It still sends data to the pad, but the camera
-and storage draw their operating power from the hub.
+The easiest option. A powered USB hub is a hub that comes with its own power adapter. It still
+sends data to the pad, but the camera and USB stick draw their power from the hub instead of
+from the pad.
 
 ```text
        Hub's own power adapter
@@ -236,28 +178,28 @@ and storage draw their operating power from the hub.
 1. With the printer shut down and the supplies off, connect the hub's upstream cable
    to one of the pad's side USB-A sockets.
 2. Connect the camera and USB stick to the hub rather than directly to the pad.
-3. Connect the hub's own power adapter, power up according to its instructions and
-   check that the camera and storage work normally.
+3. Connect the hub's own power adapter, power up and check that the camera and storage work
+   normally.
 
 Choose a self-powered hub that does **not** feed power backwards into its host USB
 port. An unpowered USB splitter does not help: it still draws all its power from the
 pad. The G-Sensor socket stays free, so Input Shaper works as usual with its original
 cable.
 
-Unlike options 1 and 2, this does not add power to the pad itself. It removes the load
-of the connected accessories from the pad's existing supply. If the pad still has
-insufficient power even without those accessories, the dedicated 5 V input is the
-more relevant option.
+This does not add power to the pad itself. It removes the load of the connected accessories
+from the pad's supply. If the pad still freezes with the camera on a powered hub, the other
+options give the pad itself more power - and please
+[report it](#if-you-experience-a-freeze): that is the most useful result for us.
 
-### Option 4 (advanced): replace the printer's 5 V
+### Options 3 and 4: power the pad without the printer's 5 V
 
-With options 1 and 2, the printer's 5 V and the extra supply feed the pad **at the same time**.
+With option 1, the printer's 5 V and the extra supply feed the pad **at the same time**.
 Which of the two does most of the work depends on which voltage is slightly higher, so the
-extra supply may help less than expected. Option 4 takes the printer's 5 V away from the pad
-completely, so the pad runs only on a supply you choose.
+extra supply may help less than expected. Options 3 and 4 take the printer's 5 V away from the
+pad completely, so the pad runs only on a supply you choose.
 
-**This is a modification.** It is for people who are comfortable with wiring and a
-multimeter, and you do it at your own risk. Do not cut the original cable: use jumper wires
+**These are modifications.** They are for people who are comfortable with wiring and a
+multimeter, and you do them at your own risk. Do not cut the original cable: use jumper wires
 between the cable and the pad, so you can always go back.
 
 The pad's large rectangular connector carries the serial link to the mainboard, **5 V** and
@@ -268,10 +210,20 @@ The pad's large rectangular connector carries the serial link to the mainboard, 
 *Community picture from r/Creality. Check 5 V and ground with a multimeter on your own
 printer before you connect anything.*
 
-**Variant a: USB power in the rear socket.** This is how ukiduki1 runs their KE: the printer's
-ribbon cable goes to the pad through jumper wires, the **5 V wire is left unplugged at the pad**
-(the separate wire in the pictures), and the pad gets its 5 V from a USB adapter in the rear
-socket. RX, TX and ground stay connected.
+For both options:
+
+- **Never connect two 5 V supplies to the same pin.** The mainboard's 5 V wire must be
+  disconnected from the pad.
+- **Keep ground connected** between the pad and the mainboard; without it the serial link to
+  the mainboard does not work.
+- Work only with the printer switched off and unplugged.
+
+### Option 3: USB power in the rear socket, printer's 5 V disconnected
+
+This is how ukiduki1 runs their KE: the printer's ribbon cable goes to the pad through jumper
+wires, the **5 V wire is left unplugged at the pad** (the separate wire in the pictures), and
+the pad gets its 5 V from a USB adapter with a **USB-A-to-USB-C** cable in the rear socket.
+RX, TX and ground stay connected.
 
 ![Jumper wires between the printer's ribbon cable and the pad, with one wire left out](images/nebula-pad-rear-power-setup.jpg)
 
@@ -281,21 +233,74 @@ socket. RX, TX and ground stay connected.
 
 *Photos: ukiduki1.*
 
-**Variant b: a buck converter.** A small 24 V → 5 V step-down ("buck") converter, rated
-**at least 3 A**, fed from the printer's own 24 V power supply, powers the pad's 5 V and ground
-pins instead of the mainboard's 5 V. The mainboard's 5 V wire stays unplugged at the pad, as in
-variant a. The pad then switches on and off with the printer, and the G-Sensor socket stays
-free for Input Shaper.
+The pad now stays on when you switch the printer off, and goes off only when you unplug the
+USB adapter. For Input Shaper, swap the power cable for the G-Sensor cable - and then the pad
+needs its 5 V from somewhere else for that session (plug the printer's 5 V wire back in first).
 
-For both variants:
+Use a USB-A adapter and a **USB-A-to-USB-C** cable. A USB-C charger with a USB-C-to-USB-C cable
+will usually not switch on: see [Inside the rear socket](#inside-the-rear-socket).
 
-- **Never connect two 5 V supplies to the same pin.** The mainboard's 5 V wire must be
-  disconnected from the pad.
-- **Keep ground connected** between the pad and the mainboard; without it the serial link to
-  the mainboard does not work.
+### Option 4: a buck converter, printer's 5 V disconnected
+
+A small 24 V → 5 V step-down ("buck") converter, rated **at least 3 A**, fed from the printer's
+own 24 V power supply, powers the pad's 5 V and ground pins instead of the mainboard's 5 V. The
+mainboard's 5 V wire stays unplugged at the pad, as in option 3.
+
+The pad then switches on and off with the printer as before, and the G-Sensor socket stays free
+for Input Shaper.
+
 - Set and measure the converter's output **before** connecting it: 5.0-5.2 V, never more.
-- Work only with the printer switched off and unplugged. The 24 V supply is connected to mains;
-  stay on its low-voltage side.
+- The 24 V supply is connected to mains. Stay on its low-voltage side, and only work on it with
+  the printer unplugged.
+
+### Option 5: a plain USB cable in the rear socket (not confirmed)
+
+The simplest-looking option: a 5 V USB adapter with a USB-A-to-USB-C cable in the rear socket,
+and the printer's own 5 V **still connected**.
+
+```text
+       Regulated 5 V USB power adapter
+                       |
+              USB-A to USB-C cable
+                       |
+                Rear G-Sensor socket
+                   [ Nebula Pad ]
+                       |
+               Original printer cable (5 V still connected)
+                       |
+                 KE mainboard
+```
+
+**We have not been able to confirm that this works or helps.** In theory it could, but:
+
+- Both supplies are then connected to the pad at the same time. The extra adapter may take over
+  only a small part of the load, or none.
+- We don't know how Creality's own Y-cable (option 1) is wired. Its power branch may connect
+  the adapter differently from a plain cable, for example only its 5 V and not its ground, or
+  it may contain parts a plain cable does not have.
+- One owner still had a freeze with a charger in this socket.
+
+If you try it anyway: only a USB-A adapter with a USB-A-to-USB-C cable, never more than 5 V,
+and unplug both supplies before changing anything. Please tell us your result.
+
+#### Inside the rear socket
+
+The rear socket has a USB-C shape, but only its power pins are used as USB. The other pins
+carry the G-Sensor's (ADXL345) signals:
+
+| USB-C pin | ADXL345 G-Sensor | Nebula Pad board |
+|---|---|---|
+| VCC | VCC | 2× voltage regulator |
+| GND | GND | GND |
+| D- (1/2) | SDA | DT |
+| D+ (1/2) | SDO | DR |
+| CC (1/2) | SCL | CLK |
+| SBU (1/2) | CS | CE |
+
+The **CC** pins are what a USB-C charger uses to detect a device before it switches its 5 V
+on. In this socket they carry the sensor's clock instead. So a charger with a **USB-C-to-USB-C**
+cable will usually not switch on at all; a USB-A adapter with a **USB-A-to-USB-C** cable always
+supplies 5 V.
 
 ### An important difference when switching off
 
@@ -353,8 +358,8 @@ printer stopped freezing once the camera was unplugged. We also measured how muc
 memory's time the USB devices use: less than 1 %, so a camera does not overload the processor
 or its memory. That leaves the power supply as the most likely link, although the precise
 electrical mechanism is not yet proven, and **whether extra power stops the freezes is not
-confirmed yet**: one owner still had a freeze with a charger in the rear socket (option 2,
-whose arrangement is not validated), another had none with extra power and a freeze right
+confirmed yet**: one owner still had a freeze with a charger in the rear socket (option 5,
+not confirmed), another had none with extra power and a freeze right
 after removing it.
 
 Restoring the hardware configuration is our responsibility as an operating system.
@@ -375,7 +380,7 @@ than immediately cutting the power. NebulaOS keeps diagnostic information across
 watchdog restart which may be lost if the power is removed.
 
 **We only take freeze reports with extra power connected**, preferably a powered USB hub for
-the camera and USB stick ([option 3](#option-3-a-powered-usb-hub)). Without extra power, a
+the camera and USB stick ([option 2](#option-2-a-powered-usb-hub)). Without extra power, a
 freeze looks the same whether power is the cause or not, so it can't tell us anything new. If
 your printer still freezes **with** extra power, that is exactly the report we need.
 
