@@ -4,15 +4,17 @@ NebulaOS is made for the **Creality Ender-3 V3 KE**. Underneath it runs ordinary
 so other printers of the **Ender-3 V3 family** can run it too, on a **Nebula Pad** connected to
 their mainboard. We call these **community boards**.
 
-> **Community boards are not supported by NebulaOS.** They're built from published, working
-> recipes so you can try them easily. There is no guarantee and no support. If you get one
-> working, or find something wrong in a recipe, tell us so everyone else gets the fix.
+> **Community ports.** NebulaOS is made and tested for the KE. These printers run it thanks to
+> owners who use it and share what they find - no guarantee, and the community helps each other
+> on [Discord](https://discord.com/invite/k3HdqpdB) and in issues.
+>
+> **Have an Ender-3 V3 SE?** Start at **[NebulaOS on the Ender-3 V3 SE](Ender-3-V3-SE)**.
 
 ## The boards
 
 | Printer | Mainboard chip | Status | Everything you need |
 |---|---|---|---|
-| Ender-3 V3 SE | **GD32F303** (every C13 board, some C14) | **Community proven** | [`community/ender-3-v3-se`](https://github.com/NebulaOS-KE/NebulaOS/tree/main/community/ender-3-v3-se) |
+| Ender-3 V3 SE | **GD32F303** (every C13 board, some C14) | **Community proven** - [SE page](Ender-3-V3-SE) | [`community/ender-3-v3-se`](https://github.com/NebulaOS-KE/NebulaOS/tree/main/community/ender-3-v3-se) |
 | Ender-3 V3 SE | **STM32F401** (some C14) | **Untested with NebulaOS** - first testers wanted | [`community/ender-3-v3-se`](https://github.com/NebulaOS-KE/NebulaOS/tree/main/community/ender-3-v3-se) |
 
 **Community proven** means: people run NebulaOS on it every day and told us. **Untested** means:

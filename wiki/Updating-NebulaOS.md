@@ -22,6 +22,11 @@ Two kinds of update exist, and they are not the same thing:
 | **The whole system** - kernel, system, screen app, everything in the image | **Settings → Updates → System image** | Once per NebulaOS release |
 | **Apps** - Klipper, Moonraker, Mainsail, the NebulaOS extensions, the screen app | **Settings → Updates**, the list | When a component has a newer version |
 
+> **"Update all" does not install a new NebulaOS.** It only updates the apps in the list. A new
+> NebulaOS version - with its fixes for the printer itself, such as the freeze fixes and the bed
+> temperature correction in 1.0.5 - only comes with **System image**. If Settings → Updates says a
+> newer NebulaOS exists, use **System image → Online**.
+
 **Which version am I running?** **Settings → System** shows the NebulaOS build, the screen
 version and the boot slot; **Settings → Updates** lists every app with its version.
 
@@ -149,7 +154,7 @@ Worth knowing how these track upstream:
   and stop with a clear message if it does not.** A mismatch announces itself instead of
   failing mid-print. The system image keeps its own matched versions as a fallback.
 - **Mainsail** updates itself from its own repository (`mainsail-crew/mainsail`, channel
-  `stable`). NebulaOS 1.0.3 ships **2.18.2**; that is the version in the image, not a ceiling -
+  `stable`). NebulaOS 1.0.5 ships **2.18.2**; that is the version in the image, not a ceiling -
   Moonraker's update manager moves it on without a system image.
 - The screen app updates from its own releases. A system image brings its own copy of the
   screen app, and after a system image install that copy is used again.

@@ -167,7 +167,7 @@ actually works.
 | Section | What it does |
 |---|---|
 | **Power devices** | On/off buttons for smart plugs or relays configured in Moonraker's `[power]` section. NebulaOS ships none, so this section is normally not shown. |
-| **Power Loss Recovery** | Shows the state of NebulaOS power-loss recovery (the Klipper object `nebulaos_power_loss_recovery`). After a power cut the screen asks by itself: "A print was interrupted by a power loss... Resume?" with **Later** and **Resume** (Mainsail shows the same question). **Resume** heats, homes X and Y, lifts, primes and continues; **Later** keeps the record for this screen. While a print runs it says the print is being recorded. After a power cut it shows the interrupted file and, when the printer allows a physical resume, a **Resume Print** button (asks to confirm); **Discard** drops the record. If the record cannot be resumed (file or printer configuration changed), it says why and offers only **Discard**. |
+| **Power Loss Recovery** | Shows the state of NebulaOS power-loss recovery (the Klipper object `nebulaos_power_loss_recovery`). After a power cut the screen asks by itself: "A print was interrupted by a power loss... Resume?" with **Later** and **Resume** (Mainsail shows the same question). **Resume** heats the bed, softens the nozzle and lifts it out of the part, parks at the side, primes, and then **waits** while you remove the loose filament; **Later** keeps the record for this screen. While it waits, this page shows **Continue** (back to the part, printing continues), **Purge more** (prime again) and **Stop** (nozzle off, bed stays warm, the record is kept). Details: [Power-loss recovery](Power-Loss-Recovery#expected-result). While a print runs it says the print is being recorded. After a power cut it shows the interrupted file and, when the printer allows a physical resume, a **Resume Print** button (asks to confirm); **Discard** drops the record. If the record cannot be resumed (file or printer configuration changed), it says why and offers only **Discard**. |
 
 ![The power-loss resume offer at start-up](images/plr-resume-offer.png)
 
@@ -275,25 +275,25 @@ layers that are uneven left to right despite re-meshing. Full guide:
 
 Corrects parts that come out as slight parallelograms instead of squares.
 
-- Enter three caliper measurements from a printed test square: **AC diagonal**, **BD diagonal**, **AD side**.
-  Tapping a field opens a number keypad.
-- Tap **Apply & Save** — this sends the correction *and* runs `SAVE_CONFIG` (Klipper restarts).
+- Enter three caliper measurements from a printed test square: **A-C** and **B-D** (the
+  diagonals) and **A-D** (the left edge). Tapping a field opens a number keypad at the side.
+- Tap **Apply & Save**: the correction is saved and loaded at every Klipper start (Klipper
+  restarts now).
+- The page shows **Skew correction: on** or **off**; while it is on, the saved measurements are
+  shown in grey in the fields.
+- **Clear correction** removes it again, for a new calibration print.
 
 Full guide: [Calibration explained → Skew Correction](Calibration-Explained#skew-correction).
 
-![Skew Correction with the number keypad open](images/skew-keypad.png)
+![Skew Correction with the number keypad open at the side](images/m21b-skew-keyboard-bd.png)
 
 *The real screen app.*
 
 #### TMC Autotune
 
-![TMC Autotune with the KE's stock motors pre-selected](images/tmc-tune.png)
-
-*The real screen app, with NebulaOS's shipped configuration and motor list. A printer that has saved its own choices shows those instead.*
-
 Quieter, cooler steppers. For each stepper pick a **Motor** and a **Tuning Goal** (`auto`, `silent`,
 `performance`, `autoswitch`), then tap **Save/Restart**. Steppers without a saved choice are
-pre-selected with the KE's stock motors. Full guide: [Calibration explained → TMC Autotune](Calibration-Explained#tmc-autotune).
+pre-selected with the KE's stock motor, `creality-42-40`, on all three axes. Full guide: [Calibration explained → TMC Autotune](Calibration-Explained#tmc-autotune).
 
 ---
 

@@ -2,11 +2,11 @@
   "caveat": "real UI from the real application at this commit; not hardware. machine.nebulaos.* panels need a live printer and are not truthful here.",
   "commit": "36490ed",
   "commit_note": "captured from NebulaOS-nebulascreen main at 36490ed on 2026-11-02",
-  "count": 129,
+  "count": 132,
   "excluded": {
     "07-updates.png": "timing-dependent: the Updates page waits on a Moonraker reply that never arrives without a printer, so the buttons are captured enabled or disabled depending on timing. Would show a reader greyed-out buttons that are not greyed out on a real printer."
   },
-  "history": "re-captured when the screen tip moved 94869f7 -> 3194104 -> dee0f6f -> 36490ed. At 36490ed the new Statistics page (20a-statistics) was added and 4 images changed: 05-printer and 15-printer (the Printer settings page gained the Statistics button), 35-restart-klipper-refused (that page is the dialog's background) and 37-spoolman-typing (the Use button's pressed shade, not a code change).",
+  "history": "re-captured when the screen tip moved 94869f7 -> 3194104 -> dee0f6f -> 36490ed. At 36490ed the new Statistics page (20a-statistics) was added and 4 images changed: 05-printer and 15-printer (the Printer settings page gained the Statistics button), 35-restart-klipper-refused (that page is the dialog's background) and 37-spoolman-typing (the Use button's pressed shade, not a code change). 2026-11-25: 15 images re-captured from NebulaOS-nebulascreen f3b730c (NebulaOS 1.0.5): m21-skew, m21a/b/c (new: saved values, side keypad), 03-wifi, 04-display, 20a-statistics, 33-image-stopped-print, 39/40-display-*-camera, m40/m41/m41a/m44/m46 tramming.",
   "images": [
     {
       "image": "01-settings.png",
@@ -906,6 +906,27 @@
     },
     {
       "image": "m66-print-start-done.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m21a-skew-saved.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m21b-skew-keyboard-bd.png",
+      "size": [
+        480,
+        272
+      ]
+    },
+    {
+      "image": "m21c-skew-keyboard-ad.png",
       "size": [
         480,
         272

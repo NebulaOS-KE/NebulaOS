@@ -1,8 +1,9 @@
 # Community boards
 
-> **Community boards are not supported by NebulaOS.** They're built from published, working
-> recipes so you can try them easily. There is no guarantee and no support. If you get one
-> working, or find something wrong in a recipe, tell us so everyone else gets the fix.
+> **Community ports.** NebulaOS is made and tested for the Ender-3 V3 KE. These printers run it
+> thanks to owners who use it and share what they find - no guarantee, and the community helps
+> each other. Got one working, found a fix, or stuck? Tell us on
+> [Discord](https://discord.com/invite/k3HdqpdB) or in an issue, so everyone else gets it too.
 
 NebulaOS is made for the Creality Ender-3 V3 KE. These folders let owners of other printers in the
 **Ender-3 V3 family** run NebulaOS on a Nebula Pad. Each has the printer configuration and a

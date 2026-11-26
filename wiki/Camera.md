@@ -29,6 +29,12 @@ firmware version.
   board).
 - **Defaults** puts every camera setting back to its default (asks first).
 - **Flip or rotate** the picture in Mainsail's webcam settings.
+- **Colours:** since NebulaOS 1.0.5 the Nebula Camera's colour tone (hue) is set correctly by
+  itself, so red no longer looks orange ([#29](https://github.com/NebulaOS-KE/NebulaOS/issues/29)).
+  If you used a `v4l2-ctl` command to fix the colours, you no longer need it.
+- **Camera and power:** the camera takes its power from the Nebula Pad, which shares the
+  printer's 5 V supply. If the printer freezes or restarts mid-print while a camera is connected,
+  see [Powering the Nebula Pad](Nebula-Pad-Power-And-Freezes).
 
 The three questions the page asks:
 

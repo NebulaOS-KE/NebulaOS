@@ -1,7 +1,17 @@
 # The NebulaOS manual
 
 **NebulaOS is open firmware for the Creality Ender-3 V3 KE: guided printing on its own touchscreen
-app, with full Klipper control underneath.** This manual describes NebulaOS 1.0.4.
+app, with full Klipper control underneath.** This manual describes NebulaOS 1.0.5.
+
+## Where do I start?
+
+| I have ... | Start here |
+|---|---|
+| An **Ender-3 V3 KE** with Creality's firmware | [New here? Start printing](#new-here-start-printing), below |
+| An **Ender-3 V3 KE** already running NebulaOS | [Keeping NebulaOS updated](Updating-NebulaOS) - what is new: [release notes](https://github.com/NebulaOS-KE/NebulaOS/releases/latest) |
+| An **Ender-3 V3 SE** with a Nebula Pad | [NebulaOS on the Ender-3 V3 SE](Ender-3-V3-SE) - a community port, welcome! |
+| A question | [Frequently asked questions](FAQ) |
+| A problem | [Troubleshooting](Troubleshooting) - start from what you see |
 
 ## New here? Start printing
 
@@ -40,12 +50,16 @@ Seven short steps, in order. Each one ends with a link to the next.
 
 ---
 
-**Supported: the Ender-3 V3 KE only** - not the Ender-3 V3, V3 SE or V3 Plus.
+**Printers:** made for the Ender-3 V3 KE. The Ender-3 V3 SE runs it as a
+[community port](Ender-3-V3-SE). Not for the Ender-3 V3 or V3 Plus.
 
 - **[Using NebulaScreen](Screen-Reference)** - every tab, button and setting on the printer's
   screen, in the screen's own order.
 - **[Help and recovery](Troubleshooting)** - start from the symptom.
   [Going back to stock](Going-Back), [Resetting](Resetting), [Recovery](Recovery).
+- **Freezes or restarts mid-print?** [Powering the Nebula Pad](Nebula-Pad-Power-And-Freezes).
+- **Community:** questions, tips and other owners on
+  [Discord](https://discord.com/invite/k3HdqpdB).
 
 NebulaOS stands on the work of many others: [Thank you](Thank-You).
 

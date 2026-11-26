@@ -113,7 +113,7 @@ forward, so the print is presented to you.
 
 ### What START_PRINT and END_PRINT run
 
-The full text of both macros, as NebulaOS 1.0.3 ships them (`print.cfg`, unchanged since 1.0.2).
+The full text of both macros, as NebulaOS 1.0.5 ships them (`print.cfg`, unchanged since 1.0.2).
 You find the same file in Mainsail under `config/nebulaos/print.cfg`.
 
 <details>

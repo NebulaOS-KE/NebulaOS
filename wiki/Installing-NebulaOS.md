@@ -7,23 +7,26 @@ NebulaOS, and your old system is still there in the other slot in case you want 
 
 ## What you need
 
-- A Creality Ender-3 V3 KE. Nothing else is supported - see
+- A Creality Ender-3 V3 KE - see
   [Check you have the right printer](What-NebulaOS-Is#check-you-have-the-right-printer).
+  Have an **Ender-3 V3 SE**? Follow [Ender-3 V3 SE](Ender-3-V3-SE) instead.
 - The right NebulaOS image file, from
   [NebulaOS releases](https://github.com/NebulaOS-KE/NebulaOS/releases). **Which one depends on
-  the route** (section 1 below). For 1.0.4 the files are:
+  the route** (section 1 below). For 1.0.5 the files are:
 
   | File | What it is |
   |---|---|
-  | `NebulaOS-Ender3V3KE-F005_ota_img_V9.1.0.4.img` | **From stock Creality firmware, with the touchscreen (section 2b).** The file with `ota_img` in its name - Creality's touchscreen updater offers only a file named like this |
-  | `NebulaOS-NebulaPad-NEBULA_ota_img_V9.1.0.4.img` | **Only for a Nebula Pad bought separately** (section 2c) - Creality's pad software accepts only this envelope. Same system inside |
-  | `NebulaOS-Ender3V3KE-1.0.4.img` | **From OpenKE, over SSH (section 2a).** The printer also uses this one for online updates. Creality's touchscreen ignores it |
-  | `NebulaOS-Ender3V3KE-1.0.4.img.sha256` | Its checksum, for the optional download check below |
-  | `NebulaOS-Ender3V3KE-1.0.4.ingenic` | Only for USB recovery on a printer that will not start - see [Recovery](Recovery). **Not** for a normal install |
-  | `NebulaOS-Ender3V3KE-1.0.4.ingenic.sha256` | Its checksum |
+  | `NebulaOS-Ender3V3KE-F005_ota_img_V9.1.0.5.img` | **From stock Creality firmware, with the touchscreen (section 2b).** The file with `ota_img` in its name - Creality's touchscreen updater offers only a file named like this |
+  | `NebulaOS-NebulaPad-NEBULA_ota_img_V9.1.0.5.img` | **Only for a Nebula Pad bought separately** (section 2c) - Creality's pad software accepts only this envelope. Same system inside |
+  | `NebulaOS-Ender3V3KE-1.0.5.img` | **From OpenKE, over SSH (section 2a).** The printer also uses this one for online updates. Creality's touchscreen ignores it |
+  | `NebulaOS-Ender3V3KE-1.0.5.ingenic` | Only for USB recovery on a printer that will not start - see [Recovery](Recovery). **Not** for a normal install |
+  | `SHA256SUMS` | The checksums of all files, for the optional download check below |
   | `nebulaos-release.json` | Machine-readable release details; the printer uses it for online updates |
 
-  The examples on this page use 1.0.4; if you downloaded a newer version, use its number.
+  The release page's *Which file do I need?* table says the same. The other files there are
+  slicer profiles and the [Ender-3 V3 SE](Ender-3-V3-SE) mainboard firmwares.
+
+  The examples on this page use 1.0.5; if you downloaded a newer version, use its number.
 - **If you are coming from stock Creality firmware:** a USB stick formatted as FAT32.
 - **If you are coming from OpenKE:** your usual SFTP and SSH tools, and OpenKE's root
   password.
@@ -40,10 +43,11 @@ NebulaOS, and your old system is still there in the other slot in case you want 
 - **Do not rename either image file.** Creality's updater finds the parts inside the file by its
   name. A renamed file stops with `failed to get .../ota_config.in` and installs nothing. The
   `ota_img` file in particular only works under its original name.
-- Check your download if you can. On Linux or macOS, in the folder with both files:
+- Check your download if you can. Download `SHA256SUMS` too, then on Linux or macOS, in the
+  folder with both files:
 
   ```
-  sha256sum -c NebulaOS-Ender3V3KE-1.0.4.img.sha256
+  sha256sum -c SHA256SUMS --ignore-missing
   ```
 
   You want to see `OK`. If it says `FAILED`, download the file again - do not install it.
@@ -65,11 +69,11 @@ You need the SFTP and SSH tools you already use with OpenKE - for example WinSCP
 password (the system running on the printer now, not NebulaOS's). This route uses the
 **normal** `.img`, the one without `ota_img` in its name.
 
-1. Copy `NebulaOS-Ender3V3KE-1.0.4.img` to `/usr/data/` on the printer. Do not rename it.
+1. Copy `NebulaOS-Ender3V3KE-1.0.5.img` to `/usr/data/` on the printer. Do not rename it.
 2. In an SSH session on the printer, run:
 
    ```
-   /etc/ota_bin/local_ota_update.sh /usr/data/NebulaOS-Ender3V3KE-1.0.4.img
+   /etc/ota_bin/local_ota_update.sh /usr/data/NebulaOS-Ender3V3KE-1.0.5.img
    ```
 
    Wait for `ota update ok`. A line `sh: 1.1.0.15: bad number` on the way is harmless - it
@@ -90,9 +94,9 @@ Now go to section 3.
 
 This is the usual route if your printer still has Creality's software on it.
 
-1. Copy the file with `ota_img` in its name - for 1.0.4,
-   `NebulaOS-Ender3V3KE-F005_ota_img_V9.1.0.4.img` - to the top level of a FAT32 USB stick.
-   Do not put it in a folder, and do not rename it. The normal `NebulaOS-Ender3V3KE-1.0.4.img`
+1. Copy the file with `ota_img` in its name - for 1.0.5,
+   `NebulaOS-Ender3V3KE-F005_ota_img_V9.1.0.5.img` - to the top level of a FAT32 USB stick.
+   Do not put it in a folder, and do not rename it. The normal `NebulaOS-Ender3V3KE-1.0.5.img`
    does not work here: Creality's screen does not offer it.
 2. Plug the USB stick into the printer.
 3. Start the update from Creality's own screen, the same way you would install a Creality
@@ -108,15 +112,15 @@ Now go to section 3.
 The Nebula Pad sold on its own is the same touchscreen computer as the KE's, but its Creality
 software only opens update files made for it. NebulaOS has one:
 
-1. Copy `NebulaOS-NebulaPad-NEBULA_ota_img_V9.1.0.4.img` to the top level of a FAT32 USB stick.
+1. Copy `NebulaOS-NebulaPad-NEBULA_ota_img_V9.1.0.5.img` to the top level of a FAT32 USB stick.
    Do not put it in a folder, and do not rename it.
 2. Plug the USB stick into the pad.
 3. Start the update from the pad's own screen, the same way you would install a Creality
    update.
 
 The system inside is exactly the same as in the KE files. **After the pad restarts, one power
-cycle is needed** - section 3 says when. NebulaOS is made for the Ender-3 V3 KE; on another
-printer, read [Other printers](Other-Printers-Experimental) first.
+cycle is needed** - section 3 says when. On an **Ender-3 V3 SE**, follow [NebulaOS on the Ender-3 V3 SE](Ender-3-V3-SE) - the SE also
+needs its own mainboard firmware.
 
 Now go to section 3.
 
@@ -151,7 +155,7 @@ If you came from OpenKE, delete the copied image afterwards to free the space it
 session on the printer:
 
 ```
-rm /usr/data/NebulaOS-Ender3V3KE-1.0.4.img
+rm /usr/data/NebulaOS-Ender3V3KE-1.0.5.img
 ```
 
 **SSH on NebulaOS:** user `root`, password `NebulaOS` on a new install. Change it, and never make

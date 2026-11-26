@@ -228,9 +228,12 @@ NebulaOS is developed in public repositories. The kernel, the operating system b
 Klipper extensions, the touchscreen application and the update tooling can all be read.
 
 Each system image records the exact source revision of every component it was built from, and
-every release carries checksums and that record. The build is **reproducible**: NebulaOS 1.0.2
-was built twice from the same source and both builds produced exactly the same kernel and the
-same root filesystem, byte for byte, and those are the files in the release. The download itself
+every release carries checksums and that record. The build is **reproducible**: every release
+is built twice from the same source and both builds produced exactly the same kernel and the
+same root filesystem, byte for byte. Since 1.0.5 those two files (`xImage` and
+`rootfs.squashfs`) and the build records are published in the
+[NebulaOS-firmware releases](https://github.com/NebulaOS-KE/NebulaOS-firmware/releases), next to
+the source they were built from. The download itself
 cannot be compared that way - it is packed into Creality's own encrypted container, which uses a
 fresh random key every time, so its bytes differ even when its contents do not - so that file is
 compared by its contents instead.
