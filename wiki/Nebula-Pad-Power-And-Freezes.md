@@ -23,8 +23,8 @@ Creality's original firmware, NebulaOS or another operating system.
   USB stick) connected: first try a print **without the camera**. If that runs fine, give the
   camera its own power. The easiest way is a **powered USB hub** for the camera and USB stick -
   [your options](#your-options-for-additional-power).
-- Keep NebulaOS up to date (1.0.5 or newer) and send logs if it still happens -
-  [If you experience a freeze](#if-you-experience-a-freeze).
+- Keep NebulaOS up to date (1.0.5 or newer). If it still freezes **with extra power
+  connected**, send us the logs - [If you experience a freeze](#if-you-experience-a-freeze).
 
 ## Creality's own documentation
 
@@ -98,6 +98,7 @@ has to be swapped for Input Shaper, and it takes the camera's load off the pad c
 | **1. Original Creality G-Sensor Y-cable** | The three-ended Creality cable and a regulated 5 V USB power adapter | Adds power directly to the pad and leaves the G-Sensor connection available. This is Creality's documented solution. |
 | **2. USB-A to USB-C power cable** | A compatible cable and a regulated 5 V USB power adapter | Adds power directly to the pad without the Y-cable. Swap the cable for the G-Sensor when calibrating. This alternative is awaiting compatibility confirmation. |
 | **3. Powered USB hub** | A USB hub with its own power adapter and no upstream power backfeed | Powers the camera and USB stick separately, leaving more of the original supply available for the pad. |
+| **4. Advanced: replace the printer's 5 V** | Jumper wires, and a 5 V USB adapter or a 24 V → 5 V buck converter | The pad no longer takes its 5 V from the mainboard at all. A modification, for people comfortable with wiring - see below. |
 
 Look at the **back of the Nebula Pad**, next to the large rectangular connector that
 connects it to the printer. The small USB-C-shaped socket is the G-Sensor socket and
@@ -186,11 +187,30 @@ charger and power arrangement have been confirmed, use option 1 or 3 instead. Ne
 apply more than 5 V to this connector.
 
 What we know so far: one owner ran the pad from this socket **alone**, with the printer's 5 V
-wire to the pad disconnected (a modification we do not recommend). So the socket can power
-the pad. With the printer's own 5 V still connected, as in the diagram above, both supplies
-feed the pad at the same time, and the extra adapter may take over only a small part of the
-load. Another owner still had a freeze with a charger in this socket. That is why a powered
-USB hub (option 3) is the easier first step.
+wire to the pad disconnected ([option 4](#option-4-advanced-replace-the-printers-5-v)). So the
+socket can power the pad. With the printer's own 5 V still connected, as in the diagram above,
+both supplies feed the pad at the same time, and the extra adapter may take over only a small
+part of the load. Another owner still had a freeze with a charger in this socket. That is why a
+powered USB hub (option 3) is the easier first step.
+
+#### Inside the rear socket
+
+The rear socket has a USB-C shape, but only its power pins are used as USB. The other pins
+carry the G-Sensor's (ADXL345) signals:
+
+| USB-C pin | ADXL345 G-Sensor | Nebula Pad board |
+|---|---|---|
+| VCC | VCC | 2× voltage regulator |
+| GND | GND | GND |
+| D- (1/2) | SDA | DT |
+| D+ (1/2) | SDO | DR |
+| CC (1/2) | SCL | CLK |
+| SBU (1/2) | CS | CE |
+
+The **CC** pins are what a USB-C charger uses to detect a device before it switches its 5 V
+on. In this socket they carry the sensor's clock instead. So a charger with a **USB-C-to-USB-C**
+cable will usually not switch on at all; use a USB-A adapter with a **USB-A-to-USB-C** cable,
+which always supplies 5 V.
 
 ### Option 3: a powered USB hub
 
@@ -228,6 +248,54 @@ Unlike options 1 and 2, this does not add power to the pad itself. It removes th
 of the connected accessories from the pad's existing supply. If the pad still has
 insufficient power even without those accessories, the dedicated 5 V input is the
 more relevant option.
+
+### Option 4 (advanced): replace the printer's 5 V
+
+With options 1 and 2, the printer's 5 V and the extra supply feed the pad **at the same time**.
+Which of the two does most of the work depends on which voltage is slightly higher, so the
+extra supply may help less than expected. Option 4 takes the printer's 5 V away from the pad
+completely, so the pad runs only on a supply you choose.
+
+**This is a modification.** It is for people who are comfortable with wiring and a
+multimeter, and you do it at your own risk. Do not cut the original cable: use jumper wires
+between the cable and the pad, so you can always go back.
+
+The pad's large rectangular connector carries the serial link to the mainboard, **5 V** and
+**ground**. The community picture below shows which pins are which:
+
+![The Nebula Pad's printer connector: RX/TX, ground and 5 V](images/nebula-pad-header-pinout.jpg)
+
+*Community picture from r/Creality. Check 5 V and ground with a multimeter on your own
+printer before you connect anything.*
+
+**Variant a: USB power in the rear socket.** This is how ukiduki1 runs their KE: the printer's
+ribbon cable goes to the pad through jumper wires, the **5 V wire is left unplugged at the pad**
+(the separate wire in the pictures), and the pad gets its 5 V from a USB adapter in the rear
+socket. RX, TX and ground stay connected.
+
+![Jumper wires between the printer's ribbon cable and the pad, with one wire left out](images/nebula-pad-rear-power-setup.jpg)
+
+![The rear USB-C socket in use for power, next to the jumper wires on the printer connector](images/nebula-pad-rear-power-closeup.jpg)
+
+![The printer's ribbon cable adapted to jumper wires, with the 5 V wire separated](images/nebula-pad-header-5v-separated.jpg)
+
+*Photos: ukiduki1.*
+
+**Variant b: a buck converter.** A small 24 V → 5 V step-down ("buck") converter, rated
+**at least 3 A**, fed from the printer's own 24 V power supply, powers the pad's 5 V and ground
+pins instead of the mainboard's 5 V. The mainboard's 5 V wire stays unplugged at the pad, as in
+variant a. The pad then switches on and off with the printer, and the G-Sensor socket stays
+free for Input Shaper.
+
+For both variants:
+
+- **Never connect two 5 V supplies to the same pin.** The mainboard's 5 V wire must be
+  disconnected from the pad.
+- **Keep ground connected** between the pad and the mainboard; without it the serial link to
+  the mainboard does not work.
+- Set and measure the converter's output **before** connecting it: 5.0-5.2 V, never more.
+- Work only with the printer switched off and unplugged. The 24 V supply is connected to mains;
+  stay on its low-voltage side.
 
 ### An important difference when switching off
 
@@ -305,6 +373,11 @@ settings: you need the 1.0.5 **system image**.
 If the printer is safe and has frozen completely, let the watchdog restart it rather
 than immediately cutting the power. NebulaOS keeps diagnostic information across a
 watchdog restart which may be lost if the power is removed.
+
+**We only take freeze reports with extra power connected**, preferably a powered USB hub for
+the camera and USB stick ([option 3](#option-3-a-powered-usb-hub)). Without extra power, a
+freeze looks the same whether power is the cause or not, so it can't tell us anything new. If
+your printer still freezes **with** extra power, that is exactly the report we need.
 
 After it restarts, go to **Settings → System → Report a problem → Save logs to USB**.
 Post the zip in [the freeze issue](https://github.com/NebulaOS-KE/NebulaOS/issues/FREEZE_ISSUE)
