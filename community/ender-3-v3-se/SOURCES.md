@@ -66,7 +66,9 @@ which SimpleAF uses for both chips [S1], have the same pins for everything Nebul
 | STM32F401 | `.bin` in `STM32F4_UPDATE/` on the SD card, new short name | SimpleAF [S10], Creality's C14 guide [S11] |
 
 SimpleAF warns that the C14 firmware on a C13 board, or the reverse, will very likely brick it
-(different bootloader offsets) [S10].
+(different bootloader offsets) [S10]. Both chips keep their SD-card bootloader, which a `.bin`
+never overwrites (GD32F303 app at 0x7000, STM32F401 at 0x10000), so a wrong flash is fixed by
+flashing the right file with a new name. Not tested by us yet.
 
 ## Sources
 

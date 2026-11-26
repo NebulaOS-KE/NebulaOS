@@ -29,7 +29,7 @@ Klipper that release runs.
 ## C13 or C14: look at the chip
 
 The Ender-3 V3 SE was sold with **two different mainboard chips**, and each needs its own
-firmware. The wrong one can brick the board.
+firmware. The wrong firmware won't harm the board, but it won't work either: the printer stays *not ready*. Flash the right file again, with a new name.
 
 - **C13** on the board: the chip is a **GD32F303**.
 - **C14** on the board: it can be **either** a **GD32F303** **or** an **STM32F401** - the same

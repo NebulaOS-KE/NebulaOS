@@ -30,7 +30,7 @@ Thank you **Hazok652**, who made the first SE setup and runs it every day
 ## Step 1 - Find out which chip your mainboard has
 
 The SE was sold with two different mainboard chips, and each needs its own firmware.
-**Putting the wrong firmware on a board can brick it** - so check first.
+Check first. The wrong firmware won't harm the board, but it won't work either: the printer stays *not ready*. Flash the right file again, with a new name.
 
 - Switch the printer off and unplug it.
 - Open the cover under the printer and find the mainboard.
