@@ -273,7 +273,10 @@ reported, mostly on printers with a camera connected, and several owners found t
 printer stopped freezing once the camera was unplugged. We also measured how much of the
 memory's time the USB devices use: less than 1 %, so a camera does not overload the processor
 or its memory. That leaves the power supply as the most likely link, although the precise
-electrical mechanism is not yet proven.
+electrical mechanism is not yet proven, and **whether extra power stops the freezes is not
+confirmed yet**: one owner still had a freeze with a charger in the rear socket (option 2,
+whose cable arrangement is not validated), another had none with extra power and a freeze
+right after removing it.
 
 Restoring the hardware configuration is our responsibility as an operating system.
 It helps the pad operate within its original design limits without deliberately
@@ -293,9 +296,12 @@ than immediately cutting the power. NebulaOS keeps diagnostic information across
 watchdog restart which may be lost if the power is removed.
 
 After it restarts, go to **Settings → System → Report a problem → Save logs to USB**.
-Attach the zip to [issue #27](https://github.com/NebulaOS-KE/NebulaOS/issues/27). Tell us which accessories
-are connected, whether they have their own supply and whether the pad has additional
-power. If there is an immediate safety concern, disconnect both supplies instead.
+Post the zip in [the freeze issue](https://github.com/NebulaOS-KE/NebulaOS/issues/FREEZE_ISSUE)
+with the short form there: your NebulaOS version, what is connected, and how the pad and the
+USB devices are powered. Setting **Log level** to **Debug** on the day you print gives us more
+detail (it returns to Info by itself after 24 hours). Results **without** a freeze are welcome
+too, for example after adding extra power. If there is an immediate safety concern, disconnect
+both supplies instead.
 
 For other types of failure, see [Troubleshooting](Troubleshooting) and
 [Report a problem](Report-A-Problem).
@@ -307,5 +313,5 @@ special requirement of NebulaOS.
 
 ---
 
-*Thanks to ukiduki1, Hazok652 and everyone who supplied logs and tested the hardware in
-issue #27 and on Discord.*
+*Thanks to ukiduki1, Hazok652, WizardKnight, 503Dev, Tinyt0x and everyone who supplied logs
+and tested the hardware in issue #27 and on Discord.*
