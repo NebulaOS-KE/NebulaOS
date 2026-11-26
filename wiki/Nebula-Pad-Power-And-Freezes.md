@@ -97,7 +97,7 @@ has to be swapped for Input Shaper, and it takes the camera's load off the pad c
 |---|---|---|---|
 | **1. Creality G-Sensor Y-cable** | The three-ended Creality cable and a regulated 5 V USB adapter | Adds power to the pad through Creality's documented input; the G-Sensor stays connectable | Creality's own solution |
 | **2. Powered USB hub** | A USB hub with its own power adapter | The camera and USB stick get their power from the hub instead of the pad | **Easiest**, no changes to the printer |
-| **3. USB power in the rear socket, printer's ground wire unplugged** | Jumper wires, a USB-A-to-USB-C cable and a 5 V USB adapter | The pad runs on the USB adapter | Modification, in daily use by a community member |
+| **3. USB power in the rear socket, printer's 5 V wire unplugged** | Jumper wires, a USB-A-to-USB-C cable and a 5 V USB adapter | The pad runs on the USB adapter | Modification, in daily use by a community member |
 | **4. Buck converter, printer's 5 V wire unplugged** | Jumper wires and a 24 V → 5 V buck converter (3 A or more) | The pad runs on its own 5 V, made from the printer's 24 V supply | Modification |
 | **5. Plain USB cable in the rear socket** | A USB-A-to-USB-C cable and a 5 V USB adapter | Adds a second supply next to the printer's 5 V | **Not confirmed** - see the warnings |
 
@@ -211,28 +211,29 @@ The pad's large rectangular connector carries the serial link to the mainboard (
 *Community picture from r/Creality. Check 5 V and ground with a multimeter on your own
 printer before you connect anything.*
 
-### Option 3: USB power in the rear socket, printer's ground wire unplugged
+### Option 3: USB power in the rear socket, printer's 5 V wire unplugged
 
 This is how ukiduki1 runs their KE: the printer's ribbon cable goes to the pad through jumper
-wires, the **ground wire is left unplugged at the pad** (the separate wire in the pictures),
+wires, the **5 V wire is left unplugged at the pad** (the separate wire in the pictures),
 and the pad gets its power from a USB adapter with a **USB-A-to-USB-C** cable in the rear
-socket. RX, TX and 5 V stay connected. Without the ground wire, the printer's 5 V has no return
-path through the cable, so the pad takes its power from the USB adapter, and the USB adapter's
-ground becomes the pad's ground.
+socket. RX, TX and **ground stay connected**. Ground must stay connected: without it the pad
+cannot talk to the mainboard. With the printer's 5 V unplugged, the pad runs only on the USB
+adapter.
 
 ![Jumper wires between the printer's ribbon cable and the pad, with one wire left out](images/nebula-pad-rear-power-setup.jpg)
 
 ![The rear USB-C socket in use for power, next to the jumper wires on the printer connector](images/nebula-pad-rear-power-closeup.jpg)
 
-![The printer's ribbon cable adapted to jumper wires, with the ground wire separated](images/nebula-pad-header-ground-separated.jpg)
+![The printer's ribbon cable adapted to jumper wires, with the 5 V wire separated](images/nebula-pad-header-5v-separated.jpg)
 
 *Photos: ukiduki1.*
 
 - Use a USB-A adapter and a **USB-A-to-USB-C** cable. A USB-C charger with a USB-C-to-USB-C
   cable will usually not switch on: see [Inside the rear socket](#inside-the-rear-socket).
 - The pad needs the USB adapter now. For Input Shaper, swap the power cable for the G-Sensor
-  cable **and plug the ground wire back in first**, so the pad is powered by the printer again
-  for that session. Afterwards, unplug the ground wire again before you reconnect the adapter.
+  cable **and plug the 5 V wire back in first**, so the pad is powered by the printer again
+  for that session. Afterwards, unplug the 5 V wire again before you reconnect the adapter.
+- **Never unplug the ground wire.** The pad needs it to communicate with the mainboard.
 
 ### Option 4: a buck converter, printer's 5 V wire unplugged
 
