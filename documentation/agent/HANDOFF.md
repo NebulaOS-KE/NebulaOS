@@ -13,6 +13,35 @@ coverage dashboard, delivered as `docs/*` branches and pull requests. Not a plan
 outline: the pages themselves. The full assignment is in `MISSION.md`; `RULES.md` holds the
 workspace rules and the owner's decisions and wins wherever the two differ.
 
+## Merged and published (2026-11-12, end of the day)
+
+All eight pull requests were merged by the main session at the heads this session reported, and
+every repository now publishes its `wiki/` to its GitHub wiki through a `wiki.yml` workflow on
+the default branch (`on: push`, `paths: ['wiki/**']`). Tim decided to publish.
+
+Checked here afterwards rather than taken on report - all eight `.wiki.git` repositories cloned
+read-only and diffed against `wiki/` on each default branch: **0 differences, eight out of
+eight**. NebulaOS 53 pages, firmware 16, kernel 8, extensions 8, mcu 7, packages 6, lv_drivers 6,
+screen 35; the firmware's and kernel's old August pages are gone. Merge commits: `a296fe1`,
+`0c712b2`, `1dbe846`, `55a0d11`, `c9cebf7`, `670a0d4`, `fcdda5f`, `a61fd51`.
+
+**The rule that changed, and it is the one to carry forward.** Until today publishing was a
+separate step the owner took after merging, and this session's safety came from both: a branch
+could hold a half-finished page indefinitely. Now a merged `docs/*` pull request *is* the
+publication, in every repository. Nothing this session is allowed to do has changed - push
+`docs/*`, open pull requests, never merge, never push a `.wiki.git`, never run a publish
+workflow - but the margin has. Three habits follow:
+
+- `tools/check_links.py` before **every** commit that touches `wiki/`, not just before a batch.
+- No "push it now, fix the wording later" on a `docs/*` branch: the fix and the mistake are one
+  merge apart.
+- A page that is not ready stays uncommitted, or goes in with the gap written on its face - the
+  way the eight API drafts do.
+
+`docs/agent` has been fast-forwarded onto the merged `main` (`a296fe1`). A new pull request
+carries this state update; the eight merged PR numbers are history now and should not be
+reopened.
+
 ## Latest batch (2026-11-12): the developer wikis
 
 Inbox note `2026-11-11-DEV-WIKIS.md`. Tim: *"the idea was to have dev wikis on the sub

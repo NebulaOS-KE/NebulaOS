@@ -434,3 +434,14 @@ Inbox note `_scratch/docs-agent/inbox/2026-11-11-DEV-WIKIS.md`.
   Settings -> Updates -> NebulaOS extensions and keeps the `printer.cfg` lines as the fallback.
   What was read for it, including why a hand-set `z_offset` changes the search floor and why a
   second `[nebulaos_calibration]` section overrides the firmware's, is in `VERIFICATION.md`.
+
+## Closed by the merge (2026-11-12)
+
+- **Q-086 and Q-087 are published, not just done.** The main session merged all eight PRs at the
+  heads this session reported, each repository's `wiki.yml` published on the merge, and a
+  read-only clone-and-diff of all eight `.wiki.git` repositories against `wiki/` on their default
+  branches found **0 differences**. The developer wikis and the Z-offset troubleshooting entry
+  are live.
+- **From now on a merged `docs/*` PR publishes itself.** The queue's definition of done moves
+  with it: an item is finished when its page would be safe to publish the moment someone merges
+  it, because that is now what happens.
